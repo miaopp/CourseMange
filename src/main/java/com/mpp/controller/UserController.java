@@ -2,7 +2,6 @@ package com.mpp.controller;
 
 import com.mpp.model.User;
 import com.mpp.service.UserService;
-import jdk.nashorn.internal.ir.RuntimeNode;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,10 +33,10 @@ public class UserController {
         System.out.println(user.getUsername());
         String rtn = "failed";
         User u = userService.getUserByName(user.getUsername());
-        if(null!=u.getPassword()&&u.getPassword().equals(user.getPassword()))
-        {
-            httpSession.setAttribute("uid",u.getUserId());
-            httpSession.setAttribute("user",user.getUsername());
+        System.out.println(u);
+        if (null != u && null != u.getPassword() && u.getPassword().equals(user.getPassword())) {
+            httpSession.setAttribute("uid", u.getUserId());
+            httpSession.setAttribute("user", user.getUsername());
             rtn = "success";
         }
         return rtn;
