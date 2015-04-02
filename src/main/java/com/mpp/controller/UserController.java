@@ -23,6 +23,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST, value = "/register", produces = "application/json; charset=utf-8")
     @ResponseBody
     public String register(@RequestBody User user) {
+        System.out.println(user);
         userService.addUser(user);
         return "success";
     }
