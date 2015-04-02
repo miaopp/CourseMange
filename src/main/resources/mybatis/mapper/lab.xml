@@ -7,6 +7,7 @@
         <result property="id" column="lab_id"/>
         <result property="courseId" column="course_id"/>
         <result property="userId" column="user_id"/>
-        <result property="labTime" column="lab_time"/>
+        <result property="labBeginTime" column="begin_time"/>
+        <result property="labEndTime" column="end_time"/>
     </resultMap>
 </mapper>
