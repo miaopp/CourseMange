@@ -6,19 +6,15 @@ import java.util.Date;
  * Created by xiang.xu on 2015/3/30.
  */
 public class Apply {
-    private int id;
+    private int applyId;
     private int courseId;
     private int labId;
+    private int userId;
     private Date applyTime;
-    private String labTime;
 
-    public int getId() {
-        return id;
-    }
+    public int getApplyId() { return applyId; }
 
-    public void setId(final int id) {
-        this.id = id;
-    }
+    public void setApplyId(final int applyId) { this.applyId = applyId; }
 
     public int getCourseId() {
         return courseId;
@@ -44,11 +40,8 @@ public class Apply {
         this.applyTime = applyTime;
     }
 
-    public String getLabTime() {
-        return labTime;
-    }
 
-    public void setLabTime(final String labTime) {
-        this.labTime = labTime;
-    }
+    public int getUserId() { return userId; }
+
+    public void setUserId(final int userId) { this.userId = userId; }
 }

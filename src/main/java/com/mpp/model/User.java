@@ -9,10 +9,15 @@ public class User {
     private int userId;
     private String username;
     private String password;
-    private String userNo;
+    private String realName;
     private int classes;
     private String dept;
     private int power;
+    private String course;
+
+    public int getUserId() { return userId; }
+
+    public void setUserId(final int userId) { this.userId = userId; }
 
     public String getUsername() {
         return username;
@@ -28,14 +33,6 @@ public class User {
 
     public void setPassword(final String password) {
         this.password = password;
-    }
-
-    public String getUserNo() {
-        return userNo;
-    }
-
-    public void setUserNo(final String userNo) {
-        this.userNo = userNo;
     }
 
     public int getClasses() {
@@ -62,16 +59,25 @@ public class User {
         this.power = power;
     }
 
+    public String getCourse() { return course; }
+
+    public void setCourse(final String course) { this.course = course; }
+
+    public String getRealName() { return realName; }
+
+    public void setRealName(final String realName) { this.realName = realName; }
+
     @Override
     public String toString() {
         return Objects.toStringHelper(this)
                 .add("userId", userId)
                 .add("username", username)
                 .add("password", password)
-                .add("userNo", userNo)
+                .add("realName",realName)
                 .add("classes", classes)
                 .add("dept", dept)
                 .add("power", power)
+                .add("course",course)
                 .toString();
     }
 }

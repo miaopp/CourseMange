@@ -7,7 +7,8 @@ public class Lab {
     private int id;
     private int courseId;
     private int userId;
-    private String labTime;
+    private String labBeginTime;
+    private String labEndTime;
 
     public int getId() {
         return id;
@@ -33,11 +34,11 @@ public class Lab {
         this.userId = userId;
     }
 
-    public String getLabTime() {
-        return labTime;
-    }
+    public String getLabBeginTime() { return labBeginTime; }
 
-    public void setLabTime(final String labTime) {
-        this.labTime = labTime;
-    }
+    public void setLabBeginTime(final String labBeginTime) { this.labBeginTime = labBeginTime; }
+
+    public String getLabEndTime() { return labEndTime; }
+
+    public void setLabEndTime(final String labEndTime) { this.labEndTime = labEndTime; }
 }

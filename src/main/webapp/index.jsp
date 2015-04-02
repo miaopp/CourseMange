@@ -11,20 +11,26 @@
     <script src="./js/bootstrap.js"></script>
     <script src="./js/json2.js"></script>
     <script type="text/javascript">
-        function registerBean(username, password, classes, dept) {
+        function registerBean(username, password, realname, dept, classes, course, power) {
             this.username = username;
             this.password = password;
-            this.classes = classes;
+            this.realname = realname;
             this.dept = dept;
+            this.classes = classes;
+            this.course = course;
+            this.power = power;
         }
 
         $(function() {
             $(document).on("click", "#register", function () {
-                var username = "aaa";
-                var password = "bbb";
-                var classes = 1
-                var dept = "ccc";
-                var json = JSON.stringify(new registerBean(username, password, classes, dept));
+                var username = $("#regModal input[name='username']").val();
+                var password = $("#regModal input[name='password']").val();
+                var realname = $("#regModal input[name='realname']").val();
+                var dept = $("#regModal input[name='dept']").val();
+                var classes = $("#regModal input[name='class']").val();
+                var course = $("#regModal input[name='course']").val();
+                var power = $("#regModal input[name='power']").val();
+                var json = JSON.stringify(new registerBean(username, password, realname, dept, classes, course, power));
                 $.ajax({
                     type: "post",
                     url: "/user/register",

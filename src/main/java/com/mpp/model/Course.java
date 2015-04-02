@@ -7,7 +7,8 @@ public class Course {
     private int id;
     private String name;
     private int targetClass;
-    private String courseTime;
+    private int courseBegineWeek;
+    private int courseEndWeek;
 
     public int getId() {
         return id;
@@ -33,11 +34,11 @@ public class Course {
         this.targetClass = targetClass;
     }
 
-    public String getCourseTime() {
-        return courseTime;
-    }
+    public int getCourseBegineWeek() { return courseBegineWeek; }
 
-    public void setCourseTime(final String courseTime) {
-        this.courseTime = courseTime;
-    }
+    public void setCourseBegineWeek(final int courseBegineWeek) { this.courseBegineWeek = courseBegineWeek; }
+
+    public int getCourseEndWeek() { return courseEndWeek; }
+
+    public void setCourseEndWeek(final int courseEndWeek) { this.courseEndWeek = courseEndWeek; }
 }
