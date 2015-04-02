@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Course">
+    <resultMap id="courseResultMap" type="Course">
+        <result property="id" column="course_id"/>
+        <result property="name" column="course_name"/>
+        <result property="targetClass" column="target_class"/>
+        <result property="courseTime" column="course_time"/>
+    </resultMap>
+</mapper>

@@ -1,0 +1,32 @@
+.mycontianer{
+	margin-left: 15%;
+	margin-right: 15%;
+}
+
+.page-header1{
+	padding-bottom: 9px;
+	margin: 20px 0 30px;
+}
+.row{
+	margin-left: -30px;
+}
+.my_con{
+	width: 1200px;
+	height: 900px;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+p.p1{
+	text-align: left;
+	font-size: 17px;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.jumbotron {
+/* margin: 80px 0; */
+	text-align: left;
+}
+textarea.publish {
+	width: 97%;
+	height: 130px;	
+}
