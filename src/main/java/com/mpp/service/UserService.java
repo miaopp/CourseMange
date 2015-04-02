@@ -7,4 +7,5 @@ import com.mpp.model.User;
  */
 public interface UserService {
     public void addUser(User user);
+    public User getUserByName(String username);
 }

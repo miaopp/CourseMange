@@ -20,4 +20,7 @@ public class UserServiceImpl implements UserService {
     public void addUser(final User user) {
         userDao.addUser(user);
     }
+    public User getUserByName(String username) {
+        return userDao.getUserByName(username);
+    }
 }

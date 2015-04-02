@@ -23,8 +23,8 @@
     <insert id="insertUser" parameterType="User">
         <![CDATA[
             insert into user
-            (user_name, user_password, user_class, user_dept, user_power)
-            values (#{username}, #{password}, #{classes}, #{dept}, #{power})
+            (user_name, user_password, user_class, user_dept, user_power, user_course, user_realname)
+            values (#{username}, #{password}, #{classes}, #{dept}, #{power}, #{course}, #{realName})
         ]]>
     </insert>
 </mapper>
