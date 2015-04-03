@@ -33,8 +33,8 @@
         }
         $(function () {
             $("#login").click(function() {
-                var username = $("#loginModal input[name='username']").val();
-                var password = $("#loginModal input[name='password']").val();
+                var username = $("#inputUsername").val();
+                var password = $("#inputPassword").val();
                 var json = JSON.stringify(new loginBean(username, password));
                 $.ajax({
                     type: "post",

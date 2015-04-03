@@ -52,7 +52,7 @@
             });
             $("#logout").click(function() {
                 $.get("/user/logout" , function() {
-                    location.reload();
+                    location.href = "./login.jsp";
                 });
             });
             $("#register").click(function() {
