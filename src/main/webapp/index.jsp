@@ -12,10 +12,10 @@
     <script src="./js/json2.js"></script>
     <script type="text/javascript">
         var userid = <%=request.getSession().getAttribute("uid") %>
-                function loginBean(username, password) {
-                    this.username = username;
-                    this.password = password;
-                }
+        function loginBean(username, password) {
+            this.username = username;
+            this.password = password;
+        }
         function registerBean(username, password, realName, dept, classes, course, power) {
             this.username = username;
             this.password = password;
@@ -27,7 +27,7 @@
         }
 
         $(function () {
-            $(document).on("click", "#login", function () {
+            $("#login").click(function() {
                 var username = $("#loginModal input[name='username']").val();
                 var password = $("#loginModal input[name='password']").val();
                 var json = JSON.stringify(new loginBean(username, password));
@@ -39,7 +39,8 @@
                     dataType: 'json',
                     success: function (data) {
                         if (data == "success") {
-                            location.reload();
+                            alert("success");
+                            location = location;
                         }
                         else {
                             $("#loginModal .alert").removeClass("alert-info").addClass("alert-error");
@@ -49,7 +50,12 @@
                 });
                 return false;
             });
-            $(document).on("click", "#register", function () {
+            $("#logout").click(function() {
+                $.get("/user/logout" , function() {
+                    location.reload();
+                });
+            });
+            $("#register").click(function() {
                 var username = $("#regModal input[name='username']").val();
                 var password = $("#regModal input[name='password']").val();
                 var realName = $("#regModal input[name='realname']").val();
@@ -65,8 +71,10 @@
                     contentType: 'application/json',
                     dataType: 'json',
                     success: function (data) {
-                        if (data == "success")
-                            Location.reload();
+                        if (data == "success") {
+                            alert(data);
+                            location = location;
+                        }
                         else {
                             $("#regModal .alert").removeClass("alert-info").addClass("alert-error");
                             $("#regModal .alert").html("<p class='p1'>failed to Regist!</p>");

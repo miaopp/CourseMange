@@ -20,9 +20,11 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/register", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String register(@RequestBody User user) {
-        System.out.println(user);
+    public String register(@RequestBody User user,HttpSession httpSession) {
+        //System.out.println(user);
         userService.addUser(user);
+        httpSession.setAttribute("uid", user.getUserId());
+        httpSession.setAttribute("user", user.getUsername());
         return "success";
     }
 
@@ -40,5 +42,12 @@ public class UserController {
             rtn = "success";
         }
         return rtn;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/logout", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public void logout(HttpSession httpSession) {
+        httpSession.removeAttribute("uid");
+        httpSession.removeAttribute("user");
     }
 }
