@@ -43,9 +43,15 @@
                     contentType: 'application/json',
                     dataType: 'json',
                     success: function (data) {
-                        if (data == "success") {
+                        if (data == "student") {
                             alert("success");
                             location.href="./index.jsp";
+                        }
+                        else if(data == "teacher") {
+                            location.href="./teacher.jsp";
+                        }
+                        else if(data == "manager") {
+                            location.href="./manager.jsp";
                         }
                         else {
                             $("#loginModal .alert").removeClass("alert-info").addClass("alert-error");
@@ -71,9 +77,15 @@
                     contentType: 'application/json',
                     dataType: 'json',
                     success: function (data) {
-                        if (data == "success") {
-                            alert(data);
+                        if (data == "student") {
+                            alert("success");
                             location.href="./index.jsp";
+                        }
+                        else if(data == "teacher") {
+                            location.href="./teacher.jsp";
+                        }
+                        else if(data == "manager") {
+                            location.href="./manager.jsp";
                         }
                         else {
                             $("#regModal .alert").removeClass("alert-info").addClass("alert-error");

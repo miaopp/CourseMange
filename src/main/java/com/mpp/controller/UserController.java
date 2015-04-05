@@ -23,9 +23,19 @@ public class UserController {
     public String register(@RequestBody User user,HttpSession httpSession) {
         //System.out.println(user);
         userService.addUser(user);
+        String rtn = "failed";
         httpSession.setAttribute("uid", user.getUserId());
         httpSession.setAttribute("user", user.getUsername());
-        return "success";
+        if(user.getPower() == 0) {
+            rtn = "student";
+        }
+        else if(user.getPower() == 1) {
+            rtn = "teacher";
+        }
+        else if(user.getPower() == 2) {
+            rtn = "manager";
+        }
+        return rtn;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/login", produces = "application/json; charset=utf-8")
@@ -39,7 +49,15 @@ public class UserController {
         if (null != u && null != u.getPassword() && u.getPassword().equals(user.getPassword())) {
             httpSession.setAttribute("uid", u.getUserId());
             httpSession.setAttribute("user", user.getUsername());
-            rtn = "success";
+            if(u.getPower() == 0) {
+                rtn = "student";
+            }
+            else if(u.getPower() == 1) {
+                rtn = "teacher";
+            }
+            else if(u.getPower() == 2) {
+                rtn = "manager";
+            }
         }
         return rtn;
     }
