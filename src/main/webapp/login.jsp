@@ -43,20 +43,16 @@
                     contentType: 'application/json',
                     dataType: 'json',
                     success: function (data) {
-                        if (data == "student") {
-                            alert("success");
-                            location.href="./index.jsp";
-                        }
-                        else if(data == "teacher") {
-                            location.href="./teacher.jsp";
-                        }
-                        else if(data == "manager") {
-                            location.href="./manager.jsp";
+                        if (200 == data.status) {
+                            location.href = data.data;
                         }
                         else {
                             $("#loginModal .alert").removeClass("alert-info").addClass("alert-error");
                             $("#loginModal .alert").html("<p class='p1'>failed to Login!</p>");
                         }
+                    },
+                    error: function () {
+                        alert("error");
                     }
                 });
                 return false;
@@ -209,7 +205,7 @@
                         </div>
                     </div>
                 </fieldset>
-                <br></br>
+                <br/>
                 <div class="modal-footer">
                     <div class="alert alert-info hide">
                     </div>
