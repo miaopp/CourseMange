@@ -3,6 +3,7 @@ package com.mpp.controller;
 import com.google.common.collect.ImmutableMap;
 import com.mpp.constants.CodeMessage;
 import com.mpp.constants.JsonReturn;
+import com.mpp.constants.UserPowerEnum;
 import com.mpp.model.User;
 import com.mpp.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -52,15 +53,8 @@ public class UserController {
         if (null != u && null != u.getPassword() && u.getPassword().equals(user.getPassword())) {
             httpSession.setAttribute("uid", u.getUserId());
             httpSession.setAttribute("user", user.getUsername());
-            if(u.getPower() == 0) {
-                rtn = JsonReturn.getSuccess("./index.jsp");
-            }
-            else if(u.getPower() == 1) {
-                rtn = JsonReturn.getSuccess("./teacher.jsp");
-            }
-            else if(u.getPower() == 2) {
-                rtn = JsonReturn.getSuccess("./manager.jsp");
-            }
+            UserPowerEnum powerEnum = UserPowerEnum.getType(u.getPower());
+            rtn = JsonReturn.getSuccess(powerEnum.getDispather());
         }
         return rtn;
     }
