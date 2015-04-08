@@ -248,10 +248,10 @@
             <div class="span3">
                 <div class="well sidebar-nav">
                     <ul class="nav nav-list">
-                        <li class="nav-header">Sidebar</li>
-                        <li class="active"><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
+                        <li class="nav-header">Home</li>
+                        <li class="active"><a href="#">按周查看</a></li>
+                        <li><a href="#">按实验室查看</a></li>
+                        <li><a href="#">个人信息修改</a></li>
                         <li><a href="#">Link</a></li>
                         <li class="nav-header">Sidebar</li>
                         <li><a href="#">Link</a></li>
@@ -276,42 +276,86 @@
                 </p>
                 </div>
                 <div class="row-fluid">
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><a class="btn" href="#">View details »</a></p>
-                    </div><!--/span-->
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><a class="btn" href="#">View details »</a></p>
-                    </div><!--/span-->
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><a class="btn" href="#">View details »</a></p>
-                    </div><!--/span-->
-                </div><!--/row-->
-                <div class="row-fluid">
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><a class="btn" href="#">View details »</a></p>
-                    </div><!--/span-->
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><a class="btn" href="#">View details »</a></p>
-                    </div><!--/span-->
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><a class="btn" href="#">View details »</a></p>
-                    </div><!--/span-->
-                </div><!--/row-->
-            </div><!--/span-->
+                    <div class="btn-group">
+                        <button class="btn">Action</button>
+                        <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>星期一</th>
+                            <th>星期二</th>
+                            <th>星期三</th>
+                            <th>星期四</th>
+                            <th>星期五</th>
+                            <th>星期六</th>
+                            <th>星期日</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1-2</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <td>3-4</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@TwBootstrap</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@TwBootstrap</td>
+                            <td>@TwBootstrap</td>
+                        </tr>
+                        <tr>
+                            <td>5-6</td>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <td>7-8</td>
+                            <td>Larry the Bird</td>
+                            <td>@twitter</td>
+                            <td>Larry the Bird</td>
+                            <td>@twitter</td>
+                            <td>Larry the Bird</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                        </tr>
+                        <tr>
+                            <td>9-11</td>
+                            <td>Larry the Bird</td>
+                            <td>@twitter</td>
+                            <td>Larry the Bird</td>
+                            <td>@twitter</td>
+                            <td>Larry the Bird</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
     <div class="footer" style="margin-top: 10px;">
         <div class="container">
             <hr>
@@ -323,6 +367,7 @@
             0.052352 sec - 0 queries - 0 sec @ portal
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

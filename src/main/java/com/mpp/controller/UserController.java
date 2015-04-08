@@ -25,21 +25,14 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/register", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String register(@RequestBody User user,HttpSession httpSession) {
-        //System.out.println(user);
+    public CodeMessage register(@RequestBody User user,HttpSession httpSession) {
+        System.out.println(user.getPower());
         userService.addUser(user);
-        String rtn = "failed";
+        CodeMessage rtn = JsonReturn.getError("faild");
         httpSession.setAttribute("uid", user.getUserId());
         httpSession.setAttribute("user", user.getUsername());
-        if(user.getPower() == 0) {
-            rtn = "student";
-        }
-        else if(user.getPower() == 1) {
-            rtn = "teacher";
-        }
-        else if(user.getPower() == 2) {
-            rtn = "manager";
-        }
+        UserPowerEnum powerEnum = UserPowerEnum.getType(user.getPower());
+        rtn = JsonReturn.getSuccess(powerEnum.getDispather());
         return rtn;
     }
 

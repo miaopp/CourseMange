@@ -76,10 +76,10 @@
             <div class="span3">
                 <div class="well sidebar-nav">
                     <ul class="nav nav-list">
-                        <li class="nav-header">Sidebar</li>
-                        <li class="active"><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
+                        <li class="nav-header">Home</li>
+                        <li class="active"><a href="#">实验室课程申请管理</a></li>
+                        <li><a href="#">课程管理</a></li>
+                        <li><a href="#">用户信息管理</a></li>
                         <li><a href="#">Link</a></li>
                         <li class="nav-header">Sidebar</li>
                         <li><a href="#">Link</a></li>

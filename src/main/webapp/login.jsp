@@ -64,7 +64,7 @@
                 var dept = $("#regModal input[name='dept']").val();
                 var classes = $("#regModal input[name='class']").val();
                 var course = $("#regModal input[name='course']").val();
-                var power = $("#regModal input[name='power']").val();
+                var power = $("input[type='radio']:checked").val();
                 var json = JSON.stringify(new registerBean(username, password, realName, dept, classes, course, power));
                 $.ajax({
                     type: "post",
@@ -73,15 +73,8 @@
                     contentType: 'application/json',
                     dataType: 'json',
                     success: function (data) {
-                        if (data == "student") {
-                            alert("success");
-                            location.href="./index.jsp";
-                        }
-                        else if(data == "teacher") {
-                            location.href="./teacher.jsp";
-                        }
-                        else if(data == "manager") {
-                            location.href="./manager.jsp";
+                        if (200 == data.status) {
+                            location.href = data.data;
                         }
                         else {
                             $("#regModal .alert").removeClass("alert-info").addClass("alert-error");
