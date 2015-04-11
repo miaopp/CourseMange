@@ -22,17 +22,41 @@
             $.get("/lab/loadLab", function(data) {
                 var list = data.data;
                 var str = "";
-                alert(list.length);
+//                alert(list.length);
                 if(parseInt(list.length) == parseInt(0)) {
                     str+="<div class='well'>";
-                    str+="  <p class='text-info'>目前还没有相关实验室信息</p>";
+                    str+="  <p class='text-info'>目前还没有相关实验室信息，请添加！</p>";
                     str+="  <div class='btn-group'>";
-                    str+="      <button type='button' class='btn btn-success'>确认查看课表</button>";
+                    str+="      <a href='#LabModal' role='button' class='btn btn-success' data-toggle='modal'>添加实验室信息</a>";
                     str+="  </div>";
+                    str+="</div>";
+                }
+                else {
+                    str+="<div class='row-fluid'>";
+                    str+="  <ul class='thumbnails'>";
+                    for(var i = 0; i < list.length ; i++) {
+                        str+="      <li class='span4'>";
+                        str+="          <div class='thumbnail'>";
+                        str+="              <img data-src='holder.js/300x200' alt='300x200' src='#' style='width: 300px; height: 200px;'>";
+                        str+="              <div class='caption'>";
+                        str+="                  <h3>"+list[i].labName+"</h3>";
+                        str+="                  <h4>"+list[i].labAddress+"</h4>";
+                        str+="                  <h4>"+list[i].labDept+"</h4>";
+                        str+="              </div>";
+                        str+="          </div>";
+                        str+="      </li>";
+                    }
+                    str+="  </ul>";
                     str+="</div>";
                 }
                 $("#showLab").html(str);
             });
+        }
+
+        function labInsertBean(labName, labAddress, labDept) {
+            this.labName = labName;
+            this.labAddress = labAddress;
+            this.labDept = labDept;
         }
 
         $(function () {
@@ -42,9 +66,72 @@
                     location.href = "./login.jsp";
                 });
             });
+            $("#labinsert").click(function() {
+                var labName = $("#LabModal input[name='labname']").val();
+                var labAddress = $("#LabModal input[name='labaddress']").val();
+                var labDept = $("#LabModal input[name='labdept']").val();
+                alert(labDept);
+                var json = JSON.stringify(new labInsertBean(labName, labAddress, labDept));
+                $.ajax({
+                    type: "post",
+                    url: "/lab/insertLabMessage",
+                    data: json,
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        if(200 == data.status) {
+                            location.reload();
+                        }
+                        $("#LabModal .alert").removeClass("alert-info").addClass("alert-error");
+                        $("#LabModal .alert").html("<p class='p1'>failed to Insert!</p>");
+                    }
+                });
+            });
         });
     </script>
 </head>
+<!-- Modal -->
+<div id="LabModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">添加实验室信息</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label" for="labname">实验室 (必填)：</label>
+
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="labname" name="labname" placeholder="实验室">
+
+                        <p class="help-block">请在此输入实验室名（大小写敏感）。</p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="labaddress">实验室地点 (必填)：</label>
+
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="labaddress" name="labaddress" placeholder="实验室地点">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="labdept">所属学院 (必填)：</label>
+
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="labdept" name="labdept" placeholder="所属学院">
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div class="alert alert-info hide">
+        </div>
+        <button class="btn btn-success" id="labinsert">提交</button>
+    </div>
+</div>
 <body>
 <div class="navbar navbar-inverse" style="position: static;">
     <div class="navbar">

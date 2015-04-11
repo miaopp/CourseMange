@@ -77,7 +77,7 @@
                 });
                 return false;
             });
-        })
+        });
     </script>
 </head>
 <body>

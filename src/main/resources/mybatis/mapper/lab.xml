@@ -13,7 +13,7 @@
         <![CDATA[
             insert into lab
             (lab_name, lab_address, lab_dept)
-            values (#{labname}, #{address}, #{labdept})
+            values (#{labName}, #{labAddress}, #{labDept})
         ]]>
     </insert>
     <select id="selectLabs" resultType="Lab">

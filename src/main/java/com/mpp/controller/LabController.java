@@ -4,6 +4,7 @@ import com.mpp.constants.CodeMessage;
 import com.mpp.constants.JsonReturn;
 import com.mpp.model.Lab;
 import com.mpp.service.LabService;
+import com.sun.org.apache.bcel.internal.classfile.Code;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,5 +29,12 @@ public class LabController {
     public CodeMessage loadLab() {
         List<Lab> list = labService.getLab();
         return JsonReturn.getSuccess(list);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/insertLabMessage", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public CodeMessage insertLabMessage(@RequestBody Lab lab) {
+        labService.addLab(lab);
+        return JsonReturn.getSuccess("success");
     }
 }
