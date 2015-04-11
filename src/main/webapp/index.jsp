@@ -118,6 +118,7 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     <li class="active"><a href="./index.jsp">首页</a></li>
+                    <li><a href="#">查看课程表</a></li>
                 </ul>
             </div>
         </div>
@@ -247,145 +248,123 @@
             </p>
         </div>
         <div class="row-fluid">
-            <%--<div class="span3">--%>
-                <%--<div class="well sidebar-nav">--%>
-                    <%--<ul class="nav nav-list">--%>
-                        <%--<li class="nav-header">Home</li>--%>
-                        <%--<li class="active"><a href="#">按周查看</a></li>--%>
-                        <%--<li><a href="#">按实验室查看</a></li>--%>
-                        <%--<li><a href="#">个人信息修改</a></li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li class="nav-header">Sidebar</li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li class="nav-header">Sidebar</li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                    <%--</ul>--%>
-                <%--</div><!--/.well -->--%>
-            <%--</div><!--/span-->--%>
-            <div class="span9">
-                <%--<div class="page-header">--%>
-                <%--<h1>欢迎登录实验室排课系统</h1>--%>
-
-                <%--<p class="lead" id="showNotice">--%>
-
-                <%--</p>--%>
+            <div class="btnsty" style="height:70px;">
+                <div class="btn-group">
+                    <button class="btn">选择学院</button>
+                    <button class="btn dropdown-toggle" data-toggle="dropdown" style="height: 30px"><span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">计算机学院</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
                 </div>
-                <div class="row-fluid">
-                    <div class="btnsty" style="height:70px;">
-                    <div class="btn-group">
-                        <button class="btn">选择学院</button>
-                        <button class="btn dropdown-toggle" data-toggle="dropdown" style="height: 30px"><span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">计算机学院</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </div>
-                        <div class="btn-group" style="  margin-left: 100px;">
-                            <button class="btn">选择实验室</button>
-                            <button class="btn dropdown-toggle" data-toggle="dropdown" style="height: 30px"><span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">5201</a></li>
-                                <li><a href="#">6304</a></li>
-                                <li><a href="#">6305</a></li>
-                                <li><a href="#">6309</a></li>
-                                <li><a href="#">6310</a></li>
-                                <li><a href="#">6311</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
-                        </div>
-                        <div class="btn-group" style=" margin-left: 100px;">
-                            <button type="button" class="btn btn-info">确认查看课表</button>
-                        </div>
-                    </div>
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>星期一</th>
-                            <th>星期二</th>
-                            <th>星期三</th>
-                            <th>星期四</th>
-                            <th>星期五</th>
-                            <th>星期六</th>
-                            <th>星期日</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1-2</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>3-4</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@TwBootstrap</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@TwBootstrap</td>
-                            <td>@TwBootstrap</td>
-                        </tr>
-                        <tr>
-                            <td>5-6</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <td>7-8</td>
-                            <td>Larry the Bird</td>
-                            <td>@twitter</td>
-                            <td>Larry the Bird</td>
-                            <td>@twitter</td>
-                            <td>Larry the Bird</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                        </tr>
-                        <tr>
-                            <td>9-11</td>
-                            <td>Larry the Bird</td>
-                            <td>@twitter</td>
-                            <td>Larry the Bird</td>
-                            <td>@twitter</td>
-                            <td>Larry the Bird</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="btn-group" style="  margin-left: 100px;">
+                    <button class="btn">选择实验室</button>
+                    <button class="btn dropdown-toggle" data-toggle="dropdown" style="height: 30px"><span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">5201</a></li>
+                        <li><a href="#">6304</a></li>
+                        <li><a href="#">6305</a></li>
+                        <li><a href="#">6309</a></li>
+                        <li><a href="#">6310</a></li>
+                        <li><a href="#">6311</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group" style="  margin-left: 100px;">
+                    <button class="btn">选择查看方式</button>
+                    <button class="btn dropdown-toggle" data-toggle="dropdown" style="height: 30px"><span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">5201</a></li>
+                        <li><a href="#">6304</a></li>
+                        <li><a href="#">6305</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group" style=" margin-left: 100px;">
+                    <button type="button" class="btn btn-success">确认查看课表</button>
                 </div>
             </div>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>星期一</th>
+                    <th>星期二</th>
+                    <th>星期三</th>
+                    <th>星期四</th>
+                    <th>星期五</th>
+                    <th>星期六</th>
+                    <th>星期日</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1-2</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <td>3-4</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@TwBootstrap</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@TwBootstrap</td>
+                    <td>@TwBootstrap</td>
+                </tr>
+                <tr>
+                    <td>5-6</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <td>7-8</td>
+                    <td>Larry the Bird</td>
+                    <td>@twitter</td>
+                    <td>Larry the Bird</td>
+                    <td>@twitter</td>
+                    <td>Larry the Bird</td>
+                    <td>@twitter</td>
+                    <td>@twitter</td>
+                </tr>
+                <tr>
+                    <td>9-11</td>
+                    <td>Larry the Bird</td>
+                    <td>@twitter</td>
+                    <td>Larry the Bird</td>
+                    <td>@twitter</td>
+                    <td>Larry the Bird</td>
+                    <td>@twitter</td>
+                    <td>@twitter</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-    <div class="footer" style="margin-top: 10px;">
-        <div class="container">
-            <hr>
-            Powered by HTML 4.0
-            <br>
-            Copyright © 计算机应用112班 缪萍.
-            All rights reserved.
-            <br>
-            0.052352 sec - 0 queries - 0 sec @ portal
+        <div class="footer" style="margin-top: 10px;">
+            <div class="container">
+                <hr>
+                Powered by HTML 4.0
+                <br>
+                Copyright © 计算机应用112班 缪萍.
+                All rights reserved.
+                <br>
+                0.052352 sec - 0 queries - 0 sec @ portal
+            </div>
         </div>
-    </div>
 </div>
 </div>
 </body>

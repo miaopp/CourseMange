@@ -14,9 +14,9 @@
     <meta charset="utf-8">
     <link href="./css/mystyle.css" rel="stylesheet">
     <link href="./css/bootstrap.css" rel="stylesheet">
-    <script src="./js/jquery-1.8.3.js"></script>
-    <script src="./js/bootstrap.js"></script>
-    <script src="./js/json2.js"></script>
+    <script src="./js/jquery-1.8.3.js" type="text/javascript"></script>
+    <script src="./js/bootstrap.js" type="text/javascript"></script>
+    <script src="./js/json2.js" type="text/javascript"></script>
     <script type="text/javascript">
         function loadLab() {
             $.get("/lab/loadLab", function(data) {
