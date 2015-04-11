@@ -237,43 +237,45 @@
 
 <div class="mycontianer">
     <div class="container-fluid">
-        <%--<div class="jumbotron">--%>
-            <%--<h1>欢迎登录实验室排课系统</h1>--%>
-
-            <%--<p class="lead" id="showNotice">--%>
-
-            <%--</p>--%>
-        <%--</div>--%>
-        <div class="row-fluid">
-            <div class="span3">
-                <div class="well sidebar-nav">
-                    <ul class="nav nav-list">
-                        <li class="nav-header">Home</li>
-                        <li class="active"><a href="#">按周查看</a></li>
-                        <li><a href="#">按实验室查看</a></li>
-                        <li><a href="#">个人信息修改</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li class="nav-header">Sidebar</li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li class="nav-header">Sidebar</li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                    </ul>
-                </div><!--/.well -->
-            </div><!--/span-->
-            <div class="span9">
-                <div class="page-header">
+        <div class="jumbotron">
+            <div class="page-header">
                 <h1>欢迎登录实验室排课系统</h1>
+            </div>
 
-                <p class="lead" id="showNotice">
+            <p class="lead" id="showNotice">
 
-                </p>
+            </p>
+        </div>
+        <div class="row-fluid">
+            <%--<div class="span3">--%>
+                <%--<div class="well sidebar-nav">--%>
+                    <%--<ul class="nav nav-list">--%>
+                        <%--<li class="nav-header">Home</li>--%>
+                        <%--<li class="active"><a href="#">按周查看</a></li>--%>
+                        <%--<li><a href="#">按实验室查看</a></li>--%>
+                        <%--<li><a href="#">个人信息修改</a></li>--%>
+                        <%--<li><a href="#">Link</a></li>--%>
+                        <%--<li class="nav-header">Sidebar</li>--%>
+                        <%--<li><a href="#">Link</a></li>--%>
+                        <%--<li><a href="#">Link</a></li>--%>
+                        <%--<li><a href="#">Link</a></li>--%>
+                        <%--<li><a href="#">Link</a></li>--%>
+                        <%--<li><a href="#">Link</a></li>--%>
+                        <%--<li><a href="#">Link</a></li>--%>
+                        <%--<li class="nav-header">Sidebar</li>--%>
+                        <%--<li><a href="#">Link</a></li>--%>
+                        <%--<li><a href="#">Link</a></li>--%>
+                        <%--<li><a href="#">Link</a></li>--%>
+                    <%--</ul>--%>
+                <%--</div><!--/.well -->--%>
+            <%--</div><!--/span-->--%>
+            <div class="span9">
+                <%--<div class="page-header">--%>
+                <%--<h1>欢迎登录实验室排课系统</h1>--%>
+
+                <%--<p class="lead" id="showNotice">--%>
+
+                <%--</p>--%>
                 </div>
                 <div class="row-fluid">
                     <div class="btnsty" style="height:70px;">

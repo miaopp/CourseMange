@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: pp
-  Date: 2015/4/2
-  Time: 21:33
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -163,21 +156,21 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="dept">所在学院 (必填)：</label>
+                        <label class="control-label" for="dep">所在学院 (必填)：</label>
 
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="dept" name="dept" placeholder="学院">
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="major">所在专业 (必填)：</label>
+                        <label class="control-label" for="realname">所在专业 (必填)：</label>
 
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="major" name="major" placeholder="专业">
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="class">所在（教授）班级 (必填)：</label>
+                        <label class="control-label" for="realname">所在（教授）班级 (必填)：</label>
 
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="class" name="class" placeholder="班级">

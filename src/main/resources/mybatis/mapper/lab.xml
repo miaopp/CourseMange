@@ -5,9 +5,21 @@
 <mapper namespace="Lab">
     <resultMap id="labResultMap" type="Lab">
         <result property="id" column="lab_id"/>
-        <result property="courseId" column="course_id"/>
-        <result property="userId" column="user_id"/>
-        <result property="labBeginTime" column="begin_time"/>
-        <result property="labEndTime" column="end_time"/>
+        <result property="lab_name" column="lab_name"/>
+        <result property="lab_address" column="lab_address"/>
+        <result property="lab_dept" column="lab_dept"/>
     </resultMap>
+    <insert id="insertLab" parameterType="Lab">
+        <![CDATA[
+            insert into lab
+            (lab_name, lab_address, lab_dept)
+            values (#{labname}, #{address}, #{labdept})
+        ]]>
+    </insert>
+    <select id="selectLabs" resultType="Lab">
+        <![CDATA[
+            select *
+            from lab;
+        ]]>
+    </select>
 </mapper>

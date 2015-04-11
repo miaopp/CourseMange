@@ -5,52 +5,49 @@ package com.mpp.model;
  */
 public class Lab {
     private int id;
-    private int courseId;
-    private int userId;
-    private String labBeginTime;
-    private String labEndTime;
+    private String lab_name;
+    private String lab_address;
+    private String lab_dept;
 
     public int getId() {
         return id;
     }
 
-    public void setId(final int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public int getCourseId() {
-        return courseId;
+    public String getLab_name() {
+        return lab_name;
     }
 
-    public void setCourseId(final int courseId) {
-        this.courseId = courseId;
+    public void setLab_name(String lab_name) {
+        this.lab_name = lab_name;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getLab_address() {
+        return lab_address;
     }
 
-    public void setUserId(final int userId) {
-        this.userId = userId;
+    public void setLab_address(String lab_address) {
+        this.lab_address = lab_address;
     }
 
-    public String getLabBeginTime()
-    {
-        return labBeginTime;
+    public String getLab_dept() {
+        return lab_dept;
     }
 
-    public void setLabBeginTime(final String labBeginTime)
-    {
-        this.labBeginTime = labBeginTime;
+    public void setLab_dept(String lab_dept) {
+        this.lab_dept = lab_dept;
     }
 
-    public String getLabEndTime()
-    {
-        return labEndTime;
-    }
-
-    public void setLabEndTime(final String labEndTime)
-    {
-        this.labEndTime = labEndTime;
+    @Override
+    public String toString() {
+        return "Lab{" +
+                "id=" + id +
+                ", lab_name='" + lab_name + '\'' +
+                ", lab_address='" + lab_address + '\'' +
+                ", lab_dept='" + lab_dept + '\'' +
+                '}';
     }
 }

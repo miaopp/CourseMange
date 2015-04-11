@@ -1,12 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
   User: pp
-  Date: 2015/4/5
-  Time: 17:14
+  Date: 2015/4/11
+  Time: 12:16
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-         pageEncoding="utf-8" %>
+         pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-CN">
@@ -18,7 +18,25 @@
     <script src="./js/bootstrap.js"></script>
     <script src="./js/json2.js"></script>
     <script type="text/javascript">
+        function loadLab() {
+            $.get("/lab/loadLab", function(data) {
+                var list = JSON.parse(data);
+                var str = "";
+                alert(list.length);
+                if(parseInt(list.length) == parseInt(0)) {
+                    str+="<div class='well'>";
+                    str+="  <p class='text-info'>目前还没有相关实验室信息</p>";
+                    str+="  <div class='btn-group'>";
+                    str+="      <button type='button' class='btn btn-success'>确认查看课表</button>";
+                    str+="  </div>";
+                    str+="</div>";
+                }
+                $("#showLab").html(str);
+            });
+        }
+
         $(function () {
+            loadLab();
             $("#logout").click(function() {
                 $.get("/user/logout" , function() {
                     location.href = "./login.jsp";
@@ -57,8 +75,8 @@
             </div>
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li class="active"><a href="./manager.jsp">首页</a></li>
-                    <li><a href="./labmanager.jsp">实验室管理</a></li>
+                    <li><a href="./manager.jsp">首页</a></li>
+                    <li class="active"><a href="./labmanager.jsp">实验室管理</a></li>
                     <li><a href="#">实验室课程申请管理</a></li>
                     <li><a href="#">用户信息管理</a></li>
                 </ul>
@@ -69,46 +87,13 @@
 <div class="mycontianer">
     <div class="container">
         <div class="jumbotron">
-        <h1>欢迎登录实验室排课系统</h1>
+            <div class="page-header">
+                <h1>实验室管理</h1>
+            </div>
+            <p class="p1" id="showLab">
 
-        <p class="lead" id="showNotice">
-
-        </p>
+            </p>
         </div>
-        <%--<div class="row-fluid">--%>
-            <%--<div class="span3">--%>
-                <%--<div class="well sidebar-nav">--%>
-                    <%--<ul class="nav nav-list">--%>
-                        <%--<li class="nav-header">Home</li>--%>
-                        <%--<li class="active"><a href="#">实验室课程申请管理</a></li>--%>
-                        <%--<li><a href="#">用户信息管理</a></li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li class="nav-header">Sidebar</li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li class="nav-header">Sidebar</li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                        <%--<li><a href="#">Link</a></li>--%>
-                    <%--</ul>--%>
-                <%--</div><!--/.well -->--%>
-            <%--</div><!--/span-->--%>
-            <%--<div class="span9">--%>
-                <%--<div class="page-header">--%>
-                    <%--<h1>欢迎登录实验室排课系统</h1>--%>
-
-                    <%--<p class="lead" id="showNotice">--%>
-
-                    <%--</p>--%>
-                <%--</div>--%>
-                <%--<div class="row-fluid">--%>
-                <%--</div><!--/row-->--%>
-            <%--</div><!--/span-->--%>
-        <%--</div>--%>
     </div>
     <div class="footer" style="margin-top: 10px;">
         <div class="container">

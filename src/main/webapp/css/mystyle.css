@@ -1,104 +1,60 @@
 .mycontianer{
-    margin-left: 15%;
-    margin-right: 15%;
+	margin-left: 15%;
+	margin-right: 15%;
 }
 
 .page-header1{
-    padding-bottom: 9px;
-    margin: 20px 0 30px;
+	padding-bottom: 9px;
+	margin: 20px 0 30px;
 }
 .row{
-    margin-left: -30px;
+	margin-left: -30px;
 }
 .my_con{
-    width: 1200px;
-    height: 900px;
-    margin-left: 10%;
-    margin-right: 10%;
+	width: 1200px;
+	height: 900px;
+	margin-left: 10%;
+	margin-right: 10%;
 }
 p.p1{
-    text-align: left;
-    font-size: 17px;
-    font-weight: normal;
-    font-family: Arial, Helvetica, sans-serif;
+	text-align: left;
+	font-size: 17px;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
 }
 .jumbotron {
-    /* margin: 80px 0; */
-    text-align: left;
+/* margin: 80px 0; */
+	text-align: left;
 }
+textarea.publish {
+	width: 97%;
+	height: 130px;	
+}
+
+.mytitle {
+	text-indent: -9999em;
+	outline-style: none;
+	font: normal 20px/24px Tahoma;
+	float: left;
+	width: 224px;
+	height: 24px;
+}
+
+#login-dialog{
+	margin: 200px auto auto 50%;
+}
+
 .login-body{
-    height: 324px;
-    width: 500px;
-    margin-top: 200px;
-    margin-left: 400px;
+	width: 470px;
+	height: auto;
 }
 
-.bs-docs-sidenav {
-  width: 228px;
-  margin: 30px 0 0;
-  padding: 0;
-  background-color: #fff;
-  -webkit-border-radius: 6px;
-     -moz-border-radius: 6px;
-          border-radius: 6px;
-  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
-     -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
-          box-shadow: 0 1px 4px rgba(0,0,0,.065);
-}
-.bs-docs-sidenav > li > a {
-  display: block;
-  width: 190px \9;
-  margin: 0 0 -1px;
-  padding: 8px 14px;
-  border: 1px solid #e5e5e5;
-}
-.bs-docs-sidenav > li:first-child > a {
-  -webkit-border-radius: 6px 6px 0 0;
-     -moz-border-radius: 6px 6px 0 0;
-          border-radius: 6px 6px 0 0;
-}
-.bs-docs-sidenav > li:last-child > a {
-  -webkit-border-radius: 0 0 6px 6px;
-     -moz-border-radius: 0 0 6px 6px;
-          border-radius: 0 0 6px 6px;
-}
-.bs-docs-sidenav > .active > a {
-  position: relative;
-  z-index: 2;
-  padding: 9px 15px;
-  border: 0;
-  text-shadow: 0 1px 0 rgba(0,0,0,.15);
-  -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
-     -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
-          box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
-}
-/* Chevrons */
-.bs-docs-sidenav .icon-chevron-right {
-  float: right;
-  margin-top: 2px;
-  margin-right: -6px;
-  opacity: .25;
-}
-.bs-docs-sidenav > li > a:hover {
-  background-color: #f5f5f5;
-}
-.bs-docs-sidenav a:hover .icon-chevron-right {
-  opacity: .5;
-}
-.bs-docs-sidenav .active .icon-chevron-right,
-.bs-docs-sidenav .active a:hover .icon-chevron-right {
-  background-image: url(../img/glyphicons-halflings-white.png);
-  opacity: 1;
-}
-.bs-docs-sidenav.affix {
-  top: 40px;
-}
-.bs-docs-sidenav.affix-bottom {
-  position: absolute;
-  top: auto;
-  bottom: 270px;
+#login-dialog .footer{
+	height: 30px;
 }
 
-.btnsty{
-    height: 50px;
+#leaveMessage textarea{
+	width: 90%;
+	height: 200px;
+	margin: auto 5% auto 5%;
 }
