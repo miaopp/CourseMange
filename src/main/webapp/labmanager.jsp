@@ -12,15 +12,15 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <link href="./css/mystyle.css" rel="stylesheet">
-    <link href="./css/bootstrap.css" rel="stylesheet">
-    <script src="./js/jquery-1.8.3.js" type="text/javascript"/>
-    <script src="./js/bootstrap.js" type="text/javascript"/>
-    <script src="./js/json2.js" type="text/javascript"/>
+    <link href="./css/mystyle.css" rel="stylesheet" type="text/css">
+    <link href="./css/bootstrap.css" rel="stylesheet" type="text/css">
+    <script src="./js/jquery-1.8.3.js" type="text/javascript"></script>
+    <script src="./js/bootstrap.js" type="text/javascript"></script>
+    <script src="./js/json2.js" type="text/javascript"></script>
     <script type="text/javascript">
         function loadLab() {
             $.get("/lab/loadLab", function(data) {
-                var list = JSON.parse(data);
+                var list = data.data;
                 var str = "";
                 alert(list.length);
                 if(parseInt(list.length) == parseInt(0)) {
