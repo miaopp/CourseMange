@@ -10,12 +10,12 @@
         <result property="realName" column="user_realname"/>
         <result property="classes" column="user_class"/>
         <result property="dept" column="user_dept"/>
+        <result property="major" column="user_major"/>
         <result property="power" column="user_power"/>
-        <result property="course" column="user_course"/>
     </resultMap>
     <select id="selectByName" parameterType="java.lang.String" resultMap="userResultMap">
         <![CDATA[
-            select user_id,user_name,user_password,user_class,user_dept,user_power
+            select user_id,user_name,user_password,user_class,user_dept,user_major,user_power
             from user
             where  user_name = #{username};
         ]]>
@@ -23,8 +23,8 @@
     <insert id="insertUser" parameterType="User">
         <![CDATA[
             insert into user
-            (user_name, user_password, user_class, user_dept, user_power, user_course, user_realname)
-            values (#{username}, #{password}, #{classes}, #{dept}, #{power}, #{course}, #{realName})
+            (user_name, user_password, user_class, user_dept, user_major, user_power,user_realname)
+            values (#{username}, #{password}, #{classes}, #{dept}, #{major}, #{power}, #{realName})
         ]]>
     </insert>
 </mapper>

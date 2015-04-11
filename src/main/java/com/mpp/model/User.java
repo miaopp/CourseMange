@@ -12,8 +12,8 @@ public class User {
     private String realName;
     private int classes;
     private String dept;
+    private String major;
     private int power;
-    private String course;
 
     public int getUserId() { return userId; }
 
@@ -51,6 +51,14 @@ public class User {
         this.dept = dept;
     }
 
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
     public int getPower() {
         return power;
     }
@@ -59,13 +67,15 @@ public class User {
         this.power = power;
     }
 
-    public String getCourse() { return course; }
+    public String getRealName()
+    {
+        return realName;
+    }
 
-    public void setCourse(final String course) { this.course = course; }
-
-    public String getRealName() { return realName; }
-
-    public void setRealName(final String realName) { this.realName = realName; }
+    public void setRealName(final String realName)
+    {
+        this.realName = realName;
+    }
 
     @Override
     public String toString() {
@@ -76,8 +86,8 @@ public class User {
                 .add("realName",realName)
                 .add("classes", classes)
                 .add("dept", dept)
+                .add("major", major)
                 .add("power", power)
-                .add("course",course)
                 .toString();
     }
 }

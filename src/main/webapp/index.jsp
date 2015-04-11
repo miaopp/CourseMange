@@ -276,16 +276,33 @@
                 </p>
                 </div>
                 <div class="row-fluid">
+                    <div class="btnsty" style="height:70px;">
                     <div class="btn-group">
-                        <button class="btn">Action</button>
-                        <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                        <button class="btn">选择学院</button>
+                        <button class="btn dropdown-toggle" data-toggle="dropdown" style="height: 30px"><span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
+                            <li><a href="#">计算机学院</a></li>
                             <li class="divider"></li>
                             <li><a href="#">Separated link</a></li>
                         </ul>
+                    </div>
+                        <div class="btn-group" style="  margin-left: 100px;">
+                            <button class="btn">选择实验室</button>
+                            <button class="btn dropdown-toggle" data-toggle="dropdown" style="height: 30px"><span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">5201</a></li>
+                                <li><a href="#">6304</a></li>
+                                <li><a href="#">6305</a></li>
+                                <li><a href="#">6309</a></li>
+                                <li><a href="#">6310</a></li>
+                                <li><a href="#">6311</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group" style=" margin-left: 100px;">
+                            <button type="button" class="btn btn-info">确认查看课表</button>
+                        </div>
                     </div>
                     <table class="table table-hover">
                         <thead>

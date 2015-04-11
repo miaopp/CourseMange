@@ -12,9 +12,15 @@ public class Apply {
     private int userId;
     private Date applyTime;
 
-    public int getApplyId() { return applyId; }
+    public int getApplyId()
+    {
+        return applyId;
+    }
 
-    public void setApplyId(final int applyId) { this.applyId = applyId; }
+    public void setApplyId(final int applyId)
+    {
+        this.applyId = applyId;
+    }
 
     public int getCourseId() {
         return courseId;
@@ -41,7 +47,13 @@ public class Apply {
     }
 
 
-    public int getUserId() { return userId; }
+    public int getUserId()
+    {
+        return userId;
+    }
 
-    public void setUserId(final int userId) { this.userId = userId; }
+    public void setUserId(final int userId)
+    {
+        this.userId = userId;
+    }
 }

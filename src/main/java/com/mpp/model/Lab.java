@@ -34,11 +34,23 @@ public class Lab {
         this.userId = userId;
     }
 
-    public String getLabBeginTime() { return labBeginTime; }
+    public String getLabBeginTime()
+    {
+        return labBeginTime;
+    }
 
-    public void setLabBeginTime(final String labBeginTime) { this.labBeginTime = labBeginTime; }
+    public void setLabBeginTime(final String labBeginTime)
+    {
+        this.labBeginTime = labBeginTime;
+    }
 
-    public String getLabEndTime() { return labEndTime; }
+    public String getLabEndTime()
+    {
+        return labEndTime;
+    }
 
-    public void setLabEndTime(final String labEndTime) { this.labEndTime = labEndTime; }
+    public void setLabEndTime(final String labEndTime)
+    {
+        this.labEndTime = labEndTime;
+    }
 }

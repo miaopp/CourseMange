@@ -78,7 +78,7 @@
                     <ul class="nav nav-list">
                         <li class="nav-header">Home</li>
                         <li class="active"><a href="#">查看实验室课程表</a></li>
-                        <li><a href="#">查看实验室申请状态</a></li>
+                        <li><a href="#">添加课程信息</a></li>
                         <li><a href="#">实验室申请</a></li>
                         <li><a href="#">个人信息修改</a></li>
                         <li class="nav-header">Sidebar</li>
@@ -104,38 +104,7 @@
                     </p>
                 </div>
                 <div class="row-fluid">
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><a class="btn" href="#">View details »</a></p>
-                    </div><!--/span-->
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><a class="btn" href="#">View details »</a></p>
-                    </div><!--/span-->
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><a class="btn" href="#">View details »</a></p>
-                    </div><!--/span-->
-                </div><!--/row-->
-                <div class="row-fluid">
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><a class="btn" href="#">View details »</a></p>
-                    </div><!--/span-->
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><a class="btn" href="#">View details »</a></p>
-                    </div><!--/span-->
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><a class="btn" href="#">View details »</a></p>
-                    </div><!--/span-->
+
                 </div><!--/row-->
             </div><!--/span-->
         </div>

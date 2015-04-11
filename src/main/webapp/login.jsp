@@ -22,13 +22,13 @@
             this.username = username;
             this.password = password;
         }
-        function registerBean(username, password, realName, dept, classes, course, power) {
+        function registerBean(username, password, realName, dept, major, classes, power) {
             this.username = username;
             this.password = password;
             this.realName = realName;
             this.dept = dept;
+            this.major = major;
             this.classes = classes;
-            this.course = course;
             this.power = power;
         }
         $(function () {
@@ -62,10 +62,10 @@
                 var password = $("#regModal input[name='password']").val();
                 var realName = $("#regModal input[name='realname']").val();
                 var dept = $("#regModal input[name='dept']").val();
+                var major = $("#regModal input[name='major']").val();
                 var classes = $("#regModal input[name='class']").val();
-                var course = $("#regModal input[name='course']").val();
                 var power = $("input[type='radio']:checked").val();
-                var json = JSON.stringify(new registerBean(username, password, realName, dept, classes, course, power));
+                var json = JSON.stringify(new registerBean(username, password, realName, dept, major, classes, power));
                 $.ajax({
                     type: "post",
                     url: "/user/register",
@@ -163,24 +163,24 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="realname">所在专业 (必填)：</label>
+                        <label class="control-label" for="dept">所在学院 (必填)：</label>
 
                         <div class="controls">
-                            <input type="text" class="input-xlarge" id="dept" name="dept" placeholder="专业">
+                            <input type="text" class="input-xlarge" id="dept" name="dept" placeholder="学院">
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="realname">所在（教授）班级 (必填)：</label>
+                        <label class="control-label" for="major">所在专业 (必填)：</label>
+
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="major" name="major" placeholder="专业">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="class">所在（教授）班级 (必填)：</label>
 
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="class" name="class" placeholder="班级">
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="realname">所上（教授）课程 (必填)：</label>
-
-                        <div class="controls">
-                            <input type="text" class="input-xlarge" id="course" name="course" placeholder="课程">
                         </div>
                     </div>
                     <div class="control-group">
