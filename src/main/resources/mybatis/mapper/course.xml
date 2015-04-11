@@ -7,7 +7,7 @@
         <result property="id" column="course_id"/>
         <result property="name" column="course_name"/>
         <result property="targetClass" column="target_class"/>
-        <result property="courseBegineWeek" column="begin_time"/>
+        <result property="courseBeginWeek" column="begin_time"/>
         <result property="courseEndWeek" column="end_time"/>
     </resultMap>
 </mapper>

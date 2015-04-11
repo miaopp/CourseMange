@@ -5,9 +5,9 @@
 <mapper namespace="Lab">
     <resultMap id="labResultMap" type="Lab">
         <result property="id" column="lab_id"/>
-        <result property="lab_name" column="lab_name"/>
-        <result property="lab_address" column="lab_address"/>
-        <result property="lab_dept" column="lab_dept"/>
+        <result property="labName" column="lab_name"/>
+        <result property="labAddress" column="lab_address"/>
+        <result property="labDept" column="lab_dept"/>
     </resultMap>
     <insert id="insertLab" parameterType="Lab">
         <![CDATA[

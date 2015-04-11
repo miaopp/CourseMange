@@ -4,7 +4,7 @@ CREATE TABLE `user` (
 	`user_password`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '密码',
 	`user_realname`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '真实姓名',
   `user_class` 				INT 				NOT NULL DEFAULT 0		COMMENT '班级',
-	`user_dept` 			VARCHAR(18) 		NOT NULL DEFAULT ''		COMMENT '所在专业',
+	`user_dept` 			VARCHAR(18) 		NOT NULL DEFAULT ''		COMMENT '所在学院',
 	`user_power` 					SMALLINT 			NOT NULL DEFAULT 0		COMMENT '身份',
   `user_major` 			VARCHAR(18) 		NOT NULL DEFAULT ''		COMMENT '所在专业',
 	PRIMARY KEY (`user_id`)
