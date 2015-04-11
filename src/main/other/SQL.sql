@@ -6,7 +6,7 @@ CREATE TABLE `user` (
   `user_class` 				INT 				NOT NULL DEFAULT 0		COMMENT '班级',
 	`user_dept` 			VARCHAR(18) 		NOT NULL DEFAULT ''		COMMENT '所在专业',
 	`user_power` 					SMALLINT 			NOT NULL DEFAULT 0		COMMENT '身份',
-  `user_course` 			VARCHAR(18) 		NOT NULL DEFAULT ''		COMMENT '所在专业',
+  `user_major` 			VARCHAR(18) 		NOT NULL DEFAULT ''		COMMENT '所在专业',
 	PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '用户表';
 
@@ -30,9 +30,8 @@ CREATE TABLE `apply` (
 
 CREATE TABLE `lab` (
   `lab_id` 					BIGINT UNSIGNED 	NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `course_id`				BIGINT UNSIGNED			NOT NULL DEFAULT 0  	COMMENT '已安排课程编号',
-  `user_id`				BIGINT UNSIGNED 				NOT NULL DEFAULT 0		COMMENT '上课老师',
-  `begin_time`				DATETIME 			NOT NULL 	DEFAULT '1971-01-01 00:00:00'  	COMMENT '上课时间',
-  `end_time`				DATETIME 			NOT NULL 	DEFAULT '1971-01-01 00:00:00'  	COMMENT '下课时间',
+  `lab_name`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '实验室名称',
+  `lab_address`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '实验室地址',
+  `lab_dept`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '实验室所属学院',
   PRIMARY KEY (`lab_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '实验室信息表';

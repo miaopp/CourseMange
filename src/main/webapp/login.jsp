@@ -156,7 +156,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="dep">所在学院 (必填)：</label>
+                        <label class="control-label" for="dept">所在学院 (必填)：</label>
 
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="dept" name="dept" placeholder="学院">
