@@ -28,6 +28,7 @@ public class LabController {
     @ResponseBody
     public CodeMessage loadLab() {
         List<Lab> list = labService.getLab();
+        System.out.println(list);
         return JsonReturn.getSuccess(list);
     }
 

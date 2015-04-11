@@ -16,7 +16,7 @@
             values (#{labName}, #{labAddress}, #{labDept})
         ]]>
     </insert>
-    <select id="selectLabs" resultType="Lab">
+    <select id="selectLabs" resultMap="labResultMap">
         <![CDATA[
             select *
             from lab;
