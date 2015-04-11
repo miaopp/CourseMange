@@ -1,13 +1,15 @@
 package com.mpp.model;
 
+import com.google.common.base.Objects;
+
 /**
  * Created by xiang.xu on 2015/3/30.
  */
 public class Lab {
     private int id;
-    private String lab_name;
-    private String lab_address;
-    private String lab_dept;
+    private String labName;
+    private String labAddress;
+    private String labDept;
 
     public int getId() {
         return id;
@@ -17,37 +19,37 @@ public class Lab {
         this.id = id;
     }
 
-    public String getLab_name() {
-        return lab_name;
+    public String getLabName() {
+        return labName;
     }
 
-    public void setLab_name(String lab_name) {
-        this.lab_name = lab_name;
+    public void setLabName(final String labName) {
+        this.labName = labName;
     }
 
-    public String getLab_address() {
-        return lab_address;
+    public String getLabAddress() {
+        return labAddress;
     }
 
-    public void setLab_address(String lab_address) {
-        this.lab_address = lab_address;
+    public void setLabAddress(final String labAddress) {
+        this.labAddress = labAddress;
     }
 
-    public String getLab_dept() {
-        return lab_dept;
+    public String getLabDept() {
+        return labDept;
     }
 
-    public void setLab_dept(String lab_dept) {
-        this.lab_dept = lab_dept;
+    public void setLabDept(final String labDept) {
+        this.labDept = labDept;
     }
 
     @Override
     public String toString() {
-        return "Lab{" +
-                "id=" + id +
-                ", lab_name='" + lab_name + '\'' +
-                ", lab_address='" + lab_address + '\'' +
-                ", lab_dept='" + lab_dept + '\'' +
-                '}';
+        return Objects.toStringHelper(this)
+                .add("id", id)
+                .add("labName", labName)
+                .add("labAddress", labAddress)
+                .add("labDept", labDept)
+                .toString();
     }
 }
