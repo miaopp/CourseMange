@@ -33,8 +33,8 @@ public class LabDaoImpl implements LabDao {
     }
 
     @Override
-    public void deleteLab(final String labName) {
-        Preconditions.checkNotNull(labName);
-        this.sqlSession.delete("Lab.deleteLab",labName);
+    public void deleteLab(final Integer id) {
+        Preconditions.checkNotNull(id);
+        this.sqlSession.delete("Lab.deleteLab",id);
     }
 }

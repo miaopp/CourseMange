@@ -42,7 +42,7 @@
                         str+="                  <h3>"+list[i].labName+"</h3>";
                         str+="                  <h4>"+list[i].labAddress+"</h4>";
                         str+="                  <h4>"+list[i].labDept+"</h4>";
-                        str+="                  <p><button type='button' class='btn btn-large btn-primary disabled lab_del' val='"+list[i].labName+"' >删除</button></p>";
+                        str+="                  <p><button type='button' class='btn btn-large btn-primary disabled lab_del' val='"+list[i].id+"' >删除</button></p>";
                         str+="              </div>";
                         str+="          </div>";
                         str+="      </li>";
@@ -61,8 +61,8 @@
             this.labDept = labDept;
         }
 
-        function labDeleteBean(labName) {
-            this.labName = labName;
+        function labDeleteBean(id) {
+            this.id = id;
         }
 
         $(function () {
@@ -94,9 +94,9 @@
                 });
             });
             $(document).on("click", ".lab_del", function() {
-                var labName = $(this).attr("val");
-                alert(labName);
-                var json = JSON.stringify(new labDeleteBean(labName));
+                var id = $(this).attr("val");
+                alert(id);
+                var json = JSON.stringify(new labDeleteBean(id));
                 $.ajax({
                     type: "post",
                     url: "/lab/labDelete",

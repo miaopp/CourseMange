@@ -10,5 +10,5 @@ import java.util.List;
 public interface LabService {
     public void addLab(Lab lab);
     public List<Lab> getLab();
-    public void deleteLab (String labName);
+    public void deleteLab (Integer id);
 }

@@ -12,5 +12,5 @@ public interface LabDao {
 
     public void addLab(Lab lab);
 
-    public void deleteLab (String labName);
+    public void deleteLab (Integer id);
 }
