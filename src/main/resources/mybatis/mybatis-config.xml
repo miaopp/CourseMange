@@ -12,6 +12,7 @@
         <typeAlias type="com.mpp.model.Course" alias="Course"/>
         <typeAlias type="com.mpp.model.Lab" alias="Lab"/>
         <typeAlias type="com.mpp.model.User" alias="User"/>
+        <typeAlias type="com.mpp.model.Schedule" alias="Schedule"/>
     </typeAliases>
 
     <mappers>
@@ -19,5 +20,6 @@
         <mapper resource="mybatis/mapper/course.xml"/>
         <mapper resource="mybatis/mapper/lab.xml"/>
         <mapper resource="mybatis/mapper/user.xml"/>
+        <mapper resource="mybatis/mapper/schedule.xml"/>
     </mappers>
 </configuration>

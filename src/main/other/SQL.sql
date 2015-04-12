@@ -35,3 +35,14 @@ CREATE TABLE `lab` (
   `lab_dept`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '实验室所属学院',
   PRIMARY KEY (`lab_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '实验室信息表';
+
+CREATE TABLE `schedule` (
+  `schedule_id` 					BIGINT UNSIGNED 	NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `lab_id`				BIGINT UNSIGNED 				NOT NULL DEFAULT 0  	COMMENT '实验室id',
+  `course_id`				BIGINT UNSIGNED 				NOT NULL DEFAULT 0  	COMMENT '课程id',
+  `state`    TINYINT  NOT NULL  DEFAULT 0 COMMENT '被安排情况',
+  `week`				INT 				NOT NULL DEFAULT 0  	COMMENT '第几周',
+  `day_of_week`       INT 				NOT NULL DEFAULT 0  	COMMENT '星期几',
+  `order`				INT 			NOT NULL DEFAULT 0  	COMMENT '第几节课',
+  PRIMARY KEY (`schedule_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '排课信息表';

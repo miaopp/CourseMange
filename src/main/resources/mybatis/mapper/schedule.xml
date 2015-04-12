@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Schedule">
+    <resultMap id="scheduleResultMap" type="Schedule">
+        <result property="id" column="schedule_id"/>
+        <result property="labId" column="lab_id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="dayOfWeek" column="day_of_week"/>
+    </resultMap>
+    <insert id="saveScheduleList" parameterType="Schedule">
+        <![CDATA[
+          insert into schedule
+          (lab_id, state, week, day_of_week, "order",)
+          values
+        ]]>
+        <foreach collection="list" item="item" index="index" separator=",">
+            <![CDATA[
+                    (#{item.labId}, #{item.state}, #{item.week}, #{item.dayOfWeek}, #{item.order})
+            ]]>
+        </foreach>
+    </insert>
+</mapper>
