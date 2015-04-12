@@ -38,4 +38,10 @@ public class LabController {
         labService.addLab(lab);
         return JsonReturn.getSuccess("success");
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/labDelete", produces = "application/json; charset=utf-8")
+    public CodeMessage labDelete(@RequestBody String labName) {
+        labService.deleteLab(labName);
+        return JsonReturn.getSuccess("success");
+    }
 }

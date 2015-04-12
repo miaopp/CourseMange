@@ -35,18 +35,20 @@
                     str+="<div class='row-fluid'>";
                     str+="  <ul class='thumbnails'>";
                     for(var i = 0; i < list.length ; i++) {
-                        str+="      <li class='span4'>";
+                        str+="      <li class='span4' style='margin-left: 1%;'>";
                         str+="          <div class='thumbnail'>";
                         str+="              <img data-src='holder.js/300x200' alt='300x200' src='#' style='width: 300px; height: 200px;'>";
                         str+="              <div class='caption'>";
                         str+="                  <h3>"+list[i].labName+"</h3>";
                         str+="                  <h4>"+list[i].labAddress+"</h4>";
                         str+="                  <h4>"+list[i].labDept+"</h4>";
+                        str+="                  <p><button type='button' class='btn btn-large btn-primary disabled lab_del' val='"+list[i].labName+"' >删除</button></p>";
                         str+="              </div>";
                         str+="          </div>";
                         str+="      </li>";
                     }
                     str+="  </ul>";
+                    str+="  <a href='#LabModal' role='button' class='btn btn-large btn-success disabled' disabled='disabled' data-toggle='modal'>添加实验室信息</a>";
                     str+="</div>";
                 }
                 $("#showLab").html(str);
@@ -57,6 +59,10 @@
             this.labName = labName;
             this.labAddress = labAddress;
             this.labDept = labDept;
+        }
+
+        function labDeleteBean(labName) {
+            this.labName = labName;
         }
 
         $(function () {
@@ -84,6 +90,23 @@
                         }
                         $("#LabModal .alert").removeClass("alert-info").addClass("alert-error");
                         $("#LabModal .alert").html("<p class='p1'>failed to Insert!</p>");
+                    }
+                });
+            });
+            $(document).on("click", ".lab_del", function() {
+                var labName = $(this).attr("val");
+                alert(labName);
+                var json = JSON.stringify(new labDeleteBean(labName));
+                $.ajax({
+                    type: "post",
+                    url: "/lab/labDelete",
+                    data: "json",
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function(data) {
+                        if(200 == data.status) {
+                            location.reload();
+                        }
                     }
                 });
             });

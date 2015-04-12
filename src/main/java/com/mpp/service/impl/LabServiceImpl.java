@@ -26,4 +26,7 @@ public class LabServiceImpl implements LabService{
     public List<Lab> getLab() {
         return labDao.getLab();
     }
+    public void deleteLab(final String labName) {
+        labDao.deleteLab(labName);
+    }
 }

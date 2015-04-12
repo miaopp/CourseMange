@@ -22,4 +22,11 @@
             from lab;
         ]]>
     </select>
+    <delete id="deleteLab" parameterType="java.lang.String">
+        <![CDATA[
+            delete *
+            from lab
+            where lab_name = #{labName};
+        ]]>
+    </delete>
 </mapper>
