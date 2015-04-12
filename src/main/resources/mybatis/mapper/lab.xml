@@ -24,7 +24,7 @@
     </select>
     <delete id="deleteLab" parameterType="java.lang.String">
         <![CDATA[
-            delete *
+            delete
             from lab
             where lab_name = #{labName};
         ]]>
