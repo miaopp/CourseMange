@@ -7,7 +7,27 @@
         <result property="id" column="course_id"/>
         <result property="name" column="course_name"/>
         <result property="targetClass" column="target_class"/>
-        <result property="courseBeginWeek" column="begin_time"/>
-        <result property="courseEndWeek" column="end_time"/>
+        <result property="courseBeginWeek" column="begin_week"/>
+        <result property="courseEndWeek" column="end_week"/>
     </resultMap>
+    <select id="selectCourses" resultMap="courseResultMap">
+        <![CDATA[
+            select *
+            from course;
+        ]]>
+    </select>
+    <insert id="insertCourse" parameterType="Course">
+        <![CDATA[
+            insert into course
+            (course_name, target_class, begin_week, end_week)
+            values (#{name}, #{targetClass}, #{courseBeginWeek}, #{courseEndWeek});
+        ]]>
+    </insert>
+    <delete id="deleteCourse" parameterType="java.lang.Integer">
+        <![CDATA[
+            delete
+            from course
+            where course_id = #{id};
+        ]]>
+    </delete>
 </mapper>

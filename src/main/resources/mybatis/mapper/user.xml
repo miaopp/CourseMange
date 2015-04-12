@@ -15,7 +15,7 @@
     </resultMap>
     <select id="selectByName" parameterType="java.lang.String" resultMap="userResultMap">
         <![CDATA[
-            select user_id,user_name,user_password,user_class,user_dept,user_major,user_power
+            select user_id,user_name,user_password,user_realname,user_class,user_dept,user_major,user_power
             from user
             where  user_name = #{username};
         ]]>

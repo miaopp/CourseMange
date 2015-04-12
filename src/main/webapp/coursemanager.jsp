@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: pp
-  Date: 2015/4/5
-  Time: 17:14
+  Date: 2015/4/12
+  Time: 20:25
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -18,6 +18,10 @@
     <script src="./js/bootstrap.js"></script>
     <script src="./js/json2.js"></script>
     <script type="text/javascript">
+        function loadCourse() {
+            
+        }
+
         $(function () {
             $("#logout").click(function() {
                 $.get("/user/logout" , function() {
@@ -57,8 +61,8 @@
             </div>
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li class="active"><a href="./teacher.jsp">首页</a></li>
-                    <li><a href="./coursemanager.jsp">添加课程信息</a></li>
+                    <li><a href="./teacher.jsp">首页</a></li>
+                    <li class="active"><a href="./coursemanager.jsp">添加课程信息</a></li>
                     <li><a href="#">实验室申请</a></li>
                     <li><a href="#">查看实验室课程表</a></li>
                 </ul>
@@ -70,10 +74,10 @@
     <div class="container">
         <div class="jumbotron">
             <div class="page-header">
-                <h1>欢迎登录实验室排课系统</h1>
+                <h1>课程管理</h1>
             </div>
 
-            <p class="lead" id="showNotice">
+            <p class="p1" id="showCourse">
 
             </p>
         </div>
@@ -88,7 +92,8 @@
                 0.052352 sec - 0 queries - 0 sec @ portal
             </div>
         </div>
-        </div>
+    </div>
 </div>
 </body>
 </html>
+

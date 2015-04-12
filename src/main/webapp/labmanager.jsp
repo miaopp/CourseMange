@@ -97,7 +97,7 @@
             });
             $(document).on("click", ".lab_del", function() {
                 var id = $(this).attr("val");
-                alert(id);
+//                alert(id);
                 var json = JSON.stringify(new labDeleteBean(id));
                 $.ajax({
                     type: "post",
