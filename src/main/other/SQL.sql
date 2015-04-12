@@ -13,6 +13,8 @@ CREATE TABLE `user` (
 CREATE TABLE `course` (
   `course_id` 					BIGINT UNSIGNED 	NOT NULL AUTO_INCREMENT COMMENT 'id',
   `course_name`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '课程名称',
+  `course_dept`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '开设课程学院',
+  `course_major`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '开设课程专业',
   `target_class`				INT 				NOT NULL DEFAULT 0		COMMENT '上课班级',
   `begin_week`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '上课时间',
   `end_week`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '下课时间',
