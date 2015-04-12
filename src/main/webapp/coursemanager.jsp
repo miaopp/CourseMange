@@ -19,10 +19,24 @@
     <script src="./js/json2.js"></script>
     <script type="text/javascript">
         function loadCourse() {
-            
+            $.get("/course/loadCourse", function(data) {
+                var list = data.data;
+                var str = "";
+                //alert(list.length);
+                if(0 == list.length) {
+                    str+="<div class='well'>";
+                    str+="  <p class='text-info'>目前还没有相关课程信息，请添加！</p>";
+                    str+="  <div class='btn-group'>";
+                    str+="      <a href='#CourseModal' role='button' class='btn btn-success disabled' disabled='disabled' data-toggle='modal'>添加实验室信息</a>";
+                    str+="  </div>";
+                    str+="</div>";
+                }
+                $("#showCourse").html(str);
+            });
         }
 
         $(function () {
+            loadCourse();
             $("#logout").click(function() {
                 $.get("/user/logout" , function() {
                     location.href = "./login.jsp";
@@ -31,6 +45,57 @@
         })
     </script>
 </head>
+
+<!-- Modal -->
+<div id="CourseModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">添加课程信息</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label" for="coursename">课程名称 (必填)：</label>
+
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="coursename" name="coursename" placeholder="实验室">
+
+                        <p class="help-block">请在此输入课程名称。</p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="coursedept">课程开设学院 (必填)：</label>
+
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="coursedept" name="coursedept" placeholder="实验室地点">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="coursemajor">课程开设专业 (必填)：</label>
+
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="coursemajor" name="coursemajor" placeholder="所属学院">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="targetclass">课程开设班级 (必填)：</label>
+
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="targetclass" name="targetclass" placeholder="所属学院">
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div class="alert alert-info hide">
+        </div>
+        <button class="btn btn-success" id="labinsert">提交</button>
+    </div>
+</div>
+
 <body>
 <div class="navbar navbar-inverse" style="position: static;">
     <div class="navbar">

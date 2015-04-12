@@ -6,6 +6,8 @@ package com.mpp.model;
 public class Course {
     private int id;
     private String name;
+    private String courseDept;
+    private String courseMajor;
     private int targetClass;
     private String courseBeginWeek;
     private String courseEndWeek;
@@ -48,5 +50,21 @@ public class Course {
 
     public void setCourseEndWeek(final String courseEndWeek) {
         this.courseEndWeek = courseEndWeek;
+    }
+
+    public String getCourseDept() {
+        return courseDept;
+    }
+
+    public void setCourseDept(String courseDept) {
+        this.courseDept = courseDept;
+    }
+
+    public String getCourseMajor() {
+        return courseMajor;
+    }
+
+    public void setCourseMajor(String courseMajor) {
+        this.courseMajor = courseMajor;
     }
 }
