@@ -100,7 +100,7 @@
                 $.ajax({
                     type: "post",
                     url: "/lab/labDelete",
-                    data: "json",
+                    data: json,
                     contentType: 'application/json',
                     dataType: 'json',
                     success: function(data) {
