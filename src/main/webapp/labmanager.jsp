@@ -88,8 +88,10 @@
                         if(200 == data.status) {
                             location.reload();
                         }
-                        $("#LabModal .alert").removeClass("alert-info").addClass("alert-error");
-                        $("#LabModal .alert").html("<p class='p1'>failed to Insert!</p>");
+                        else {
+                            $("#LabModal .alert").removeClass("alert-info").addClass("alert-error");
+                            $("#LabModal .alert").html("<p class='p1'>failed to Insert!</p>");
+                        }
                     }
                 });
             });
