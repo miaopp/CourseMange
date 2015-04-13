@@ -60,4 +60,6 @@ public class UserController {
         httpSession.removeAttribute("user");
         httpSession.removeAttribute("realname");
     }
+
+    
 }
