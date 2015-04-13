@@ -37,4 +37,11 @@ public class CourseController {
         courseService.addCourse(course);
         return JsonReturn.getSuccess("success");
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/courseDelete", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public CodeMessage courseDelete(@RequestBody Course course) {
+        courseService.deleteCourse(course.getId());
+        return JsonReturn.getSuccess("success");
+    }
 }

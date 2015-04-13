@@ -27,4 +27,10 @@
             values (#{username}, #{password}, #{classes}, #{dept}, #{major}, #{power}, #{realName})
         ]]>
     </insert>
+    <select id="selectUsers" resultMap="userResultMap">
+        <![CDATA[
+            select *
+            from user;
+        ]]>
+    </select>
 </mapper>

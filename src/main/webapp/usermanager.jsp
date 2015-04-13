@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: pp
-  Date: 2015/4/5
-  Time: 17:14
+  Date: 2015/4/13
+  Time: 15:19
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -57,10 +57,10 @@
             </div>
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li class="active"><a href="./manager.jsp">首页</a></li>
+                    <li><a href="./manager.jsp">首页</a></li>
                     <li><a href="./labmanager.jsp">实验室管理</a></li>
                     <li><a href="#">实验室课程申请管理</a></li>
-                    <li><a href="usermanager.jsp">用户信息管理</a></li>
+                    <li class="active"><a href="usermanager.jsp">用户信息管理</a></li>
                 </ul>
             </div>
         </div>
@@ -70,7 +70,7 @@
     <div class="container">
         <div class="jumbotron">
             <div class="page-header">
-                <h1>欢迎登录实验室排课系统</h1>
+                <h1>用户信息管理</h1>
             </div>
 
             <p class="p1" id="showNotice">
