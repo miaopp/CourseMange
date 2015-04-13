@@ -27,4 +27,7 @@ public class UserServiceImpl implements UserService {
     public List<User> gerUser() {
         return userDao.gerUser();
     }
+    public void deleteUser (Integer userId) {
+        userDao.deleteUser(userId);
+    }
 }

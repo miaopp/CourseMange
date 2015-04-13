@@ -18,10 +18,65 @@
     <script src="./js/bootstrap.js"></script>
     <script src="./js/json2.js"></script>
     <script type="text/javascript">
+        function loadUser() {
+            $.get("/user/loadUser", function(data) {
+                var list = data.data;
+                var str = "";
+                str+="<div class='row-fluid'>";
+                str+="  <ul class='thumbnails'>";
+                for(var i = 0; i < list.length; i++) {
+                    if(list[i].power != 2) {
+                        str += "      <li class='span4' style='margin-left: 1%;'>";
+                        str += "          <div class='thumbnail'>";
+                        str += "              <img data-src='holder.js/300x200' alt='300x200' src='#' style='width: 300px; height: 200px;'>";
+                        str += "              <div class='caption'>";
+                        str += "                  <h4>用户名：" + list[i].username + "</h4>";
+                        str += "                  <h5>真实姓名：" + list[i].realName + "</h5>";
+                        str += "                  <h5>所在学院：" + list[i].dept + "</h5>";
+                        str += "                  <h5>所在专业：" + list[i].major + "</h5>";
+                        if(list[i].power == 0) {
+                            str += "                  <h5>身份：学生</h5>";
+                        }
+                        else {
+                            str += "                  <h5>身份：老师</h5>";
+                        }
+                        str += "                  <p><button type='button' class='btn btn-large btn-primary disabled user_del' val='" + list[i].userId + "' >删除</button></p>";
+                        str += "              </div>";
+                        str += "          </div>";
+                        str += "      </li>";
+                    }
+                }
+                $("#showUser").html(str);
+            });
+        }
+
+        function deleteUserBean(userId) {
+            this.userId = userId;
+        }
+
         $(function () {
+            loadUser();
             $("#logout").click(function() {
                 $.get("/user/logout" , function() {
                     location.href = "./login.jsp";
+                });
+            });
+
+            $(document).on("click", ".user_del", function() {
+                var userId = $(this).attr("val");
+//                alert(userId);
+                var json = JSON.stringify(new deleteUserBean(userId));
+                $.ajax({
+                    type: "post",
+                    url: "/user/userDelete",
+                    data: json,
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function(data) {
+                        if(200 == data.status) {
+                            location.reload();
+                        }
+                    }
                 });
             });
         })
@@ -73,7 +128,7 @@
                 <h1>用户信息管理</h1>
             </div>
 
-            <p class="p1" id="showNotice">
+            <p class="p1" id="showUser">
 
             </p>
         </div>
