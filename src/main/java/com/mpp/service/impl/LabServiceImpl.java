@@ -32,8 +32,7 @@ public class LabServiceImpl implements LabService{
             for (int j = 0; j < 7; j++) {
                 for (int k = 0; k < 12; k++) {
                     Schedule schedule = new Schedule(0, i, j, k);
-                    //差labId
-                    schedule.setLabId(0);
+                    schedule.setLabId(lab.getId());
                     scheduleList.add(schedule);
                 }
             }
