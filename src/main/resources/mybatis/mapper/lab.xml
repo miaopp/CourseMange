@@ -9,7 +9,7 @@
         <result property="labAddress" column="lab_address"/>
         <result property="labDept" column="lab_dept"/>
     </resultMap>
-    <insert id="insertLab" parameterType="Lab">
+    <insert id="insertLab" parameterType="Lab" keyProperty="id">
         <![CDATA[
             insert into lab
             (lab_name, lab_address, lab_dept)
