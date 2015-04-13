@@ -12,12 +12,12 @@
     <insert id="saveScheduleList" parameterType="Schedule">
         <![CDATA[
           insert into schedule
-          (lab_id, state, week, day_of_week, "order",)
+          (lab_id, state, week, day_of_week, orders)
           values
         ]]>
         <foreach collection="list" item="item" index="index" separator=",">
             <![CDATA[
-                    (#{item.labId}, #{item.state}, #{item.week}, #{item.dayOfWeek}, #{item.order})
+                    (#{item.labId}, #{item.state}, #{item.week}, #{item.dayOfWeek}, #{item.orders})
             ]]>
         </foreach>
     </insert>

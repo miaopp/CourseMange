@@ -46,6 +46,6 @@ CREATE TABLE `schedule` (
   `state`    TINYINT  NOT NULL  DEFAULT 0 COMMENT '被安排情况',
   `week`				INT 				NOT NULL DEFAULT 0  	COMMENT '第几周',
   `day_of_week`       INT 				NOT NULL DEFAULT 0  	COMMENT '星期几',
-  `order`				INT 			NOT NULL DEFAULT 0  	COMMENT '第几节课',
+  `orders`				INT 			NOT NULL DEFAULT 0  	COMMENT '第几节课',
   PRIMARY KEY (`schedule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '排课信息表';

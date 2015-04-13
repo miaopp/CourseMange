@@ -12,16 +12,16 @@ public class Schedule {
     private int state;
     private int week;
     private int dayOfWeek;
-    private int order;
+    private int orders;
 
     public Schedule() {
     }
 
-    public Schedule(final int state, final int week, final int dayOfWeek, final int order) {
+    public Schedule(final int state, final int week, final int dayOfWeek, final int orders) {
         this.state = state;
         this.week = week;
         this.dayOfWeek = dayOfWeek;
-        this.order = order;
+        this.orders = orders;
     }
 
     public int getId() {
@@ -72,12 +72,12 @@ public class Schedule {
         this.dayOfWeek = dayOfWeek;
     }
 
-    public int getOrder() {
-        return order;
+    public int getOrders() {
+        return orders;
     }
 
-    public void setOrder(final int order) {
-        this.order = order;
+    public void setOrders(final int orders) {
+        this.orders = orders;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class Schedule {
                 .add("state", state)
                 .add("week", week)
                 .add("dayOfWeek", dayOfWeek)
-                .add("order", order)
+                .add("orders", orders)
                 .toString();
     }
 }
