@@ -18,6 +18,8 @@
     <script src="./js/bootstrap.js"></script>
     <script src="./js/json2.js"></script>
     <script type="text/javascript">
+        var userId = <%=request.getSession().getAttribute("uid") %>;
+        <%--var realName = <%=request.getSession().getAttribute("realname")%>;--%>
         function loadCourse() {
             $.get("/course/loadCourse", function(data) {
                 var list = data.data;
@@ -31,8 +33,39 @@
                     str+="  </div>";
                     str+="</div>";
                 }
+                else {
+                    str+="<div class='row-fluid'>";
+                    str+="  <ul class='thumbnails'>";
+                    for(var i = 0; i < str.length; i++) {
+                        str+="      <li class='span4' style='margin-left: 1%;'>";
+                        str+="          <div class='thumbnail'>";
+                        str+="              <img data-src='holder.js/300x200' alt='300x200' src='#' style='width: 300px; height: 200px;'>";
+                        str+="              <div class='caption'>";
+                        str+="                  <h3>课程名称："+list[i].name+"</h3>";
+                        <!--str+="                  <h4>授课老师："+<%=request.getSession().getAttribute("realname")%>+"</h4>";-->
+                        str+="                  <h4>课程开设专业："+list[i].courseMajor+"</h4>";
+                        str+="                  <h4>上课时间：第"+list[i].courseBeginWeek+"周-第"+list[i].courseEndWeek+"周</h4>";
+                        str+="                  <p><button type='button' class='btn btn-large btn-primary disabled course_del' val='"+list[i].id+"' >删除</button></p>";
+                        str+="              </div>";
+                        str+="          </div>";
+                        str+="      </li>";
+                    }
+                    str+="  </ul>";
+                    str+="  <a href='#CourseModal' role='button' class='btn btn-large btn-success disabled' disabled='disabled' data-toggle='modal'>添加课程信息</a>";
+                    str+="</div>";
+                }
                 $("#showCourse").html(str);
             });
+        }
+
+        function courseInsertBean(userId, name, courseDept, courseMajor, targetClass, courseBeginWeek, courseEndWeek) {
+            this.userId = userId;
+            this.name = name;
+            this.courseDept = courseDept;
+            this.courseMajor = courseMajor;
+            this.targetClass = targetClass;
+            this.courseBeginWeek = courseBeginWeek;
+            this.courseEndWeek = courseBeginWeek;
         }
 
         $(function () {
@@ -40,6 +73,34 @@
             $("#logout").click(function() {
                 $.get("/user/logout" , function() {
                     location.href = "./login.jsp";
+                });
+            });
+
+            $("#courseinsert").click(function () {
+//                alert(userId);
+//                alert(realName);
+                var name = $("#CourseModal input[name='coursename']").val();
+                var courseDept = $("#CourseModal input[name='coursedept']").val();
+                var courseMajor = $("#CourseModal input[name='coursemajor']").val();
+                var targetClass = $("#CourseModal input[name='targetclass']").val();
+                var courseBeginWeek = $("#CourseModal input[name='coursebeginweek']").val();
+                var courseEndWeek = $("#CourseModal input[name='courseendweek']").val();
+                var json = JSON.stringify(new courseInsertBean(userId,name, courseDept, courseMajor, targetClass, courseBeginWeek, courseEndWeek));
+                $.ajax({
+                    type: "post",
+                    url: "/course/insertCourseMessage",
+                    data: json,
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function(data) {
+                        if(200 == data.status) {
+                            location.reload();
+                        }
+                        else {
+                            $("#CourseModal .alert").removeClass("alert-info").addClass("alert-error");
+                            $("#CourseModal .alert").html("<p class='p1'>failed to Insert!</p>");
+                        }
+                    }
                 });
             });
         })
@@ -60,7 +121,7 @@
                     <label class="control-label" for="coursename">课程名称 (必填)：</label>
 
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="coursename" name="coursename" placeholder="实验室">
+                        <input type="text" class="input-xlarge" id="coursename" name="coursename" placeholder="课程名称">
 
                         <p class="help-block">请在此输入课程名称。</p>
                     </div>
@@ -69,21 +130,39 @@
                     <label class="control-label" for="coursedept">课程开设学院 (必填)：</label>
 
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="coursedept" name="coursedept" placeholder="实验室地点">
+                        <input type="text" class="input-xlarge" id="coursedept" name="coursedept" placeholder="课程开设学院">
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="coursemajor">课程开设专业 (必填)：</label>
 
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="coursemajor" name="coursemajor" placeholder="所属学院">
+                        <input type="text" class="input-xlarge" id="coursemajor" name="coursemajor" placeholder="课程开设专业">
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="targetclass">课程开设班级 (必填)：</label>
 
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="targetclass" name="targetclass" placeholder="所属学院">
+                        <input type="text" class="input-xlarge" id="targetclass" name="targetclass" placeholder="课程开设班级">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="coursebeginweek">上课起始周 (必填)：</label>
+
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="coursebeginweek" name="coursebeginweek" placeholder="上课起始周">
+
+                        <p class="help-block">请在此输入开始上课周次（只能填写数字）。</p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="courseendweek">上课结束周 (必填)：</label>
+
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="courseendweek" name="courseendweek" placeholder="上课结束周">
+
+                        <p class="help-block">请在此输入上课结束周次（只能填写数字）。</p>
                     </div>
                 </div>
             </fieldset>
@@ -92,7 +171,7 @@
     <div class="modal-footer">
         <div class="alert alert-info hide">
         </div>
-        <button class="btn btn-success" id="labinsert">提交</button>
+        <button class="btn btn-success" id="courseinsert">提交</button>
     </div>
 </div>
 

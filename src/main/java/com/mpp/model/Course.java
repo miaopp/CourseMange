@@ -5,6 +5,7 @@ package com.mpp.model;
  */
 public class Course {
     private int id;
+    private int userId;
     private String name;
     private String courseDept;
     private String courseMajor;
@@ -18,6 +19,14 @@ public class Course {
 
     public void setId(final int id) {
         this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {

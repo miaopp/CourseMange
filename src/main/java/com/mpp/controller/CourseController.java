@@ -4,7 +4,9 @@ import com.mpp.constants.CodeMessage;
 import com.mpp.constants.JsonReturn;
 import com.mpp.model.Course;
 import com.mpp.service.CourseService;
+import com.sun.org.apache.bcel.internal.classfile.Code;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,5 +29,12 @@ public class CourseController {
     public CodeMessage loadCourse() {
         List<Course> list = courseService.getCourse();
         return JsonReturn.getSuccess(list);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/insertCourseMessage", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public CodeMessage insertCourseMessage(@RequestBody Course course) {
+        courseService.addCourse(course);
+        return JsonReturn.getSuccess("success");
     }
 }

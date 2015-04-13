@@ -11,7 +11,7 @@
     <script src="./js/bootstrap.js"></script>
     <script src="./js/json2.js"></script>
     <script type="text/javascript">
-        var userid = <%=request.getSession().getAttribute("uid") %>
+        var userid = <%=request.getSession().getAttribute("uid") %>;
         function loginBean(username, password) {
             this.username = username;
             this.password = password;

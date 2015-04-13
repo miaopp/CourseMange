@@ -5,6 +5,7 @@
 <mapper namespace="Course">
     <resultMap id="courseResultMap" type="Course">
         <result property="id" column="course_id"/>
+        <result property="userId" column="user_id"/>
         <result property="name" column="course_name"/>
         <result property="courseDept" column="course_dept"/>
         <result property="courseMajor" column="course_major"/>
@@ -21,8 +22,8 @@
     <insert id="insertCourse" parameterType="Course">
         <![CDATA[
             insert into course
-            (course_name, course_dept, course_major, target_class, begin_week, end_week)
-            values (#{name}, #{courseDept}, #{courseMajor}, #{targetClass}, #{courseBeginWeek}, #{courseEndWeek});
+            (user_id, course_name, course_dept, course_major, target_class, begin_week, end_week)
+            values (#{userId}, #{name}, #{courseDept}, #{courseMajor}, #{targetClass}, #{courseBeginWeek}, #{courseEndWeek});
         ]]>
     </insert>
     <delete id="deleteCourse" parameterType="java.lang.Integer">

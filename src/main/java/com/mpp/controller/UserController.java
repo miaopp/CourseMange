@@ -46,6 +46,7 @@ public class UserController {
         if (null != u && null != u.getPassword() && u.getPassword().equals(user.getPassword())) {
             httpSession.setAttribute("uid", u.getUserId());
             httpSession.setAttribute("user", user.getUsername());
+            httpSession.setAttribute("realname",u.getRealName());
             UserPowerEnum powerEnum = UserPowerEnum.getType(u.getPower());
             rtn = JsonReturn.getSuccess(powerEnum.getDispather());
         }
@@ -57,5 +58,6 @@ public class UserController {
     public void logout(HttpSession httpSession) {
         httpSession.removeAttribute("uid");
         httpSession.removeAttribute("user");
+        httpSession.removeAttribute("realname");
     }
 }
