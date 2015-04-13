@@ -1,5 +1,7 @@
 package com.mpp.dao.impl;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.mpp.dao.ScheduleDao;
 import com.mpp.model.Schedule;
 import org.apache.ibatis.session.SqlSession;
@@ -19,6 +21,6 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
     @Override
     public void saveScheduleList(final List<Schedule> scheduleList) {
-
+        this.sqlSession.insert("Schedule.saveScheduleList", scheduleList);
     }
 }
