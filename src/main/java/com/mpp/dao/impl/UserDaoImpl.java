@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by xiang.xu on 2015/3/30.
@@ -27,5 +28,10 @@ public class UserDaoImpl implements UserDao {
     public void addUser(final User user) {
         Preconditions.checkNotNull(user);
         this.sqlSession.insert("User.insertUser", user);
+    }
+
+    @Override
+    public List<User> gerUser() {
+        return this.sqlSession.selectList("User.selectUsers");
     }
 }

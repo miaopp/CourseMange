@@ -19,7 +19,7 @@
     <script src="./js/json2.js"></script>
     <script type="text/javascript">
         var userId = <%=request.getSession().getAttribute("uid") %>;
-        <%--var realName = <%=request.getSession().getAttribute("realname")%>;--%>
+        var realName = "<%=request.getSession().getAttribute("realname")%>";
         function loadCourse() {
             $.get("/course/loadCourse", function(data) {
                 var list = data.data;
@@ -36,15 +36,15 @@
                 else {
                     str+="<div class='row-fluid'>";
                     str+="  <ul class='thumbnails'>";
-                    for(var i = 0; i < str.length; i++) {
+                    for(var i = 0; i < list.length; i++) {
                         str+="      <li class='span4' style='margin-left: 1%;'>";
                         str+="          <div class='thumbnail'>";
                         str+="              <img data-src='holder.js/300x200' alt='300x200' src='#' style='width: 300px; height: 200px;'>";
                         str+="              <div class='caption'>";
-                        str+="                  <h3>课程名称："+list[i].name+"</h3>";
-                        <!--str+="                  <h4>授课老师："+<%=request.getSession().getAttribute("realname")%>+"</h4>";-->
-                        str+="                  <h4>课程开设专业："+list[i].courseMajor+"</h4>";
-                        str+="                  <h4>上课时间：第"+list[i].courseBeginWeek+"周-第"+list[i].courseEndWeek+"周</h4>";
+                        str+="                  <h4>课程名称："+list[i].name+"</h4>";
+                        str+="                  <h5>授课老师："+realName+"</h5>";
+                        str+="                  <h5>课程开设专业："+list[i].courseMajor+"</h5>";
+                        str+="                  <h5>上课时间：第"+list[i].courseBeginWeek+"周~第"+list[i].courseEndWeek+"周</h5>";
                         str+="                  <p><button type='button' class='btn btn-large btn-primary disabled course_del' val='"+list[i].id+"' >删除</button></p>";
                         str+="              </div>";
                         str+="          </div>";
@@ -65,7 +65,11 @@
             this.courseMajor = courseMajor;
             this.targetClass = targetClass;
             this.courseBeginWeek = courseBeginWeek;
-            this.courseEndWeek = courseBeginWeek;
+            this.courseEndWeek = courseEndWeek;
+        }
+
+        function courseDeleteBean(id) {
+            this.id = id;
         }
 
         $(function () {
@@ -77,15 +81,14 @@
             });
 
             $("#courseinsert").click(function () {
-//                alert(userId);
-//                alert(realName);
                 var name = $("#CourseModal input[name='coursename']").val();
                 var courseDept = $("#CourseModal input[name='coursedept']").val();
                 var courseMajor = $("#CourseModal input[name='coursemajor']").val();
                 var targetClass = $("#CourseModal input[name='targetclass']").val();
                 var courseBeginWeek = $("#CourseModal input[name='coursebeginweek']").val();
                 var courseEndWeek = $("#CourseModal input[name='courseendweek']").val();
-                var json = JSON.stringify(new courseInsertBean(userId,name, courseDept, courseMajor, targetClass, courseBeginWeek, courseEndWeek));
+                alert(courseEndWeek);
+                var json = JSON.stringify(new courseInsertBean(userId, name, courseDept, courseMajor, targetClass, courseBeginWeek, courseEndWeek));
                 $.ajax({
                     type: "post",
                     url: "/course/insertCourseMessage",
@@ -99,6 +102,24 @@
                         else {
                             $("#CourseModal .alert").removeClass("alert-info").addClass("alert-error");
                             $("#CourseModal .alert").html("<p class='p1'>failed to Insert!</p>");
+                        }
+                    }
+                });
+            });
+
+            $(document).on("click", ".course_del", function() {
+                var id = $(this).attr("val");
+//                alert(id);
+                var json = JSON.stringify(new courseDeleteBean(id));
+                $.ajax({
+                    type: "post",
+                    url: "/course/courseDelete",
+                    data: json,
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data) {
+                        if(200 == data.status) {
+                            location.reload();
                         }
                     }
                 });
