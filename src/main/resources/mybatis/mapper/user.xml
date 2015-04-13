@@ -33,4 +33,11 @@
             from user;
         ]]>
     </select>
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        <![CDATA[
+            delete
+            from user
+            where user_id = #{userId};
+        ]]>
+    </delete>
 </mapper>

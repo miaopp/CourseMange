@@ -34,4 +34,10 @@ public class UserDaoImpl implements UserDao {
     public List<User> gerUser() {
         return this.sqlSession.selectList("User.selectUsers");
     }
+
+    @Override
+    public void deleteUser (final Integer userId) {
+        Preconditions.checkNotNull(userId);
+        this.sqlSession.delete("User.deleteUser", userId);
+    }
 }

@@ -6,11 +6,13 @@ import com.mpp.constants.JsonReturn;
 import com.mpp.constants.UserPowerEnum;
 import com.mpp.model.User;
 import com.mpp.service.UserService;
+import com.sun.org.apache.bcel.internal.classfile.Code;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -60,4 +62,19 @@ public class UserController {
         httpSession.removeAttribute("user");
         httpSession.removeAttribute("realname");
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/loadUser", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public CodeMessage loadUser() {
+        List<User> list = userService.gerUser();
+        return JsonReturn.getSuccess(list);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/userDelete", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public CodeMessage userDelete(@RequestBody User user) {
+        userService.deleteUser(user.getUserId());
+        return JsonReturn.getSuccess("success");
+    }
+
 }

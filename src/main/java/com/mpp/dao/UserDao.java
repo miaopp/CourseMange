@@ -13,4 +13,6 @@ public interface UserDao {
     public void addUser(User user);
 
     public List<User> gerUser();
+
+    public void deleteUser (Integer userId);
 }

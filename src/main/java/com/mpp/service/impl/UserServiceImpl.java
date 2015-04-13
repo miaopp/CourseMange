@@ -6,6 +6,7 @@ import com.mpp.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by xiang.xu on 2015/4/2.
@@ -22,5 +23,11 @@ public class UserServiceImpl implements UserService {
     }
     public User getUserByName(String username) {
         return userDao.getUserByName(username);
+    }
+    public List<User> gerUser() {
+        return userDao.gerUser();
+    }
+    public void deleteUser (Integer userId) {
+        userDao.deleteUser(userId);
     }
 }

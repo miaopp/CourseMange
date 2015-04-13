@@ -227,7 +227,7 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     <li><a href="./teacher.jsp">首页</a></li>
-                    <li class="active"><a href="./coursemanager.jsp">添加课程信息</a></li>
+                    <li class="active"><a href="./coursemanager.jsp">课程信息管理</a></li>
                     <li><a href="#">实验室申请</a></li>
                     <li><a href="#">查看实验室课程表</a></li>
                 </ul>
@@ -239,7 +239,7 @@
     <div class="container">
         <div class="jumbotron">
             <div class="page-header">
-                <h1>课程管理</h1>
+                <h1>课程信息管理</h1>
             </div>
 
             <p class="p1" id="showCourse">
