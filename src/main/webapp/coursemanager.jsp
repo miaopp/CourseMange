@@ -45,7 +45,8 @@
                         str+="                  <h5>授课老师："+realName+"</h5>";
                         str+="                  <h5>课程开设专业："+list[i].courseMajor+"</h5>";
                         str+="                  <h5>上课时间：第"+list[i].courseBeginWeek+"周~第"+list[i].courseEndWeek+"周</h5>";
-                        str+="                  <p><button type='button' class='btn btn-large btn-primary disabled course_del' val='"+list[i].id+"' >删除</button></p>";
+                        str+="                  <a href='#ApplyModal' role='button' class='btn btn-large btn-success disabled' disabled='disabled' data-toggle='modal'>实验室申请</a>";
+                        str+="               <button type='button' class='btn btn-large btn-info disabled pull-right course_del' val='"+list[i].id+"' >删除</button>";
                         str+="              </div>";
                         str+="          </div>";
                         str+="      </li>";
@@ -196,6 +197,115 @@
     </div>
 </div>
 
+<div id="ApplyModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">实验室申请</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label" for="coursename">实验室名称 (必选)：</label>
+
+                    <div class="controls" style="height: 25px;">
+                        <ul class="nav nav-pills">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#">实验室名称 <b class="caret"></b></a>
+                                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="coursedept">课程开设起始周 (必选)：</label>
+
+                    <div class="controls" style="height: 25px;">
+                        <ul class="nav nav-pills">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#">上课起始周次 <b class="caret"></b></a>
+                                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="coursemajor">课程开设结束周 (必选)：</label>
+
+                    <div class="controls" style="height: 25px;">
+                        <ul class="nav nav-pills">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#">上课结束周次 <b class="caret"></b></a>
+                                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="targetclass">课程星期 (必选)：</label>
+
+                    <div class="controls" style="height: 25px;">
+                        <ul class="nav nav-pills">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#">课程星期 <b class="caret"></b></a>
+                                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="coursebeginweek">上课时间 (必选)：</label>
+
+                    <div class="controls" style="height: 25px;">
+                        <ul class="nav nav-pills">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#">上课时间 <b class="caret"></b></a>
+                                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div class="alert alert-info hide">
+        </div>
+        <button class="btn btn-success" id="applyinsert">提交</button>
+    </div>
+</div>
+
 <body>
 <div class="navbar navbar-inverse" style="position: static;">
     <div class="navbar">
@@ -228,7 +338,6 @@
                 <ul class="nav">
                     <li><a href="./teacher.jsp">首页</a></li>
                     <li class="active"><a href="./coursemanager.jsp">课程信息管理</a></li>
-                    <li><a href="#">实验室申请</a></li>
                     <li><a href="#">查看实验室课程表</a></li>
                 </ul>
             </div>

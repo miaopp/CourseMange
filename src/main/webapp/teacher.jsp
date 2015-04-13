@@ -59,7 +59,6 @@
                 <ul class="nav">
                     <li class="active"><a href="./teacher.jsp">首页</a></li>
                     <li><a href="./coursemanager.jsp">课程信息管理</a></li>
-                    <li><a href="#">实验室申请</a></li>
                     <li><a href="#">查看实验室课程表</a></li>
                 </ul>
             </div>
