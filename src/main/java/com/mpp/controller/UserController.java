@@ -1,20 +1,22 @@
 package com.mpp.controller;
 
-import com.google.common.collect.ImmutableMap;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.mpp.constants.AcademyEnum;
 import com.mpp.constants.CodeMessage;
 import com.mpp.constants.JsonReturn;
 import com.mpp.constants.UserPowerEnum;
 import com.mpp.model.User;
 import com.mpp.service.UserService;
-import com.sun.org.apache.bcel.internal.classfile.Code;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by xiang.xu on 2015/3/30.
