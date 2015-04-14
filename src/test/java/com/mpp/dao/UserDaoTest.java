@@ -31,7 +31,7 @@ public class UserDaoTest {
         user.setUsername("asdf");
         user.setPassword("asdf");
         user.setClasses(1);
-        user.setDept("asdf");
+        user.setDept(1);
         user.setPower(1);
         System.out.println(user);
         userDao.addUser(user);

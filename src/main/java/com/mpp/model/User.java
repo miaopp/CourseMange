@@ -11,7 +11,7 @@ public class User {
     private String password;
     private String realName;
     private int classes;
-    private String dept;
+    private int dept;
     private String major;
     private int power;
 
@@ -43,11 +43,11 @@ public class User {
         this.classes = classes;
     }
 
-    public String getDept() {
+    public int getDept() {
         return dept;
     }
 
-    public void setDept(final String dept) {
+    public void setDept(final int dept) {
         this.dept = dept;
     }
 

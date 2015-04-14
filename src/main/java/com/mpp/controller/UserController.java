@@ -1,6 +1,7 @@
 package com.mpp.controller;
 
 import com.google.common.collect.ImmutableMap;
+import com.mpp.constants.AcademyEnum;
 import com.mpp.constants.CodeMessage;
 import com.mpp.constants.JsonReturn;
 import com.mpp.constants.UserPowerEnum;
@@ -28,39 +29,42 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST, value = "/register", produces = "application/json; charset=utf-8")
     @ResponseBody
     public CodeMessage register(@RequestBody User user,HttpSession httpSession) {
+        AcademyEnum academy = AcademyEnum.getAcademy(user.getDept());
+        if (AcademyEnum.ERROR == academy) {
+            return JsonReturn.getError("error academy");
+        }
+
         System.out.println(user.getPower());
         userService.addUser(user);
-        CodeMessage rtn = JsonReturn.getError("faild");
+        httpSession.setAttribute("user", user);
         httpSession.setAttribute("uid", user.getUserId());
-        httpSession.setAttribute("user", user.getUsername());
+        httpSession.setAttribute("username", user.getUsername());
         UserPowerEnum powerEnum = UserPowerEnum.getType(user.getPower());
-        rtn = JsonReturn.getSuccess(powerEnum.getDispather());
-        return rtn;
+        return JsonReturn.getSuccess(powerEnum.getDispather());
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/login", produces = "application/json; charset=utf-8")
     @ResponseBody
     public CodeMessage login(@RequestBody User user,HttpSession httpSession) {
         System.out.println(user.getUsername());
-        CodeMessage rtn = JsonReturn.getError("faild");
         User u = userService.getUserByName(user.getUsername());
         System.out.println(u);
         if (null != u && null != u.getPassword() && u.getPassword().equals(user.getPassword())) {
+            httpSession.setAttribute("user", u);
             httpSession.setAttribute("uid", u.getUserId());
-            httpSession.setAttribute("user", user.getUsername());
-            httpSession.setAttribute("realname",u.getRealName());
+            httpSession.setAttribute("username", u.getUsername());
             UserPowerEnum powerEnum = UserPowerEnum.getType(u.getPower());
-            rtn = JsonReturn.getSuccess(powerEnum.getDispather());
+            return JsonReturn.getSuccess(powerEnum.getDispather());
         }
-        return rtn;
+        return JsonReturn.getError("failed");
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/logout", produces = "application/json; charset=utf-8")
     @ResponseBody
     public void logout(HttpSession httpSession) {
-        httpSession.removeAttribute("uid");
         httpSession.removeAttribute("user");
-        httpSession.removeAttribute("realname");
+        httpSession.removeAttribute("uid");
+        httpSession.removeAttribute("username");
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/loadUser", produces = "application/json; charset=utf-8")

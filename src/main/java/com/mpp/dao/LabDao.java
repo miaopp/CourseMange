@@ -13,4 +13,6 @@ public interface LabDao {
     public void addLab(Lab lab);
 
     public void deleteLab (Integer id);
+
+    public List<String> selectLabNameByDept(int dept);
 }

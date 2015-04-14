@@ -4,7 +4,7 @@ CREATE TABLE `user` (
 	`user_password`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '密码',
 	`user_realname`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '真实姓名',
   `user_class` 				INT 				NOT NULL DEFAULT 0		COMMENT '班级',
-	`user_dept` 			VARCHAR(18) 		NOT NULL DEFAULT ''		COMMENT '所在学院',
+	`user_dept` 			INT 		NOT NULL DEFAULT 0		COMMENT '所在学院',
 	`user_power` 					SMALLINT 			NOT NULL DEFAULT 0		COMMENT '身份',
   `user_major` 			VARCHAR(18) 		NOT NULL DEFAULT ''		COMMENT '所在专业',
 	PRIMARY KEY (`user_id`)
@@ -35,7 +35,7 @@ CREATE TABLE `lab` (
   `lab_id` 					BIGINT UNSIGNED 	NOT NULL AUTO_INCREMENT COMMENT 'id',
   `lab_name`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '实验室名称',
   `lab_address`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '实验室地址',
-  `lab_dept`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '实验室所属学院',
+  `lab_dept`				INT			NOT NULL DEFAULT 0  	COMMENT '实验室所属学院',
   PRIMARY KEY (`lab_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '实验室信息表';
 

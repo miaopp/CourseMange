@@ -9,7 +9,7 @@ public class Lab {
     private int id;
     private String labName;
     private String labAddress;
-    private String labDept;
+    private int labDept;
 
     public int getId() {
         return id;
@@ -35,11 +35,11 @@ public class Lab {
         this.labAddress = labAddress;
     }
 
-    public String getLabDept() {
+    public int getLabDept() {
         return labDept;
     }
 
-    public void setLabDept(final String labDept) {
+    public void setLabDept(final int labDept) {
         this.labDept = labDept;
     }
 

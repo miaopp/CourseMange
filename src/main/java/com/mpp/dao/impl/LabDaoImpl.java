@@ -37,4 +37,9 @@ public class LabDaoImpl implements LabDao {
         Preconditions.checkNotNull(id);
         this.sqlSession.delete("Lab.deleteLab",id);
     }
+
+    @Override
+    public List<String> selectLabNameByDept(final int dept) {
+        return this.sqlSession.selectList("Lab.selectLabNameByDept",dept);
+    }
 }

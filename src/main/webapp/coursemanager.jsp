@@ -1,3 +1,4 @@
+<%@ page import="com.mpp.model.User" %>
 <%--
   Created by IntelliJ IDEA.
   User: pp
@@ -14,12 +15,14 @@
     <meta charset="utf-8">
     <link href="./css/mystyle.css" rel="stylesheet">
     <link href="./css/bootstrap.css" rel="stylesheet">
-    <script src="./js/jquery-1.8.3.js"></script>
-    <script src="./js/bootstrap.js"></script>
-    <script src="./js/json2.js"></script>
+    <script src="./js/jquery-1.8.3.js" type="text/javascript"></script>
+    <script src="./js/bootstrap.js" type="text/javascript"></script>
+    <script src="./js/json2.js" type="text/javascript"></script>
+    <script src="./js/public.js" type="text/javascript"></script>
     <script type="text/javascript">
-        var userId = <%=request.getSession().getAttribute("uid") %>;
-        var realName = "<%=request.getSession().getAttribute("realname")%>";
+        var userId = <%=session.getAttribute("uid") %>;
+        var realName = "<%=((User)session.getAttribute("user")).getRealName()%>";
+        var selectCourse;
         function loadCourse() {
             $.get("/course/loadCourse", function(data) {
                 var list = data.data;
@@ -45,7 +48,7 @@
                         str+="                  <h5>授课老师："+realName+"</h5>";
                         str+="                  <h5>课程开设专业："+list[i].courseMajor+"</h5>";
                         str+="                  <h5>上课时间：第"+list[i].courseBeginWeek+"周~第"+list[i].courseEndWeek+"周</h5>";
-                        str+="                  <a href='#ApplyModal' role='button' class='btn btn-large btn-success disabled' disabled='disabled' data-toggle='modal'>实验室申请</a>";
+                        str+="               <button type='button' class='btn btn-primary applyBtn' name='"+list[i].id+"'>实验室申请</button>";
                         str+="               <button type='button' class='btn btn-large btn-info disabled pull-right course_del' val='"+list[i].id+"' >删除</button>";
                         str+="              </div>";
                         str+="          </div>";
@@ -125,16 +128,31 @@
                     }
                 });
             });
+
+            $(document).on("click", ".applyBtn", function() {
+                selectCourse = this.name;
+                $.post("/lab/getLabListByTeacher", function(data) {
+                    list = data.data;
+                    var str = "";
+                    for (var i = 0 ; i < list.length ; i++) {
+                        str += "<li><a>"+list[i]+"</a></li>";
+                    }
+                    $(".choice ul").html(str);
+                    sstr = "未选择<span class='caret'></span>";
+                    $(".choice button").html(sstr);
+                });
+                $("#ApplyModal").modal('show');
+            });
         })
     </script>
 </head>
 
 <!-- Modal -->
-<div id="CourseModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div id="CourseModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
      aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">添加课程信息</h3>
+        <h3 id="addModalLabel">添加课程信息</h3>
     </div>
     <div class="modal-body">
         <form class="form-horizontal">
@@ -197,31 +215,24 @@
     </div>
 </div>
 
-<div id="ApplyModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div id="ApplyModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel"
      aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">实验室申请</h3>
+        <h3 id="applyModalLabel">实验室申请</h3>
     </div>
     <div class="modal-body">
         <form class="form-horizontal">
             <fieldset>
                 <div class="control-group">
-                    <label class="control-label" for="coursename">实验室名称 (必选)：</label>
+                    <label class="control-label" for="labName">实验室名称 (必选)：</label>
 
-                    <div class="controls" style="height: 25px;">
-                        <ul class="nav nav-pills">
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#">实验室名称 <b class="caret"></b></a>
-                                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                                    <li role="presentation" class="divider"></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                    <div class="controls">
+                        <div class="btn-group open choice" id="labName">
+                            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 加载中...<span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="control-group">
@@ -322,7 +333,7 @@
                             <ul class="nav pull-right">
                                 <li id="fat-menu" class="dropdown">
                                     <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><i
-                                            class="icon-user icon-white"></i>当前用户：<%=session.getAttribute("user") %> <b
+                                            class="icon-user icon-white"></i>当前用户：<%=session.getAttribute("username") %> <b
                                             class="caret"></b></a>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
                                         <li role="presentation" class="divider"></li>

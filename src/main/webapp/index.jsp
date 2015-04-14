@@ -7,11 +7,13 @@
     <meta charset="utf-8">
     <link href="./css/mystyle.css" rel="stylesheet">
     <link href="./css/bootstrap.css" rel="stylesheet">
-    <script src="./js/jquery-1.8.3.js"></script>
-    <script src="./js/bootstrap.js"></script>
-    <script src="./js/json2.js"></script>
+    <script src="./js/jquery-1.8.3.js" type="text/javascript"></script>
+    <script src="./js/bootstrap.js" type="text/javascript"></script>
+    <script src="./js/json2.js" type="text/javascript"></script>
+    <script src="./js/academy.js" type="text/javascript"></script>
+    <script src="./js/public.js" type="text/javascript"></script>
     <script type="text/javascript">
-        var userid = <%=request.getSession().getAttribute("uid") %>;
+        var userid = <%=session.getAttribute("uid") %>;
         function loginBean(username, password) {
             this.username = username;
             this.password = password;
@@ -38,9 +40,8 @@
                     contentType: 'application/json',
                     dataType: 'json',
                     success: function (data) {
-                        if (data == "success") {
-                            alert("success");
-                            location = location;
+                        if (data.status == 200) {
+                            location.reload();
                         }
                         else {
                             $("#loginModal .alert").removeClass("alert-info").addClass("alert-error");
@@ -59,7 +60,7 @@
                 var username = $("#regModal input[name='username']").val();
                 var password = $("#regModal input[name='password']").val();
                 var realName = $("#regModal input[name='realname']").val();
-                var dept = $("#regModal input[name='dept']").val();
+                var dept = academy[$("#dept button")[0].innerText];
                 var classes = $("#regModal input[name='class']").val();
                 var course = $("#regModal input[name='course']").val();
                 var power = $("#regModal input[name='power']").val();
@@ -103,7 +104,7 @@
                             <ul class="nav pull-right">
                                 <li id="fat-menu" class="dropdown">
                                     <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><i
-                                            class="icon-user icon-white"></i>当前用户：<%=session.getAttribute("user") %> <b
+                                            class="icon-user icon-white"></i>当前用户：<%=session.getAttribute("username") %> <b
                                             class="caret"></b></a>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
                                         <li role="presentation" class="divider"></li>
@@ -192,10 +193,18 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="realname">所在专业 (必填)：</label>
+                    <label class="control-label" for="dept">所在专业 (必填)：</label>
 
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="dept" name="dept" placeholder="专业">
+                        <div class="btn-group open choice" id="dept">
+                            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 未选择<span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a>未选择</a></li>
+                                <li class="divider"></li>
+                                <li><a>计算机学院</a></li>
+                                <li><a>软件学院</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="control-group">

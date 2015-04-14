@@ -45,4 +45,9 @@ public class LabServiceImpl implements LabService{
     public void deleteLab(final Integer id) {
         labDao.deleteLab(id);
     }
+
+    @Override
+    public List<String> getLabNameByDept(final int dept) {
+        return labDao.selectLabNameByDept(dept);
+    }
 }

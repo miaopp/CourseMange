@@ -17,6 +17,8 @@
     <script src="./js/jquery-1.8.3.js" type="text/javascript"></script>
     <script src="./js/bootstrap.js" type="text/javascript"></script>
     <script src="./js/json2.js" type="text/javascript"></script>
+    <script src="./js/academy.js" type="text/javascript"></script>
+    <script src="./js/public.js" type="text/javascript"></script>
     <script type="text/javascript">
         function loadLab() {
             $.get("/lab/loadLab", function(data) {
@@ -41,7 +43,7 @@
                         str+="              <div class='caption'>";
                         str+="                  <h3>"+list[i].labName+"</h3>";
                         str+="                  <h4>"+list[i].labAddress+"</h4>";
-                        str+="                  <h4>"+list[i].labDept+"</h4>";
+                        str+="                  <h4>"+academy_code[list[i].labDept]+"</h4>";
                         str+="                  <p><button type='button' class='btn btn-large btn-primary disabled lab_del' val='"+list[i].id+"' >删除</button></p>";
                         str+="              </div>";
                         str+="          </div>";
@@ -75,7 +77,7 @@
             $("#labinsert").click(function() {
                 var labName = $("#LabModal input[name='labname']").val();
                 var labAddress = $("#LabModal input[name='labaddress']").val();
-                var labDept = $("#LabModal input[name='labdept']").val();
+                var labDept = academy[$("#dept button")[0].innerText];
                 alert(labDept);
                 var json = JSON.stringify(new labInsertBean(labName, labAddress, labDept));
                 $.ajax({
@@ -142,10 +144,18 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="labdept">所属学院 (必填)：</label>
+                    <label class="control-label" for="dept">所属学院 (必填)：</label>
 
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="labdept" name="labdept" placeholder="所属学院">
+                        <div class="btn-group open choice" id="dept">
+                            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 未选择<span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a>未选择</a></li>
+                                <li class="divider"></li>
+                                <li><a>计算机学院</a></li>
+                                <li><a>软件学院</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </fieldset>
