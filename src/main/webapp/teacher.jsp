@@ -43,7 +43,7 @@
                             <ul class="nav pull-right">
                                 <li id="fat-menu" class="dropdown">
                                     <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><i
-                                            class="icon-user icon-white"></i>当前用户：<%=session.getAttribute("user") %> <b
+                                            class="icon-user icon-white"></i>当前用户：<%=session.getAttribute("username") %> <b
                                             class="caret"></b></a>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
                                         <li role="presentation" class="divider"></li>

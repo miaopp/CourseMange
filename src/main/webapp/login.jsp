@@ -54,7 +54,8 @@
                 var username = $("#regModal input[name='username']").val();
                 var password = $("#regModal input[name='password']").val();
                 var realName = $("#regModal input[name='realname']").val();
-                var dept = $("#regModal input[name='dept']").val();
+                var dept = academy[$("#dept button")[0].innerText];
+                alert(dept);
                 var major = $("#regModal input[name='major']").val();
                 var classes = $("#regModal input[name='class']").val();
                 var power = $("input[type='radio']:checked").val();
@@ -156,10 +157,18 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="dept">所在学院 (必填)：</label>
+                        <label class="control-label" for="dept">所属学院 (必选)：</label>
 
                         <div class="controls">
-                            <input type="text" class="input-xlarge" id="dept" name="dept" placeholder="学院">
+                            <div class="btn-group open choice" id="dept">
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 未选择<span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a>未选择</a></li>
+                                    <li class="divider"></li>
+                                    <li><a>计算机学院</a></li>
+                                    <li><a>软件学院</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div class="control-group">
