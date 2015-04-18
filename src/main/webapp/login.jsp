@@ -41,7 +41,7 @@
                 $http.post("/user/register", $scope.userRegister)
                         .success(function (response) {
                             if (200 == response.status) {
-                                location.href = "/index.jsp";
+                                location.href = response.data;
                             }
                         })
             }

@@ -125,14 +125,14 @@
             <div class="modal-body">
                 <div class="form-horizontal">
                     <div class="form-group">
-                        <label for="inputCourseName" class="col-sm-2 control-label col-sm-offset-1">课程名称</label>
-                        <div class="col-sm-6 col-sm-offset-1">
+                        <label for="inputCourseName" class="col-sm-3 control-label col-sm-offset-1">课程名称</label>
+                        <div class="col-sm-4 col-sm-offset-1">
                             <input type="text" class="form-control" id="inputCourseName" placeholder="课程名称" ng-model="courseAdd.name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputCourseDept" class="col-sm-2 control-label col-sm-offset-1">课程开设学院</label>
-                        <div class="controls col-sm-6 col-sm-offset-1">
+                        <label for="inputCourseDept" class="col-sm-3 control-label col-sm-offset-1">课程开设学院</label>
+                        <div class="controls col-sm-4 col-sm-offset-1">
                             <div class="btn-group open choice" id="inputCourseDept">
                                 <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> {{academySelected}}<span class="caret"></span></button>
                                 <ul class="dropdown-menu" role="menu">
@@ -144,27 +144,27 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputCourseMajor" class="col-sm-2 control-label col-sm-offset-1">课程开设专业</label>
-                        <div class="col-sm-6 col-sm-offset-1">
+                        <label for="inputCourseMajor" class="col-sm-3 control-label col-sm-offset-1">课程开设专业</label>
+                        <div class="col-sm-4 col-sm-offset-1">
                             <input type="text" class="form-control" id="inputCourseMajor" placeholder="课程开设专业" ng-model="courseAdd.courseMajor">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputCourseClass" class="col-sm-2 control-label col-sm-offset-1">课程开设班级</label>
-                        <div class="col-sm-6 col-sm-offset-1">
+                        <label for="inputCourseClass" class="col-sm-3 control-label col-sm-offset-1">课程开设班级</label>
+                        <div class="col-sm-4 col-sm-offset-1">
                             <input type="text" class="form-control" id="inputCourseClass" placeholder="课程开设班级" ng-model="courseAdd.targetClass">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputCourseBeginWeek" class="col-sm-2 control-label col-sm-offset-1">上课起始周 </label>
-                        <div class="col-sm-6 col-sm-offset-1">
-                            <input type="text" class="form-control" id="inputCourseBeginWeek" placeholder="课程开设班级" ng-model="courseAdd.courseBeginWeek">
+                        <label for="inputCourseBeginWeek" class="col-sm-3 control-label col-sm-offset-1">上课起始周 </label>
+                        <div class="col-sm-4 col-sm-offset-1">
+                            <input type="text" class="form-control" id="inputCourseBeginWeek" placeholder="上课起始周" ng-model="courseAdd.courseBeginWeek">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputCourseEndWeek" class="col-sm-2 control-label col-sm-offset-1">上课结束周 </label>
-                        <div class="col-sm-6 col-sm-offset-1">
-                            <input type="text" class="form-control" id="inputCourseEndWeek" placeholder="课程开设班级" ng-model="courseAdd.courseEndWeek">
+                        <label for="inputCourseEndWeek" class="col-sm-3 control-label col-sm-offset-1">上课结束周 </label>
+                        <div class="col-sm-4 col-sm-offset-1">
+                            <input type="text" class="form-control" id="inputCourseEndWeek" placeholder="上课结束周" ng-model="courseAdd.courseEndWeek">
                         </div>
                     </div>
                 </div>
@@ -258,7 +258,7 @@
         <div class="col-sm-3" ng-repeat="item in course">
             <div class="thumbnail">
                 <img data-src="holder.js/100%x200" alt="100%x200"
-                     src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjkzIiB5PSIxMDAiIHN0eWxlPSJmaWxsOiNBQUFBQUE7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MTFwdDtkb21pbmFudC1iYXNlbGluZTpjZW50cmFsIj4yNDJ4MjAwPC90ZXh0PjwvZz48L3N2Zz4="
+                     src="#"
                      data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
 
                 <div class="caption">
