@@ -30,9 +30,9 @@
         ]]>
     </delete>
 
-    <select id="selectLabNameByDept" parameterType="java.lang.Integer" resultType="java.lang.String">
+    <select id="selectLabNameByDept" parameterType="java.lang.Integer" resultMap="labResultMap">
         <![CDATA[
-            select lab_name
+            select lab_id, lab_name
             from lab
             where lab_dept = #{dept};
         ]]>

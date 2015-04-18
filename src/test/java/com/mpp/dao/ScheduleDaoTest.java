@@ -2,6 +2,8 @@ package com.mpp.dao;
 
 import com.google.common.collect.Lists;
 import com.mpp.model.Schedule;
+import com.mpp.model.entity.OrderFilter;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,6 +24,7 @@ public class ScheduleDaoTest {
     @Resource
     private ScheduleDao scheduleDao;
 
+    @Ignore
     @Test
     public void run() {
         List<Schedule> list = Lists.newArrayList();
@@ -32,5 +35,11 @@ public class ScheduleDaoTest {
         schedule.setLabId(1);
         list.add(schedule);
         scheduleDao.saveScheduleList(list);
+    }
+
+    @Test
+    public void test() {
+        OrderFilter filter = new OrderFilter(1, 1, 1, 2, 2, 0);
+        System.out.println(scheduleDao.getOrders(filter));
     }
 }

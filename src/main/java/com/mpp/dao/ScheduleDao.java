@@ -1,6 +1,7 @@
 package com.mpp.dao;
 
 import com.mpp.model.Schedule;
+import com.mpp.model.entity.OrderFilter;
 
 import java.util.List;
 
@@ -9,4 +10,6 @@ import java.util.List;
  */
 public interface ScheduleDao {
     public void saveScheduleList(List<Schedule> scheduleList);
+
+    public List<Integer> getOrders(OrderFilter filter);
 }

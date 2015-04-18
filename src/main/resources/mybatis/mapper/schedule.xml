@@ -27,4 +27,15 @@
           from schedule
         ]]>
     </select>
+    <select id="selectOrders" parameterType="OrderFilter" resultType="java.lang.Integer">
+        <![CDATA[
+            select orders
+            from
+            (select orders, count(orders) cnt
+            FROM schedule
+            where lab_id = #{labId} and day_of_week = #{dayOfWeek} and state = #{status} and week >= #{beginWeek} and week <= #{endWeek}
+            group by orders) a
+            where cnt >= #{length}
+        ]]>
+    </select>
 </mapper>

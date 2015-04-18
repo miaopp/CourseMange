@@ -13,6 +13,7 @@
         <typeAlias type="com.mpp.model.Lab" alias="Lab"/>
         <typeAlias type="com.mpp.model.User" alias="User"/>
         <typeAlias type="com.mpp.model.Schedule" alias="Schedule"/>
+        <typeAlias type="com.mpp.model.entity.OrderFilter" alias="OrderFilter"/>
     </typeAliases>
 
     <mappers>

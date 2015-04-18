@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.mpp.constants.AcademyEnum;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,10 @@ public class CourseController {
     @RequestMapping(method = RequestMethod.POST, value = "/insertCourseMessage", produces = "application/json; charset=utf-8")
     @ResponseBody
     public CodeMessage insertCourseMessage(@RequestBody Course course) {
+        AcademyEnum academy = AcademyEnum.getAcademy(course.getCourseDept());
+        if (AcademyEnum.ERROR == academy) {
+            return JsonReturn.getError("error academy");
+        }
         courseService.addCourse(course);
         return JsonReturn.getSuccess("success");
     }

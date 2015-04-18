@@ -40,16 +40,13 @@ textarea.publish {
 	height: 24px;
 }
 
-#login-dialog{
-	margin: 200px auto auto 50%;
-}
-
-.login-body{
+.login-dialog{
+    margin: 200px auto auto 50%;
 	width: 470px;
 	height: auto;
 }
 
-#login-dialog .footer{
+.login-dialog .footer{
 	height: 30px;
 }
 

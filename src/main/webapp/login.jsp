@@ -1,210 +1,176 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-         pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<html ng-app="loginModule" ng-controller="loginCtrl">
 <head>
-    <title>Login</title>
-    <meta charset="utf-8">
-    <link href="./css/mystyle.css" rel="stylesheet">
-    <link href="./css/bootstrap.css" rel="stylesheet">
-    <script src="./js/jquery-1.8.3.js"></script>
-    <script src="./js/bootstrap.js"></script>
-    <script src="./js/json2.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- css-->
+    <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="./css/mystyle.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        .nav, .pagination, .carousel, .panel-title a {
+            cursor: pointer;
+        }
+    </style>
+    <!-- JavaScripts-->
+    <script type="text/javascript" src="./js/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.js"></script>
+    <script type="text/javascript" src="./js/angular.js"></script>
+    <script type="text/javascript" src="./js/ui-bootstrap-0.12.1.js"></script>
     <script type="text/javascript">
-        function loginBean(username, password) {
-            this.username = username;
-            this.password = password;
-        }
-        function registerBean(username, password, realName, dept, major, classes, power) {
-            this.username = username;
-            this.password = password;
-            this.realName = realName;
-            this.dept = dept;
-            this.major = major;
-            this.classes = classes;
-            this.power = power;
-        }
-        $(function () {
-            $("#login").click(function() {
-                var username = $("#inputUsername").val();
-                var password = $("#inputPassword").val();
-                var json = JSON.stringify(new loginBean(username, password));
-                $.ajax({
-                    type: "post",
-                    url: "/user/login",
-                    data: json,
-                    contentType: 'application/json',
-                    dataType: 'json',
-                    success: function (data) {
-                        if (200 == data.status) {
-                            location.href = data.data;
-                        }
-                        else {
-                            $("#loginModal .alert").removeClass("alert-info").addClass("alert-error");
-                            $("#loginModal .alert").html("<p class='p1'>failed to Login!</p>");
-                        }
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
-                return false;
-            });
-            $("#register").click(function() {
-                var username = $("#regModal input[name='username']").val();
-                var password = $("#regModal input[name='password']").val();
-                var realName = $("#regModal input[name='realname']").val();
-                var dept = academy[$("#dept button")[0].innerText];
-                alert(dept);
-                var major = $("#regModal input[name='major']").val();
-                var classes = $("#regModal input[name='class']").val();
-                var power = $("input[type='radio']:checked").val();
-                var json = JSON.stringify(new registerBean(username, password, realName, dept, major, classes, power));
-                $.ajax({
-                    type: "post",
-                    url: "/user/register",
-                    data: json,
-                    contentType: 'application/json',
-                    dataType: 'json',
-                    success: function (data) {
-                        if (200 == data.status) {
-                            location.href = data.data;
-                        }
-                        else {
-                            $("#regModal .alert").removeClass("alert-info").addClass("alert-error");
-                            $("#regModal .alert").html("<p class='p1'>failed to Regist!</p>");
-                        }
-                    }
-                });
-                return false;
-            });
+        var app = angular.module('loginModule', ['ui.bootstrap']);
+        app.controller("loginCtrl", function ($scope, $http) {
+            $scope.userLogin = {"username": "", "password": ""};
+            $scope.userRegister = {username: "", password: "", realName: "", dept: -1, major: "", classes: "", power: 0};
+            $scope.academy = [{code: -1, name: "未选择"}, {code: 1, name: "计算机学院"}, {code: 2, name: "软件学院"}];
+            $scope.login = function () {
+                $http.post("/user/login", $scope.userLogin)
+                        .success(function (response) {
+                            if (200 == response.status) {
+                                location.href = response.data;
+                            }
+                        })
+            };
+
+            $scope.academySelected = "未选择";
+            $scope.academySelector = function (item) {
+                $scope.academySelected = item.name;
+                $scope.userRegister.dept = item.code;
+            };
+
+            $scope.register = function () {
+                $http.post(site + "/user/register", $scope.userRegister)
+                        .success(function (response) {
+                            if (200 == response.status) {
+                                location.href = "/index.jsp";
+                            }
+                        })
+            }
         });
     </script>
 </head>
 <body>
 <div class="container">
-    <div id="login-dialog">
-        <div class="well login-body">
+    <div class="well login-dialog">
+        <div class="header">
             <center>
-                <div class="header">
-                    <h3>账号密码登录</h3>
-                    <hr>
-                    </hr>
-                </div>
+            <h3>账号密码登录</h3>
             </center>
-            <div class="form-horizontal">
-                <div class="control-group">
-                    <label class="control-label" for="inputUsername">用户名</label>
-                    <div class="controls">
-                        <input type="text" id="inputUsername" name="username" placeholder="Username">
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="inputPassword">密码</label>
-                    <div class="controls">
-                        <input type="password" id="inputPassword" name="password" placeholder="Password">
-                    </div>
-                </div>
-                <div class="control-group">
-                    <div class="controls">
-                        <button type="submit" class="btn btn-success" id="login">登录</button>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <div class="alert fade in hide">
-                    </div>
-                </div>
-            </div>
             <hr>
             </hr>
-            <div class="footer">
-                <a href="#regModal" role="button" class="btn btn-link pull-right" data-toggle="modal">注册新账号</a>
+        </div>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label for="inputUsername" class="col-sm-2 control-label col-sm-offset-1">Username</label>
+                <div class="col-sm-6 col-sm-offset-1">
+                    <input type="text" class="form-control" id="inputUsername" placeholder="Username" ng-model="userLogin.username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-2 control-label col-sm-offset-1">Password</label>
+                <div class="col-sm-6 col-sm-offset-1">
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="userLogin.password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-10">
+                    <button type="button" class="btn btn-default" ng-click="login()">Sign in</button>
+                </div>
             </div>
         </div>
+        <hr>
+        </hr>
+        <div class="footer">
+            <button class="btn btn-link pull-right" data-toggle="modal" data-target="#regModal">注册新账号</button>
+        </div>
+        <div class="clearfix"></div>
     </div>
 
-    <div id="regModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel">Register</h3>
-        </div>
-        <div class="modal-body">
-            <div class="form-horizontal">
-                <fieldset>
-                    <div class="control-group">
-                        <label class="control-label" for="username">用户名 (必填)：</label>
-
-                        <div class="controls">
-                            <input type="text" class="input-xlarge" id="username" name="username" placeholder="用户名">
-
-                            <p class="help-block">请在此输入您的用户名（大小写敏感）。</p>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="password">密码 (必填)：</label>
-
-                        <div class="controls">
-                            <input type="password" class="input-xlarge" id="password" name="password" placeholder="密码">
-
-                            <p class="help-block">请在此输入您的密码（大小写敏感）。</p>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="realname">姓名 (必填)：</label>
-
-                        <div class="controls">
-                            <input type="text" class="input-xlarge" id="realname" name="realname" placeholder="姓名">
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="dept">所属学院 (必选)：</label>
-
-                        <div class="controls">
-                            <div class="btn-group open choice" id="dept">
-                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 未选择<span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                    <li><a>未选择</a></li>
-                                    <li class="divider"></li>
-                                    <li><a>计算机学院</a></li>
-                                    <li><a>软件学院</a></li>
-                                </ul>
+    <div id="regModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 id="registerModalLabel">Register</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputUsernameReg" class="col-sm-3 control-label col-sm-offset-1">用户名</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputUsernameReg" placeholder="用户名" ng-model="userRegister.username">
+                                <p class="help-block">请在此输入您的用户名（大小写敏感）。</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="realname">所在专业 (必填)：</label>
 
-                        <div class="controls">
-                            <input type="text" class="input-xlarge" id="major" name="major" placeholder="专业">
+                        <div class="form-group">
+                            <label for="inputPasswordReg" class="col-sm-3 control-label col-sm-offset-1">密码</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputPasswordReg" placeholder="密码" ng-model="userRegister.password">
+                                <p class="help-block">请在此输入您的密码（大小写敏感）。</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputRealnameReg" class="col-sm-3 control-label col-sm-offset-1">姓名</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputRealnameReg" placeholder="姓名" ng-model="userRegister.realName">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label col-sm-offset-1" for="dept">所属学院</label>
+
+                            <div class="controls col-sm-6">
+                                <div class="btn-group open choice" id="dept">
+                                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> {{academySelected}}<span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li ng-repeat="item in academy">
+                                            <a ng-click="academySelector(item)">{{item.name}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputMajorReg" class="col-sm-3 control-label col-sm-offset-1">所在专业</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputMajorReg" placeholder="专业" ng-model="userRegister.major">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputClassReg" class="col-sm-3 control-label col-sm-offset-1">所在（教授）班级</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputClassReg" placeholder="班级" ng-model="userRegister.classes">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label col-sm-offset-1" for="power">身份</label>
+
+                            <div class="controls col-sm-6">
+                                <div class="radio" id="power">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="0" checked ng-model="userRegister.power">
+                                        学生
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="1" ng-model="userRegister.power">
+                                        老师
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="modal-footer">
+                            <div class="alert alert-info hide">
+                            </div>
+                            <button type="button" class="btn btn-success" ng-click="register()">提交</button>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label" for="realname">所在（教授）班级 (必填)：</label>
-
-                        <div class="controls">
-                            <input type="text" class="input-xlarge" id="class" name="class" placeholder="班级">
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">身份(必选)：</label>
-
-                        <div class="controls">
-                            <label class="radio">
-                                <input type="radio" name="option" value="0" checked>
-                                学生
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="option" value="1">
-                                老师
-                            </label>
-                        </div>
-                    </div>
-                </fieldset>
-                <br/>
-                <div class="modal-footer">
-                    <div class="alert alert-info hide">
-                    </div>
-                    <button type="button" id="register" class="btn btn-success">提交</button>
                 </div>
             </div>
         </div>

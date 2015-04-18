@@ -39,7 +39,7 @@ public class LabDaoImpl implements LabDao {
     }
 
     @Override
-    public List<String> selectLabNameByDept(final int dept) {
+    public List<Lab> selectLabNameByDept(final int dept) {
         return this.sqlSession.selectList("Lab.selectLabNameByDept",dept);
     }
 }

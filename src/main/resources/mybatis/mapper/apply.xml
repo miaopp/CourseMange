@@ -8,6 +8,8 @@
         <result property="courseId" column="course_id"/>
         <result property="labId" column="lab_id"/>
         <result property="userId" column="user_id"/>
+        <result property="dayOfWeek" column="apply_day_of_week"/>
+        <result property="orders" column="apply_orders"/>
         <result property="applyTime" column="apply_time"/>
     </resultMap>
 </mapper>

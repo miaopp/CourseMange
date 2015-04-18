@@ -14,5 +14,5 @@ public interface LabDao {
 
     public void deleteLab (Integer id);
 
-    public List<String> selectLabNameByDept(int dept);
+    public List<Lab> selectLabNameByDept(int dept);
 }

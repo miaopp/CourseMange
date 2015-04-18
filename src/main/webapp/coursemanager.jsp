@@ -1,382 +1,298 @@
 <%@ page import="com.mpp.model.User" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: pp
-  Date: 2015/4/12
-  Time: 20:25
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-         pageEncoding="utf-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="zh-CN">
+<!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<html ng-app="courseManagerModule" ng-controller="courseManagerCtrl">
 <head>
-    <meta charset="utf-8">
-    <link href="./css/mystyle.css" rel="stylesheet">
-    <link href="./css/bootstrap.css" rel="stylesheet">
-    <script src="./js/jquery-1.8.3.js" type="text/javascript"></script>
-    <script src="./js/bootstrap.js" type="text/javascript"></script>
-    <script src="./js/json2.js" type="text/javascript"></script>
-    <script src="./js/public.js" type="text/javascript"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- css-->
+    <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="./css/mystyle.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        .nav, .pagination, .carousel, .panel-title a {
+            cursor: pointer;
+        }
+    </style>
+    <!-- JavaScripts-->
+    <script type="text/javascript" src="./js/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.js"></script>
+    <script type="text/javascript" src="./js/angular.js"></script>
+    <script type="text/javascript" src="./js/ui-bootstrap-0.12.1.js"></script>
     <script type="text/javascript">
-        var userId = <%=session.getAttribute("uid") %>;
-        var realName = "<%=((User)session.getAttribute("user")).getRealName()%>";
-        var selectCourse;
-        function loadCourse() {
-            $.get("/course/loadCourse", function(data) {
-                var list = data.data;
-                var str = "";
-                //alert(list.length);
-                if(0 == list.length) {
-                    str+="<div class='well'>";
-                    str+="  <p class='text-info'>目前还没有相关课程信息，请添加！</p>";
-                    str+="  <div class='btn-group'>";
-                    str+="      <a href='#CourseModal' role='button' class='btn btn-success disabled' disabled='disabled' data-toggle='modal'>添加实验室信息</a>";
-                    str+="  </div>";
-                    str+="</div>";
-                }
-                else {
-                    str+="<div class='row-fluid'>";
-                    str+="  <ul class='thumbnails'>";
-                    for(var i = 0; i < list.length; i++) {
-                        str+="      <li class='span4' style='margin-left: 1%;'>";
-                        str+="          <div class='thumbnail'>";
-                        str+="              <img data-src='holder.js/300x200' alt='300x200' src='#' style='width: 300px; height: 200px;'>";
-                        str+="              <div class='caption'>";
-                        str+="                  <h4>课程名称："+list[i].name+"</h4>";
-                        str+="                  <h5>授课老师："+realName+"</h5>";
-                        str+="                  <h5>课程开设专业："+list[i].courseMajor+"</h5>";
-                        str+="                  <h5>上课时间：第"+list[i].courseBeginWeek+"周~第"+list[i].courseEndWeek+"周</h5>";
-                        str+="               <button type='button' class='btn btn-primary applyBtn' name='"+list[i].id+"'>实验室申请</button>";
-                        str+="               <button type='button' class='btn btn-large btn-info disabled pull-right course_del' val='"+list[i].id+"' >删除</button>";
-                        str+="              </div>";
-                        str+="          </div>";
-                        str+="      </li>";
-                    }
-                    str+="  </ul>";
-                    str+="  <a href='#CourseModal' role='button' class='btn btn-large btn-success disabled' disabled='disabled' data-toggle='modal'>添加课程信息</a>";
-                    str+="</div>";
-                }
-                $("#showCourse").html(str);
-            });
-        }
-
-        function courseInsertBean(userId, name, courseDept, courseMajor, targetClass, courseBeginWeek, courseEndWeek) {
-            this.userId = userId;
-            this.name = name;
-            this.courseDept = courseDept;
-            this.courseMajor = courseMajor;
-            this.targetClass = targetClass;
-            this.courseBeginWeek = courseBeginWeek;
-            this.courseEndWeek = courseEndWeek;
-        }
-
-        function courseDeleteBean(id) {
-            this.id = id;
-        }
-
-        $(function () {
-            loadCourse();
-            $("#logout").click(function() {
-                $.get("/user/logout" , function() {
-                    location.href = "./login.jsp";
-                });
-            });
-
-            $("#courseinsert").click(function () {
-                var name = $("#CourseModal input[name='coursename']").val();
-                var courseDept = $("#CourseModal input[name='coursedept']").val();
-                var courseMajor = $("#CourseModal input[name='coursemajor']").val();
-                var targetClass = $("#CourseModal input[name='targetclass']").val();
-                var courseBeginWeek = $("#CourseModal input[name='coursebeginweek']").val();
-                var courseEndWeek = $("#CourseModal input[name='courseendweek']").val();
-                alert(courseEndWeek);
-                var json = JSON.stringify(new courseInsertBean(userId, name, courseDept, courseMajor, targetClass, courseBeginWeek, courseEndWeek));
-                $.ajax({
-                    type: "post",
-                    url: "/course/insertCourseMessage",
-                    data: json,
-                    contentType: 'application/json',
-                    dataType: 'json',
-                    success: function(data) {
-                        if(200 == data.status) {
-                            location.reload();
+        var app = angular.module('courseManagerModule', ['ui.bootstrap']);
+        app.controller("courseManagerCtrl", function ($scope, $http) {
+            $scope.user = {name: "<%=((User)session.getAttribute("user")).getRealName()%>", uid: <%=session.getAttribute("uid") %>};
+            $scope.courseIsEmpty = true;
+            $scope.academyLabs;
+            $http.get("/course/loadCourse")
+                    .success(function (response) {
+                        if (200 == response.status) {
+                            $scope.course = response.data;
+                            if ($scope.course.length > 0) {
+                                $scope.courseIsEmpty = false;
+                            } else {
+                                $scope.courseIsEmpty = true;
+                            }
                         }
-                        else {
-                            $("#CourseModal .alert").removeClass("alert-info").addClass("alert-error");
-                            $("#CourseModal .alert").html("<p class='p1'>failed to Insert!</p>");
-                        }
-                    }
-                });
-            });
+                    });
 
-            $(document).on("click", ".course_del", function() {
-                var id = $(this).attr("val");
-//                alert(id);
-                var json = JSON.stringify(new courseDeleteBean(id));
-                $.ajax({
-                    type: "post",
-                    url: "/course/courseDelete",
-                    data: json,
-                    contentType: 'application/json',
-                    dataType: 'json',
-                    success: function (data) {
-                        if(200 == data.status) {
-                            location.reload();
+            $scope.apply = {courseId: -1, labId: -1, userId: $scope.user.uid, dayOfWeek: 0, orders: -1};
+            $http.post("/lab/getLabListByTeacher")
+                    .success(function (response) {
+                        if (200 == response.status) {
+                            $scope.academyLabs = response.data;
                         }
-                    }
-                });
-            });
+                    });
+            $scope.courseLabSelect = "未选择";
+            $scope.courseLabSelector = function (item) {
+                $scope.courseLabSelect = item.labName;
+                $scope.apply.labId = item.id;
+            };
 
-            $(document).on("click", ".applyBtn", function() {
-                selectCourse = this.name;
-                $.post("/lab/getLabListByTeacher", function(data) {
-                    list = data.data;
-                    var str = "";
-                    for (var i = 0 ; i < list.length ; i++) {
-                        str += "<li><a>"+list[i]+"</a></li>";
-                    }
-                    $(".choice ul").html(str);
-                    sstr = "未选择<span class='caret'></span>";
-                    $(".choice button").html(sstr);
-                });
-                $("#ApplyModal").modal('show');
-            });
-        })
+            $scope.weeks = [
+                {name: "星期一", code: 1},
+                {name: "星期二", code: 2},
+                {name: "星期三", code: 3},
+                {name: "星期四", code: 4},
+                {name: "星期五", code: 5},
+                {name: "星期六", code: 6},
+                {name: "星期天", code: 7}
+            ];
+            $scope.courseWeekSelect = "未选择";
+            $scope.courseWeekSelector = function (item) {
+                $scope.courseWeekSelect = item.name;
+                $scope.apply.dayOfWeek = item.code;
+
+                loadCourseApplyOrders();
+            };
+            $scope.orders = [{name: "待载入", code: -1}];
+            $scope.courseOrderSelect = "待载入";
+            $scope.courseOrderSelector = function (item) {
+                $scope.courseOrderSelect = item.name;
+                $scope.apply.orders = item.code;
+            };
+
+            var loadCourseApplyOrders = function () {
+                var json = {labId: $scope.apply.labId ,dayOfWeek: $scope.apply.dayOfWeek, beginWeek: 1,endWeek: 2};
+                $http.post("/schedule/availiableOrders", json)
+                        .success(function (response) {
+                            if (response.status == 200) {
+                                $scope.orders = response.data;
+                                $scope.courseOrderSelect = "未选择";
+                            }
+                        })
+//                $scope.orders = [
+//                    {name: "第一节", code: 1},
+//                    {name: "第二节", code: 2},
+//                    {name: "第三节", code: 3},
+//                    {name: "第四节", code: 4},
+//                    {name: "第五节", code: 5},
+//                    {name: "第六节", code: 6},
+//                    {name: "第七节", code: 7},
+//                    {name: "第八节", code: 8}
+//                ];
+            }
+
+
+            $scope.courseAdd = {userId: <%=session.getAttribute("uid") %>, name: "", courseDept: "", courseMajor: "", targetClass: "", courseBeginWeek: "", courseEndWeek: ""};
+            $scope.academy = [{code: -1, name: "未选择"}, {code: 1, name: "计算机学院"}, {code: 2, name: "软件学院"}];
+            $scope.academySelected = "未选择";
+            $scope.academySelector = function (item) {
+                $scope.academySelected = item.name;
+                $scope.courseAdd.courseDept = item.code;
+            };
+
+            $scope.courseInsert = function () {
+                $http.post("/course/insertCourseMessage", $scope.courseAdd)
+                        .success(function (response) {
+                            if (200 == response.status) {
+                                location.reload();
+                            }
+                        })
+            }
+        });
     </script>
 </head>
 
 <!-- Modal -->
-<div id="CourseModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
-     aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="addModalLabel">添加课程信息</h3>
-    </div>
-    <div class="modal-body">
-        <form class="form-horizontal">
-            <fieldset>
-                <div class="control-group">
-                    <label class="control-label" for="coursename">课程名称 (必填)：</label>
-
-                    <div class="controls">
-                        <input type="text" class="input-xlarge" id="coursename" name="coursename" placeholder="课程名称">
-
-                        <p class="help-block">请在此输入课程名称。</p>
+<div id="CourseModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h3 id="addModalLabel">添加课程信息</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputCourseName" class="col-sm-2 control-label col-sm-offset-1">课程名称</label>
+                        <div class="col-sm-6 col-sm-offset-1">
+                            <input type="text" class="form-control" id="inputCourseName" placeholder="课程名称" ng-model="courseAdd.name">
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="coursedept">课程开设学院 (必填)：</label>
-
-                    <div class="controls">
-                        <input type="text" class="input-xlarge" id="coursedept" name="coursedept" placeholder="课程开设学院">
+                    <div class="form-group">
+                        <label for="inputCourseDept" class="col-sm-2 control-label col-sm-offset-1">课程开设学院</label>
+                        <div class="controls col-sm-6 col-sm-offset-1">
+                            <div class="btn-group open choice" id="inputCourseDept">
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> {{academySelected}}<span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li ng-repeat="item in academy">
+                                        <a ng-click="academySelector(item)">{{item.name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="coursemajor">课程开设专业 (必填)：</label>
-
-                    <div class="controls">
-                        <input type="text" class="input-xlarge" id="coursemajor" name="coursemajor" placeholder="课程开设专业">
+                    <div class="form-group">
+                        <label for="inputCourseMajor" class="col-sm-2 control-label col-sm-offset-1">课程开设专业</label>
+                        <div class="col-sm-6 col-sm-offset-1">
+                            <input type="text" class="form-control" id="inputCourseMajor" placeholder="课程开设专业" ng-model="courseAdd.courseMajor">
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="targetclass">课程开设班级 (必填)：</label>
-
-                    <div class="controls">
-                        <input type="text" class="input-xlarge" id="targetclass" name="targetclass" placeholder="课程开设班级">
+                    <div class="form-group">
+                        <label for="inputCourseClass" class="col-sm-2 control-label col-sm-offset-1">课程开设班级</label>
+                        <div class="col-sm-6 col-sm-offset-1">
+                            <input type="text" class="form-control" id="inputCourseClass" placeholder="课程开设班级" ng-model="courseAdd.targetClass">
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="coursebeginweek">上课起始周 (必填)：</label>
-
-                    <div class="controls">
-                        <input type="text" class="input-xlarge" id="coursebeginweek" name="coursebeginweek" placeholder="上课起始周">
-
-                        <p class="help-block">请在此输入开始上课周次（只能填写数字）。</p>
+                    <div class="form-group">
+                        <label for="inputCourseBeginWeek" class="col-sm-2 control-label col-sm-offset-1">上课起始周 </label>
+                        <div class="col-sm-6 col-sm-offset-1">
+                            <input type="text" class="form-control" id="inputCourseBeginWeek" placeholder="课程开设班级" ng-model="courseAdd.courseBeginWeek">
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="courseendweek">上课结束周 (必填)：</label>
-
-                    <div class="controls">
-                        <input type="text" class="input-xlarge" id="courseendweek" name="courseendweek" placeholder="上课结束周">
-
-                        <p class="help-block">请在此输入上课结束周次（只能填写数字）。</p>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <div class="alert alert-info hide">
-        </div>
-        <button class="btn btn-success" id="courseinsert">提交</button>
-    </div>
-</div>
-
-<div id="ApplyModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel"
-     aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="applyModalLabel">实验室申请</h3>
-    </div>
-    <div class="modal-body">
-        <form class="form-horizontal">
-            <fieldset>
-                <div class="control-group">
-                    <label class="control-label" for="labName">实验室名称 (必选)：</label>
-
-                    <div class="controls">
-                        <div class="btn-group open choice" id="labName">
-                            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 加载中...<span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                            </ul>
+                    <div class="form-group">
+                        <label for="inputCourseEndWeek" class="col-sm-2 control-label col-sm-offset-1">上课结束周 </label>
+                        <div class="col-sm-6 col-sm-offset-1">
+                            <input type="text" class="form-control" id="inputCourseEndWeek" placeholder="课程开设班级" ng-model="courseAdd.courseEndWeek">
                         </div>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="coursedept">课程开设起始周 (必选)：</label>
-
-                    <div class="controls" style="height: 25px;">
-                        <ul class="nav nav-pills">
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#">上课起始周次 <b class="caret"></b></a>
-                                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                                    <li role="presentation" class="divider"></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+            </div>
+            <div class="modal-footer">
+                <div class="alert alert-info hide">
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="coursemajor">课程开设结束周 (必选)：</label>
-
-                    <div class="controls" style="height: 25px;">
-                        <ul class="nav nav-pills">
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#">上课结束周次 <b class="caret"></b></a>
-                                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                                    <li role="presentation" class="divider"></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="targetclass">课程星期 (必选)：</label>
-
-                    <div class="controls" style="height: 25px;">
-                        <ul class="nav nav-pills">
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#">课程星期 <b class="caret"></b></a>
-                                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                                    <li role="presentation" class="divider"></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="coursebeginweek">上课时间 (必选)：</label>
-
-                    <div class="controls" style="height: 25px;">
-                        <ul class="nav nav-pills">
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" href="#">上课时间 <b class="caret"></b></a>
-                                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                                    <li role="presentation" class="divider"></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <div class="alert alert-info hide">
+                <button class="btn btn-success" ng-click="courseInsert()">提交</button>
+            </div>
         </div>
-        <button class="btn btn-success" id="applyinsert">提交</button>
+    </div>
+</div>
+
+<div id="ApplyModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h3 id="applyModalLabel">实验室申请</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label col-sm-offset-1" for="labName">实验室名称</label>
+
+                        <div class="controls col-sm-6">
+                            <div class="btn-group open choice" id="labName">
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    {{courseLabSelect}}<span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li ng-repeat="item in academyLabs">
+                                        <a ng-click="courseLabSelector(item)">{{item.labName}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label col-sm-offset-1" for="weeks">星期</label>
+
+                        <div class="controls col-sm-6">
+                            <div class="btn-group open choice" id="weeks">
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    {{courseWeekSelect}}<span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li ng-repeat="item in weeks">
+                                        <a ng-click="courseWeekSelector(item)">{{item.name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label col-sm-offset-1" for="orders">时间</label>
+
+                        <div class="controls col-sm-6">
+                            <div class="btn-group open choice" id="orders">
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    {{courseOrderSelect}}<span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li ng-repeat="item in orders">
+                                        <a ng-click="courseOrderSelector(item)">{{item.name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="alert alert-info hide">
+                </div>
+                <button class="btn btn-success" id="applyinsert">提交</button>
+            </div>
+        </div>
     </div>
 </div>
 
 <body>
-<div class="navbar navbar-inverse" style="position: static;">
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="control_dos pull-right">
-                <!-- Button to trigger modal -->
-                <c:choose>
-                    <c:when test="${sessionScope.user==null}">
-                        <a href="#loginModal" role="button" class="btn btn-primary" data-toggle="modal">登录</a>
-                        <a href="#regModal" role="button" class="btn btn-success" data-toggle="modal">新用户注册</a>
-                    </c:when>
-                    <c:otherwise>
-                        <div class="control_dos pull-right">
-                            <ul class="nav pull-right">
-                                <li id="fat-menu" class="dropdown">
-                                    <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><i
-                                            class="icon-user icon-white"></i>当前用户：<%=session.getAttribute("username") %> <b
-                                            class="caret"></b></a>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
-                                        <li role="presentation" class="divider"></li>
-                                        <li role="presentation" id="logout"><a role="menuitem" tabindex="-1">退出</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </c:otherwise>
-                </c:choose>
-            </div>
-            <div class="nav-collapse">
-                <ul class="nav">
-                    <li><a href="./teacher.jsp">首页</a></li>
-                    <li class="active"><a href="./coursemanager.jsp">课程信息管理</a></li>
-                    <li><a href="#">查看实验室课程表</a></li>
-                </ul>
+<div class="container">
+    <div class="page-header">
+        <h1>课程信息管理</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3" ng-repeat="item in course">
+            <div class="thumbnail">
+                <img data-src="holder.js/100%x200" alt="100%x200"
+                     src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjkzIiB5PSIxMDAiIHN0eWxlPSJmaWxsOiNBQUFBQUE7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MTFwdDtkb21pbmFudC1iYXNlbGluZTpjZW50cmFsIj4yNDJ4MjAwPC90ZXh0PjwvZz48L3N2Zz4="
+                     data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+
+                <div class="caption">
+                    <h4>课程名称：{{item.name}}</h4>
+                    <h5>授课老师：{{user.name}}</h5>
+                    <h5>课程开设专业：{{item.courseMajor}}</h5>
+                    <h5>上课时间：第{{item.courseBeginWeek}}周 -- 第{{item.courseEndWeek}}周</h5>
+                    <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#ApplyModal">
+                        添加实验室排课
+                    </button>
+                    <button type='button' class='btn btn-danger pull-right'>删除</button>
+                </div>
             </div>
         </div>
     </div>
+    <div class='well'>
+        <p class='text-info' ng-show="courseIsEmpty">目前还没有相关课程信息，请添加！</p>
+
+        <div class='btn-group'>
+            <button type='button' class='btn btn-success' data-toggle="modal" data-target="#CourseModal">添加实验室信息</button>
+        </div>
+    </div>
+
+    </p>
 </div>
-<div class="mycontianer">
+<div class="footer" style="margin-top: 10px;">
     <div class="container">
-        <div class="jumbotron">
-            <div class="page-header">
-                <h1>课程信息管理</h1>
-            </div>
-
-            <p class="p1" id="showCourse">
-
-            </p>
-        </div>
-        <div class="footer" style="margin-top: 10px;">
-            <div class="container">
-                <hr>
-                Powered by HTML 4.0
-                <br>
-                Copyright © 计算机应用112班 缪萍.
-                All rights reserved.
-                <br>
-                0.052352 sec - 0 queries - 0 sec @ portal
-            </div>
-        </div>
+        <hr>
+        Powered by HTML 4.0
+        <br>
+        Copyright © 计算机应用112班 缪萍.
+        All rights reserved.
+        <br>
+        0.052352 sec - 0 queries - 0 sec @ portal
     </div>
 </div>
 </body>

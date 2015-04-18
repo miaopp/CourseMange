@@ -1,5 +1,7 @@
 package com.mpp.model;
 
+import com.google.common.base.Objects;
+
 /**
  * Created by xiang.xu on 2015/3/30.
  */
@@ -7,7 +9,7 @@ public class Course {
     private int id;
     private int userId;
     private String name;
-    private String courseDept;
+    private int courseDept;
     private String courseMajor;
     private int targetClass;
     private String courseBeginWeek;
@@ -61,11 +63,11 @@ public class Course {
         this.courseEndWeek = courseEndWeek;
     }
 
-    public String getCourseDept() {
+    public int getCourseDept() {
         return courseDept;
     }
 
-    public void setCourseDept(String courseDept) {
+    public void setCourseDept(final int courseDept) {
         this.courseDept = courseDept;
     }
 
@@ -75,5 +77,19 @@ public class Course {
 
     public void setCourseMajor(String courseMajor) {
         this.courseMajor = courseMajor;
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+                .add("id", id)
+                .add("userId", userId)
+                .add("name", name)
+                .add("courseDept", courseDept)
+                .add("courseMajor", courseMajor)
+                .add("targetClass", targetClass)
+                .add("courseBeginWeek", courseBeginWeek)
+                .add("courseEndWeek", courseEndWeek)
+                .toString();
     }
 }

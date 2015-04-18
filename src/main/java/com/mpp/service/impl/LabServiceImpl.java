@@ -28,9 +28,9 @@ public class LabServiceImpl implements LabService{
     public void addLab(final Lab lab) {
         labDao.addLab(lab);
         List<Schedule> scheduleList = Lists.newArrayList();
-        for (int i = 0; i < 25; i++) {
-            for (int j = 0; j < 7; j++) {
-                for (int k = 0; k < 12; k++) {
+        for (int i = 1; i <= 25; i++) {
+            for (int j = 1; j <= 7; j++) {
+                for (int k = 1; k <= 12; k++) {
                     Schedule schedule = new Schedule(0, i, j, k);
                     schedule.setLabId(lab.getId());
                     scheduleList.add(schedule);
@@ -47,7 +47,7 @@ public class LabServiceImpl implements LabService{
     }
 
     @Override
-    public List<String> getLabNameByDept(final int dept) {
+    public List<Lab> getLabNameByDept(final int dept) {
         return labDao.selectLabNameByDept(dept);
     }
 }

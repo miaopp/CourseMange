@@ -1,5 +1,7 @@
 package com.mpp.model;
 
+import com.google.common.base.Objects;
+
 import java.util.Date;
 
 /**
@@ -10,15 +12,15 @@ public class Apply {
     private int courseId;
     private int labId;
     private int userId;
+    private int dayOfWeek;
+    private int orders;
     private Date applyTime;
 
-    public int getApplyId()
-    {
+    public int getApplyId() {
         return applyId;
     }
 
-    public void setApplyId(final int applyId)
-    {
+    public void setApplyId(final int applyId) {
         this.applyId = applyId;
     }
 
@@ -46,14 +48,40 @@ public class Apply {
         this.applyTime = applyTime;
     }
 
-
-    public int getUserId()
-    {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(final int userId)
-    {
+    public void setUserId(final int userId) {
         this.userId = userId;
+    }
+
+    public int getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(final int dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    public int getOrders() {
+        return orders;
+    }
+
+    public void setOrders(final int orders) {
+        this.orders = orders;
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+                .add("applyId", applyId)
+                .add("courseId", courseId)
+                .add("labId", labId)
+                .add("userId", userId)
+                .add("dayOfWeek", dayOfWeek)
+                .add("orders", orders)
+                .add("applyTime", applyTime)
+                .toString();
     }
 }

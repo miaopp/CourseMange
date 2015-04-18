@@ -14,7 +14,7 @@ CREATE TABLE `course` (
   `course_id` 					BIGINT UNSIGNED 	NOT NULL AUTO_INCREMENT COMMENT 'id',
   `user_id`				INT 				NOT NULL DEFAULT 0		COMMENT '上课老师',
   `course_name`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '课程名称',
-  `course_dept`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '开设课程学院',
+  `course_dept`				INT 		NOT NULL DEFAULT 0  	COMMENT '开设课程学院',
   `course_major`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '开设课程专业',
   `target_class`				INT 				NOT NULL DEFAULT 0		COMMENT '上课班级',
   `begin_week`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '上课时间',
@@ -27,6 +27,8 @@ CREATE TABLE `apply` (
   `course_id`				BIGINT UNSIGNED			NOT NULL DEFAULT 0  	COMMENT '课程编号',
   `lab_id`				BIGINT UNSIGNED 				NOT NULL DEFAULT 0		COMMENT '上课实验室',
   `user_id`				BIGINT UNSIGNED 				NOT NULL DEFAULT 0		COMMENT '申请用户',
+  `apply_day_of_week`				BIGINT UNSIGNED 				NOT NULL DEFAULT 0		COMMENT '申请的星期几',
+  `apply_orders`				BIGINT UNSIGNED 				NOT NULL DEFAULT 0		COMMENT '申请的第几节课',
   `apply_time`				DATETIME 			NOT NULL 	DEFAULT '1971-01-01 00:00:00'  	COMMENT '申请时间',
   PRIMARY KEY (`apply_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '实验室信息表';

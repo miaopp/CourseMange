@@ -15,7 +15,7 @@
     <link href="./css/mystyle.css" rel="stylesheet" type="text/css">
     <link href="./css/bootstrap.css" rel="stylesheet" type="text/css">
     <script src="./js/jquery-1.8.3.js" type="text/javascript"></script>
-    <script src="./js/bootstrap.js" type="text/javascript"></script>
+    <script src="./js/bootstrapv2.js" type="text/javascript"></script>
     <script src="./js/json2.js" type="text/javascript"></script>
     <script src="./js/academy.js" type="text/javascript"></script>
     <script src="./js/public.js" type="text/javascript"></script>

@@ -58,7 +58,7 @@ public class LabController {
     @ResponseBody
     public CodeMessage getLabList(HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("user");
-        List<String> list = labService.getLabNameByDept(user.getDept());
+        List<Lab> list = labService.getLabNameByDept(user.getDept());
         return JsonReturn.getSuccess(list);
     }
 }
