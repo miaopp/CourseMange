@@ -41,63 +41,33 @@
                             }
                         }
                     });
-        });
-        function labInsertBean(labName, labAddress, labDept) {
-            this.labName = labName;
-            this.labAddress = labAddress;
-            this.labDept = labDept;
-        }
+            $scope.LabAdd = {labName:"", labDept:"", labAddress:""};
+            $scope.academy = [{code: -1, name: "未选择"}, {code: 1, name: "计算机学院"}, {code: 2, name: "软件学院"}];
+            $scope.academySelected = "未选择";
+            $scope.academySelector = function (item) {
+                $scope.academySelected = item.name;
+                $scope.LabAdd.labDept = item.code;
+            }
 
-        function labDeleteBean(id) {
-            this.id = id;
-        }
+            $scope.labInsert = function () {
+                $http.post("/lab/insertLabMessage", $scope.LabAdd)
+                        .success(function (response) {
+                            if(200 == response.status) {
+                                location.reload();
+                            }
+                        })
+            }
 
-        $(function () {
-            $("#logout").click(function() {
-                $.get("/user/logout" , function() {
-                    location.href = "./login.jsp";
-                });
-            });
-            $("#labinsert").click(function() {
-                var labName = $("#LabModal input[name='labname']").val();
-                var labAddress = $("#LabModal input[name='labaddress']").val();
-                var labDept = academy[$("#dept button")[0].innerText];
-                alert(labDept);
-                var json = JSON.stringify(new labInsertBean(labName, labAddress, labDept));
-                $.ajax({
-                    type: "post",
-                    url: "/lab/insertLabMessage",
-                    data: json,
-                    contentType: 'application/json',
-                    dataType: 'json',
-                    success: function (data) {
-                        if(200 == data.status) {
-                            location.reload();
-                        }
-                        else {
-                            $("#LabModal .alert").removeClass("alert-info").addClass("alert-error");
-                            $("#LabModal .alert").html("<p class='p1'>failed to Insert!</p>");
-                        }
-                    }
-                });
-            });
-            $(document).on("click", ".lab_del", function() {
-                var id = $(this).attr("val");
-//                alert(id);
-                var json = JSON.stringify(new labDeleteBean(id));
-                $.ajax({
-                    type: "post",
-                    url: "/lab/labDelete",
-                    data: json,
-                    contentType: 'application/json',
-                    dataType: 'json',
-                    success: function(data) {
-                        if(200 == data.status) {
-                            location.reload();
-                        }
-                    }
-                });
-            });
+            $scope.labDelete = {id: -1};
+            $scope.labDelete = function (id) {
+                $scope.labDelete.id = id;
+                $http.post("/lab/labDelete", $scope.labDelete)
+                        .success(function (response) {
+                            if(200 == response.status) {
+                                location.reload();
+                            }
+                        })
+            }
         });
     </script>
 </head>
@@ -115,7 +85,7 @@
                     <div class="form-group">
                         <label for="inputlabName" class="col-sm-3 control-label col-sm-offset-1">实验室名称</label>
                         <div class="col-sm-4 col-sm-offset-1">
-                            <input type="text" class="form-control" id="inputlabName" placeholder="实验室名称" ng-model="LabAdd.LabName">
+                            <input type="text" class="form-control" id="inputlabName" placeholder="实验室名称" ng-model="LabAdd.labName">
                         </div>
                     </div>
                     <div class="form-group">
@@ -134,7 +104,7 @@
                     <div class="form-group">
                         <label for="inputLabAddress" class="col-sm-3 control-label col-sm-offset-1">实验室地点</label>
                         <div class="col-sm-4 col-sm-offset-1">
-                            <input type="text" class="form-control" id="inputLabAddress" placeholder="实验室地点" ng-model="LabAdd.LabAddress">
+                            <input type="text" class="form-control" id="inputLabAddress" placeholder="实验室地点" ng-model="LabAdd.labAddress">
                         </div>
                     </div>
                 </div>
@@ -162,7 +132,7 @@
                 <div class="caption">
                     <h4>实验室名称：{{item.labName}}</h4>
                     <h5>实验室地址：{{item.labAddress}}</h5>
-                    <button type='button' class='btn btn-danger pull-right'>删除</button>
+                    <button type='button' class='btn btn-danger' ng-click="labDelete(item.id)">删除</button>
                 </div>
             </div>
         </div>
