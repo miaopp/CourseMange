@@ -58,10 +58,10 @@
                         })
             }
 
-            $scope.labDelete = {id: -1};
-            $scope.labDelete = function (id) {
-                $scope.labDelete.id = id;
-                $http.post("/lab/labDelete", $scope.labDelete)
+            $scope.LabDe = {id: -1};
+            $scope.Deletor = function (id) {
+                $scope.LabDe.id = id;
+                $http.post("/lab/labDelete", $scope.LabDe)
                         .success(function (response) {
                             if(200 == response.status) {
                                 location.reload();
@@ -132,7 +132,7 @@
                 <div class="caption">
                     <h4>实验室名称：{{item.labName}}</h4>
                     <h5>实验室地址：{{item.labAddress}}</h5>
-                    <button type='button' class='btn btn-danger' ng-click="labDelete(item.id)">删除</button>
+                    <button type='button' class='btn btn-danger' ng-click="Deletor(item.id)">删除</button>
                 </div>
             </div>
         </div>

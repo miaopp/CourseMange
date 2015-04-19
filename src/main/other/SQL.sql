@@ -51,3 +51,13 @@ CREATE TABLE `schedule` (
   `orders`				INT 			NOT NULL DEFAULT 0  	COMMENT '第几节课',
   PRIMARY KEY (`schedule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '排课信息表';
+
+CREATE TABLE `notice` (
+  `notice_id` 					BIGINT UNSIGNED 	NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `apply_id` 				INT 				NOT NULL DEFAULT 0		COMMENT '对应课程申请',
+	`course_id` 			INT 		NOT NULL DEFAULT 0		COMMENT '对应课程',
+	`lab_id` 				INT 			NOT NULL DEFAULT 0		COMMENT '申请实验室',
+  `user_id` 			INT 		NOT NULL DEFAULT 0		COMMENT '申请老师',
+  `target_user` 			INT 		NOT NULL DEFAULT 0		COMMENT '待处理用户',
+	PRIMARY KEY (`notice_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '公告表';

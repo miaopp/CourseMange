@@ -49,8 +49,8 @@ public class LabController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/labDelete", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public CodeMessage labDelete(@RequestBody Integer id) {
-        labService.deleteLab(id);
+    public CodeMessage labDelete(@RequestBody Lab lab) {
+        labService.deleteLab(lab.getId());
         return JsonReturn.getSuccess("success");
     }
 

@@ -9,22 +9,39 @@
          pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="zh-CN">
+<html ng-app="managerModule" ng-controller="managerCtrl">
 <head>
-    <meta charset="utf-8">
-    <link href="./css/mystyle.css" rel="stylesheet">
-    <link href="./css/bootstrap.css" rel="stylesheet">
-    <script src="./js/jquery-1.8.3.js"></script>
-    <script src="./js/bootstrapv2.js"></script>
-    <script src="./js/json2.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- css-->
+    <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="./css/mystyle.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        .nav, .pagination, .carousel, .panel-title a {
+            cursor: pointer;
+        }
+    </style>
+    <!-- JavaScripts-->
+    <script type="text/javascript" src="./js/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.js"></script>
+    <script type="text/javascript" src="./js/angular.js"></script>
+    <script type="text/javascript" src="./js/ui-bootstrap-0.12.1.js"></script>
     <script type="text/javascript">
-        $(function () {
-            $("#logout").click(function() {
-                $.get("/user/logout" , function() {
-                    location.href = "./login.jsp";
-                });
-            });
-        })
+        var app = angular.module('managerModule', ['ui.bootstrap']);
+        app.controller("managerCtrl", function ($scope, $http) {
+            $scope.noticeIsEmpty = true;
+            $http.get("/notice/loadNotice")
+                    .success(function (response) {
+                        if(200 == response.status) {
+                            $scope.notice = response.data;
+                            if($scope.notice.length > 0) {
+                                $scope.noticeIsEmpty = false;
+                            }
+                            else {
+                                $scope.noticeIsEmpty = true;
+                            }
+                        }
+                    })
+        });
     </script>
 </head>
 <body>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Notice">
+    <resultMap id="noticeResultMap" type="Notice">
+        <result property="noticeId" column="notice_id"/>
+        <result property="applyId" column="apply_id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="labId" column="lab_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="targetUser" column="target_user"/>
+    </resultMap>
+    <select id="selectNoticeByTargetUser" parameterType="java.lang.Integer" resultMap="noticeResultMap">
+        <![CDATA[
+            select *
+            from notice
+            where target_user = #{targetUser};
+        ]]>
+    </select>
+</mapper>

@@ -105,7 +105,7 @@
                         <div class="form-group">
                             <label for="inputPasswordReg" class="col-sm-3 control-label col-sm-offset-1">密码</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="inputPasswordReg" placeholder="密码" ng-model="userRegister.password">
+                                <input type="password" class="form-control" id="inputPasswordReg" placeholder="密码" ng-model="userRegister.password">
                                 <p class="help-block">请在此输入您的密码（大小写敏感）。</p>
                             </div>
                         </div>
