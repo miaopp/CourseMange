@@ -42,48 +42,17 @@
                             }
                         }
                     })
+
+            $scope.logout = function () {
+                $http.get("/user/logout")
+                        .success(function () {
+                            location.href = "./login.jsp";
+                        })
+            }
         });
     </script>
 </head>
 <body>
-<%--<div class="navbar navbar-inverse" style="position: static;">--%>
-    <%--<div class="navbar">--%>
-        <%--<div class="navbar-inner">--%>
-            <%--<div class="control_dos pull-right">--%>
-                <%--<!-- Button to trigger modal -->--%>
-                <%--<c:choose>--%>
-                    <%--<c:when test="${sessionScope.user==null}">--%>
-                        <%--<a href="#loginModal" role="button" class="btn btn-primary" data-toggle="modal">登录</a>--%>
-                        <%--<a href="#regModal" role="button" class="btn btn-success" data-toggle="modal">新用户注册</a>--%>
-                    <%--</c:when>--%>
-                    <%--<c:otherwise>--%>
-                        <%--<div class="control_dos pull-right">--%>
-                            <%--<ul class="nav pull-right">--%>
-                                <%--<li id="fat-menu" class="dropdown">--%>
-                                    <%--<a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><i--%>
-                                            <%--class="icon-user icon-white"></i>当前用户：<%=session.getAttribute("username") %> <b--%>
-                                            <%--class="caret"></b></a>--%>
-                                    <%--<ul class="dropdown-menu" role="menu" aria-labelledby="drop3">--%>
-                                        <%--<li role="presentation" class="divider"></li>--%>
-                                        <%--<li role="presentation" id="logout"><a role="menuitem" tabindex="-1">退出</a></li>--%>
-                                    <%--</ul>--%>
-                                <%--</li>--%>
-                            <%--</ul>--%>
-                        <%--</div>--%>
-                    <%--</c:otherwise>--%>
-                <%--</c:choose>--%>
-            <%--</div>--%>
-            <%--<div class="nav-collapse">--%>
-                <%--<ul class="nav">--%>
-                    <%--<li class="active"><a href="./manager.jsp">首页</a></li>--%>
-                    <%--<li><a href="./labmanager.jsp">实验室管理</a></li>--%>
-                    <%--<li><a href="#">实验室课程申请管理</a></li>--%>
-                    <%--<li><a href="usermanager.jsp">用户信息管理</a></li>--%>
-                <%--</ul>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-<%--</div>--%>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -94,13 +63,27 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Brand</a>
+            <a class="navbar-brand" href="#">LabManagement</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
+                <li class="active"><a href="./manager.jsp">首页</a></li>
+                <li><a href="./labmanager.jsp">实验室管理</a></li>
+                <li><a href="#">实验室课程申请管理</a></li>
+                <li><a href="./usermanager.jsp">用户信息管理</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        当前用户：<%=session.getAttribute("username")%> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">修改个人信息</a></li>
+                        <li><a ng-click="logout()">退出</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -109,6 +92,10 @@
 <div class="container">
     <div class="page-header">
         <h1>欢迎登录实验室排课系统</h1>
+    </div>
+
+    <div class="well">
+
     </div>
 
     <div class='well'>
