@@ -28,8 +28,9 @@
     <script type="text/javascript">
         var app = angular.module('managerModule', ['ui.bootstrap']);
         app.controller("managerCtrl", function ($scope, $http) {
+            $scope.LoadNotice = {targetUser: <%=session.getAttribute("uid")%>};
             $scope.noticeIsEmpty = true;
-            $http.get("/notice/loadNotice")
+            $http.post("/notice/loadNotice" ,$scope.LoadNotice)
                     .success(function (response) {
                         if(200 == response.status) {
                             $scope.notice = response.data;
@@ -45,66 +46,85 @@
     </script>
 </head>
 <body>
-<div class="navbar navbar-inverse" style="position: static;">
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="control_dos pull-right">
-                <!-- Button to trigger modal -->
-                <c:choose>
-                    <c:when test="${sessionScope.user==null}">
-                        <a href="#loginModal" role="button" class="btn btn-primary" data-toggle="modal">登录</a>
-                        <a href="#regModal" role="button" class="btn btn-success" data-toggle="modal">新用户注册</a>
-                    </c:when>
-                    <c:otherwise>
-                        <div class="control_dos pull-right">
-                            <ul class="nav pull-right">
-                                <li id="fat-menu" class="dropdown">
-                                    <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><i
-                                            class="icon-user icon-white"></i>当前用户：<%=session.getAttribute("username") %> <b
-                                            class="caret"></b></a>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
-                                        <li role="presentation" class="divider"></li>
-                                        <li role="presentation" id="logout"><a role="menuitem" tabindex="-1">退出</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </c:otherwise>
-                </c:choose>
-            </div>
-            <div class="nav-collapse">
-                <ul class="nav">
-                    <li class="active"><a href="./manager.jsp">首页</a></li>
-                    <li><a href="./labmanager.jsp">实验室管理</a></li>
-                    <li><a href="#">实验室课程申请管理</a></li>
-                    <li><a href="usermanager.jsp">用户信息管理</a></li>
-                </ul>
-            </div>
+<%--<div class="navbar navbar-inverse" style="position: static;">--%>
+    <%--<div class="navbar">--%>
+        <%--<div class="navbar-inner">--%>
+            <%--<div class="control_dos pull-right">--%>
+                <%--<!-- Button to trigger modal -->--%>
+                <%--<c:choose>--%>
+                    <%--<c:when test="${sessionScope.user==null}">--%>
+                        <%--<a href="#loginModal" role="button" class="btn btn-primary" data-toggle="modal">登录</a>--%>
+                        <%--<a href="#regModal" role="button" class="btn btn-success" data-toggle="modal">新用户注册</a>--%>
+                    <%--</c:when>--%>
+                    <%--<c:otherwise>--%>
+                        <%--<div class="control_dos pull-right">--%>
+                            <%--<ul class="nav pull-right">--%>
+                                <%--<li id="fat-menu" class="dropdown">--%>
+                                    <%--<a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><i--%>
+                                            <%--class="icon-user icon-white"></i>当前用户：<%=session.getAttribute("username") %> <b--%>
+                                            <%--class="caret"></b></a>--%>
+                                    <%--<ul class="dropdown-menu" role="menu" aria-labelledby="drop3">--%>
+                                        <%--<li role="presentation" class="divider"></li>--%>
+                                        <%--<li role="presentation" id="logout"><a role="menuitem" tabindex="-1">退出</a></li>--%>
+                                    <%--</ul>--%>
+                                <%--</li>--%>
+                            <%--</ul>--%>
+                        <%--</div>--%>
+                    <%--</c:otherwise>--%>
+                <%--</c:choose>--%>
+            <%--</div>--%>
+            <%--<div class="nav-collapse">--%>
+                <%--<ul class="nav">--%>
+                    <%--<li class="active"><a href="./manager.jsp">首页</a></li>--%>
+                    <%--<li><a href="./labmanager.jsp">实验室管理</a></li>--%>
+                    <%--<li><a href="#">实验室课程申请管理</a></li>--%>
+                    <%--<li><a href="usermanager.jsp">用户信息管理</a></li>--%>
+                <%--</ul>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Brand</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Link</a></li>
+            </ul>
         </div>
     </div>
+</nav>
+
+<div class="container">
+    <div class="page-header">
+        <h1>欢迎登录实验室排课系统</h1>
+    </div>
+
+    <div class='well'>
+        <p class='text-info' ng-show="noticeIsEmpty">目前没有待处理申请。</p>
+    </div>
+
 </div>
-<div class="mycontianer">
+<div class="footer" style="margin-top: 10px;">
     <div class="container">
-        <div class="jumbotron">
-            <div class="page-header">
-                <h1>欢迎登录实验室排课系统</h1>
-            </div>
-
-            <p class="p1" id="showNotice">
-
-            </p>
-        </div>
-        <div class="footer" style="margin-top: 10px;">
-            <div class="container">
-                <hr>
-                Powered by HTML 4.0
-                <br>
-                Copyright © 计算机应用112班 缪萍.
-                All rights reserved.
-                <br>
-                0.052352 sec - 0 queries - 0 sec @ portal
-            </div>
-        </div>
+        <hr>
+        Powered by HTML 4.0
+        <br>
+        Copyright © 计算机应用112班 缪萍.
+        All rights reserved.
+        <br>
+        0.052352 sec - 0 queries - 0 sec @ portal
     </div>
 </div>
 </body>

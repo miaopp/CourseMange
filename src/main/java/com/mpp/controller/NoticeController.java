@@ -23,7 +23,7 @@ public class NoticeController {
     @Resource
     private NoticeService noticeService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/loadNotice", produces = "application/json; charset=utf-8")
+    @RequestMapping(method = RequestMethod.POST, value = "/loadNotice", produces = "application/json; charset=utf-8")
     @ResponseBody
     public CodeMessage loadNotice(@RequestBody Notice notice) {
         List<Notice> list = noticeService.getNoticeByTargetUser(notice.getTargetUser());
