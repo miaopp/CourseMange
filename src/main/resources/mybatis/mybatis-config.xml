@@ -13,6 +13,7 @@
         <typeAlias type="com.mpp.model.Lab" alias="Lab"/>
         <typeAlias type="com.mpp.model.User" alias="User"/>
         <typeAlias type="com.mpp.model.Schedule" alias="Schedule"/>
+        <typeAlias type="com.mpp.model.Notice" alias="Notice"/>
         <typeAlias type="com.mpp.model.entity.OrderFilter" alias="OrderFilter"/>
     </typeAliases>
 
@@ -22,5 +23,6 @@
         <mapper resource="mybatis/mapper/lab.xml"/>
         <mapper resource="mybatis/mapper/user.xml"/>
         <mapper resource="mybatis/mapper/schedule.xml"/>
+        <mapper resource="mybatis/mapper/notice.xml"/>
     </mappers>
 </configuration>
