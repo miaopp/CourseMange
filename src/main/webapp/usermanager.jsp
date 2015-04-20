@@ -26,9 +26,25 @@
     <script type="text/javascript" src="./js/angular.js"></script>
     <script type="text/javascript" src="./js/ui-bootstrap-0.12.1.js"></script>
     <script type="text/javascript">
-        var app = angular.Module('userManagerModule', ['ui.bootstrap']);
+        var app = angular.module('userManagerModule', ['ui.bootstrap']);
         app.controller("userManagerCtrl", function ($scope, $http) {
-            $scope.LoadUser = {}
+            $scope.userIsEmpty = true;
+            $http.get("/user/loadUser")
+                    .success(function (response) {
+                        if(200 == response.status) {
+                            $scope.user = response.data;
+                            if($scope.user.length > 0) {
+                                $scope.userIsEmpty = false;
+                            }
+                            else {
+                                $scope.userIsEmpty = true;
+                            }
+                        }
+                    })
+
+            $scope.userDeletor = function () {
+
+            }
         });
 
 //        function loadUser() {
@@ -96,28 +112,41 @@
     </script>
 </head>
 <body>
-<div class="mycontianer">
+<div class="container">
+    <div class="page-header">
+        <h1>用户信息管理</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3" ng-repeat="item in user">
+            <div class="thumbnail">
+                <img data-src="holder.js/100%x200" alt="100%x200"
+                     src="#"
+                     data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="caption">
+                    <h4>用户名：{{item.username}}</h4>
+                    <h5>真实姓名：{{item.realName}}</h5>
+                    <h5>所在专业：{{item.major}}</h5>
+
+                    <button type='button' class='btn btn-danger' ng-click="userDeletor(item.userId)">删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="well" ng-show="userIsEmpty">
+        <p class='text-info'>目前还没有相关用户信息！</p>
+    </div>
+</div>
+<div class="footer" style="margin-top: 10px;">
     <div class="container">
-        <div class="jumbotron">
-            <div class="page-header">
-                <h1>用户信息管理</h1>
-            </div>
-
-            <p class="p1" id="showUser">
-
-            </p>
-        </div>
-        <div class="footer" style="margin-top: 10px;">
-            <div class="container">
-                <hr>
-                Powered by HTML 4.0
-                <br>
-                Copyright © 计算机应用112班 缪萍.
-                All rights reserved.
-                <br>
-                0.052352 sec - 0 queries - 0 sec @ portal
-            </div>
-        </div>
+        <hr>
+        Powered by HTML 4.0
+        <br>
+        Copyright © 计算机应用112班 缪萍.
+        All rights reserved.
+        <br>
+        0.052352 sec - 0 queries - 0 sec @ portal
     </div>
 </div>
 </body>
