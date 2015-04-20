@@ -3,10 +3,11 @@ package com.mpp.model.entity;
 import com.google.common.base.Objects;
 
 /**
- * Created by xiang.xu on 2015/4/18.
+ * Created by xiang.xu on 2015/4/20.
  */
-public class OrderFilter {
+public class ScheduleStatus {
     private int labId;
+    private int courseId;
     private int dayOfWeek;
     private int beginWeek;
     private int endWeek;
@@ -14,20 +15,12 @@ public class OrderFilter {
     private int status;
     private int orders;
 
-    public OrderFilter() {
+    public ScheduleStatus() {
     }
 
-    public OrderFilter(final int labId, final int dayOfWeek, final int beginWeek, final int endWeek, final int length, final int status) {
+    public ScheduleStatus(final int labId, final int courseId, final int dayOfWeek, final int beginWeek, final int endWeek, final int length, final int status, final int orders) {
         this.labId = labId;
-        this.dayOfWeek = dayOfWeek;
-        this.beginWeek = beginWeek;
-        this.endWeek = endWeek;
-        this.length = length;
-        this.status = status;
-    }
-
-    public OrderFilter(final int labId, final int dayOfWeek, final int beginWeek, final int endWeek, final int length, final int status, final int orders) {
-        this.labId = labId;
+        this.courseId = courseId;
         this.dayOfWeek = dayOfWeek;
         this.beginWeek = beginWeek;
         this.endWeek = endWeek;
@@ -42,6 +35,14 @@ public class OrderFilter {
 
     public void setLabId(final int labId) {
         this.labId = labId;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(final int courseId) {
+        this.courseId = courseId;
     }
 
     public int getDayOfWeek() {
@@ -96,6 +97,7 @@ public class OrderFilter {
     public String toString() {
         return Objects.toStringHelper(this)
                 .add("labId", labId)
+                .add("courseId", courseId)
                 .add("dayOfWeek", dayOfWeek)
                 .add("beginWeek", beginWeek)
                 .add("endWeek", endWeek)

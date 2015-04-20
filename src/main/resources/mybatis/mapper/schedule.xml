@@ -38,4 +38,10 @@
             where cnt >= #{length}
         ]]>
     </select>
+    <update id="updateScheduleState" parameterType="ScheduleStatus">
+        <![CDATA[
+            update schedule set state = #{status}, course_id = #{courseId}
+            where lab_id = #{labId} and day_of_week = #{dayOfWeek} and week >= #{beginWeek} and week <= #{endWeek} and orders = #{orders}
+        ]]>
+    </update>
 </mapper>

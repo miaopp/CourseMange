@@ -15,7 +15,6 @@ import java.util.List;
 @Repository
 public class CourseDaoImpl implements CourseDao {
 
-
     @Resource
     private SqlSession sqlSession;
 
@@ -34,5 +33,11 @@ public class CourseDaoImpl implements CourseDao {
     public void deleteCourse(final Integer id) {
         Preconditions.checkNotNull(id);
         this.sqlSession.delete("Course.deleteCourse",id);
+    }
+
+    @Override
+    public Course getCourse(final Integer id) {
+        Preconditions.checkArgument(id >= 0);
+        return this.sqlSession.selectOne("Course.selectCourse", id);
     }
 }

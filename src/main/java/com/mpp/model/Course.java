@@ -12,8 +12,8 @@ public class Course {
     private int courseDept;
     private String courseMajor;
     private int targetClass;
-    private String courseBeginWeek;
-    private String courseEndWeek;
+    private int courseBeginWeek;
+    private int courseEndWeek;
 
     public int getId() {
         return id;
@@ -47,19 +47,19 @@ public class Course {
         this.targetClass = targetClass;
     }
 
-    public String getCourseBeginWeek() {
+    public int getCourseBeginWeek() {
         return courseBeginWeek;
     }
 
-    public void setCourseBeginWeek(final String courseBeginWeek) {
+    public void setCourseBeginWeek(final int courseBeginWeek) {
         this.courseBeginWeek = courseBeginWeek;
     }
 
-    public String getCourseEndWeek() {
+    public int getCourseEndWeek() {
         return courseEndWeek;
     }
 
-    public void setCourseEndWeek(final String courseEndWeek) {
+    public void setCourseEndWeek(final int courseEndWeek) {
         this.courseEndWeek = courseEndWeek;
     }
 

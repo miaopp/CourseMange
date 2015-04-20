@@ -15,6 +15,7 @@
         <typeAlias type="com.mpp.model.Schedule" alias="Schedule"/>
         <typeAlias type="com.mpp.model.Notice" alias="Notice"/>
         <typeAlias type="com.mpp.model.entity.OrderFilter" alias="OrderFilter"/>
+        <typeAlias type="com.mpp.model.entity.ScheduleStatus" alias="ScheduleStatus"/>
     </typeAliases>
 
     <mappers>

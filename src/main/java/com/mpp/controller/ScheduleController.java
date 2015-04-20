@@ -23,14 +23,14 @@ public class ScheduleController {
     @Resource
     private ScheduledService scheduledService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/availiableOrders", produces = "application/json; charset=utf-8")
+    @RequestMapping(method = RequestMethod.POST, value = "/availableOrders", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public CodeMessage getAvailiableOrders(@RequestBody OrderFilter filter) {
+    public CodeMessage getAvailableOrders(@RequestBody OrderFilter filter) {
         Preconditions.checkArgument(filter.getLabId() >= 0);
         Preconditions.checkArgument(filter.getBeginWeek() > 0);
         Preconditions.checkArgument(filter.getEndWeek() > 0);
         Preconditions.checkArgument(filter.getDayOfWeek() > 0);
         filter.setLength(filter.getEndWeek()-filter.getBeginWeek()+1);
-        return JsonReturn.getSuccess(scheduledService.getAvailiableOrders(filter));
+        return JsonReturn.getSuccess(scheduledService.getAvailableOrders(filter));
     }
 }

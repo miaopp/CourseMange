@@ -16,7 +16,14 @@
     <select id="selectCourses" resultMap="courseResultMap">
         <![CDATA[
             select *
-            from course;
+            from course
+        ]]>
+    </select>
+    <select id="selectCourse" parameterType="java.lang.Integer" resultMap="courseResultMap">
+        <![CDATA[
+            select *
+            from course
+            where course_id = #{id}
         ]]>
     </select>
     <insert id="insertCourse" parameterType="Course">

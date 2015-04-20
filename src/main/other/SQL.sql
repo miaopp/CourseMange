@@ -17,8 +17,8 @@ CREATE TABLE `course` (
   `course_dept`				INT 		NOT NULL DEFAULT 0  	COMMENT '开设课程学院',
   `course_major`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '开设课程专业',
   `target_class`				INT 				NOT NULL DEFAULT 0		COMMENT '上课班级',
-  `begin_week`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '上课时间',
-  `end_week`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '下课时间',
+  `begin_week`				INT 				NOT NULL DEFAULT 0  	COMMENT '上课时间',
+  `end_week`				INT 				NOT NULL DEFAULT 0  	COMMENT '下课时间',
   PRIMARY KEY (`course_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '实验室课程表';
 

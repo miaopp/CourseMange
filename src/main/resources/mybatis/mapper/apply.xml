@@ -12,4 +12,11 @@
         <result property="orders" column="apply_orders"/>
         <result property="applyTime" column="apply_time"/>
     </resultMap>
+    <insert id="insertApply" parameterType="Course">
+        <![CDATA[
+            insert into apply
+            (course_id, lab_id, user_id, apply_day_of_week, apply_orders, apply_time)
+            values (#{courseId}, #{labId}, #{userId}, #{dayOfWeek}, #{orders}, #{applyTime});
+        ]]>
+    </insert>
 </mapper>

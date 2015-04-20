@@ -22,7 +22,7 @@ public class ScheduledServiceImpl implements ScheduledService {
     private ScheduleDao scheduleDao;
 
     @Override
-    public List<CodeNameBean> getAvailiableOrders(final OrderFilter filter) {
+    public List<CodeNameBean> getAvailableOrders(final OrderFilter filter) {
         filter.setStatus(0);
         List<Integer> orders = scheduleDao.getOrders(filter);
         List<CodeNameBean> beans = Lists.newArrayList();

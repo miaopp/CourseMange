@@ -73,25 +73,23 @@
 
             var loadCourseApplyOrders = function () {
                 var json = {labId: $scope.apply.labId ,dayOfWeek: $scope.apply.dayOfWeek, beginWeek: 1,endWeek: 2};
-                $http.post("/schedule/availiableOrders", json)
+                $http.post("/schedule/availableOrders", json)
                         .success(function (response) {
                             if (response.status == 200) {
                                 $scope.orders = response.data;
                                 $scope.courseOrderSelect = "未选择";
                             }
-                        })
-//                $scope.orders = [
-//                    {name: "第一节", code: 1},
-//                    {name: "第二节", code: 2},
-//                    {name: "第三节", code: 3},
-//                    {name: "第四节", code: 4},
-//                    {name: "第五节", code: 5},
-//                    {name: "第六节", code: 6},
-//                    {name: "第七节", code: 7},
-//                    {name: "第八节", code: 8}
-//                ];
-            }
+                        });
+            };
 
+            $scope.addApply = function () {
+                $http.post("/apply/addApply", $scope.apply)
+                        .success(function (response) {
+                            if (200 == response.status) {
+                                location.reload();
+                            }
+                        })
+            };
 
             $scope.courseAdd = {userId: <%=session.getAttribute("uid") %>, name: "", courseDept: "", courseMajor: "", targetClass: "", courseBeginWeek: "", courseEndWeek: ""};
             $scope.academy = [{code: -1, name: "未选择"}, {code: 1, name: "计算机学院"}, {code: 2, name: "软件学院"}];
@@ -242,7 +240,7 @@
             <div class="modal-footer">
                 <div class="alert alert-info hide">
                 </div>
-                <button class="btn btn-success" id="applyinsert">提交</button>
+                <button class="btn btn-success" ng-click="addApply()">提交</button>
             </div>
         </div>
     </div>
@@ -266,7 +264,7 @@
                     <h5>授课老师：{{user.name}}</h5>
                     <h5>课程开设专业：{{item.courseMajor}}</h5>
                     <h5>上课时间：第{{item.courseBeginWeek}}周 -- 第{{item.courseEndWeek}}周</h5>
-                    <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#ApplyModal">
+                    <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#ApplyModal" ng:click="apply.courseId = item.id">
                         添加实验室排课
                     </button>
                     <button type='button' class='btn btn-danger pull-right'>删除</button>
