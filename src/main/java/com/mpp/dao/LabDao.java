@@ -16,4 +16,6 @@ public interface LabDao {
 
     public void deleteLab (Integer id);
 
+    public Lab getLabByLabId (Integer id);
+
 }

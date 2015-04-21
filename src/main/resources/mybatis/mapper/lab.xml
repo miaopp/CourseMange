@@ -29,6 +29,13 @@
             where lab_dept = #{labDept};
         ]]>
     </select>
+    <select id="selectLabByLabId" parameterType="java.lang.Integer" resultMap="labResultMap">
+        <![CDATA[
+            select *
+            from lab
+            where lab_id = #{id};
+        ]]>
+    </select>
     <delete id="deleteLab" parameterType="java.lang.Integer">
         <![CDATA[
             delete

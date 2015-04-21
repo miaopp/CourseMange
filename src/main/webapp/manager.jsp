@@ -95,7 +95,20 @@
     </div>
 
     <div class="row">
+        <div class="col-sm-3" ng-repeat="item in notice">
+            <div class="thumbnail">
+                <img data-src="holder.js/100%x200" alt="100%x200"
+                     src="#"
+                     data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="caption">
+                    <h4>教师 {{item.userRealName}}就所教课程 {{item.courseName}}提出实验室 {{item.labName}}申请</h4>
 
+                    <button type='button' class='btn btn-success'>同意申请</button>
+
+                    <button type='button' class='btn btn-danger pull-right'>拒绝申请</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class='well' ng-show="noticeIsEmpty">

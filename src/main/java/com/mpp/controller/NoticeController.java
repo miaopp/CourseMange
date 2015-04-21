@@ -3,6 +3,7 @@ package com.mpp.controller;
 import com.mpp.constants.CodeMessage;
 import com.mpp.constants.JsonReturn;
 import com.mpp.model.Notice;
+import com.mpp.model.entity.NoticeBean;
 import com.mpp.service.NoticeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +27,7 @@ public class NoticeController {
     @RequestMapping(method = RequestMethod.POST, value = "/loadNotice", produces = "application/json; charset=utf-8")
     @ResponseBody
     public CodeMessage loadNotice(@RequestBody Notice notice) {
-        List<Notice> list = noticeService.getNoticeByTargetUser(notice.getTargetUser());
+        List<NoticeBean> list = noticeService.getNoticeByTargetUser(notice.getTargetUser());
         return JsonReturn.getSuccess(list);
     }
 }

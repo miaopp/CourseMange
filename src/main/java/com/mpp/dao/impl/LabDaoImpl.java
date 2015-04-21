@@ -42,4 +42,10 @@ public class LabDaoImpl implements LabDao {
     public List<Lab> getLabByDept(Integer labDept) {
         return this.sqlSession.selectList("Lab.selectLabByDept",labDept);
     }
+
+    @Override
+    public Lab getLabByLabId (final Integer id) {
+        Preconditions.checkNotNull(id);
+        return sqlSession.selectOne("Lab.selectLabByLabId", id);
+    }
 }

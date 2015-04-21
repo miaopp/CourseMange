@@ -1,11 +1,19 @@
 package com.mpp.service.impl;
 
+import com.mpp.dao.CourseDao;
+import com.mpp.dao.LabDao;
 import com.mpp.dao.NoticeDao;
+import com.mpp.dao.UserDao;
+import com.mpp.model.Course;
+import com.mpp.model.Lab;
 import com.mpp.model.Notice;
+import com.mpp.model.User;
+import com.mpp.model.entity.NoticeBean;
 import com.mpp.service.NoticeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,9 +26,30 @@ public class NoticeServiceImpl implements NoticeService {
     @Resource
     private NoticeDao noticeDao;
 
+    @Resource
+    private UserDao userDao;
+
+    @Resource
+    private CourseDao courseDao;
+
+    @Resource
+    private LabDao labDao;
+
     @Override
-    public List<Notice> getNoticeByTargetUser(final Integer targetUser) {
-        return noticeDao.getNoticeByTargetUser(targetUser);
+    public List<NoticeBean> getNoticeByTargetUser(final Integer targetUser) {
+        List<Notice> notice = noticeDao.getNoticeByTargetUser(targetUser);
+        List<NoticeBean> noticeBean = new ArrayList<NoticeBean>();
+        for (Notice no : notice) {
+            NoticeBean n = new NoticeBean();
+            User u = userDao.getUserByUserId(no.getUserId());
+            n.setUserRealName(u.getRealName());
+            Course c = courseDao.getCourse(no.getCourseId());
+            n.setCourseName(c.getName());
+            Lab l = labDao.getLabByLabId(no.getLabId());
+            n.setLabName(l.getLabName());
+            noticeBean.add(n);
+        }
+        return noticeBean;
     }
 
     @Override
