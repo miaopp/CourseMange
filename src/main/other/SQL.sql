@@ -29,6 +29,7 @@ CREATE TABLE `apply` (
   `user_id`				BIGINT UNSIGNED 				NOT NULL DEFAULT 0		COMMENT '申请用户',
   `apply_day_of_week`				BIGINT UNSIGNED 				NOT NULL DEFAULT 0		COMMENT '申请的星期几',
   `apply_orders`				BIGINT UNSIGNED 				NOT NULL DEFAULT 0		COMMENT '申请的第几节课',
+  `state` 					TINYINT 			NOT NULL DEFAULT 0		COMMENT '状态',
   `apply_time`				DATETIME 			NOT NULL 	DEFAULT '1971-01-01 00:00:00'  	COMMENT '申请时间',
   PRIMARY KEY (`apply_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '实验室信息表';

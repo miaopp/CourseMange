@@ -13,6 +13,8 @@ import com.mpp.model.Course;
 import com.mpp.model.entity.OrderFilter;
 import com.mpp.service.ApplyService;
 
+import java.util.List;
+
 /**
  * Created by xiang.xu on 2015/4/20.
  */
@@ -37,5 +39,10 @@ public class ApplyServiceImpl implements ApplyService{
         int len = course.getCourseEndWeek() - course.getCourseBeginWeek() + 1;
         ScheduleStatus scheduleStatus = new ScheduleStatus(apply.getLabId(), apply.getCourseId(), apply.getDayOfWeek(), course.getCourseBeginWeek(), course.getCourseEndWeek(), len, 1, apply.getOrders());
         scheduleDao.setScheduleState(scheduleStatus);
+    }
+
+    @Override
+    public List<Apply> getAllApply(final Integer uid) {
+        return applyDao.getAllApply(uid);
     }
 }

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by xiang.xu on 2015/4/20.
@@ -21,5 +22,10 @@ public class ApplyDaoImpl implements ApplyDao {
     public void addApply(final Apply apply) {
         Preconditions.checkNotNull(apply);
         sqlSession.insert("Apply.insertApply", apply);
+    }
+
+    @Override
+    public List<Apply> getAllApply(final Integer uid) {
+        return sqlSession.selectList("Apply.selectAll", uid);
     }
 }

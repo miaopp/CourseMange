@@ -15,8 +15,15 @@
     <insert id="insertApply" parameterType="Course">
         <![CDATA[
             insert into apply
-            (course_id, lab_id, user_id, apply_day_of_week, apply_orders, apply_time)
-            values (#{courseId}, #{labId}, #{userId}, #{dayOfWeek}, #{orders}, #{applyTime});
+            (course_id, lab_id, user_id, apply_day_of_week, apply_orders, state, apply_time)
+            values (#{courseId}, #{labId}, #{userId}, #{dayOfWeek}, #{orders}, #{state}, #{applyTime});
         ]]>
     </insert>
+    <select id="selectAll" parameterType="java.lang.Integer" resultMap="applyResultMap">
+        <![CDATA[
+            select lab_id, apply_day_of_week, apply_orders
+            from apply
+            where user_id = #{uid}
+        ]]>
+    </select>
 </mapper>

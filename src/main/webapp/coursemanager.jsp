@@ -27,6 +27,9 @@
                     .success(function (response) {
                         if (200 == response.status) {
                             $scope.course = response.data;
+                            for (idx in $scope.course) {
+                                $scope.course[idx].apply = new Array();
+                            }
                             if ($scope.course.length > 0) {
                                 $scope.courseIsEmpty = false;
                             } else {
@@ -34,6 +37,20 @@
                             }
                         }
                     });
+
+            $http.post("/apply/loadAll")
+                    .success(function (response) {
+                        if (200 == response.status) {
+                            for (val in response.data) {
+                                var apply = response.data[val];
+                                for (idx in $scope.course) {
+                                    if ($scope.course[idx].id == apply.labId) {
+                                        $scope.course[idx].apply.push(apply);
+                                    }
+                                }
+                            }
+                        }
+                    })
 
             $scope.apply = {courseId: -1, labId: -1, userId: $scope.user.uid, dayOfWeek: 0, orders: -1};
             $http.post("/lab/getLabListByTeacher")
@@ -264,6 +281,13 @@
                     <h5>授课老师：{{user.name}}</h5>
                     <h5>课程开设专业：{{item.courseMajor}}</h5>
                     <h5>上课时间：第{{item.courseBeginWeek}}周 -- 第{{item.courseEndWeek}}周</h5>
+                    <div class="well" ng-show="item.apply.length > 0">
+                        <p class='text-info'>排课记录：</p>
+                        <div ng-repeat="apply in item.apply">
+                            <p class='text-info'>星期{{apply.dayOfWeek}}, 第{{apply.orders}}节课</p>
+                        </div>
+
+                    </div>
                     <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#ApplyModal" ng:click="apply.courseId = item.id">
                         添加实验室排课
                     </button>

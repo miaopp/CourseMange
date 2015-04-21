@@ -14,6 +14,7 @@ public class Apply {
     private int userId;
     private int dayOfWeek;
     private int orders;
+    private int state;
     private Date applyTime;
 
     public int getApplyId() {
@@ -72,6 +73,14 @@ public class Apply {
         this.orders = orders;
     }
 
+    public int getState() {
+        return state;
+    }
+
+    public void setState(final int state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return Objects.toStringHelper(this)
@@ -81,6 +90,7 @@ public class Apply {
                 .add("userId", userId)
                 .add("dayOfWeek", dayOfWeek)
                 .add("orders", orders)
+                .add("state", state)
                 .add("applyTime", applyTime)
                 .toString();
     }

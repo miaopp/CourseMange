@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 
 /**
@@ -29,5 +30,12 @@ public class ApplyController {
         apply.setApplyTime(new Timestamp(System.currentTimeMillis()));
         applyService.addApply(apply);
         return JsonReturn.getSuccess(null);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/loadAll", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public CodeMessage getAll(HttpSession session) {
+        Integer uid = (Integer) session.getAttribute("uid");
+        return JsonReturn.getSuccess(applyService.getAllApply(uid));
     }
 }
