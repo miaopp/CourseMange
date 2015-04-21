@@ -29,7 +29,8 @@
         var app = angular.module('labManagerModule', ['ui.bootstrap']);
         app.controller("labManagerCtrl", function($scope , $http) {
             $scope.labIsEmpty = true;
-            $http.get("/lab/loadLab")
+            $scope.LabLoad = {labDept: <%=session.getAttribute("userdept")%>};
+            $http.post("/lab/loadLab", $scope.LabLoad)
                     .success(function (response) {
                         if(200 == response.status) {
                             $scope.lab = response.data;
@@ -40,7 +41,8 @@
                                 $scope.labIsEmpty = true;
                             }
                         }
-                    });
+                    })
+
             $scope.LabAdd = {labName:"", labDept:"", labAddress:""};
             $scope.academy = [{code: -1, name: "未选择"}, {code: 1, name: "计算机学院"}, {code: 2, name: "软件学院"}];
             $scope.academySelected = "未选择";
@@ -66,6 +68,13 @@
                             if(200 == response.status) {
                                 location.reload();
                             }
+                        })
+            }
+
+            $scope.logout = function () {
+                $http.get("/user/logout")
+                        .success(function () {
+                            location.href = "./login.jsp";
                         })
             }
         });
@@ -117,6 +126,43 @@
         </div>
     </div>
 </div>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">LabManagement</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="./manager.jsp">首页</a></li>
+                <li class="active"><a href="./labmanager.jsp">实验室管理</a></li>
+                <li><a href="#">实验室课程申请管理</a></li>
+                <li><a href="./usermanager.jsp">用户信息管理</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        当前用户：<%=session.getAttribute("username")%> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">修改个人信息</a></li>
+                        <li><a ng-click="logout()">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <body>
 <div class="container">
     <div class="page-header">
@@ -139,7 +185,7 @@
     </div>
 
     <div class='well'>
-        <p class='text-info' ng-show="courseIsEmpty">目前还没有相关实验室信息，请添加！</p>
+        <p class='text-info'   ng-show="labIsEmpty">目前还没有相关实验室信息，请添加！</p>
 
         <div class='btn-group'>
             <button type='button' class='btn btn-success' data-toggle="modal" data-target="#LabModal">添加实验室信息</button>

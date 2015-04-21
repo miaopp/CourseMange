@@ -10,9 +10,10 @@ import java.util.List;
 public interface LabDao {
     public List<Lab> getLab();
 
+    public List<Lab> getLabByDept(Integer labDept);
+
     public void addLab(Lab lab);
 
     public void deleteLab (Integer id);
 
-    public List<Lab> selectLabNameByDept(int dept);
 }

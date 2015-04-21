@@ -20,6 +20,13 @@
             where  user_name = #{username};
         ]]>
     </select>
+    <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="userResultMap">
+        <![CDATA[
+            select user_id,user_name,user_password,user_realname,user_class,user_dept,user_major,user_power
+            from user
+            where  user_id = #{userId};
+        ]]>
+    </select>
     <insert id="insertUser" parameterType="User">
         <![CDATA[
             insert into user
@@ -31,6 +38,20 @@
         <![CDATA[
             select *
             from user;
+        ]]>
+    </select>
+    <select id="selectUserByDept" parameterType="java.lang.Integer" resultMap="userResultMap">
+        <![CDATA[
+            select *
+            from user
+            where user_dept = #{dept};
+        ]]>
+    </select>
+    <select id="selectManagerByDept" parameterType="User" resultMap="userResultMap">
+        <![CDATA[
+            select *
+            from user
+            where user_dept = #{dept} and user_power = #{power};
         ]]>
     </select>
     <delete id="deleteUser" parameterType="java.lang.Integer">

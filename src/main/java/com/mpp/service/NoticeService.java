@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface NoticeService {
     public List<Notice> getNoticeByTargetUser(Integer targetUser);
+    public void addNotice(Notice notice);
 }

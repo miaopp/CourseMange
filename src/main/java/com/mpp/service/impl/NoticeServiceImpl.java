@@ -22,4 +22,9 @@ public class NoticeServiceImpl implements NoticeService {
     public List<Notice> getNoticeByTargetUser(final Integer targetUser) {
         return noticeDao.getNoticeByTargetUser(targetUser);
     }
+
+    @Override
+    public void addNotice(final Notice notice) {
+        noticeDao.addNotice(notice);
+    }
 }

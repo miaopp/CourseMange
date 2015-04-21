@@ -28,10 +28,10 @@ public class LabController {
     @Resource
     private LabService labService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/loadLab", produces = "application/json; charset=utf-8")
+    @RequestMapping(method = RequestMethod.POST, value = "/loadLab", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public CodeMessage loadLab() {
-        List<Lab> list = labService.getLab();
+    public CodeMessage loadLab(@RequestBody Lab lab) {
+        List<Lab> list = labService.getLabNameByDept(lab.getLabDept());
 //        System.out.println(list);
         return JsonReturn.getSuccess(list);
     }

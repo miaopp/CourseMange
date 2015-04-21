@@ -3,6 +3,7 @@ package com.mpp.service.impl;
 import com.mpp.dao.UserDao;
 import com.mpp.model.User;
 import com.mpp.service.UserService;
+import jdk.nashorn.internal.ir.ReturnNode;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,13 +22,22 @@ public class UserServiceImpl implements UserService {
     public void addUser(final User user) {
         userDao.addUser(user);
     }
-    public User getUserByName(String username) {
+    public User getUserByName(final String username) {
         return userDao.getUserByName(username);
     }
     public List<User> gerUser() {
         return userDao.gerUser();
     }
-    public void deleteUser (Integer userId) {
+    public void deleteUser (final Integer userId) {
         userDao.deleteUser(userId);
+    }
+    public List<User> getUserByDept (final Integer dept) {
+        return userDao.getUserByDept(dept);
+    }
+    public List<User> getManageByDept (final User user) {
+        return userDao.getManageByDept(user);
+    }
+    public User getUserByUserId(final Integer userId) {
+        return userDao.getUserByUserId(userId);
     }
 }

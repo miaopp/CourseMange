@@ -124,6 +124,13 @@
                             }
                         })
             }
+
+            $scope.logout = function () {
+                $http.get("/user/logout")
+                        .success(function () {
+                            location.href = "./login.jsp";
+                        })
+            }
         });
     </script>
 </head>
@@ -263,6 +270,40 @@
     </div>
 </div>
 
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">LabManagement</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="./teacher.jsp">首页</a></li>
+                <li class="active"><a href="./coursemanager.jsp">课程信息管理</a></li>
+                <li><a href="#">查看实验室课程表</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        当前用户：<%=session.getAttribute("username")%> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">修改个人信息</a></li>
+                        <li><a ng-click="logout()">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <body>
 <div class="container">
     <div class="page-header">
@@ -297,7 +338,7 @@
         </div>
     </div>
     <div class='well'>
-        <p class='text-info' ng-show="courseIsEmpty">目前还没有相关课程信息，请添加！</p>
+        <p class='text-info'  ng-show="courseIsEmpty">目前还没有相关课程信息，请添加！</p>
 
         <div class='btn-group'>
             <button type='button' class='btn btn-success' data-toggle="modal" data-target="#CourseModal">添加实验室信息</button>

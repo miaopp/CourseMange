@@ -47,7 +47,7 @@ public class LabServiceImpl implements LabService{
     }
 
     @Override
-    public List<Lab> getLabNameByDept(final int dept) {
-        return labDao.selectLabNameByDept(dept);
+    public List<Lab> getLabNameByDept(final Integer labDept) {
+        return labDao.getLabByDept(labDept);
     }
 }

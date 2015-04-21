@@ -10,6 +10,7 @@
         <result property="labId" column="lab_id"/>
         <result property="userId" column="user_id"/>
         <result property="targetUser" column="target_user"/>
+        <result property="state" column="notice_state"/>
     </resultMap>
     <select id="selectNoticeByTargetUser" parameterType="java.lang.Integer" resultMap="noticeResultMap">
         <![CDATA[
@@ -18,4 +19,11 @@
             where target_user = #{targetUser};
         ]]>
     </select>
+    <insert id="insertNotice" parameterType="Notice">
+        <![CDATA[
+            insert into notice
+            (apply_id, course_id, lab_id, user_id, target_user, notice_state)
+            values (#{applyId}, #{courseId}, #{labId}, #{userId}, #{targetUser}, #{state});
+        ]]>
+    </insert>
 </mapper>

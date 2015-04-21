@@ -12,4 +12,7 @@ public interface UserService {
     public User getUserByName(String username);
     public List<User> gerUser();
     public void deleteUser (Integer userId);
+    public List<User> getUserByDept (Integer dept);
+    public List<User> getManageByDept (User user);
+    public User getUserByUserId(Integer userId);
 }

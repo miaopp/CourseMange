@@ -1,5 +1,6 @@
 package com.mpp.dao.impl;
 
+import com.google.common.base.Preconditions;
 import com.mpp.dao.NoticeDao;
 import com.mpp.model.Notice;
 import org.apache.ibatis.session.SqlSession;
@@ -21,5 +22,11 @@ public class NoticeDaoImpl implements NoticeDao {
     @Override
     public List<Notice> getNoticeByTargetUser(final Integer targetUser) {
         return this.sqlSession.selectList("Notice.selectNoticeByTargetUser",targetUser);
+    }
+
+    @Override
+    public void addNotice(final Notice notice) {
+        Preconditions.checkNotNull(notice);
+        this.sqlSession.insert("Notice.insertNotice", notice);
     }
 }

@@ -2,17 +2,18 @@ package com.mpp.service.impl;
 
 import javax.annotation.Resource;
 
+import com.mpp.dao.*;
+import com.mpp.model.Notice;
+import com.mpp.model.User;
 import com.mpp.model.entity.ScheduleStatus;
 import org.springframework.stereotype.Service;
 
-import com.mpp.dao.ApplyDao;
-import com.mpp.dao.CourseDao;
-import com.mpp.dao.ScheduleDao;
 import com.mpp.model.Apply;
 import com.mpp.model.Course;
 import com.mpp.model.entity.OrderFilter;
 import com.mpp.service.ApplyService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,6 +31,12 @@ public class ApplyServiceImpl implements ApplyService{
     @Resource
     private ScheduleDao scheduleDao;
 
+    @Resource
+    private NoticeDao noticeDao;
+
+    @Resource
+    private UserDao userDao;
+
     @Override
     public void addApply(final Apply apply) {
         applyDao.addApply(apply);
@@ -39,6 +46,24 @@ public class ApplyServiceImpl implements ApplyService{
         int len = course.getCourseEndWeek() - course.getCourseBeginWeek() + 1;
         ScheduleStatus scheduleStatus = new ScheduleStatus(apply.getLabId(), apply.getCourseId(), apply.getDayOfWeek(), course.getCourseBeginWeek(), course.getCourseEndWeek(), len, 1, apply.getOrders());
         scheduleDao.setScheduleState(scheduleStatus);
+
+        //得到manager
+        User u = userDao.getUserByUserId(apply.getUserId());
+        User u1 = new User();
+        u1.setDept(u.getDept());
+        u1.setPower(2);
+        List<User> managerList = userDao.getManageByDept(u1);
+        for (User user : managerList) {
+            Notice notice = new Notice();
+            notice.setApplyId(apply.getApplyId());
+            notice.setCourseId(apply.getCourseId());
+            notice.setLabId(apply.getLabId());
+            notice.setUserId(apply.getUserId());
+            notice.setTargetUser(user.getUserId());
+            notice.setState(1);
+            noticeDao.addNotice(notice);
+        }
+
     }
 
     @Override

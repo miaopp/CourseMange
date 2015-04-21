@@ -55,6 +55,7 @@ public class UserController {
             httpSession.setAttribute("user", u);
             httpSession.setAttribute("uid", u.getUserId());
             httpSession.setAttribute("username", u.getUsername());
+            httpSession.setAttribute("userdept", u.getDept());
             UserPowerEnum powerEnum = UserPowerEnum.getType(u.getPower());
             return JsonReturn.getSuccess(powerEnum.getDispather());
         }
@@ -67,12 +68,13 @@ public class UserController {
         httpSession.removeAttribute("user");
         httpSession.removeAttribute("uid");
         httpSession.removeAttribute("username");
+        httpSession.removeAttribute("userdept");
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/loadUser", produces = "application/json; charset=utf-8")
+    @RequestMapping(method = RequestMethod.POST, value = "/loadUser", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public CodeMessage loadUser() {
-        List<User> list = userService.gerUser();
+    public CodeMessage loadUser(@RequestBody User user) {
+        List<User> list = userService.getUserByDept(user.getDept());
         return JsonReturn.getSuccess(list);
     }
 

@@ -94,12 +94,12 @@
         <h1>欢迎登录实验室排课系统</h1>
     </div>
 
-    <div class="well">
+    <div class="row">
 
     </div>
 
-    <div class='well'>
-        <p class='text-info' ng-show="noticeIsEmpty">目前没有待处理申请。</p>
+    <div class='well' ng-show="noticeIsEmpty">
+        <p class='text-info'>目前没有待处理申请。</p>
     </div>
 
 </div>

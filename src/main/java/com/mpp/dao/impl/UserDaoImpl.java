@@ -40,4 +40,22 @@ public class UserDaoImpl implements UserDao {
         Preconditions.checkNotNull(userId);
         this.sqlSession.delete("User.deleteUser", userId);
     }
+
+    @Override
+    public List<User> getUserByDept (final Integer dept) {
+        Preconditions.checkNotNull(dept);
+        return this.sqlSession.selectList("User.selectUserByDept", dept);
+    }
+
+    @Override
+    public List<User> getManageByDept (final User user) {
+        Preconditions.checkNotNull(user);
+        return this.sqlSession.selectList("User.selectManagerByDept", user);
+    }
+
+    @Override
+    public User getUserByUserId(final Integer userId) {
+        Preconditions.checkNotNull(userId);
+        return this.sqlSession.selectOne("User.selectByUserId", userId);
+    }
 }

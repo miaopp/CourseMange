@@ -11,5 +11,5 @@ public interface LabService {
     public void addLab(Lab lab);
     public List<Lab> getLab();
     public void deleteLab (Integer id);
-    public List<Lab> getLabNameByDept(int dept);
+    public List<Lab> getLabNameByDept(Integer labDept);
 }
