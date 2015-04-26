@@ -61,4 +61,11 @@
             where user_id = #{userId};
         ]]>
     </delete>
+    <update id="changeUser" parameterType="User">
+        <![CDATA[
+            update user
+            set user_password = #{password}, user_dept = #{dept}, user_major = #{major}
+            where user_id = #{userId};
+        ]]>
+    </update>
 </mapper>

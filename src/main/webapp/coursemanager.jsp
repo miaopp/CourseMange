@@ -287,7 +287,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="./teacher.jsp">首页</a></li>
                 <li class="active"><a href="./coursemanager.jsp">课程信息管理</a></li>
-                <li><a href="#">查看实验室课程表</a></li>
+                <li><a href="./courseDisplayToTeacher.jsp">查看实验室课程表</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

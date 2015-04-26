@@ -40,4 +40,7 @@ public class UserServiceImpl implements UserService {
     public User getUserByUserId(final Integer userId) {
         return userDao.getUserByUserId(userId);
     }
+    public void changUser(final User user) {
+        userDao.changUser(user);
+    }
 }

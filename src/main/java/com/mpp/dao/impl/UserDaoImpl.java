@@ -58,4 +58,10 @@ public class UserDaoImpl implements UserDao {
         Preconditions.checkNotNull(userId);
         return this.sqlSession.selectOne("User.selectByUserId", userId);
     }
+
+    @Override
+    public void changUser(final User user) {
+        Preconditions.checkNotNull(user);
+        this.sqlSession.update("User.changeUser", user);
+    }
 }

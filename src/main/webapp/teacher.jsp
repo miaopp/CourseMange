@@ -34,6 +34,37 @@
                             location.href = "./login.jsp";
                         })
             }
+
+            $scope.LoadNotice = {targetUser: <%=session.getAttribute("uid")%>};
+            $scope.noticeIsEmpty = true;
+            $http.post("/notice/loadNotice" ,$scope.LoadNotice)
+                    .success(function (response) {
+                        $scope.notice = response.data;
+                        if($scope.notice.length > 0) {
+                            $scope.noticeIsEmpty = false;
+                        }
+                        else {
+                            $scope.noticeIsEmpty = true;
+                        }
+                    })
+
+            $scope.academy = [{code: -1, name: "未选择"}, {code: 1, name: "计算机学院"}, {code: 2, name: "软件学院"}];
+            $scope.academySelected = "未选择";
+            $scope.academySelector = function (item) {
+                $scope.academySelected = item.name;
+                $scope.userRegister.dept = item.code;
+            };
+            $scope.changeUser = {userId: <%=session.getAttribute("uid")%>, username: "", password: "", realName: "", dept: -1, major: "", classes: ""};
+            $scope.userChange = function () {
+                $http.post("/user/userDelete", $scope.changeUser)
+                        .success(function (response) {
+                            if(200 == response.data) {
+                                location.reload();
+                            }
+                        })
+            }
+
+
         });
     </script>
 </head>
@@ -54,7 +85,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="./teacher.jsp">首页</a></li>
                 <li><a href="./coursemanager.jsp">课程信息管理</a></li>
-                <li><a href="#">查看实验室课程表</a></li>
+                <li><a href="./courseDisplayToTeacher.jsp">查看实验室课程表</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -63,7 +94,7 @@
                         当前用户：<%=session.getAttribute("username")%> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">修改个人信息</a></li>
+                        <li><a href="#changeUserModal" data-toggle="modal">修改个人信息</a></li>
                         <li><a ng-click="logout()">退出</a></li>
                     </ul>
                 </li>
@@ -72,9 +103,92 @@
     </div>
 </nav>
 <body>
+
+<div id="changeUserModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="changeUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 id="registerModalLabel">基本信息修改</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputUsernameReg" class="col-sm-3 control-label col-sm-offset-1">用户名</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="inputUsernameReg" placeholder="用户名" ng-model="changeUser.username">
+                            <p class="help-block">请在此输入您的用户名（大小写敏感）。</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPasswordReg" class="col-sm-3 control-label col-sm-offset-1">密码</label>
+                        <div class="col-sm-6">
+                            <input type="password" class="form-control" id="inputPasswordReg" placeholder="密码" ng-model="changeUser.password">
+                            <p class="help-block">请在此输入您的密码（大小写敏感）。</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputRealnameReg" class="col-sm-3 control-label col-sm-offset-1">姓名</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="inputRealnameReg" placeholder="姓名" ng-model="changeUser.realName">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label col-sm-offset-1" for="dept">所属学院</label>
+
+                        <div class="controls col-sm-6">
+                            <div class="btn-group open choice" id="dept">
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> {{academySelected}}<span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li ng-repeat="item in academy">
+                                        <a ng-click="academySelector(item)">{{item.name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputMajorReg" class="col-sm-3 control-label col-sm-offset-1">所在专业</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="inputMajorReg" placeholder="专业" ng-model="changeUser.major">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputClassReg" class="col-sm-3 control-label col-sm-offset-1">所在（教授）班级</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="inputClassReg" placeholder="班级" ng-model="changeUser.classes">
+                        </div>
+                    </div>
+
+                    <br/>
+                    <div class="modal-footer">
+                        <div class="alert alert-info hide">
+                        </div>
+                        <button type="button" class="btn btn-success" ng-click="userChange()">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="page-header">
         <h1>欢迎登录实验室排课系统</h1>
+    </div>
+
+    <div class="panel panel-danger" ng-show="noticeIsEmpty">
+        <div class="panel-heading">
+            <h3 class="panel-title" id="panel-title">提醒<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
+        </div>
+        <div class="panel-body">
+            目前没有未处理消息！
+        </div>
     </div>
 </div>
 <div class="footer" style="margin-top: 10px;">

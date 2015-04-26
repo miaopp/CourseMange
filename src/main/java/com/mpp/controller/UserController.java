@@ -85,4 +85,11 @@ public class UserController {
         return JsonReturn.getSuccess("success");
     }
 
+
+    @RequestMapping(method = RequestMethod.POST, value = "/userChange", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public CodeMessage userChange(@RequestBody User user) {
+        userService.changUser(user);
+        return JsonReturn.getSuccess("success");
+    }
 }

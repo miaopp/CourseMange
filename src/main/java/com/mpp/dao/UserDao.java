@@ -21,4 +21,6 @@ public interface UserDao {
     public List<User> getManageByDept (User user);
 
     public User getUserByUserId(Integer userId);
+
+    public void changUser(User user);
 }

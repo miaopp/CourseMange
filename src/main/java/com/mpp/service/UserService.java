@@ -15,4 +15,5 @@ public interface UserService {
     public List<User> getUserByDept (Integer dept);
     public List<User> getManageByDept (User user);
     public User getUserByUserId(Integer userId);
+    public void changUser(User user);
 }
