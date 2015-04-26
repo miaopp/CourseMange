@@ -55,9 +55,10 @@
                 $scope.changeUser.dept = item.code;
             };
             $scope.userChange = function () {
-                $http.post("/user/userDelete", $scope.changeUser)
+                $http.post("/user/userChange", $scope.changeUser)
                         .success(function (response) {
                             if(200 == response.data) {
+                                alert("信息修改成功！");
                                 location.reload();
                             }
                         })
