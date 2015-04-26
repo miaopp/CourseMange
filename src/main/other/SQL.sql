@@ -6,7 +6,7 @@ CREATE TABLE `user` (
   `user_class` 				INT 				NOT NULL DEFAULT 0		COMMENT '班级',
 	`user_dept` 			INT 		NOT NULL DEFAULT 0		COMMENT '所在学院',
 	`user_power` 					SMALLINT 			NOT NULL DEFAULT 0		COMMENT '身份',
-  `user_major` 			VARCHAR(18) 		NOT NULL DEFAULT ''		COMMENT '所在专业',
+  `user_major` 			INT 		NOT NULL DEFAULT 0		COMMENT '所在专业',
 	PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '用户表';
 
@@ -15,7 +15,7 @@ CREATE TABLE `course` (
   `user_id`				INT 				NOT NULL DEFAULT 0		COMMENT '上课老师',
   `course_name`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '课程名称',
   `course_dept`				INT 		NOT NULL DEFAULT 0  	COMMENT '开设课程学院',
-  `course_major`				VARCHAR(64)			NOT NULL DEFAULT ''  	COMMENT '开设课程专业',
+  `course_major`				INT 		NOT NULL DEFAULT 0  	COMMENT '开设课程专业',
   `target_class`				INT 				NOT NULL DEFAULT 0		COMMENT '上课班级',
   `begin_week`				INT 				NOT NULL DEFAULT 0  	COMMENT '上课时间',
   `end_week`				INT 				NOT NULL DEFAULT 0  	COMMENT '下课时间',

@@ -10,7 +10,7 @@ public class Course {
     private int userId;
     private String name;
     private int courseDept;
-    private String courseMajor;
+    private int courseMajor;
     private int targetClass;
     private int courseBeginWeek;
     private int courseEndWeek;
@@ -71,11 +71,11 @@ public class Course {
         this.courseDept = courseDept;
     }
 
-    public String getCourseMajor() {
+    public int getCourseMajor() {
         return courseMajor;
     }
 
-    public void setCourseMajor(String courseMajor) {
+    public void setCourseMajor(final int courseMajor) {
         this.courseMajor = courseMajor;
     }
 

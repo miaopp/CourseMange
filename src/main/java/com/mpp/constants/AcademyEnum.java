@@ -7,7 +7,7 @@ public enum AcademyEnum {
     /*
     error
      */
-    ERROR(-1),
+    ERROR(0),
 
     /*
     计算机学院

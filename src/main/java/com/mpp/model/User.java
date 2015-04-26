@@ -12,7 +12,7 @@ public class User {
     private String realName;
     private int classes;
     private int dept;
-    private String major;
+    private int major;
     private int power;
 
     public int getUserId() { return userId; }
@@ -51,11 +51,11 @@ public class User {
         this.dept = dept;
     }
 
-    public String getMajor() {
+    public int getMajor() {
         return major;
     }
 
-    public void setMajor(String major) {
+    public void setMajor(final int major) {
         this.major = major;
     }
 

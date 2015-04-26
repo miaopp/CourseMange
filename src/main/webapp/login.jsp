@@ -20,8 +20,14 @@
         var app = angular.module('loginModule', ['ui.bootstrap']);
         app.controller("loginCtrl", function ($scope, $http) {
             $scope.userLogin = {"username": "", "password": ""};
-            $scope.userRegister = {username: "", password: "", realName: "", dept: -1, major: "", classes: "", power: 0};
-            $scope.academy = [{code: -1, name: "未选择"}, {code: 1, name: "计算机学院"}, {code: 2, name: "软件学院"}];
+            $scope.userRegister = {username: "", password: "", realName: "", dept: 0, major: 0, classes: "", power: 0};
+            $scope.academy = [{code: 0, name: "未选择"}, {code: 1, name: "计算机学院"}, {code: 2, name: "软件工程学院"}];
+            $scope.major = [
+                    [],
+                    [{code: 101, name: "计算机科学与技术"}, {code: 102, name: "数字媒体"}],
+                    [{code: 201, name: "软件工程"}]
+            ];
+            $scope.majorList = new Array();
             $scope.login = function () {
                 $http.post("/user/login", $scope.userLogin)
                         .success(function (response) {
@@ -35,6 +41,13 @@
             $scope.academySelector = function (item) {
                 $scope.academySelected = item.name;
                 $scope.userRegister.dept = item.code;
+                $scope.majorList = $scope.major[item.code];
+            };
+
+            $scope.majorSelected = "未选择";
+            $scope.majorSelector = function (item) {
+                $scope.majorSelected = item.name;
+                $scope.userRegister.major = item.code;
             };
 
             $scope.register = function () {
@@ -134,8 +147,15 @@
 
                         <div class="form-group">
                             <label for="inputMajorReg" class="col-sm-3 control-label col-sm-offset-1">所在专业</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="inputMajorReg" placeholder="专业" ng-model="userRegister.major">
+                            <div class="controls col-sm-6">
+                                <div class="btn-group open choice" id="inputMajorReg">
+                                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> {{majorSelected}}<span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li ng-repeat="item in majorList">
+                                            <a ng-click="majorSelector(item)">{{item.name}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 

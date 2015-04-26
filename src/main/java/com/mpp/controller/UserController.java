@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import com.mpp.constants.MajorEnum;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +33,9 @@ public class UserController {
     @ResponseBody
     public CodeMessage register(@RequestBody User user,HttpSession httpSession) {
         AcademyEnum academy = AcademyEnum.getAcademy(user.getDept());
-        if (AcademyEnum.ERROR == academy) {
-            return JsonReturn.getError("error academy");
+        MajorEnum major = MajorEnum.getMajor(user.getMajor());
+        if (AcademyEnum.ERROR == academy || MajorEnum.ERROR == major) {
+            return JsonReturn.getError("error academy or major");
         }
 
         System.out.println(user.getPower());
@@ -48,9 +50,9 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST, value = "/login", produces = "application/json; charset=utf-8")
     @ResponseBody
     public CodeMessage login(@RequestBody User user,HttpSession httpSession) {
-        System.out.println(user.getUsername());
+//        System.out.println(user.getUsername());
         User u = userService.getUserByName(user.getUsername());
-        System.out.println(u);
+//        System.out.println(u);
         if (null != u && null != u.getPassword() && u.getPassword().equals(user.getPassword())) {
             httpSession.setAttribute("user", u);
             httpSession.setAttribute("uid", u.getUserId());
