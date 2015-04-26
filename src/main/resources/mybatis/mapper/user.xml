@@ -64,7 +64,7 @@
     <update id="changeUser" parameterType="User">
         <![CDATA[
             update user
-            set user_password = #{password}, user_dept = #{dept}, user_major = #{major}
+            set user_password = #{password}, user_class = #{classes}, user_dept = #{dept}, user_major = #{major}
             where user_id = #{userId};
         ]]>
     </update>

@@ -47,14 +47,13 @@
                             $scope.noticeIsEmpty = true;
                         }
                     })
-
+            $scope.changeUser = {userId: <%=session.getAttribute("uid")%>, password: "", dept: -1, major: "", classes: ""};
             $scope.academy = [{code: -1, name: "未选择"}, {code: 1, name: "计算机学院"}, {code: 2, name: "软件学院"}];
             $scope.academySelected = "未选择";
             $scope.academySelector = function (item) {
                 $scope.academySelected = item.name;
-                $scope.userRegister.dept = item.code;
+                $scope.changeUser.dept = item.code;
             };
-            $scope.changeUser = {userId: <%=session.getAttribute("uid")%>, username: "", password: "", realName: "", dept: -1, major: "", classes: ""};
             $scope.userChange = function () {
                 $http.post("/user/userDelete", $scope.changeUser)
                         .success(function (response) {
@@ -63,7 +62,6 @@
                             }
                         })
             }
-
 
         });
     </script>
@@ -114,25 +112,10 @@
             <div class="modal-body">
                 <div class="form-horizontal">
                     <div class="form-group">
-                        <label for="inputUsernameReg" class="col-sm-3 control-label col-sm-offset-1">用户名</label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" id="inputUsernameReg" placeholder="用户名" ng-model="changeUser.username">
-                            <p class="help-block">请在此输入您的用户名（大小写敏感）。</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         <label for="inputPasswordReg" class="col-sm-3 control-label col-sm-offset-1">密码</label>
                         <div class="col-sm-6">
                             <input type="password" class="form-control" id="inputPasswordReg" placeholder="密码" ng-model="changeUser.password">
                             <p class="help-block">请在此输入您的密码（大小写敏感）。</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputRealnameReg" class="col-sm-3 control-label col-sm-offset-1">姓名</label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" id="inputRealnameReg" placeholder="姓名" ng-model="changeUser.realName">
                         </div>
                     </div>
 
