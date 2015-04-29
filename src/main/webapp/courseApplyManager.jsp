@@ -90,7 +90,7 @@
         <!-- Default panel contents -->
         <div class="panel-heading" ng-modal="LabName">{{LabName}}实验室课程安排</div>
         <!-- Table -->
-        <table class="table">
+        <table class="table" ng-repeat="item in Course">
             <thead>
             <tr>
                 <th>#</th>
