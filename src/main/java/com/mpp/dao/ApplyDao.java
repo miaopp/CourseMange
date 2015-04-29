@@ -1,6 +1,7 @@
 package com.mpp.dao;
 
 import com.mpp.model.Apply;
+import com.mpp.model.entity.ApplyInfoBean;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ public interface ApplyDao {
 
     public List<Apply> getAllApply(Integer uid);
 
-    public List<Apply> getApplyByLabId(Integer labId);
+    public List<ApplyInfoBean> getApplyInfoByLabId(Integer labId);
 }

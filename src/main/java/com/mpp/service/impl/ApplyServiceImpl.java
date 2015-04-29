@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.google.common.collect.Lists;
+import com.mpp.model.entity.ApplyInfoBean;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Maps;
@@ -21,7 +23,6 @@ import com.mpp.model.Course;
 import com.mpp.model.Lab;
 import com.mpp.model.Notice;
 import com.mpp.model.User;
-import com.mpp.model.entity.CourseDisplayBean;
 import com.mpp.model.entity.ScheduleStatus;
 import com.mpp.service.ApplyService;
 
@@ -83,28 +84,26 @@ public class ApplyServiceImpl implements ApplyService{
         return applyDao.getAllApply(uid);
     }
 
+    private final static int dayOfWeeks = 7;
+    private final static int orders = 12;
+
     @Override
     public Map<String, Object> getCourseDisplayByLabId(final Integer labId) {
         HashMap<String, Object> rtn = Maps.newHashMap();
         Lab lab = labDao.getLabByLabId(labId);
         rtn.put("labName", lab.getLabName());
 
-        List<Apply> apply = applyDao.getApplyByLabId(labId);
-        List<CourseDisplayBean> dis = new ArrayList<CourseDisplayBean>();
-        for (Apply app : apply) {
-            CourseDisplayBean cour = new CourseDisplayBean();
-            User u = userDao.getUserByUserId(app.getUserId());
-            cour.setUserId(u.getUserId());
-            cour.setCourseName(u.getRealName());
-            Course c = courseDao.getCourse(app.getCourseId());
-            cour.setCourseId(c.getId());
-            cour.setCourseName(c.getName());
-            cour.setBeginWeek(c.getCourseBeginWeek());
-            cour.setEndWeek(c.getCourseEndWeek());
-            cour.setState(app.getState());
-            dis.add(cour);
+        List<ApplyInfoBean> applyInfoBeans= applyDao.getApplyInfoByLabId(labId);
+        String[][] info = new String[dayOfWeeks+1][orders+1];
+        for (int i = 0; i < info.length; i++) {
+            for (int j = 0; j < info[i].length; j++) {
+                info[i][j] = "";
+            }
         }
-        rtn.put("list", dis);
+        for (ApplyInfoBean applyInfo : applyInfoBeans) {
+            info[applyInfo.getDayOfWeek()][applyInfo.getOrders()] += applyInfo.toInfoString();
+        }
+        rtn.put("list", info);
         return rtn;
     }
 }

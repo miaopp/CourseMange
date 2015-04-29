@@ -12,6 +12,14 @@
         <result property="orders" column="apply_orders"/>
         <result property="applyTime" column="apply_time"/>
     </resultMap>
+    <resultMap id="applyInfoResultMap" type="ApplyInfoBean">
+        <result property="courseName" column="course_name"/>
+        <result property="teacherName" column="user_realname"/>
+        <result property="beginWeek" column="begin_week"/>
+        <result property="endWeek" column="end_week"/>
+        <result property="courseId" column="course_id"/>
+        <result property="userId" column="user_id"/>
+    </resultMap>
     <insert id="insertApply" parameterType="Course">
         <![CDATA[
             insert into apply
@@ -26,11 +34,12 @@
             where user_id = #{uid}
         ]]>
     </select>
-    <select id="selectByLabId" parameterType="java.lang.Integer" resultMap="applyResultMap">
+    <select id="selectApplyInfoByLabId" parameterType="java.lang.Integer" resultMap="applyInfoResultMap">
         <![CDATA[
-            select *
-            from apply
-            where lab_id = #{labId}
+            select
+            c.course_name, u.user_realname, c.begin_week, c.end_week, a.state, a.course_id, a.user_id, a.apply_day_of_week, a.apply_orders
+            from apply a, course c, `user` u
+            where a.lab_id = #{labId} and a.course_id = c.course_id and a.user_id = u.user_id
         ]]>
     </select>
 </mapper>

@@ -9,18 +9,18 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import javax.annotation.Resource;
 
 /**
- * Created by xiang.xu on 2015/4/14.
+ * Created by xiang.xu on 2015/4/29.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:spring/applicationContext.xml" })
 @WebAppConfiguration
-public class LabDaoTest {
+public class ApplyDaoTest {
 
     @Resource
-    private LabDao labDao;
+    private ApplyDao applyDao;
 
     @Test
     public void run() {
-        System.out.println(labDao.getLabByDept(1));
+        System.out.println(applyDao.getApplyInfoByLabId(1));
     }
 }

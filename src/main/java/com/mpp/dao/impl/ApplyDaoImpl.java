@@ -3,6 +3,7 @@ package com.mpp.dao.impl;
 import com.google.common.base.Preconditions;
 import com.mpp.dao.ApplyDao;
 import com.mpp.model.Apply;
+import com.mpp.model.entity.ApplyInfoBean;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -30,8 +31,8 @@ public class ApplyDaoImpl implements ApplyDao {
     }
 
     @Override
-    public List<Apply> getApplyByLabId(final Integer labId) {
+    public List<ApplyInfoBean> getApplyInfoByLabId(final Integer labId) {
         Preconditions.checkNotNull(labId);
-        return this.sqlSession.selectList("Apply.selectByLabId", labId);
+        return this.sqlSession.selectList("Apply.selectApplyInfoByLabId", labId);
     }
 }

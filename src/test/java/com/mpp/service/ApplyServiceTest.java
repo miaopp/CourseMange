@@ -1,4 +1,4 @@
-package com.mpp.dao;
+package com.mpp.service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,18 +9,18 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import javax.annotation.Resource;
 
 /**
- * Created by xiang.xu on 2015/4/14.
+ * Created by xiang.xu on 2015/4/29.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:spring/applicationContext.xml" })
 @WebAppConfiguration
-public class LabDaoTest {
+public class ApplyServiceTest {
 
     @Resource
-    private LabDao labDao;
+    private ApplyService applyService;
 
     @Test
     public void run() {
-        System.out.println(labDao.getLabByDept(1));
+        System.out.println(applyService.getCourseDisplayByLabId(1));
     }
 }
