@@ -105,10 +105,10 @@ public class ApplyInfoBean {
 
     public String toInfoString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(courseName + "\n");
-        builder.append(teacherName + "\n");
-        builder.append("第").append(beginWeek).append("周 - ").append("第").append(endWeek).append("周\n");
-        builder.append("任课老师：" + teacherName + "\n");
+        builder.append(courseName + "<br>");
+        builder.append(teacherName + "<br>");
+        builder.append("第").append(beginWeek).append("周 - ").append("第").append(endWeek).append("周<br>");
+        builder.append("任课老师：" + teacherName + "<br>");
         return builder.toString();
     }
 }

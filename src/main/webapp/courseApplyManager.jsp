@@ -24,9 +24,10 @@
     <script type="text/javascript" src="./js/jquery-2.1.3.js"></script>
     <script type="text/javascript" src="./js/bootstrap.js"></script>
     <script type="text/javascript" src="./js/angular.js"></script>
+    <script type="text/javascript" src="./js/angular-sanitize.js"></script>
     <script type="text/javascript" src="./js/ui-bootstrap-0.12.1.js"></script>
     <script type="text/javascript">
-        var app = angular.module('courseApplyManagerModule', ['ui.bootstrap']);
+        var app = angular.module('courseApplyManagerModule', ['ui.bootstrap', 'ngSanitize']);
         app.controller("courseApplyManagerCtrl", function ($scope, $http) {
             $scope.logout = function () {
                 $http.get("/user/logout")
@@ -105,8 +106,8 @@
             </thead>
             <tbody>
             <tr ng-repeat="order in Course">
-                <th scope="row">1</th>
-                <td ng-repeat="day in order track by $index">{{day}}</td>
+                <th scope="row">第{{$index+1}}节</th>
+                <td ng-repeat="item in order track by $index" ng-bind-html="item"></td>
             </tr>
             </tbody>
         </table>
