@@ -108,12 +108,25 @@
                         })
             };
 
-            $scope.courseAdd = {userId: <%=session.getAttribute("uid") %>, name: "", courseDept: "", courseMajor: "", targetClass: "", courseBeginWeek: "", courseEndWeek: ""};
+            $scope.courseAdd = {userId: <%=session.getAttribute("uid") %>, name: "", courseDept: -1, courseMajor: 0, targetClass: "", courseBeginWeek: "", courseEndWeek: ""};
+
+            $scope.major = [
+                [],
+                [{code: 101, name: "计算机科学与技术"}, {code: 102, name: "数字媒体"}],
+                [{code: 201, name: "软件工程"}]
+            ];
+            $scope.majorList = new Array();
+            $scope.majorSelected = "未选择";
+            $scope.majorSelector = function (item) {
+                $scope.majorSelected = item.name;
+                $scope.courseAdd.courseMajor = item.code;
+            };
             $scope.academy = [{code: -1, name: "未选择"}, {code: 1, name: "计算机学院"}, {code: 2, name: "软件学院"}];
             $scope.academySelected = "未选择";
             $scope.academySelector = function (item) {
                 $scope.academySelected = item.name;
                 $scope.courseAdd.courseDept = item.code;
+                $scope.majorList = $scope.major[item.code];
             };
 
             $scope.courseInsert = function () {
@@ -167,8 +180,15 @@
                     </div>
                     <div class="form-group">
                         <label for="inputCourseMajor" class="col-sm-3 control-label col-sm-offset-1">课程开设专业</label>
-                        <div class="col-sm-4 col-sm-offset-1">
-                            <input type="text" class="form-control" id="inputCourseMajor" placeholder="课程开设专业" ng-model="courseAdd.courseMajor">
+                        <div class="controls col-sm-4 col-sm-offset-1">
+                            <div class="btn-group open choice" id="inputCourseMajor">
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> {{majorSelected}}<span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li ng-repeat="item in majorList">
+                                        <a ng-click="majorSelector(item)">{{item.name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -337,13 +357,25 @@
             </div>
         </div>
     </div>
-    <div class='well'>
-        <p class='text-info'  ng-show="courseIsEmpty">目前还没有相关课程信息，请添加！</p>
 
-        <div class='btn-group'>
-            <button type='button' class='btn btn-success' data-toggle="modal" data-target="#CourseModal">添加实验室信息</button>
+    <div class="panel panel-danger">
+        <div class="panel-heading" ng-show="courseIsEmpty">
+            <h3 class="panel-title" id="panel-title">提醒<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
+        </div>
+        <div class="panel-body" ng-show="courseIsEmpty">
+            目前还没有相关课程信息，请添加！
+        </div>
+        <div class="panel-footer">
+            <a href="#" class="btn btn-link" role="button" data-toggle="modal" data-target="#CourseModal">添加课程信息</a>
         </div>
     </div>
+    <%--<div class='well'>--%>
+        <%--<p class='text-info'  ng-show="courseIsEmpty">目前还没有相关课程信息，请添加！</p>--%>
+
+        <%--<div class='btn-group'>--%>
+            <%--<button type='button' class='btn btn-success' data-toggle="modal" data-target="#CourseModal">添加实验室信息</button>--%>
+        <%--</div>--%>
+    <%--</div>--%>
 
     </p>
 </div>

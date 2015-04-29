@@ -7,6 +7,9 @@ public class NoticeBean {
     private String userRealName;
     private String courseName;
     private String labName;
+    private int userId;
+    private int labId;
+    private int courseId;
 
     public String getUserRealName() {
         return userRealName;
@@ -30,5 +33,29 @@ public class NoticeBean {
 
     public void setLabName(String labName) {
         this.labName = labName;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getLabId() {
+        return labId;
+    }
+
+    public void setLabId(int labId) {
+        this.labId = labId;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 }

@@ -28,4 +28,10 @@ public class ApplyDaoImpl implements ApplyDao {
     public List<Apply> getAllApply(final Integer uid) {
         return sqlSession.selectList("Apply.selectAll", uid);
     }
+
+    @Override
+    public List<Apply> getApplyByLabId(final Integer labId) {
+        Preconditions.checkNotNull(labId);
+        return this.sqlSession.selectList("Apply.selectByLabId", labId);
+    }
 }

@@ -34,6 +34,12 @@
                            location.href = "./login.jsp";
                        })
            }
+           $scope.CourseDisplayByLab = {LabId: location.search.substring(1).split("=")[1]};
+           $http.post("/apply/courseDisplay", $scope.CourseDisplayByLab)
+                   .success(function(response) {
+                       $scope.Course = response.data;
+                   })
+           $scope.Lab = $scope.Course[0].labName;
         });
     </script>
 </head>
@@ -76,6 +82,44 @@
 </nav>
 
 <div class="container">
+    <div class="page-header">
+        <h1>实验室申请管理</h1>
+    </div>
+    <div class="panel panel-info">
+        <!-- Default panel contents -->
+        <div class="panel-heading">{{Lab}}</div>
+        <!-- Table -->
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <div class="footer" style="margin-top: 10px;">
     <div class="container">

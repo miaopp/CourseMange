@@ -10,5 +10,7 @@ import java.util.List;
 public interface ApplyDao {
     public void addApply(Apply apply);
 
-    public List<Apply> getAllApply(final Integer uid);
+    public List<Apply> getAllApply(Integer uid);
+
+    public List<Apply> getApplyByLabId(Integer labId);
 }

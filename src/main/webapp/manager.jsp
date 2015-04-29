@@ -93,7 +93,6 @@
     <div class="page-header">
         <h1>欢迎登录实验室排课系统</h1>
     </div>
-
     <div class="panel panel-info" ng-repeat="item in notice">
         <div class="panel-heading">
             <h3 class="panel-title" id="panel-title">{{item.labName}}实验室申请<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
@@ -102,7 +101,7 @@
             教师{{item.userRealName}}就所教授课程{{item.courseName}}提出实验室申请
         </div>
         <div class="panel-footer">
-            <a href="./courseApplyManager.jsp" class="btn btn-link" role="button">查看详情</a>
+            <a href="./courseApplyManager.jsp?labId={{item.labId}}" class="btn btn-link" role="button">查看详情</a>
         </div>
     </div>
 
@@ -121,16 +120,7 @@
                 <%--</div>--%>
             <%--</div>--%>
         <%--</div>--%>
-    </div>
-
-    <div class="panel panel-danger" ng-show="noticeIsEmpty">
-        <div class="panel-heading">
-            <h3 class="panel-title" id="panel-title">提醒<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
-        </div>
-        <div class="panel-body">
-            目前没有未处理消息！
-        </div>
-    </div>
+    <%--</div>--%>
 
 </div>
 <div class="footer" style="margin-top: 10px;">

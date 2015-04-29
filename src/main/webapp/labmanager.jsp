@@ -184,13 +184,29 @@
         </div>
     </div>
 
-    <div class='well'>
-        <p class='text-info'   ng-show="labIsEmpty">目前还没有相关实验室信息，请添加！</p>
+    <div class='btn-group'>
+        <button type='button' class='btn btn-success' data-toggle="modal" data-target="#LabModal">添加实验室信息</button>
+    </div>
 
-        <div class='btn-group'>
-            <button type='button' class='btn btn-success' data-toggle="modal" data-target="#LabModal">添加实验室信息</button>
+    <div class="panel panel-danger" ng-show="labIsEmpty">
+        <div class="panel-heading">
+            <h3 class="panel-title" id="panel-title">提醒<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
+        </div>
+        <div class="panel-body">
+            目前还没有相关实验室信息，请添加！
+        </div>
+        <div class="panel-footer">
+            <a href="#" class="btn btn-link" role="button" data-toggle="modal" data-target="#LabModal">添加实验室信息</a>
         </div>
     </div>
+
+    <%--<div class='well'>--%>
+        <%--<p class='text-info'   ng-show="labIsEmpty">目前还没有相关实验室信息，请添加！</p>--%>
+
+        <%--<div class='btn-group'>--%>
+            <%--<button type='button' class='btn btn-success' data-toggle="modal" data-target="#LabModal">添加实验室信息</button>--%>
+        <%--</div>--%>
+    <%--</div>--%>
 
     </div>
     <div class="footer" style="margin-top: 10px;">

@@ -1,6 +1,7 @@
 package com.mpp.service;
 
 import com.mpp.model.Apply;
+import com.mpp.model.entity.CourseDisplayBean;
 
 import java.util.List;
 
@@ -11,4 +12,6 @@ public interface ApplyService {
     public void addApply(Apply apply);
 
     public List<Apply> getAllApply(Integer uid);
+
+    public List<CourseDisplayBean> getCourseDisplayByLabId(Integer labId);
 }

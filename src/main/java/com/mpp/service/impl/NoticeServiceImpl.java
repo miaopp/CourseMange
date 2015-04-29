@@ -47,6 +47,9 @@ public class NoticeServiceImpl implements NoticeService {
             n.setCourseName(c.getName());
             Lab l = labDao.getLabByLabId(no.getLabId());
             n.setLabName(l.getLabName());
+            n.setUserId(no.getUserId());
+            n.setLabId(no.getLabId());
+            n.setCourseId(no.getCourseId());
             noticeBean.add(n);
         }
         return noticeBean;

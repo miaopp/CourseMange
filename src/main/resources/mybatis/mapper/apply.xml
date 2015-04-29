@@ -26,4 +26,11 @@
             where user_id = #{uid}
         ]]>
     </select>
+    <select id="selectByLabId" parameterType="java.lang.Integer" resultMap="applyResultMap">
+        <![CDATA[
+            select *
+            from apply
+            where lab_id = #{labId}
+        ]]>
+    </select>
 </mapper>
