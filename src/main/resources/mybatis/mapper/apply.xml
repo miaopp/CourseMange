@@ -19,6 +19,8 @@
         <result property="endWeek" column="end_week"/>
         <result property="courseId" column="course_id"/>
         <result property="userId" column="user_id"/>
+        <result property="dayOfWeek" column="apply_day_of_week"/>
+        <result property="orders" column="apply_orders"/>
     </resultMap>
     <insert id="insertApply" parameterType="Course">
         <![CDATA[

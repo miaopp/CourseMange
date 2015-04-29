@@ -94,14 +94,14 @@ public class ApplyServiceImpl implements ApplyService{
         rtn.put("labName", lab.getLabName());
 
         List<ApplyInfoBean> applyInfoBeans= applyDao.getApplyInfoByLabId(labId);
-        String[][] info = new String[dayOfWeeks+1][orders+1];
+        String[][] info = new String[orders][dayOfWeeks];
         for (int i = 0; i < info.length; i++) {
             for (int j = 0; j < info[i].length; j++) {
                 info[i][j] = "";
             }
         }
         for (ApplyInfoBean applyInfo : applyInfoBeans) {
-            info[applyInfo.getDayOfWeek()][applyInfo.getOrders()] += applyInfo.toInfoString();
+            info[applyInfo.getOrders()-1][applyInfo.getDayOfWeek()-1] += applyInfo.toInfoString();
         }
         rtn.put("list", info);
         return rtn;
