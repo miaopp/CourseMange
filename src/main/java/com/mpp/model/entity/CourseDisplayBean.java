@@ -6,7 +6,6 @@ package com.mpp.model.entity;
 public class CourseDisplayBean {
     private String courseName;
     private String teacherName;
-    private String labName;
     private int beginWeek;
     private int endWeek;
     private int state;
@@ -27,14 +26,6 @@ public class CourseDisplayBean {
 
     public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
-    }
-
-    public String getLabName() {
-        return labName;
-    }
-
-    public void setLabName(String labName) {
-        this.labName = labName;
     }
 
     public int getBeginWeek() {

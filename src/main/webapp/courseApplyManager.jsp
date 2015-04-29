@@ -28,18 +28,18 @@
     <script type="text/javascript">
         var app = angular.module('courseApplyManagerModule', ['ui.bootstrap']);
         app.controller("courseApplyManagerCtrl", function ($scope, $http) {
-           $scope.logout = function () {
-               $http.get("/user/logout")
-                       .success(function () {
-                           location.href = "./login.jsp";
-                       })
-           }
-           $scope.CourseDisplayByLab = {LabId: location.search.substring(1).split("=")[1]};
-           $http.post("/apply/courseDisplay", $scope.CourseDisplayByLab)
-                   .success(function(response) {
-                       $scope.Course = response.data;
-                   })
-           $scope.Lab = $scope.Course[0].labName;
+            $scope.logout = function () {
+                $http.get("/user/logout")
+                        .success(function () {
+                            location.href = "./login.jsp";
+                        })
+            }
+            var LabId = location.search.substring(1).split("=")[1];
+            $http.post("/apply/courseDisplay?LabId=" + LabId)
+                    .success(function (response) {
+                        $scope.Course = response.data.list;
+                        $scope.LabName = response.data.labName;
+                    });
         });
     </script>
 </head>
@@ -49,7 +49,8 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -87,7 +88,7 @@
     </div>
     <div class="panel panel-info">
         <!-- Default panel contents -->
-        <div class="panel-heading">{{Lab}}</div>
+        <div class="panel-heading">{{LabName}}</div>
         <!-- Table -->
         <table class="table">
             <thead>

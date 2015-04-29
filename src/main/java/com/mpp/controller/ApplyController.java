@@ -1,20 +1,22 @@
 package com.mpp.controller;
 
-import com.mpp.constants.CodeMessage;
-import com.mpp.constants.JsonReturn;
-import com.mpp.model.Apply;
-import com.mpp.model.entity.CourseDisplayBean;
-import com.mpp.service.ApplyService;
+import java.sql.Timestamp;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-import java.sql.Timestamp;
-import java.util.List;
+import com.mpp.constants.CodeMessage;
+import com.mpp.constants.JsonReturn;
+import com.mpp.model.Apply;
+import com.mpp.service.ApplyService;
 
 /**
  * Created by xiang.xu on 2015/4/20.
@@ -43,8 +45,8 @@ public class ApplyController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/courseDisplay", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public CodeMessage courseDisplay(@RequestBody Apply apply) {
-        List<CourseDisplayBean> list = applyService.getCourseDisplayByLabId(apply.getLabId());
-        return JsonReturn.getSuccess(list);
+    public CodeMessage courseDisplay(@RequestParam Integer LabId) {
+        Map<String, Object> rtn = applyService.getCourseDisplayByLabId(LabId);
+        return JsonReturn.getSuccess(rtn);
     }
 }

@@ -1,9 +1,9 @@
 package com.mpp.service;
 
-import com.mpp.model.Apply;
-import com.mpp.model.entity.CourseDisplayBean;
-
 import java.util.List;
+import java.util.Map;
+
+import com.mpp.model.Apply;
 
 /**
  * Created by xiang.xu on 2015/4/20.
@@ -13,5 +13,5 @@ public interface ApplyService {
 
     public List<Apply> getAllApply(Integer uid);
 
-    public List<CourseDisplayBean> getCourseDisplayByLabId(Integer labId);
+    public Map<String, Object> getCourseDisplayByLabId(Integer labId);
 }

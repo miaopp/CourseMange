@@ -1,18 +1,29 @@
 package com.mpp.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
-import com.mpp.dao.*;
-import com.mpp.model.*;
-import com.mpp.model.entity.CourseDisplayBean;
-import com.mpp.model.entity.ScheduleStatus;
 import org.springframework.stereotype.Service;
 
-import com.mpp.model.entity.OrderFilter;
+import com.google.common.collect.Maps;
+import com.mpp.dao.ApplyDao;
+import com.mpp.dao.CourseDao;
+import com.mpp.dao.LabDao;
+import com.mpp.dao.NoticeDao;
+import com.mpp.dao.ScheduleDao;
+import com.mpp.dao.UserDao;
+import com.mpp.model.Apply;
+import com.mpp.model.Course;
+import com.mpp.model.Lab;
+import com.mpp.model.Notice;
+import com.mpp.model.User;
+import com.mpp.model.entity.CourseDisplayBean;
+import com.mpp.model.entity.ScheduleStatus;
 import com.mpp.service.ApplyService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by xiang.xu on 2015/4/20.
@@ -73,7 +84,11 @@ public class ApplyServiceImpl implements ApplyService{
     }
 
     @Override
-    public List<CourseDisplayBean> getCourseDisplayByLabId(final Integer labId) {
+    public Map<String, Object> getCourseDisplayByLabId(final Integer labId) {
+        HashMap<String, Object> rtn = Maps.newHashMap();
+        Lab lab = labDao.getLabByLabId(labId);
+        rtn.put("labName", lab.getLabName());
+
         List<Apply> apply = applyDao.getApplyByLabId(labId);
         List<CourseDisplayBean> dis = new ArrayList<CourseDisplayBean>();
         for (Apply app : apply) {
@@ -86,11 +101,10 @@ public class ApplyServiceImpl implements ApplyService{
             cour.setCourseName(c.getName());
             cour.setBeginWeek(c.getCourseBeginWeek());
             cour.setEndWeek(c.getCourseEndWeek());
-            Lab l = labDao.getLabByLabId(labId);
-            cour.setLabName(l.getLabName());
             cour.setState(app.getState());
             dis.add(cour);
         }
-        return dis;
+        rtn.put("list", dis);
+        return rtn;
     }
 }
