@@ -105,8 +105,8 @@
             </thead>
             <tbody>
             <tr ng-repeat="order in Course">
-                <th scope="row">1</th>
-                <td ng-repeat="day in order track by $index">{{day}}</td>
+                <th scope="row">第{{$index+1}}节</th>
+                <td ng-repeat="day in order track by $index"><p>{{day}}</p></td>
             </tr>
             </tbody>
         </table>
