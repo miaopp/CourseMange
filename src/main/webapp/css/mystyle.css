@@ -55,3 +55,15 @@ textarea.publish {
 	height: 200px;
 	margin: auto 5% auto 5%;
 }
+
+.callout{
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+
+.callout-info {
+    border-left-color: #1b809e;
+}

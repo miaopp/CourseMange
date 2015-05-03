@@ -79,7 +79,15 @@
                 $scope.courseWeekSelect = item.name;
                 $scope.apply.dayOfWeek = item.code;
 
-                loadCourseApplyOrders();
+                $scope.toLoadOrders.labId = $scope.apply.labId;
+                $scope.toLoadOrders.dayOfWeek = $scope.apply.dayOfWeek;
+                $http.post("/schedule/availableOrders", $scope.toLoadOrders)
+                        .success(function (response) {
+                            if (response.status == 200) {
+                                $scope.orders = response.data;
+                                $scope.courseOrderSelect = "未选择";
+                            }
+                        });
             };
             $scope.orders = [{name: "待载入", code: -1}];
             $scope.courseOrderSelect = "待载入";
@@ -88,15 +96,12 @@
                 $scope.apply.orders = item.code;
             };
 
-            var loadCourseApplyOrders = function () {
-                var json = {labId: $scope.apply.labId ,dayOfWeek: $scope.apply.dayOfWeek, beginWeek: 1,endWeek: 2};
-                $http.post("/schedule/availableOrders", json)
-                        .success(function (response) {
-                            if (response.status == 200) {
-                                $scope.orders = response.data;
-                                $scope.courseOrderSelect = "未选择";
-                            }
-                        });
+            $scope.toLoadOrders = {labId: -1 ,dayOfWeek: 0, beginWeek: 0,endWeek: 0};
+
+            $scope.clickAddApplyOrderBtn = function (item) {
+                $scope.apply.courseId = item.id;
+                $scope.toLoadOrders.beginWeek = item.courseBeginWeek;
+                $scope.toLoadOrders.endWeek = item.courseEndWeek;
             };
 
             $scope.addApply = function () {
@@ -194,19 +199,31 @@
                     <div class="form-group">
                         <label for="inputCourseClass" class="col-sm-3 control-label col-sm-offset-1">课程开设班级</label>
                         <div class="col-sm-4 col-sm-offset-1">
-                            <input type="text" class="form-control" id="inputCourseClass" placeholder="课程开设班级" ng-model="courseAdd.targetClass">
+                            <div class="input-group">
+                                <span class="input-group-addon">第</span>
+                                <input type="text" class="form-control" id="inputCourseClass" placeholder="课程开设班级" ng-model="courseAdd.targetClass">
+                                <span class="input-group-addon">班</span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputCourseBeginWeek" class="col-sm-3 control-label col-sm-offset-1">上课起始周 </label>
                         <div class="col-sm-4 col-sm-offset-1">
-                            <input type="text" class="form-control" id="inputCourseBeginWeek" placeholder="上课起始周" ng-model="courseAdd.courseBeginWeek">
+                            <div class="input-group">
+                                <span class="input-group-addon">第</span>
+                                <input type="text" class="form-control" id="inputCourseBeginWeek" placeholder="上课起始周" ng-model="courseAdd.courseBeginWeek">
+                                <span class="input-group-addon">周</span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputCourseEndWeek" class="col-sm-3 control-label col-sm-offset-1">上课结束周 </label>
                         <div class="col-sm-4 col-sm-offset-1">
-                            <input type="text" class="form-control" id="inputCourseEndWeek" placeholder="上课结束周" ng-model="courseAdd.courseEndWeek">
+                            <div class="input-group">
+                                <span class="input-group-addon">第</span>
+                                <input type="text" class="form-control" id="inputCourseEndWeek" placeholder="上课结束周" ng-model="courseAdd.courseEndWeek">
+                                <span class="input-group-addon">周</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -234,7 +251,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label col-sm-offset-1" for="labName">实验室名称</label>
 
-                        <div class="controls col-sm-6">
+                        <div class="controls col-sm-6 col-sm-offset-1">
                             <div class="btn-group open choice" id="labName">
                                 <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                     {{courseLabSelect}}<span class="caret"></span></button>
@@ -250,7 +267,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label col-sm-offset-1" for="weeks">星期</label>
 
-                        <div class="controls col-sm-6">
+                        <div class="controls col-sm-6 col-sm-offset-1">
                             <div class="btn-group open choice" id="weeks">
                                 <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                     {{courseWeekSelect}}<span class="caret"></span></button>
@@ -266,7 +283,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label col-sm-offset-1" for="orders">时间</label>
 
-                        <div class="controls col-sm-6">
+                        <div class="controls col-sm-6 col-sm-offset-1">
                             <div class="btn-group open choice" id="orders">
                                 <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                     {{courseOrderSelect}}<span class="caret"></span></button>
@@ -333,23 +350,23 @@
     <div class="row">
         <div class="col-sm-3" ng-repeat="item in course">
             <div class="thumbnail">
-                <img data-src="holder.js/100%x200" alt="100%x200"
-                     src="#"
-                     data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <%--<img data-src="holder.js/100%x200" alt="100%x200"--%>
+                     <%--src="#"--%>
+                     <%--data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">--%>
 
                 <div class="caption">
                     <h4>课程名称：{{item.name}}</h4>
                     <h5>授课老师：{{user.name}}</h5>
                     <h5>课程开设专业：{{item.courseMajor}}</h5>
                     <h5>上课时间：第{{item.courseBeginWeek}}周 -- 第{{item.courseEndWeek}}周</h5>
-                    <div class="well" ng-show="item.apply.length > 0">
-                        <p class='text-info'>排课记录：</p>
+                    <div class="callout callout-info" ng-show="item.apply.length > 0">
+                        <p class='text-info'>已排课记录：<span class="badge">{{item.apply.length}}</span></p>
                         <div ng-repeat="apply in item.apply">
-                            <p class='text-info'>星期{{apply.dayOfWeek}}, 第{{apply.orders}}节课</p>
+                            <p class='bg-info'>星期{{apply.dayOfWeek}}, 第{{apply.orders}}节课</p>
                         </div>
 
                     </div>
-                    <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#ApplyModal" ng:click="apply.courseId = item.id">
+                    <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#ApplyModal" ng-click="clickAddApplyOrderBtn(item)">
                         添加实验室排课
                     </button>
                     <button type='button' class='btn btn-danger pull-right'>删除</button>
