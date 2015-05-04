@@ -167,7 +167,7 @@
                     <div class="form-group">
                         <label for="inputCourseName" class="col-sm-3 control-label col-sm-offset-1">课程名称</label>
                         <div class="col-sm-4 col-sm-offset-1">
-                            <input type="text" class="form-control" id="inputCourseName" placeholder="课程名称" ng-model="courseAdd.name">
+                            <input type="text" class="form-control" id="inputCourseName" placeholder="课程名称" ng-model="courseAdd.name" tooltip="课程全名" tooltip-trigger="focus" tooltip-placement="right">
                         </div>
                     </div>
                     <div class="form-group">
@@ -201,7 +201,7 @@
                         <div class="col-sm-4 col-sm-offset-1">
                             <div class="input-group">
                                 <span class="input-group-addon">第</span>
-                                <input type="text" class="form-control" id="inputCourseClass" placeholder="课程开设班级" ng-model="courseAdd.targetClass">
+                                <input type="text" class="form-control" id="inputCourseClass" placeholder="课程开设班级" ng-model="courseAdd.targetClass" tooltip="只能填数字" tooltip-trigger="focus" tooltip-placement="right">
                                 <span class="input-group-addon">班</span>
                             </div>
                         </div>
@@ -211,7 +211,7 @@
                         <div class="col-sm-4 col-sm-offset-1">
                             <div class="input-group">
                                 <span class="input-group-addon">第</span>
-                                <input type="text" class="form-control" id="inputCourseBeginWeek" placeholder="上课起始周" ng-model="courseAdd.courseBeginWeek">
+                                <input type="text" class="form-control" id="inputCourseBeginWeek" placeholder="上课起始周" ng-model="courseAdd.courseBeginWeek" tooltip="只能填数字" tooltip-trigger="focus" tooltip-placement="right">
                                 <span class="input-group-addon">周</span>
                             </div>
                         </div>
@@ -221,7 +221,7 @@
                         <div class="col-sm-4 col-sm-offset-1">
                             <div class="input-group">
                                 <span class="input-group-addon">第</span>
-                                <input type="text" class="form-control" id="inputCourseEndWeek" placeholder="上课结束周" ng-model="courseAdd.courseEndWeek">
+                                <input type="text" class="form-control" id="inputCourseEndWeek" placeholder="上课结束周" ng-model="courseAdd.courseEndWeek" tooltip="只能填数字" tooltip-trigger="focus" tooltip-placement="right">
                                 <span class="input-group-addon">周</span>
                             </div>
                         </div>
