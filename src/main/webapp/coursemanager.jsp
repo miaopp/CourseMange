@@ -35,22 +35,23 @@
                             } else {
                                 $scope.courseIsEmpty = true;
                             }
+
+                            $http.post("/apply/loadAll")
+                                    .success(function (response) {
+                                        if (200 == response.status) {
+                                            for (val in response.data) {
+                                                var apply = response.data[val];
+                                                for (idx in $scope.course) {
+                                                    if ($scope.course[idx].id == apply.labId) {
+                                                        $scope.course[idx].apply.push(apply);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    });
                         }
                     });
 
-            $http.post("/apply/loadAll")
-                    .success(function (response) {
-                        if (200 == response.status) {
-                            for (val in response.data) {
-                                var apply = response.data[val];
-                                for (idx in $scope.course) {
-                                    if ($scope.course[idx].id == apply.labId) {
-                                        $scope.course[idx].apply.push(apply);
-                                    }
-                                }
-                            }
-                        }
-                    })
 
             $scope.apply = {courseId: -1, labId: -1, userId: $scope.user.uid, dayOfWeek: 0, orders: -1};
             $http.post("/lab/getLabListByTeacher")
