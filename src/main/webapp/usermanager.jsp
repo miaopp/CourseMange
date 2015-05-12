@@ -111,11 +111,14 @@
                      src="#"
                      data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
                 <div class="caption">
-                    <h4>用户名：{{item.username}}</h4>
+                    <h4>用户名：{{item.userName}}</h4>
                     <h5>真实姓名：{{item.realName}}</h5>
+                    <h5>所在学院：{{item.dept}}</h5>
                     <h5>所在专业：{{item.major}}</h5>
+                    <h5>用户身份：{{item.userPower}}</h5>
 
                     <button type='button' class='btn btn-danger' ng-click="userDeletor(item.userId)">删除</button>
+                    <%--<button type="button" class="btn btn-primary pull-right" ng-show="{{item.status}}==1?true:false" ng-click="setUserAsManager(item.userId)">设为管理员</button>--%>
                 </div>
             </div>
         </div>

@@ -106,9 +106,14 @@ public class ApplyInfoBean {
     public String toInfoString() {
         StringBuilder builder = new StringBuilder();
         builder.append(courseName + "<br>");
-        builder.append(teacherName + "<br>");
         builder.append("第").append(beginWeek).append("周 - ").append("第").append(endWeek).append("周<br>");
         builder.append("任课老师：" + teacherName + "<br>");
+        if(state == 0) {
+            builder.append("已申请未审核<br>");
+        }
+        else if(state == 1) {
+            builder.append("已审核通过<br>");
+        }
         return builder.toString();
     }
 }

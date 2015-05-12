@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import com.mpp.constants.MajorEnum;
+import com.mpp.model.entity.UserInfoBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,7 +77,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST, value = "/loadUser", produces = "application/json; charset=utf-8")
     @ResponseBody
     public CodeMessage loadUser(@RequestBody User user) {
-        List<User> list = userService.getUserByDept(user.getDept());
+        List<UserInfoBean> list = userService.getUserByDept(user.getDept());
         return JsonReturn.getSuccess(list);
     }
 

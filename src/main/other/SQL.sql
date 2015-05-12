@@ -32,7 +32,7 @@ CREATE TABLE `apply` (
   `state` 					TINYINT 			NOT NULL DEFAULT 0		COMMENT '状态',
   `apply_time`				DATETIME 			NOT NULL 	DEFAULT '1971-01-01 00:00:00'  	COMMENT '申请时间',
   PRIMARY KEY (`apply_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '实验室信息表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '实验室申请信息表';
 
 CREATE TABLE `lab` (
   `lab_id` 					BIGINT UNSIGNED 	NOT NULL AUTO_INCREMENT COMMENT 'id',

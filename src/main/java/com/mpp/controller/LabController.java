@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import com.mpp.model.entity.LabInfoBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ public class LabController {
     @RequestMapping(method = RequestMethod.POST, value = "/loadLab", produces = "application/json; charset=utf-8")
     @ResponseBody
     public CodeMessage loadLab(@RequestBody Lab lab) {
-        List<Lab> list = labService.getLabNameByDept(lab.getLabDept());
+        List<LabInfoBean> list = labService.getLabNameByDept(lab.getLabDept());
 //        System.out.println(list);
         return JsonReturn.getSuccess(list);
     }
@@ -58,7 +59,7 @@ public class LabController {
     @ResponseBody
     public CodeMessage getLabList(HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("user");
-        List<Lab> list = labService.getLabNameByDept(user.getDept());
+        List<Lab> list = labService.getLabNameByTeacherDept(user.getDept());
         return JsonReturn.getSuccess(list);
     }
 }

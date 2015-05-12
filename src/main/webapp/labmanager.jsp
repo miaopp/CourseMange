@@ -177,6 +177,7 @@
                      data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
                 <div class="caption">
                     <h4>实验室名称：{{item.labName}}</h4>
+                    <h5>所在学院：{{item.labDept}}</h5>
                     <h5>实验室地址：{{item.labAddress}}</h5>
                     <button type='button' class='btn btn-danger' ng-click="Deletor(item.id)">删除</button>
                 </div>

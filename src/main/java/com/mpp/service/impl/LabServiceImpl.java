@@ -6,10 +6,12 @@ import com.mpp.dao.ScheduleDao;
 import com.mpp.dao.UserDao;
 import com.mpp.model.Lab;
 import com.mpp.model.Schedule;
+import com.mpp.model.entity.LabInfoBean;
 import com.mpp.service.LabService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,7 +49,27 @@ public class LabServiceImpl implements LabService{
     }
 
     @Override
-    public List<Lab> getLabNameByDept(final Integer labDept) {
+    public List<LabInfoBean> getLabNameByDept(final Integer labDept) {
+        List<Lab> labs = labDao.getLabByDept(labDept);
+        List<LabInfoBean> list = new ArrayList<LabInfoBean>();
+        for (Lab lab : labs) {
+            LabInfoBean l = new LabInfoBean();
+            l.setId(lab.getId());
+            l.setLabName(lab.getLabName());
+            if(lab.getLabDept() == 1) {
+                l.setLabDept("计算机学院");
+            }
+            else if(lab.getLabDept() == 2) {
+                l.setLabDept("软件学院");
+            }
+            l.setLabAddress(lab.getLabAddress());
+            list.add(l);
+        }
+        return list;
+    }
+
+    @Override
+    public List<Lab> getLabNameByTeacherDept(final Integer labDept) {
         return labDao.getLabByDept(labDept);
     }
 
