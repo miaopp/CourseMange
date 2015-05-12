@@ -7,27 +7,29 @@ public enum MajorEnum {
     /*
     error
      */
-    ERROR(0),
+    ERROR(0, "error"),
 
     /*
     计算机科学与技术
      */
-    CS(101),
+    CS(101, "计算机科学与技术"),
 
     /*
     数字媒体
      */
-    DMT(102),
+    DMT(102, "数字媒体"),
 
     /*
     软件工程
      */
-    SE(201);
+    SE(201, "软件工程");
 
-    int code;
+    private int code;
+    private String desc;
 
-    private MajorEnum(final int code) {
+    MajorEnum(final int code, final String desc) {
         this.code = code;
+        this.desc = desc;
     }
 
     public static MajorEnum getMajor(final int code) {
@@ -43,7 +45,7 @@ public enum MajorEnum {
         return code;
     }
 
-    public void setCode(final int code) {
-        this.code = code;
+    public String getDesc() {
+        return desc;
     }
 }

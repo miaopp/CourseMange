@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.google.common.collect.Lists;
 import com.mpp.constants.AcademyEnum;
+import com.mpp.model.entity.CourseBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +31,7 @@ public class CourseController {
     @RequestMapping(method = RequestMethod.GET, value = "/loadCourse", produces = "application/json; charset=utf-8")
     @ResponseBody
     public CodeMessage loadCourse() {
-        List<Course> list = courseService.getCourse();
+        List<CourseBean> list = courseService.getCourse();
         return JsonReturn.getSuccess(list);
     }
 

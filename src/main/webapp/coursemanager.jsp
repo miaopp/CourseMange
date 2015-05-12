@@ -42,7 +42,7 @@
                                             for (val in response.data) {
                                                 var apply = response.data[val];
                                                 for (idx in $scope.course) {
-                                                    if ($scope.course[idx].id == apply.labId) {
+                                                    if ($scope.course[idx].id == apply.courseId) {
                                                         $scope.course[idx].apply.push(apply);
                                                     }
                                                 }
@@ -359,6 +359,7 @@
                     <h4>课程名称：{{item.name}}</h4>
                     <h5>授课老师：{{user.name}}</h5>
                     <h5>课程开设专业：{{item.courseMajor}}</h5>
+                    <h5>上课班级：{{item.targetClass}}班</h5>
                     <h5>上课时间：第{{item.courseBeginWeek}}周 -- 第{{item.courseEndWeek}}周</h5>
                     <div class="callout callout-info" ng-show="item.apply.length > 0">
                         <p class='text-info'>已排课记录：<span class="badge">{{item.apply.length}}</span></p>
