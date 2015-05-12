@@ -31,13 +31,8 @@ public class CourseController {
     @RequestMapping(method = RequestMethod.GET, value = "/loadCourse", produces = "application/json; charset=utf-8")
     @ResponseBody
     public CodeMessage loadCourse() {
-        List<Course> list = courseService.getCourse();
-        List<CourseBean> rtn = Lists.newArrayList();
-        for (Course course : list) {
-            CourseBean courseBean = new CourseBean(course);
-            rtn.add(courseBean);
-        }
-        return JsonReturn.getSuccess(rtn);
+        List<CourseBean> list = courseService.getCourse();
+        return JsonReturn.getSuccess(list);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/insertCourseMessage", produces = "application/json; charset=utf-8")
