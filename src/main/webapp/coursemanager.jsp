@@ -42,7 +42,7 @@
                                             for (val in response.data) {
                                                 var apply = response.data[val];
                                                 for (idx in $scope.course) {
-                                                    if ($scope.course[idx].id == apply.labId) {
+                                                    if ($scope.course[idx].id == apply.courseId) {
                                                         $scope.course[idx].apply.push(apply);
                                                     }
                                                 }
