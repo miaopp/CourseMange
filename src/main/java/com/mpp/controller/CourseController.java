@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.google.common.collect.Lists;
 import com.mpp.constants.AcademyEnum;
+import com.mpp.model.entity.CourseBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +32,12 @@ public class CourseController {
     @ResponseBody
     public CodeMessage loadCourse() {
         List<Course> list = courseService.getCourse();
-        return JsonReturn.getSuccess(list);
+        List<CourseBean> rtn = Lists.newArrayList();
+        for (Course course : list) {
+            CourseBean courseBean = new CourseBean(course);
+            rtn.add(courseBean);
+        }
+        return JsonReturn.getSuccess(rtn);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/insertCourseMessage", produces = "application/json; charset=utf-8")
