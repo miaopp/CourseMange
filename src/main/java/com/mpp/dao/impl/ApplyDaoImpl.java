@@ -35,4 +35,10 @@ public class ApplyDaoImpl implements ApplyDao {
         Preconditions.checkNotNull(labId);
         return this.sqlSession.selectList("Apply.selectApplyInfoByLabId", labId);
     }
+
+    @Override
+    public List<Apply> getApplyByCourseAndState(final Apply apply) {
+        Preconditions.checkNotNull(apply);
+        return this.sqlSession.selectList("selectCourseDisplayInfoByCourse", apply);
+    }
 }

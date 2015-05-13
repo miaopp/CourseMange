@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import com.mpp.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +48,13 @@ public class ApplyController {
     @ResponseBody
     public CodeMessage courseDisplay(@RequestParam Integer LabId) {
         Map<String, Object> rtn = applyService.getCourseDisplayByLabId(LabId);
+        return JsonReturn.getSuccess(rtn);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/courseDisplayByCourse", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public CodeMessage courseDisplayByCourse(@RequestBody User user) {
+        Map<String, Object> rtn = applyService.getCourseDisplayByCourse(user.getUserId());
         return JsonReturn.getSuccess(rtn);
     }
 }

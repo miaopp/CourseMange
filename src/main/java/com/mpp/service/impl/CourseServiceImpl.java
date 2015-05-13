@@ -43,4 +43,9 @@ public class CourseServiceImpl implements CourseService {
     public void deleteCourse(Integer id) {
         courseDao.deleteCourse(id);
     }
+
+    @Override
+    public List<Course> getCourseByMajorAndClass(final Course course) {
+        return courseDao.getCourseByMajorAndClass(course);
+    }
 }

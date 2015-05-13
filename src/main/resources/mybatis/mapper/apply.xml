@@ -11,6 +11,7 @@
         <result property="dayOfWeek" column="apply_day_of_week"/>
         <result property="orders" column="apply_orders"/>
         <result property="applyTime" column="apply_time"/>
+        <result property="state" column="state"/>
     </resultMap>
     <resultMap id="applyInfoResultMap" type="ApplyInfoBean">
         <result property="courseName" column="course_name"/>
@@ -42,6 +43,13 @@
             c.course_name, u.user_realname, c.begin_week, c.end_week, a.state, a.course_id, a.user_id, a.apply_day_of_week, a.apply_orders
             from apply a, course c, `user` u
             where a.lab_id = #{labId} and a.course_id = c.course_id and a.user_id = u.user_id
+        ]]>
+    </select>
+    <select id="selectCourseDisplayInfoByCourse" parameterType="Apply" resultMap="applyResultMap">
+        <![CDATA[
+            select *
+            from apply
+            where course_id = #{courseId} and state = #{state}
         ]]>
     </select>
 </mapper>

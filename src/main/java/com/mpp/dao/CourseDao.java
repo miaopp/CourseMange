@@ -12,4 +12,5 @@ public interface CourseDao {
     public void addCourse(Course course);
     public void deleteCourse(Integer id);
     public Course getCourse(Integer id);
+    public List<Course> getCourseByMajorAndClass(Course course);
 }

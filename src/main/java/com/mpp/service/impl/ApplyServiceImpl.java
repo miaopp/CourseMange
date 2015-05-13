@@ -1,14 +1,12 @@
 package com.mpp.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Resource;
 
 import com.google.common.collect.Lists;
 import com.mpp.model.entity.ApplyInfoBean;
+import com.mpp.model.entity.CourseDisplayInfoBean;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Maps;
@@ -104,6 +102,49 @@ public class ApplyServiceImpl implements ApplyService{
             info[applyInfo.getOrders()-1][applyInfo.getDayOfWeek()-1] += applyInfo.toInfoString();
         }
         rtn.put("list", info);
+        return rtn;
+    }
+
+    @Override
+    public Map<String, Object> getCourseDisplayByCourse(final Integer userId) {
+        HashMap<String, Object> rtn = Maps.newHashMap();
+        User u = userDao.getUserByUserId(userId);
+        Course c = new Course();
+        c.setCourseMajor(u.getMajor());
+        c.setTargetClass(u.getClasses());
+        List<Course> list = courseDao.getCourseByMajorAndClass(c);
+        List<CourseDisplayInfoBean> infoList = new ArrayList<CourseDisplayInfoBean>();
+        for (Course course : list) {
+            Apply a = new Apply();
+            a.setCourseId(course.getId());
+            a.setState(1);
+            List<Apply> applyList = applyDao.getApplyByCourseAndState(a);
+            for (Apply apply : applyList) {
+                CourseDisplayInfoBean info = new CourseDisplayInfoBean();
+                info.setCourseId(apply.getCourseId());
+                info.setCourseName(courseDao.getCourse(apply.getCourseId()).getName());
+                info.setBeginWeek(courseDao.getCourse(apply.getCourseId()).getCourseBeginWeek());
+                info.setEndWeek(courseDao.getCourse(apply.getCourseId()).getCourseEndWeek());
+                info.setLabId(apply.getLabId());
+                info.setLabName(labDao.getLabByLabId(apply.getLabId()).getLabName());
+                info.setUserId(apply.getUserId());
+                info.setTeacherName(userDao.getUserByUserId(apply.getUserId()).getRealName());
+                info.setDayOfWeek(apply.getDayOfWeek());
+                info.setOrders(apply.getOrders());
+                infoList.add(info);
+            }
+        }
+        rtn.put("Title", "按课程显示课表");
+        String[][] courseDisplay = new String[orders][dayOfWeeks];
+        for (int i = 0; i < courseDisplay.length; i++) {
+            for (int j = 0; j < courseDisplay[i].length; j++) {
+                courseDisplay[i][j] = "";
+            }
+        }
+        for (CourseDisplayInfoBean courseDisplayInfoBean : infoList) {
+            courseDisplay[courseDisplayInfoBean.getOrders()-1][courseDisplayInfoBean.getDayOfWeek()-1] += courseDisplayInfoBean.toInfoString();
+        }
+        rtn.put("list", courseDisplay);
         return rtn;
     }
 }

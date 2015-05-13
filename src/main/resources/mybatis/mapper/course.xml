@@ -26,6 +26,13 @@
             where course_id = #{id}
         ]]>
     </select>
+    <select id="selectCourseByMajorAndClass" parameterType="Course" resultMap="courseResultMap">
+        <![CDATA[
+            select *
+            from course
+            where course_major = #{courseMajor} and target_class = #{targetClass}
+        ]]>
+    </select>
     <insert id="insertCourse" parameterType="Course">
         <![CDATA[
             insert into course

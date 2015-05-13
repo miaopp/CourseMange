@@ -12,4 +12,5 @@ public interface CourseService {
     public List<CourseBean> getCourse();
     public void addCourse(Course course);
     public void deleteCourse(Integer id);
+    public List<Course> getCourseByMajorAndClass(Course course);
 }

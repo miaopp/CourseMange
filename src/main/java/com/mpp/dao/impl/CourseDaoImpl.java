@@ -40,4 +40,10 @@ public class CourseDaoImpl implements CourseDao {
         Preconditions.checkArgument(id >= 0);
         return this.sqlSession.selectOne("Course.selectCourse", id);
     }
+
+    @Override
+    public List<Course> getCourseByMajorAndClass(final Course course) {
+        Preconditions.checkNotNull(course);
+        return this.sqlSession.selectList("selectCourseByMajorAndClass", course);
+    }
 }

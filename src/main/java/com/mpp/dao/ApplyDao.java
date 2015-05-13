@@ -14,4 +14,6 @@ public interface ApplyDao {
     public List<Apply> getAllApply(Integer uid);
 
     public List<ApplyInfoBean> getApplyInfoByLabId(Integer labId);
+
+    public List<Apply> getApplyByCourseAndState(Apply apply);
 }
