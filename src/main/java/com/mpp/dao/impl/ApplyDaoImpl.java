@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.mpp.dao.ApplyDao;
 import com.mpp.model.Apply;
 import com.mpp.model.entity.ApplyInfoBean;
+import com.mpp.model.entity.CourseDisplayInfoBean;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -37,8 +38,8 @@ public class ApplyDaoImpl implements ApplyDao {
     }
 
     @Override
-    public List<Apply> getApplyByCourseAndState(final Apply apply) {
-        Preconditions.checkNotNull(apply);
-        return this.sqlSession.selectList("selectCourseDisplayInfoByCourse", apply);
+    public List<CourseDisplayInfoBean> getCourseDisplayInfoByUid(final Integer uid) {
+        Preconditions.checkArgument(uid >= 0);
+        return this.sqlSession.selectList("Apply.selectCourseDisplayInfoByCourse", uid);
     }
 }

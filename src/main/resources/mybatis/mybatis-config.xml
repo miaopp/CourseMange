@@ -17,6 +17,7 @@
         <typeAlias type="com.mpp.model.entity.OrderFilter" alias="OrderFilter"/>
         <typeAlias type="com.mpp.model.entity.ScheduleStatus" alias="ScheduleStatus"/>
         <typeAlias type="com.mpp.model.entity.ApplyInfoBean" alias="ApplyInfoBean"/>
+        <typeAlias type="com.mpp.model.entity.CourseDisplayInfoBean" alias="CourseDisplayInfoBean"/>
     </typeAliases>
 
     <mappers>

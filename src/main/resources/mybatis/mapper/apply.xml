@@ -23,6 +23,18 @@
         <result property="dayOfWeek" column="apply_day_of_week"/>
         <result property="orders" column="apply_orders"/>
     </resultMap>
+    <resultMap id="CourseDisplayInfoResultMap" type="CourseDisplayInfoBean">
+        <result property="courseName" column="course_name"/>
+        <result property="teacherName" column="user_name"/>
+        <result property="labName" column="lab_name"/>
+        <result property="labId" column="lab_id"/>
+        <result property="beginWeek" column="begin_week"/>
+        <result property="endWeek" column="end_week"/>
+        <result property="courseId" column="course_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="dayOfWeek" column="apply_day_of_week"/>
+        <result property="orders" column="apply_orders"/>
+    </resultMap>
     <insert id="insertApply" parameterType="Course">
         <![CDATA[
             insert into apply
@@ -45,11 +57,12 @@
             where a.lab_id = #{labId} and a.course_id = c.course_id and a.user_id = u.user_id
         ]]>
     </select>
-    <select id="selectCourseDisplayInfoByCourse" parameterType="Apply" resultMap="applyResultMap">
+    <select id="selectCourseDisplayInfoByCourse" parameterType="java.lang.Integer" resultMap="CourseDisplayInfoResultMap">
         <![CDATA[
-            select *
-            from apply
-            where course_id = #{courseId} and state = #{state}
+            select
+            c.course_name, t.user_name, l.lab_name, c.begin_week, c.end_week, a.apply_day_of_week, a.apply_orders, a.user_id, a.course_id, a.lab_id
+            from apply a, course c, `user` u, lab l, `user` t
+            where u.user_id=1 and u.user_dept=c.course_dept and u.user_major=c.course_major and u.user_class=c.target_class and a.course_id=c.course_id and a.lab_id = l.lab_id and t.user_id=a.user_id;
         ]]>
     </select>
 </mapper>

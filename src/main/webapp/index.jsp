@@ -18,9 +18,10 @@
     <script type="text/javascript" src="./js/jquery-2.1.3.js"></script>
     <script type="text/javascript" src="./js/bootstrap.js"></script>
     <script type="text/javascript" src="./js/angular.js"></script>
+    <script type="text/javascript" src="./js/angular-sanitize.js"></script>
     <script type="text/javascript" src="./js/ui-bootstrap-0.12.1.js"></script>
     <script type="text/javascript">
-        var app = angular.module('StudentModule', ['ui.bootstrap']);
+        var app = angular.module('StudentModule', ['ui.bootstrap', 'ngSanitize']);
         app.controller("StudentCtrl", function ($scope, $http) {
             $scope.logout = function () {
                 $http.get("/user/logout")
@@ -28,8 +29,7 @@
                             location.href = "./login.jsp";
                         })
             }
-            $scope.User = {userId: <%=session.getAttribute("uid")%>};
-            $http.post("/apply/courseDisplayByCourse" ,$scope.User)
+            $http.post("/apply/courseDisplayByCourse")
                     .success(function (response) {
                         if(200 == response.status) {
                             $scope.Course = response.data.list;
