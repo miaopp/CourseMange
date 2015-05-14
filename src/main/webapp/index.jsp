@@ -70,6 +70,7 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="./index.jsp">首页</a></li>
+                <li><a href="./courseDisplayByLab.jsp">按实验室查看课表</a></li>
                 <li><a href="#">查看个人信息</a></li>
             </ul>
 
