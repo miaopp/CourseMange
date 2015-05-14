@@ -64,7 +64,7 @@
             from apply a, course c, `user` u, lab l, `user` t
         ]]>
         <where>
-            u.user_id=#{uid} and u.user_dept=c.course_dept and u.user_major=c.course_major and u.user_class=c.target_class and a.course_id=c.course_id and a.lab_id = l.lab_id and t.user_id=a.user_id
+            u.user_id=#{uid} and u.user_dept=c.course_dept and u.user_major=c.course_major and u.user_class=c.target_class and a.course_id=c.course_id and a.lab_id = l.lab_id and t.user_id=a.user_id and a.state=1
             <if test="labId > -1" >
                 <![CDATA[
                     and a.lab_id = #{labId}
