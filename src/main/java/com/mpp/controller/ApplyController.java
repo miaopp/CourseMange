@@ -53,9 +53,9 @@ public class ApplyController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/courseDisplayByCourse", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public CodeMessage courseDisplayByCourse(HttpSession session) {
+    public CodeMessage courseDisplayByCourse(HttpSession session, @RequestParam Integer labId) {
         Integer uid = (Integer) session.getAttribute("uid");
-        Map<String, Object> rtn = applyService.getCourseDisplayByCourse(uid);
+        Map<String, Object> rtn = applyService.getCourseDisplayByCourse(uid, labId);
         return JsonReturn.getSuccess(rtn);
     }
 }

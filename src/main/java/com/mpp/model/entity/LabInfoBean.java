@@ -1,13 +1,15 @@
 package com.mpp.model.entity;
 
+import java.util.Comparator;
+
 /**
  * Created by pp on 2015/5/12.
  */
-public class LabInfoBean {
-    int id;
-    String labName;
-    String labDept;
-    String labAddress;
+public class LabInfoBean implements Comparable<LabInfoBean>{
+    private int id;
+    private String labName;
+    private String labDept;
+    private String labAddress;
 
     public int getId() {
         return id;
@@ -39,5 +41,10 @@ public class LabInfoBean {
 
     public void setLabAddress(String labAddress) {
         this.labAddress = labAddress;
+    }
+
+    @Override
+    public int compareTo(final LabInfoBean o) {
+        return Integer.compare(id, o.id);
     }
 }
