@@ -30,21 +30,12 @@
                         })
             };
 
-            $scope.labSelected = "All";
-            $scope.labSelectedId = -1;
-            $scope.labSelector = function (item) {
-                $scope.labSelectedId = item.id;
-                $scope.labSelected = item.labName;
-                load();
-            };
-
             var load = function () {
-                $http.post("/apply/courseDisplayByCourse?labId=" + $scope.labSelectedId)
+                $http.post("/apply/courseDisplayByCourse")
                         .success(function (response) {
                             if(200 == response.status) {
                                 $scope.Course = response.data.list;
                                 $scope.Displaytitle = response.data.Title;
-                                $scope.labInfo = response.data.labInfo;
                             }
                         });
             }
@@ -94,19 +85,6 @@
     <div class="panel panel-info">
         <!-- Default panel contents -->
         <div class="panel-heading" ng-modal="Displaytitle">{{Displaytitle}}</div>
-        <div class="form-horizontal">
-            <div class="form-group">
-                <label for="labList" class="col-sm-2 control-label">实验室筛选</label>
-                <div class="btn-group col-sm-2" id="labList">
-                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> {{labSelected}}<span class="caret"></span></button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li ng-repeat="item in labInfo">
-                            <a ng-click="labSelector(item)">{{item.labName}}</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
         <!-- Table -->
         <table class="table">
             <thead>
