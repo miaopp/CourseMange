@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xiang.xu on 2015/4/20.
@@ -38,8 +39,8 @@ public class ApplyDaoImpl implements ApplyDao {
     }
 
     @Override
-    public List<CourseDisplayInfoBean> getCourseDisplayInfoByUid(final Integer uid) {
-        Preconditions.checkArgument(uid >= 0);
-        return this.sqlSession.selectList("Apply.selectCourseDisplayInfoByCourse", uid);
+    public List<CourseDisplayInfoBean> getCourseDisplayInfoByUid(final Map param) {
+        Preconditions.checkArgument(Integer.valueOf(param.get("uid").toString()) > 0);
+        return this.sqlSession.selectList("Apply.selectCourseDisplayInfoByCourse", param);
     }
 }

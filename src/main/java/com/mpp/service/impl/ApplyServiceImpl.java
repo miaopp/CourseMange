@@ -4,9 +4,11 @@ import java.util.*;
 
 import javax.annotation.Resource;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Sets;
 import com.mpp.model.entity.ApplyInfoBean;
 import com.mpp.model.entity.CourseDisplayInfoBean;
+import com.mpp.model.entity.LabInfoBean;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Maps;
@@ -106,21 +108,37 @@ public class ApplyServiceImpl implements ApplyService{
     }
 
     @Override
-    public Map<String, Object> getCourseDisplayByCourse(final Integer userId) {
+    public Map<String, Object> getCourseDisplayByCourse(final Integer userId, final Integer labId) {
         HashMap<String, Object> rtn = Maps.newHashMap();
-        List<CourseDisplayInfoBean> infoList = applyDao.getCourseDisplayInfoByUid(userId);
 
         rtn.put("Title", "按课程显示课表");
+
         String[][] courseDisplay = new String[orders][dayOfWeeks];
         for (int i = 0; i < courseDisplay.length; i++) {
             for (int j = 0; j < courseDisplay[i].length; j++) {
                 courseDisplay[i][j] = "";
             }
         }
+        ImmutableMap param = ImmutableMap.of("uid", userId, "labId", labId);
+        List<CourseDisplayInfoBean> infoList = applyDao.getCourseDisplayInfoByUid(param);
         for (CourseDisplayInfoBean courseDisplayInfoBean : infoList) {
             courseDisplay[courseDisplayInfoBean.getOrders()-1][courseDisplayInfoBean.getDayOfWeek()-1] += courseDisplayInfoBean.toInfoString();
         }
         rtn.put("list", courseDisplay);
+
+        Set<LabInfoBean> labTreeSet = Sets.newTreeSet();
+        for (CourseDisplayInfoBean courseDisplayInfoBean : infoList) {
+            LabInfoBean labInfoBean = new LabInfoBean();
+            labInfoBean.setId(courseDisplayInfoBean.getLabId());
+            labInfoBean.setLabName(courseDisplayInfoBean.getLabName());
+            labTreeSet.add(labInfoBean);
+        }
+        LabInfoBean allLabInfoBean = new LabInfoBean();
+        allLabInfoBean.setId(-1);
+        allLabInfoBean.setLabName("All");
+        labTreeSet.add(allLabInfoBean);
+
+        rtn.put("labInfo", labTreeSet);
         return rtn;
     }
 }
