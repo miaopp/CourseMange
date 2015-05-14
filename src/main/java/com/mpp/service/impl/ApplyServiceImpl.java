@@ -108,7 +108,7 @@ public class ApplyServiceImpl implements ApplyService{
     }
 
     @Override
-    public Map<String, Object> getCourseDisplayByCourse(final Integer userId, final Integer labId) {
+    public Map<String, Object> getCourseDisplayByCourse(final Integer userId) {
         HashMap<String, Object> rtn = Maps.newHashMap();
 
         rtn.put("Title", "按课程显示课表");
@@ -119,8 +119,7 @@ public class ApplyServiceImpl implements ApplyService{
                 courseDisplay[i][j] = "";
             }
         }
-        ImmutableMap param = ImmutableMap.of("uid", userId, "labId", labId);
-        List<CourseDisplayInfoBean> infoList = applyDao.getCourseDisplayInfoByUid(param);
+        List<CourseDisplayInfoBean> infoList = applyDao.getCourseDisplayInfoByUid(userId);
         for (CourseDisplayInfoBean courseDisplayInfoBean : infoList) {
             courseDisplay[courseDisplayInfoBean.getOrders()-1][courseDisplayInfoBean.getDayOfWeek()-1] += courseDisplayInfoBean.toInfoString();
         }

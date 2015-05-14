@@ -39,8 +39,8 @@ public class ApplyDaoImpl implements ApplyDao {
     }
 
     @Override
-    public List<CourseDisplayInfoBean> getCourseDisplayInfoByUid(final Map param) {
-        Preconditions.checkArgument(Integer.valueOf(param.get("uid").toString()) > 0);
-        return this.sqlSession.selectList("Apply.selectCourseDisplayInfoByCourse", param);
+    public List<CourseDisplayInfoBean> getCourseDisplayInfoByUid(final Integer uid) {
+        Preconditions.checkArgument(uid > 0);
+        return this.sqlSession.selectList("Apply.selectCourseDisplayInfoByCourse", uid);
     }
 }
