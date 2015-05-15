@@ -16,5 +16,7 @@ public interface ApplyService {
 
     public Map<String, Object> getCourseDisplayByLabId(Integer labId);
 
-    public Map<String, Object> getCourseDisplayByCourse(final Integer userId);
+    public Map<String, Object> getCourseDisplayByCourse(Integer userId);
+
+    public Map<String, Object> getCourseDisplayByLab(Integer labId);
 }

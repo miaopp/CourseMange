@@ -140,4 +140,25 @@ public class ApplyServiceImpl implements ApplyService{
         rtn.put("labInfo", labTreeSet);
         return rtn;
     }
+
+    @Override
+    public Map<String, Object> getCourseDisplayByLab(final Integer labId) {
+        HashMap<String, Object> rtn = new HashMap<String, Object>();
+        Lab lab = labDao.getLabByLabId(labId);
+
+        rtn.put("labName", lab.getLabName());
+
+        List<ApplyInfoBean> applyInfoBeans = applyDao.getCourseDisplayInfoByLab(labId);
+        String[][] info = new String[orders][dayOfWeeks];
+        for (int i = 0; i < info.length; i++) {
+            for (int j = 0; j < info[i].length; j++) {
+                info[i][j] = "";
+            }
+        }
+        for (ApplyInfoBean applyInfoBean : applyInfoBeans) {
+            info[applyInfoBean.getOrders()-1][applyInfoBean.getDayOfWeek()-1] = applyInfoBean.toDisplayInfoString();
+        }
+        rtn.put("list", info);
+        return rtn;
+    }
 }

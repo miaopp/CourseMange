@@ -43,4 +43,10 @@ public class ApplyDaoImpl implements ApplyDao {
         Preconditions.checkArgument(uid > 0);
         return this.sqlSession.selectList("Apply.selectCourseDisplayInfoByCourse", uid);
     }
+
+    @Override
+    public List<ApplyInfoBean> getCourseDisplayInfoByLab(final Integer labId) {
+        Preconditions.checkNotNull(labId);
+        return this.sqlSession.selectList("selectCourseDisplayInfoByLab", labId);
+    }
 }

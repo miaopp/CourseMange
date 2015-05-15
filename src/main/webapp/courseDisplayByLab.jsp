@@ -35,19 +35,30 @@
                         .success(function () {
                             location.href = "./login.jsp";
                         })
-                $http.post("/lab/getLabListByTeacher")
+            }
+            $http.post("/lab/getLabListByTeacher")
+                    .success(function (response) {
+                        if(200 == response.status) {
+                            $scope.academyLabs = response.data;
+                        }
+                    })
+            $scope.CourseDisplay = {labId: -1};
+            $scope.LabSelect = "未选择";
+            $scope.LabSelector = function (item) {
+                $scope.LabSelect = item.labName;
+                $scope.CourseDisplay.labId = item.id;
+            }
+            $scope.Display = false;
+            $scope.LabCourseDisplay = function() {
+                $http.post("/apply/courseDisplayByLab", $scope.CourseDisplay)
                         .success(function (response) {
                             if(200 == response.status) {
-                                $scope.academyLabs = response.data;
+                                $scope.Course = response.data.list;
+                                $scope.LabName = response.data.labName;
+                                $scope.Display = true;
                             }
                         })
-                $scope.CourseDisplay = {labId: -1};
-                $scope.LabSelect = "未选择";
-                $scope.LabSelector = function (item) {
-                    $scope.LabSelect = item.labName;
-                    $scope.CourseDisplay.labId = item.id;
-                }
-            };
+            }
         });
     </script>
 </head>
@@ -106,10 +117,35 @@
                     </div>
                 </div>
                 <div class="col-sm-9">
-                    <button type="button" class="btn btn-success">确认</button>
+                    <button type="button" class="btn btn-success" ng-click="LabCourseDisplay()">确认</button>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="panel panel-info" ng-show="Display">
+        <!-- Default panel contents -->
+        <div class="panel-heading" ng-modal="LabName">{{LabName}}实验室课程安排</div>
+        <!-- Table -->
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>星期一</th>
+                <th>星期二</th>
+                <th>星期三</th>
+                <th>星期四</th>
+                <th>星期五</th>
+                <th>星期六</th>
+                <th>星期日</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="order in Course">
+                <th scope="row">第{{$index+1}}节</th>
+                <td ng-repeat="item in order track by $index" ng-bind-html="item"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <div class="footer" style="margin-top: 10px;">

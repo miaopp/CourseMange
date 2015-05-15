@@ -65,4 +65,12 @@
             where u.user_id=#{uid} and u.user_dept=c.course_dept and u.user_major=c.course_major and u.user_class=c.target_class and a.course_id=c.course_id and a.lab_id = l.lab_id and t.user_id=a.user_id and a.state=1;
         ]]>
     </select>
+    <select id="selectCourseDisplayInfoByLab" parameterType="java.lang.Integer" resultMap="applyInfoResultMap">
+        <![CDATA[
+            select
+            c.course_name, u.user_realname, c.begin_week, c.end_week, a.state, a.course_id, a.user_id, a.apply_day_of_week, a.apply_orders
+            from apply a, course c, `user` u
+            where a.lab_id = #{labId} and a.state = 1 and a.course_id = c.course_id and a.user_id = u.user_id
+        ]]>
+    </select>
 </mapper>
