@@ -42,15 +42,15 @@
                             $scope.academyLabs = response.data;
                         }
                     })
-            $scope.CourseDisplay = {labId: -1};
+            $scope.selectLabId = -1;
             $scope.LabSelect = "未选择";
             $scope.LabSelector = function (item) {
                 $scope.LabSelect = item.labName;
-                $scope.CourseDisplay.labId = item.id;
+                $scope.selectLabId = item.id;
             }
             $scope.Display = false;
             $scope.LabCourseDisplay = function() {
-                $http.post("/apply/courseDisplayByLab", $scope.CourseDisplay)
+                $http.post("/apply/courseDisplayByLab?labId=" + $scope.selectLabId)
                         .success(function (response) {
                             if(200 == response.status) {
                                 $scope.Course = response.data.list;

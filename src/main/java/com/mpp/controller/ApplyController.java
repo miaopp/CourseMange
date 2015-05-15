@@ -62,8 +62,8 @@ public class ApplyController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/courseDisplayByLab", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public  CodeMessage courseDisplayByLab(@RequestBody Lab lab) {
-        Map<String, Object> rtn = applyService.getCourseDisplayByLab(lab.getId());
+    public  CodeMessage courseDisplayByLab(@RequestParam Integer labId) {
+        Map<String, Object> rtn = applyService.getCourseDisplayByLab(labId);
         return JsonReturn.getSuccess(rtn);
     }
 }
