@@ -24,9 +24,10 @@
     <script type="text/javascript" src="./js/jquery-2.1.3.js"></script>
     <script type="text/javascript" src="./js/bootstrap.js"></script>
     <script type="text/javascript" src="./js/angular.js"></script>
+    <script type="text/javascript" src="./js/angular-sanitize.js"></script>
     <script type="text/javascript" src="./js/ui-bootstrap-0.12.1.js"></script>
     <script type="text/javascript">
-        var app = angular.module('managerModule', ['ui.bootstrap']);
+        var app = angular.module('managerModule', ['ui.bootstrap', 'ngSanitize']);
         app.controller("managerCtrl", function ($scope, $http) {
             $scope.LoadNotice = {targetUser: <%=session.getAttribute("uid")%>};
             $scope.noticeIsEmpty = true;
@@ -42,6 +43,28 @@
                             }
                         }
                     })
+
+            $scope.Lab = -1;
+            $scope.Apply = -1;
+            $scope.courseApplyChecked = function (item) {
+                $scope.Lab = item.labId;
+                $scope.Apply = item.applyId;
+                $http.post("/apply/courseDisplay?LabId=" + $scope.Lab)
+                        .success(function (response) {
+                            if(200 == response.status) {
+                                $scope.Course = response.data.list;
+                                $scope.LabName = response.data.labName;
+                            }
+                        })
+            }
+            $scope.applyAccepted = function () {
+                $http.post("/apply/applyIsAccepted?applyId=" + $scope.Apply)
+                        .success(function (response) {
+                            if(200 == response.status) {
+                                location.reload();
+                            }
+                        })
+            }
 
             $scope.logout = function () {
             $http.get("/user/logout")
@@ -89,6 +112,44 @@
     </div>
 </nav>
 
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" ng-model="LabName">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="CourseModalLabel">{{LabName}}实验室排课情况<a class="anchorjs-link" href="#CourseModalLabel"><span class="anchorjs-icon"></span></a></h4>
+            </div>
+            <div class="panel panel-info">
+                <!-- Table -->
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>星期一</th>
+                        <th>星期二</th>
+                        <th>星期三</th>
+                        <th>星期四</th>
+                        <th>星期五</th>
+                        <th>星期六</th>
+                        <th>星期日</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="order in Course">
+                        <th scope="row">第{{$index+1}}节</th>
+                        <td ng-repeat="item in order track by $index" ng-bind-html="item"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" ng-click="applyAccepted()">同意申请</button>
+                <button type="button" class="btn btn-danger" ng-click="applyNotAccepted()">拒绝申请</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="page-header">
         <h1>欢迎登录实验室排课系统</h1>
@@ -101,27 +162,11 @@
             教师{{item.userRealName}}就所教授课程{{item.courseName}}提出实验室申请
         </div>
         <div class="panel-footer">
-            <a href="./courseApplyManager.jsp?labId={{item.labId}}" class="btn btn-link" role="button">查看详情</a>
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="courseApplyChecked(item)">
+                查看详情
+            </button>
         </div>
     </div>
-
-    <%--<div class="row">--%>
-        <%--<div class="col-sm-3" ng-repeat="item in notice">--%>
-            <%--<div class="thumbnail">--%>
-                <%--<img data-src="holder.js/100%x200" alt="100%x200"--%>
-                     <%--src="#"--%>
-                     <%--data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">--%>
-                <%--<div class="caption">--%>
-                    <%--<h4>教师 {{item.userRealName}} 就所教课程 {{item.courseName}} 提出实验室 {{item.labName}} 申请</h4>--%>
-
-                    <%--<button type='button' class='btn btn-success'>同意申请</button>--%>
-
-                    <%--<button type='button' class='btn btn-danger pull-right'>拒绝申请</button>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-
 </div>
 <div class="footer" style="margin-top: 10px;">
     <div class="container">

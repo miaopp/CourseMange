@@ -20,4 +20,8 @@ public interface ApplyDao {
     public List<CourseDisplayInfoBean> getCourseDisplayInfoByUid(Integer uid);
 
     public List<ApplyInfoBean> getCourseDisplayInfoByLab(Integer labId);
+
+    public Apply getApplyIdByOtherAllMessage(Apply apply);
+
+    public void applyBeAccepted(Integer applyTd);
 }

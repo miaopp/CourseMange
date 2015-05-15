@@ -68,10 +68,11 @@ public class ApplyServiceImpl implements ApplyService{
         List<User> managerList = userDao.getManageByDept(u1);
         for (User user : managerList) {
             Notice notice = new Notice();
-            notice.setApplyId(apply.getApplyId());
-            notice.setCourseId(apply.getCourseId());
-            notice.setLabId(apply.getLabId());
-            notice.setUserId(apply.getUserId());
+            Apply app = applyDao.getApplyIdByOtherAllMessage(apply);
+            notice.setApplyId(app.getApplyId());
+            notice.setCourseId(app.getCourseId());
+            notice.setLabId(app.getLabId());
+            notice.setUserId(app.getUserId());
             notice.setTargetUser(user.getUserId());
             notice.setState(1);
             noticeDao.addNotice(notice);
@@ -160,5 +161,20 @@ public class ApplyServiceImpl implements ApplyService{
         }
         rtn.put("list", info);
         return rtn;
+    }
+
+    @Override
+    public void applyBeAccepted(final Integer applyId) {
+        applyDao.applyBeAccepted(applyId);
+        noticeDao.noticeBeChecked(applyId);
+        Notice no = noticeDao.getNoticeByApply(applyId);
+        Notice notice = new Notice();
+        notice.setState(1);
+        notice.setApplyId(applyId);
+        notice.setTargetUser(no.getUserId());
+        notice.setUserId(no.getTargetUser());
+        notice.setCourseId(no.getCourseId());
+        notice.setLabId(no.getLabId());
+        noticeDao.addNotice(notice);
     }
 }

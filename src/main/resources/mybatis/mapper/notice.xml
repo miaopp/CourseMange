@@ -16,7 +16,7 @@
         <![CDATA[
             select *
             from notice
-            where target_user = #{targetUser};
+            where target_user = #{targetUser} and notice_state = 1;
         ]]>
     </select>
     <insert id="insertNotice" parameterType="Notice">
@@ -26,4 +26,18 @@
             values (#{applyId}, #{courseId}, #{labId}, #{userId}, #{targetUser}, #{state});
         ]]>
     </insert>
+    <update id="noticeChecked" parameterType="java.lang.Integer">
+        <![CDATA[
+            update notice
+            set notice_state = 2
+            where apply_id = #{applyId}
+        ]]>
+    </update>
+    <select id="selectNoticeByApplyId" parameterType="java.lang.Integer" resultMap="noticeResultMap">
+        <![CDATA[
+            select *
+            from notice
+            where apply_id = #{applyId}
+        ]]>
+    </select>
 </mapper>

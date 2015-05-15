@@ -10,4 +10,6 @@ import java.util.List;
 public interface NoticeDao {
     public List<Notice> getNoticeByTargetUser(Integer targetUser);
     public void addNotice(Notice notice);
+    public void noticeBeChecked(Integer applyId);
+    public Notice getNoticeByApply(Integer applyId);
 }

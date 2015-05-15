@@ -10,6 +10,8 @@ public class NoticeBean {
     private int userId;
     private int labId;
     private int courseId;
+    private int applyId;
+    private int noticeId;
 
     public String getUserRealName() {
         return userRealName;
@@ -57,5 +59,21 @@ public class NoticeBean {
 
     public void setCourseId(int courseId) {
         this.courseId = courseId;
+    }
+
+    public int getApplyId() {
+        return applyId;
+    }
+
+    public void setApplyId(int applyId) {
+        this.applyId = applyId;
+    }
+
+    public int getNoticeId() {
+        return noticeId;
+    }
+
+    public void setNoticeId(int noticeId) {
+        this.noticeId = noticeId;
     }
 }

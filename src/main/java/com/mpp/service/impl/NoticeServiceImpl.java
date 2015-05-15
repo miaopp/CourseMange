@@ -50,6 +50,8 @@ public class NoticeServiceImpl implements NoticeService {
             n.setUserId(no.getUserId());
             n.setLabId(no.getLabId());
             n.setCourseId(no.getCourseId());
+            n.setApplyId(no.getApplyId());
+            n.setNoticeId(no.getNoticeId());
             noticeBean.add(n);
         }
         return noticeBean;

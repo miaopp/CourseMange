@@ -29,4 +29,16 @@ public class NoticeDaoImpl implements NoticeDao {
         Preconditions.checkNotNull(notice);
         this.sqlSession.insert("Notice.insertNotice", notice);
     }
+
+    @Override
+    public void noticeBeChecked(final Integer applyId) {
+        Preconditions.checkNotNull(applyId);
+        this.sqlSession.update("noticeChecked", applyId);
+    }
+
+    @Override
+    public Notice getNoticeByApply(final Integer applyId) {
+        Preconditions.checkNotNull(applyId);
+        return this.sqlSession.selectOne("selectNoticeByApplyId", applyId);
+    }
 }
