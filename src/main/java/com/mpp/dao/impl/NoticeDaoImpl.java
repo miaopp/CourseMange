@@ -33,12 +33,12 @@ public class NoticeDaoImpl implements NoticeDao {
     @Override
     public void noticeBeChecked(final Integer applyId) {
         Preconditions.checkNotNull(applyId);
-        this.sqlSession.update("noticeChecked", applyId);
+        this.sqlSession.update("Notice.noticeChecked", applyId);
     }
 
     @Override
     public Notice getNoticeByApply(final Integer applyId) {
         Preconditions.checkNotNull(applyId);
-        return this.sqlSession.selectOne("selectNoticeByApplyId", applyId);
+        return this.sqlSession.selectOne("Notice.selectNoticeByApplyId", applyId);
     }
 }
