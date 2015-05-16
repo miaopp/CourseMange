@@ -114,6 +114,9 @@ public class ApplyInfoBean {
         else if(state == 1) {
             builder.append("已审核通过<br>");
         }
+        else if(state == 2) {
+            builder.append("审核未通过<br>");
+        }
         return builder.toString();
     }
 
