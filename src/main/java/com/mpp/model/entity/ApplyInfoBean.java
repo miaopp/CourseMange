@@ -111,10 +111,10 @@ public class ApplyInfoBean {
         if(state == 0) {
             builder.append("已申请未审核<br>");
         }
-        else if(state == 1) {
+        else if(state == 2) {
             builder.append("已审核通过<br>");
         }
-        else if(state == 2) {
+        else if(state == 3) {
             builder.append("审核未通过<br>");
         }
         return builder.toString();

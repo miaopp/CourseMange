@@ -62,6 +62,6 @@ public class ApplyDaoImpl implements ApplyDao {
         Preconditions.checkNotNull(applyTd);
         Preconditions.checkNotNull(state);
         ImmutableMap param = ImmutableMap.of("applyTd", applyTd, "state", state);
-        this.sqlSession.update("Apply.applyAccepted", param);
+        this.sqlSession.update("Apply.applyChangeState", param);
     }
 }

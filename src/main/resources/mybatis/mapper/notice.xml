@@ -26,10 +26,10 @@
             values (#{applyId}, #{courseId}, #{labId}, #{userId}, #{targetUser}, #{state});
         ]]>
     </insert>
-    <update id="noticeChecked" parameterType="java.lang.Integer">
+    <update id="noticeChecked" parameterType="java.util.Map">
         <![CDATA[
             update notice
-            set notice_state = 2
+            set notice_state = #{state}
             where apply_id = #{applyId}
         ]]>
     </update>
