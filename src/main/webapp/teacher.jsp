@@ -24,9 +24,10 @@
     <script type="text/javascript" src="./js/jquery-2.1.3.js"></script>
     <script type="text/javascript" src="./js/bootstrap.js"></script>
     <script type="text/javascript" src="./js/angular.js"></script>
+    <script type="text/javascript" src="./js/angular-sanitize.js"></script>
     <script type="text/javascript" src="./js/ui-bootstrap-0.12.1.js"></script>
     <script type="text/javascript">
-        var app = angular.module('TeacherModule', ['ui.bootstrap']);
+        var app = angular.module('TeacherModule', ['ui.bootstrap', 'ngSanitize']);
         app.controller("TeacherCtrl", function ($scope, $http) {
             $scope.logout = function () {
                 $http.get("/user/logout")
