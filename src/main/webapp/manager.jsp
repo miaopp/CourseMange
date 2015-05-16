@@ -154,7 +154,7 @@
             教师{{item.userRealName}}就所教授课程{{item.courseName}}提出实验室申请
         </div>
         <div class="panel-footer">
-            <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="courseApplyChecked(item)">
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="courseApplyDetail(item)">
                 查看详情
             </button>
             <button type="button" class="btn btn-primary" ng-click="applyChangeState(item, 2)">
