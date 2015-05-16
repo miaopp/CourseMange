@@ -20,5 +20,5 @@ public interface ApplyService {
 
     public Map<String, Object> getCourseDisplayByLab(Integer labId);
 
-    public void applyBeAccepted(Integer applyId);
+    public void applyChangeState(Integer applyId, final Integer state);
 }

@@ -60,6 +60,6 @@ CREATE TABLE `notice` (
 	`lab_id` 				INT 			NOT NULL DEFAULT 0		COMMENT '申请实验室',
   `user_id` 			INT 		NOT NULL DEFAULT 0		COMMENT '申请老师',
   `target_user` 			INT 		NOT NULL DEFAULT 0		COMMENT '待处理用户',
-  `notice_state` 			INT 		NOT NULL DEFAULT 0		COMMENT '处理状态',
+  `notice_state` 			INT 		NOT NULL DEFAULT 0		COMMENT '处理状态 1,未处理;2,同意;3,拒绝;4,老师已读',
 	PRIMARY KEY (`notice_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '公告表';

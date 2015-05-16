@@ -4,7 +4,6 @@ import java.util.*;
 
 import javax.annotation.Resource;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Sets;
 import com.mpp.model.entity.ApplyInfoBean;
 import com.mpp.model.entity.CourseDisplayInfoBean;
@@ -164,8 +163,8 @@ public class ApplyServiceImpl implements ApplyService{
     }
 
     @Override
-    public void applyBeAccepted(final Integer applyId) {
-        applyDao.applyBeAccepted(applyId);
+    public void applyChangeState(final Integer applyId, final Integer state) {
+        applyDao.applyChangeState(applyId, state);
         noticeDao.noticeBeChecked(applyId);
         Notice no = noticeDao.getNoticeByApply(applyId);
         Notice notice = new Notice();

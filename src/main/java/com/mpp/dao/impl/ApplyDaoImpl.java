@@ -1,6 +1,7 @@
 package com.mpp.dao.impl;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 import com.mpp.dao.ApplyDao;
 import com.mpp.model.Apply;
 import com.mpp.model.entity.ApplyInfoBean;
@@ -47,18 +48,20 @@ public class ApplyDaoImpl implements ApplyDao {
     @Override
     public List<ApplyInfoBean> getCourseDisplayInfoByLab(final Integer labId) {
         Preconditions.checkNotNull(labId);
-        return this.sqlSession.selectList("selectCourseDisplayInfoByLab", labId);
+        return this.sqlSession.selectList("Apply.selectCourseDisplayInfoByLab", labId);
     }
 
     @Override
     public Apply getApplyIdByOtherAllMessage(final Apply apply) {
         Preconditions.checkNotNull(apply);
-        return this.sqlSession.selectOne("selectOneApplyId", apply);
+        return this.sqlSession.selectOne("Apply.selectOneApplyId", apply);
     }
 
     @Override
-    public void applyBeAccepted(final Integer applyTd) {
+    public void applyChangeState(final Integer applyTd, final Integer state) {
         Preconditions.checkNotNull(applyTd);
-        this.sqlSession.update("applyAccepted", applyTd);
+        Preconditions.checkNotNull(state);
+        ImmutableMap param = ImmutableMap.of("applyTd", applyTd, "state", state);
+        this.sqlSession.update("Apply.applyAccepted", param);
     }
 }

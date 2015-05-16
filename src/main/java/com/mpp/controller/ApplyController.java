@@ -69,10 +69,10 @@ public class ApplyController {
         return JsonReturn.getSuccess(rtn);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/applyIsAccepted", produces = "application/json; charset=utf-8")
+    @RequestMapping(method = RequestMethod.POST, value = "/applyChangeState", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public CodeMessage applyIsAccepted(@RequestParam Integer applyId) {
-        applyService.applyBeAccepted(applyId);
+    public CodeMessage applyChangeState(@RequestParam Integer applyId, @RequestParam Integer state) {
+        applyService.applyChangeState(applyId, state);
         return JsonReturn.getSuccess("success");
     }
 }

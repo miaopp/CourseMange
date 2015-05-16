@@ -44,21 +44,17 @@
                         }
                     })
 
-            $scope.Lab = -1;
-            $scope.Apply = -1;
-            $scope.courseApplyChecked = function (item) {
-                $scope.Lab = item.labId;
-                $scope.Apply = item.applyId;
-                $http.post("/apply/courseDisplay?LabId=" + $scope.Lab)
+            $scope.courseApplyDetail = function (item) {
+                $http.post("/apply/courseDisplay?LabId=" + item.labId)
                         .success(function (response) {
-                            if(200 == response.status) {
+                            if (200 == response.status) {
                                 $scope.Course = response.data.list;
                                 $scope.LabName = response.data.labName;
                             }
                         })
             }
-            $scope.applyAccepted = function () {
-                $http.post("/apply/applyIsAccepted?applyId=" + $scope.Apply)
+            $scope.applyChangeState = function (item, state) {
+                $http.post("/apply/applyChangeState?applyId=" + item.applyId + "&state=" + state)
                         .success(function (response) {
                             if(200 == response.status) {
                                 location.reload();
@@ -142,10 +138,6 @@
                     </tbody>
                 </table>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" ng-click="applyAccepted()">同意申请</button>
-                <button type="button" class="btn btn-danger" ng-click="applyNotAccepted()">拒绝申请</button>
-            </div>
         </div>
     </div>
 </div>
@@ -164,6 +156,12 @@
         <div class="panel-footer">
             <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="courseApplyChecked(item)">
                 查看详情
+            </button>
+            <button type="button" class="btn btn-primary" ng-click="applyChangeState(item, 2)">
+                同意
+            </button>
+            <button type="button" class="btn btn-danger" ng-click="applyChangeState(item, 3)">
+                拒绝
             </button>
         </div>
     </div>
