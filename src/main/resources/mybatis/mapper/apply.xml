@@ -80,7 +80,7 @@
             where course_id = #{courseId} and lab_id = #{labId} and user_id = #{userId} and apply_day_of_week = #{dayOfWeek} and apply_orders = #{orders} and state = #{state} and apply_time = #{applyTime}
         ]]>
     </select>
-    <update id="applyAccepted" parameterType="java.util.Map">
+    <update id="applyChangeState" parameterType="java.util.Map">
         <![CDATA[
             update apply
             set state = #{state}

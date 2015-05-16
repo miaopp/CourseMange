@@ -73,7 +73,7 @@ public class ApplyServiceImpl implements ApplyService{
             notice.setLabId(app.getLabId());
             notice.setUserId(app.getUserId());
             notice.setTargetUser(user.getUserId());
-            notice.setState(1);
+            notice.setState(0);
             noticeDao.addNotice(notice);
         }
 
@@ -165,7 +165,7 @@ public class ApplyServiceImpl implements ApplyService{
     @Override
     public void applyChangeState(final Integer applyId, final Integer state) {
         applyDao.applyChangeState(applyId, state);
-        noticeDao.noticeBeChecked(applyId);
+        noticeDao.noticeStateChange(applyId, state);
         Notice no = noticeDao.getNoticeByApply(applyId);
         Notice notice = new Notice();
         notice.setState(1);

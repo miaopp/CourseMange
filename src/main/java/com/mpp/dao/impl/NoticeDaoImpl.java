@@ -1,6 +1,7 @@
 package com.mpp.dao.impl;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 import com.mpp.dao.NoticeDao;
 import com.mpp.model.Notice;
 import org.apache.ibatis.session.SqlSession;
@@ -31,9 +32,11 @@ public class NoticeDaoImpl implements NoticeDao {
     }
 
     @Override
-    public void noticeBeChecked(final Integer applyId) {
+    public void noticeStateChange(final Integer applyId, final Integer state) {
         Preconditions.checkNotNull(applyId);
-        this.sqlSession.update("Notice.noticeChecked", applyId);
+        Preconditions.checkNotNull(state);
+        ImmutableMap param = ImmutableMap.of("applyId", applyId, "state", state);
+        this.sqlSession.update("Notice.noticeChecked", param);
     }
 
     @Override
