@@ -52,6 +52,7 @@ public class NoticeServiceImpl implements NoticeService {
             n.setCourseId(no.getCourseId());
             n.setApplyId(no.getApplyId());
             n.setNoticeId(no.getNoticeId());
+            n.setState(no.getState());
             noticeBean.add(n);
         }
         return noticeBean;
@@ -60,5 +61,34 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public void addNotice(final Notice notice) {
         noticeDao.addNotice(notice);
+    }
+
+    @Override
+    public void noticeStateChange(final Integer applyId,final Integer state) {
+        noticeDao.noticeStateChange(applyId, state);
+    }
+
+    @Override
+    public List<String> getTeacherOfNotice(Integer targetUser) {
+        List<Notice> notices = noticeDao.getNoticeByTargetUser(targetUser);
+        List<String> list = new ArrayList<String>();
+        for (Notice notice : notices) {
+            NoticeBean n = new NoticeBean();
+            User u = userDao.getUserByUserId(notice.getUserId());
+            n.setUserRealName(u.getRealName());
+            Course c = courseDao.getCourse(notice.getCourseId());
+            n.setCourseName(c.getName());
+            Lab l = labDao.getLabByLabId(notice.getLabId());
+            n.setLabName(l.getLabName());
+            n.setUserId(notice.getUserId());
+            n.setLabId(notice.getLabId());
+            n.setCourseId(notice.getCourseId());
+            n.setApplyId(notice.getApplyId());
+            n.setNoticeId(notice.getNoticeId());
+            n.setState(notice.getState());
+            String info = n.toNoticeOfTeacherString();
+            list.add(info);
+        }
+        return list;
     }
 }

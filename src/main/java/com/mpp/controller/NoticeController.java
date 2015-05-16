@@ -6,10 +6,7 @@ import com.mpp.model.Notice;
 import com.mpp.model.entity.NoticeBean;
 import com.mpp.service.NoticeService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -29,5 +26,20 @@ public class NoticeController {
     public CodeMessage loadNotice(@RequestBody Notice notice) {
         List<NoticeBean> list = noticeService.getNoticeByTargetUser(notice.getTargetUser());
         return JsonReturn.getSuccess(list);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/loadTeacherNotice", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public  CodeMessage loadTeacherNotice(@RequestBody Notice notice) {
+        List<String> list = noticeService.getTeacherOfNotice(notice.getTargetUser());
+        return JsonReturn.getSuccess(list);
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/noticeOfTeacherChange", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public CodeMessage noticeOfTeacherChange(@RequestParam Integer applyId, @RequestParam Integer state) {
+        noticeService.noticeStateChange(applyId, state);
+        return JsonReturn.getSuccess("success");
     }
 }

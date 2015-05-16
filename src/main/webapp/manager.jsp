@@ -157,11 +157,11 @@
             <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="courseApplyDetail(item)">
                 查看详情
             </button>
-            <button type="button" class="btn btn-primary" ng-click="applyChangeState(item, 2)">
-                同意
+            <button type="button" class="btn btn-link" ng-click="applyChangeState(item, 2)">
+                同意申请
             </button>
-            <button type="button" class="btn btn-danger" ng-click="applyChangeState(item, 3)">
-                拒绝
+            <button type="button" class="btn btn-link" ng-click="applyChangeState(item, 3)">
+                拒绝申请
             </button>
         </div>
     </div>

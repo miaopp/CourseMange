@@ -10,5 +10,7 @@ import java.util.List;
  */
 public interface NoticeService {
     public List<NoticeBean> getNoticeByTargetUser(Integer targetUser);
+    public List<String> getTeacherOfNotice(Integer targetUser);
     public void addNotice(Notice notice);
+    public void noticeStateChange(Integer applyId, Integer state);
 }

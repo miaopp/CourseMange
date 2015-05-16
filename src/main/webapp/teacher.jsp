@@ -37,7 +37,7 @@
 
             $scope.LoadNotice = {targetUser: <%=session.getAttribute("uid")%>};
             $scope.noticeIsEmpty = true;
-            $http.post("/notice/loadNotice" ,$scope.LoadNotice)
+            $http.post("/notice/loadTeacherNotice" ,$scope.LoadNotice)
                     .success(function (response) {
                         $scope.notice = response.data;
                         if($scope.notice.length > 0) {
@@ -47,6 +47,15 @@
                             $scope.noticeIsEmpty = true;
                         }
                     })
+            $scope.noticeOfTeacherIsHandled = function (item, state) {
+                $http.post("/notice/noticeOfTeacherChange?applyId=" + item.appyId + "&state=" + state)
+                        .success(function (response) {
+                            if(200 == response.status) {
+                                location.reload();
+                            }
+                        })
+            }
+            
             $scope.changeUser = {userId: <%=session.getAttribute("uid")%>, password: "", dept: -1, major: "", classes: ""};
             $scope.academy = [{code: -1, name: "未选择"}, {code: 1, name: "计算机学院"}, {code: 2, name: "软件学院"}];
             $scope.academySelected = "未选择";
@@ -166,14 +175,16 @@
         <h1>欢迎登录实验室排课系统</h1>
     </div>
 
-    <div class="panel panel-danger" ng-show="noticeIsEmpty">
+    <div class="panel panel-danger" ng-repeat="item in notice">
         <div class="panel-heading">
-            <h3 class="panel-title" id="panel-title">提醒<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
+            <h3 class="panel-title" id="panel-title">实验室申请审核提醒<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" ng-show="noticeIsEmpty">
             目前没有未处理消息！
         </div>
-    </div>
+        <div class="panel-body">
+            {{item}}
+        </div>
 </div>
 <div class="footer" style="margin-top: 10px;">
     <div class="container">
