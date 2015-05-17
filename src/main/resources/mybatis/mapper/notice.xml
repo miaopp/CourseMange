@@ -16,7 +16,7 @@
         <![CDATA[
             select *
             from notice
-            where target_user = #{targetUser} and notice_state = 1;
+            where target_user = #{targetUser} and (notice_state = 2 or notice_state = 3);
         ]]>
     </select>
     <insert id="insertNotice" parameterType="Notice">

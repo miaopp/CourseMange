@@ -168,7 +168,7 @@ public class ApplyServiceImpl implements ApplyService{
         noticeDao.noticeStateChange(applyId, state);
         Notice no = noticeDao.getNoticeByApply(applyId);
         Notice notice = new Notice();
-        notice.setState(1);
+        notice.setState(state);
         notice.setApplyId(applyId);
         notice.setTargetUser(no.getUserId());
         notice.setUserId(no.getTargetUser());
