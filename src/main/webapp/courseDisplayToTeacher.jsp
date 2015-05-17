@@ -76,7 +76,11 @@
                             $scope.coursesOfTeacher = response.data;
                         }
                     })
+<<<<<<< HEAD
             $scope.submitApply = function () {
+=======
+            $scope.submitApply = function (DayOfWeek, Orders) {
+>>>>>>> 0b2c864e64c10d107ea05433a0039c74503d4914
                 $scope.Apply.courseId = $scope.selectCourseId;
                 $http.post("/apply/addApply", $scope.Apply)
                         .success(function (response) {

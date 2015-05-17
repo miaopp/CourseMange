@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by xiang.xu on 2015/4/20.
@@ -58,10 +57,10 @@ public class ApplyDaoImpl implements ApplyDao {
     }
 
     @Override
-    public void applyChangeState(final Integer applyTd, final Integer state) {
-        Preconditions.checkNotNull(applyTd);
+    public void applyChangeState(final Integer applyId, final Integer state) {
+        Preconditions.checkNotNull(applyId);
         Preconditions.checkNotNull(state);
-        ImmutableMap param = ImmutableMap.of("applyTd", applyTd, "state", state);
+        ImmutableMap param = ImmutableMap.of("applyId", applyId, "state", state);
         this.sqlSession.update("Apply.applyChangeState", param);
     }
 }
