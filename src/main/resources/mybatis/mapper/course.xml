@@ -33,6 +33,13 @@
             where course_major = #{courseMajor} and target_class = #{targetClass}
         ]]>
     </select>
+    <select id="selectCourseByTeacherId" parameterType="java.lang.Integer" resultMap="courseResultMap">
+        <![CDATA[
+            select *
+            from course
+            where user_id = #{userId}
+        ]]>
+    </select>
     <insert id="insertCourse" parameterType="Course">
         <![CDATA[
             insert into course

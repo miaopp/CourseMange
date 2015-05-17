@@ -13,4 +13,5 @@ public interface CourseService {
     public void addCourse(Course course);
     public void deleteCourse(Integer id);
     public List<Course> getCourseByMajorAndClass(Course course);
+    public List<Course> getCourseByTeacherId(Integer userId);
 }

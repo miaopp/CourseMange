@@ -48,4 +48,9 @@ public class CourseServiceImpl implements CourseService {
     public List<Course> getCourseByMajorAndClass(final Course course) {
         return courseDao.getCourseByMajorAndClass(course);
     }
+
+    @Override
+    public List<Course> getCourseByTeacherId(final Integer userId) {
+        return courseDao.getCourseByTeacherId(userId);
+    }
 }

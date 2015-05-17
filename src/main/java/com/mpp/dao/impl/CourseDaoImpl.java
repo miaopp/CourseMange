@@ -44,6 +44,12 @@ public class CourseDaoImpl implements CourseDao {
     @Override
     public List<Course> getCourseByMajorAndClass(final Course course) {
         Preconditions.checkNotNull(course);
-        return this.sqlSession.selectList("selectCourseByMajorAndClass", course);
+        return this.sqlSession.selectList("Course.selectCourseByMajorAndClass", course);
+    }
+
+    @Override
+    public List<Course> getCourseByTeacherId(final Integer userId) {
+        Preconditions.checkNotNull(userId);
+        return this.sqlSession.selectList("Course.selectCourseByTeacherId", userId);
     }
 }

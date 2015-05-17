@@ -58,6 +58,34 @@
                             }
                         })
             }
+            $scope.Apply = {labId: -1, dayOfWeek: -1, orders: -1, courseId: -1, userId: <%=session.getAttribute("uid")%>};
+            $scope.addApply = function (DayOfWeek, Orders) {
+                $scope.Apply.labId = $scope.selectLabId;
+                $scope.Apply.dayOfWeek = DayOfWeek;
+                $scope.Apply.orders = Orders;
+            }
+            $scope.selectCourseId = -1;
+            $scope.CourseSelect = "未选择";
+            $scope.CourseSelector = function(item) {
+                $scope.CourseSelect = item.name;
+                $scope.selectCourseId = item.id;
+            }
+            $http.post("/course/loadCourseByTeacher")
+                    .success(function (response) {
+                        if(200 == response.status) {
+                            $scope.coursesOfTeacher = response.data;
+                        }
+                    })
+            $scope.addApply = function () {
+                $scope.Apply.courseId = $scope.selectCourseId;
+                $http.post("/apply/addApply", $scope.Apply)
+                        .success(function (response) {
+                            if(200 == response.status) {
+                                location.reload();
+                            }
+                        })
+            }
+
         });
     </script>
 <body>
@@ -95,7 +123,36 @@
         </div>
     </div>
 </nav>
-</body>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                申请课程安排
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <h5>请选择课程：</h5>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{CourseSelect}} <span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-repeat="item in coursesOfTeacher">
+                                    <a ng-click="CourseSelector(item)">{{item.name}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" ng-click="addApply()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="page-header">
         <h1>实验室课表</h1>
@@ -145,7 +202,7 @@
                 <td ng-repeat="item in order track by $index">
                     <div ng-bind-html="item"></div>
                     {{$index}}, {{$parent.$index}}
-                    <a ng-show="item.length == 0" href="#" tooltip="添加课程安排" tooltip-placement="right">
+                    <a ng-show="item.length == 0" data-toggle="modal" data-target=".bs-example-modal-sm" tooltip="申请课程安排" tooltip-placement="right" ng-click="addApply({{$index}}+1, {{$parent.$index}}+1)">
                         <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
                     </a>
                 </td>
@@ -165,4 +222,5 @@
         0.052352 sec - 0 queries - 0 sec @ portal
     </div>
 </div>
+</body>
 </html>

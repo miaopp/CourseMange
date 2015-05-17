@@ -3,9 +3,11 @@ package com.mpp.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import com.google.common.collect.Lists;
 import com.mpp.constants.AcademyEnum;
+import com.mpp.model.User;
 import com.mpp.model.entity.CourseBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,5 +53,14 @@ public class CourseController {
     public CodeMessage courseDelete(@RequestBody Course course) {
         courseService.deleteCourse(course.getId());
         return JsonReturn.getSuccess("success");
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/loadCourseByTeacher", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public CodeMessage loadCourseByTeacher(HttpSession httpSession) {
+        User user = (User) httpSession.getAttribute("user");
+        List<Course> list = courseService.getCourseByTeacherId(user.getUserId());
+        return JsonReturn.getSuccess(list);
+
     }
 }
