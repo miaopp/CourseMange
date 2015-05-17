@@ -6,6 +6,8 @@ import java.util.Objects;
 
 import com.mpp.model.Apply;
 import com.mpp.model.entity.ApplyChangeStateBean;
+import com.mpp.model.entity.ApplyInfoBean;
+import com.mpp.model.entity.CourseDisplayInfoBean;
 
 /**
  * Created by xiang.xu on 2015/4/20.
@@ -13,7 +15,7 @@ import com.mpp.model.entity.ApplyChangeStateBean;
 public interface ApplyService {
     public void addApply(Apply apply);
 
-    public List<Apply> getAllApply(Integer uid);
+    public List<CourseDisplayInfoBean> getAllApply(final Integer uid);
 
     public Map<String, Object> getCourseDisplayByLabId(Integer labId);
 

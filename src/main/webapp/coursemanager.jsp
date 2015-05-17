@@ -384,7 +384,7 @@
                     <div class="callout callout-info" ng-show="item.apply.length > 0">
                         <p class='text-info'>已排课记录：<span class="badge">共{{item.apply.length}}条</span></p>
                         <div ng-repeat="apply in item.apply">
-                            <p class='bg-info'>星期{{apply.dayOfWeek}}, 第{{apply.orders}}节课</p>
+                            <p class='bg-info'>{{apply.labName}}, 星期{{apply.dayOfWeek}}, 第{{apply.orders}}节课</p>
                         </div>
 
                     </div>
