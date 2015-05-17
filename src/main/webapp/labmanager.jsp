@@ -43,7 +43,8 @@
                         }
                     })
 
-            $scope.LabAdd = {labName:"", labDept:"", labAddress:""};
+            $scope.LabAdd = {labName:"", labDept:-1, labAddress:""};
+            $scope.LabAddAlert = {labName:false, labDept:false, labAddress:false};
             $scope.academy = [{code: -1, name: "未选择"}, {code: 1, name: "计算机学院"}, {code: 2, name: "软件学院"}];
             $scope.academySelected = "未选择";
             $scope.academySelector = function (item) {
@@ -52,13 +53,18 @@
             }
 
             $scope.labInsert = function () {
-                $http.post("/lab/insertLabMessage", $scope.LabAdd)
-                        .success(function (response) {
-                            if(200 == response.status) {
-                                location.reload();
-                            }
-                        })
-            }
+                $scope.LabAddAlert.labName = $scope.LabAdd.labName.length < 3;
+                $scope.LabAddAlert.labDept = $scope.LabAdd.labDept == -1;
+                $scope.LabAddAlert.labAddress = $scope.LabAdd.labAddress.length < 4;
+                if (!$scope.LabAddAlert.labName&&!$scope.LabAddAlert.labDept&&!$scope.LabAddAlert.labAddress) {
+                    $http.post("/lab/insertLabMessage", $scope.LabAdd)
+                            .success(function (response) {
+                                if(200 == response.status) {
+                                    location.reload();
+                                }
+                            });
+                }
+            };
 
             $scope.LabDe = {id: -1};
             $scope.Deletor = function (id) {
@@ -93,13 +99,14 @@
                 <div class="form-horizontal">
                     <div class="form-group">
                         <label for="inputlabName" class="col-sm-3 control-label col-sm-offset-1">实验室名称</label>
-                        <div class="col-sm-4 col-sm-offset-1">
-                            <input type="text" class="form-control" id="inputlabName" placeholder="实验室名称" ng-model="LabAdd.labName">
+                        <div class="col-sm-5 col-sm-offset-1">
+                            <input type="text" class="form-control" id="inputlabName" placeholder="实验室名称" ng-model="LabAdd.labName" tooltip="实验室的名称，如：6301" tooltip-trigger="focus" tooltip-placement="top">
+                            <div class="alert alert-danger" role="alert" ng-show="LabAddAlert.labName">实验室名称不能少于3个字符哦</div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputCourseDept" class="col-sm-3 control-label col-sm-offset-1">实验室所属学院</label>
-                        <div class="controls col-sm-4 col-sm-offset-1">
+                        <div class="controls col-sm-5 col-sm-offset-1">
                             <div class="btn-group open choice" id="inputCourseDept">
                                 <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> {{academySelected}}<span class="caret"></span></button>
                                 <ul class="dropdown-menu" role="menu">
@@ -108,12 +115,14 @@
                                     </li>
                                 </ul>
                             </div>
+                            <div class="alert alert-danger" role="alert" ng-show="LabAddAlert.labDept">未选择实验室所属学院</div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputLabAddress" class="col-sm-3 control-label col-sm-offset-1">实验室地点</label>
-                        <div class="col-sm-4 col-sm-offset-1">
-                            <input type="text" class="form-control" id="inputLabAddress" placeholder="实验室地点" ng-model="LabAdd.labAddress">
+                        <div class="col-sm-5 col-sm-offset-1">
+                            <input type="text" class="form-control" id="inputLabAddress" placeholder="实验室地点" ng-model="LabAdd.labAddress" tooltip="如：六教三楼最边边上，6301" tooltip-trigger="focus" tooltip-placement="bottom">
+                            <div class="alert alert-danger" role="alert" ng-show="LabAddAlert.labAddress">实验室地点不能少于5个字符哦</div>
                         </div>
                     </div>
                 </div>
@@ -172,9 +181,6 @@
     <div class="row">
         <div class="col-sm-3" ng-repeat="item in lab">
             <div class="thumbnail">
-                <img data-src="holder.js/100%x200" alt="100%x200"
-                     src="#"
-                     data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
                 <div class="caption">
                     <h4>实验室名称：{{item.labName}}</h4>
                     <h5>所在学院：{{item.labDept}}</h5>
