@@ -40,12 +40,14 @@
             $scope.noticeIsEmpty = true;
             $http.post("/notice/loadTeacherNotice" ,$scope.LoadNotice)
                     .success(function (response) {
-                        $scope.notice = response.data;
-                        if($scope.notice.length > 0) {
-                            $scope.noticeIsEmpty = false;
-                        }
-                        else {
-                            $scope.noticeIsEmpty = true;
+                        if(200 == response.status) {
+                            $scope.notice = response.data;
+                            if ($scope.notice.length > 0) {
+                                $scope.noticeIsEmpty = false;
+                            }
+                            else {
+                                $scope.noticeIsEmpty = true;
+                            }
                         }
                     })
             $scope.noticeOfTeacherIsHandled = function (item, state) {
