@@ -76,7 +76,7 @@
                             $scope.coursesOfTeacher = response.data;
                         }
                     })
-            $scope.addApply = function () {
+            $scope.submitApply = function () {
                 $scope.Apply.courseId = $scope.selectCourseId;
                 $http.post("/apply/addApply", $scope.Apply)
                         .success(function (response) {
@@ -148,7 +148,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" ng-click="addApply()">提交</button>
+                <button type="button" class="btn btn-success" ng-click="submitApply()">提交</button>
             </div>
         </div>
     </div>
@@ -201,8 +201,7 @@
                 <th scope="row">第{{$index+1}}节</th>
                 <td ng-repeat="item in order track by $index">
                     <div ng-bind-html="item"></div>
-                    {{$index}}, {{$parent.$index}}
-                    <a ng-show="item.length == 0" data-toggle="modal" data-target=".bs-example-modal-sm" tooltip="申请课程安排" tooltip-placement="right" ng-click="addApply({{$index}}+1, {{$parent.$index}}+1)">
+                    <a ng-show="item.length == 0" data-toggle="modal" data-target=".bs-example-modal-sm" tooltip="申请课程安排" tooltip-placement="right" ng-click="addApply($index+1, $parent.$index+1)">
                         <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
                     </a>
                 </td>

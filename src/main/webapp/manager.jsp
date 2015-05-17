@@ -31,11 +31,19 @@
         app.controller("managerCtrl", function ($scope, $http) {
             $scope.LoadNotice = {targetUser: <%=session.getAttribute("uid")%>};
             $scope.noticeIsEmpty = true;
+            $scope.noticeIsNotEmpty = false;
             $http.post("/notice/loadNotice" ,$scope.LoadNotice)
                     .success(function (response) {
                         if(200 == response.status) {
                             $scope.notice = response.data;
-                            $scope.noticeIsEmpty = $scope.notice.length == 0;
+                            if($scope.notice.length > 0) {
+                                $scope.noticeIsEmpty = false;
+                                $scope.noticeIsNotEmpty = true;
+                            }
+                            else {
+                                $scope.noticeIsEmpty = true;
+                                $scope.noticeIsNotEmpty = false;
+                            }
                         }
                     })
 
@@ -191,6 +199,14 @@
             <button type="button" class="btn btn-link" ng-click="changeInfo(item.applyId, 3)" data-toggle="modal" data-target="#rejectModal">
                 拒绝申请
             </button>
+        </div>
+    </div>
+    <div class="panel panel-danger" ng-show="noticeIsEmpty">
+        <div class="panel-heading">
+            提醒
+        </div>
+        <div class="panel-body">
+            目前没有待处理的消息！
         </div>
     </div>
 </div>
