@@ -5,7 +5,7 @@ import java.util.*;
 import javax.annotation.Resource;
 
 import com.google.common.collect.Sets;
-import com.mpp.model.entity.ApplyChangeStateBeans;
+import com.mpp.model.entity.ApplyChangeStateBean;
 import com.mpp.model.entity.ApplyInfoBean;
 import com.mpp.model.entity.CourseDisplayInfoBean;
 import com.mpp.model.entity.LabInfoBean;
@@ -183,7 +183,7 @@ public class ApplyServiceImpl implements ApplyService{
     }
 
     @Override
-    public void applyChangeState(final ApplyChangeStateBeans bean) {
+    public void applyChangeState(final ApplyChangeStateBean bean) {
         applyDao.applyChangeState(bean.getApplyId(), bean.getState());
         noticeDao.noticeStateChange(bean.getApplyId(), bean.getState());
         Notice no = noticeDao.getNoticeByApply(bean.getApplyId());

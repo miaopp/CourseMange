@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import com.mpp.model.entity.ApplyChangeStateBeans;
+import com.mpp.model.entity.ApplyChangeStateBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,7 +68,7 @@ public class ApplyController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/applyChangeState", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public CodeMessage applyChangeState(@RequestBody ApplyChangeStateBeans bean) {
+    public CodeMessage applyChangeState(@RequestBody ApplyChangeStateBean bean) {
         applyService.applyChangeState(bean);
         return JsonReturn.getSuccess("success");
     }

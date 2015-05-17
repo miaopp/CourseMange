@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.mpp.model.Apply;
-import com.mpp.model.entity.ApplyChangeStateBeans;
+import com.mpp.model.entity.ApplyChangeStateBean;
 import com.mpp.model.entity.CourseDisplayInfoBean;
 
 /**
@@ -21,5 +21,5 @@ public interface ApplyService {
 
     public Map<String, Object> getCourseDisplayByLab(Integer labId);
 
-    public void applyChangeState(final ApplyChangeStateBeans bean);
+    public void applyChangeState(final ApplyChangeStateBean bean);
 }
