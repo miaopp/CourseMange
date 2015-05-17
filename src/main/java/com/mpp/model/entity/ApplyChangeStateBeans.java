@@ -3,7 +3,7 @@ package com.mpp.model.entity;
 /**
  * Created by xiang.xu on 2015/5/17.
  */
-public class ApplyChangeStateBean {
+public class ApplyChangeStateBeans {
     private int applyId;
     private int state;
     private String msg;

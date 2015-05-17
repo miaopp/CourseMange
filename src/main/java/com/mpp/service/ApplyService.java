@@ -2,11 +2,9 @@ package com.mpp.service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import com.mpp.model.Apply;
-import com.mpp.model.entity.ApplyChangeStateBean;
-import com.mpp.model.entity.ApplyInfoBean;
+import com.mpp.model.entity.ApplyChangeStateBeans;
 import com.mpp.model.entity.CourseDisplayInfoBean;
 
 /**
@@ -23,5 +21,5 @@ public interface ApplyService {
 
     public Map<String, Object> getCourseDisplayByLab(Integer labId);
 
-    public void applyChangeState(final ApplyChangeStateBean bean);
+    public void applyChangeState(final ApplyChangeStateBeans bean);
 }
