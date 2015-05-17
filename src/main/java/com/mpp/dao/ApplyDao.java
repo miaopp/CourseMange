@@ -23,5 +23,5 @@ public interface ApplyDao {
 
     public Apply getApplyIdByOtherAllMessage(Apply apply);
 
-    public void applyChangeState(final Integer applyTd, final Integer state);
+    public void applyChangeState(final Integer applyId, final Integer state);
 }

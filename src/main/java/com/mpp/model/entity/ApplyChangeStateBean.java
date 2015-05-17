@@ -1,5 +1,7 @@
 package com.mpp.model.entity;
 
+import com.google.common.base.Objects;
+
 /**
  * Created by xiang.xu on 2015/5/17.
  */
@@ -30,5 +32,14 @@ public class ApplyChangeStateBean {
 
     public void setMsg(final String msg) {
         this.msg = msg;
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+                .add("applyId", applyId)
+                .add("state", state)
+                .add("msg", msg)
+                .toString();
     }
 }
