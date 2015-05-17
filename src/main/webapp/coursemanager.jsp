@@ -54,6 +54,7 @@
 
 
             $scope.apply = {courseId: -1, labId: -1, userId: $scope.user.uid, dayOfWeek: 0, orders: -1};
+            $scope.applyAlert = {labId: false, dayOfWeek: false, orders: false};
             $http.post("/lab/getLabListByTeacher")
                     .success(function (response) {
                         if (200 == response.status) {
@@ -64,6 +65,9 @@
             $scope.courseLabSelector = function (item) {
                 $scope.courseLabSelect = item.labName;
                 $scope.apply.labId = item.id;
+                if($scope.apply.dayOfWeek != 0){
+                    loadOrder();
+                }
             };
 
             $scope.weeks = [
@@ -79,16 +83,24 @@
             $scope.courseWeekSelector = function (item) {
                 $scope.courseWeekSelect = item.name;
                 $scope.apply.dayOfWeek = item.code;
+                loadOrder();
+            };
 
-                $scope.toLoadOrders.labId = $scope.apply.labId;
-                $scope.toLoadOrders.dayOfWeek = $scope.apply.dayOfWeek;
-                $http.post("/schedule/availableOrders", $scope.toLoadOrders)
-                        .success(function (response) {
-                            if (response.status == 200) {
-                                $scope.orders = response.data;
-                                $scope.courseOrderSelect = "未选择";
-                            }
-                        });
+            var loadOrder = function () {
+                $scope.applyAlert.labId = $scope.apply.labId == -1;
+                $scope.applyAlert.dayOfWeek = $scope.apply.dayOfWeek == 0;
+
+                if (!$scope.applyAlert.labId&&!$scope.applyAlert.dayOfWeek) {
+                    $scope.toLoadOrders.labId = $scope.apply.labId;
+                    $scope.toLoadOrders.dayOfWeek = $scope.apply.dayOfWeek;
+                    $http.post("/schedule/availableOrders", $scope.toLoadOrders)
+                            .success(function (response) {
+                                if (response.status == 200) {
+                                    $scope.orders = response.data;
+                                    $scope.courseOrderSelect = "未选择";
+                                }
+                            });
+                }
             };
             $scope.orders = [{name: "待载入", code: -1}];
             $scope.courseOrderSelect = "待载入";
@@ -106,12 +118,17 @@
             };
 
             $scope.addApply = function () {
-                $http.post("/apply/addApply", $scope.apply)
-                        .success(function (response) {
-                            if (200 == response.status) {
-                                location.reload();
-                            }
-                        })
+                $scope.applyAlert.labId = $scope.apply.labId == -1;
+                $scope.applyAlert.dayOfWeek = $scope.apply.dayOfWeek == 0;
+                $scope.applyAlert.orders = $scope.apply.orders == -1;
+                if (!$scope.applyAlert.labId&&!$scope.applyAlert.dayOfWeek&&!$scope.applyAlert.orders) {
+                    $http.post("/apply/addApply", $scope.apply)
+                            .success(function (response) {
+                                if (200 == response.status) {
+                                    location.reload();
+                                }
+                            })
+                }
             };
 
             $scope.courseAdd = {userId: <%=session.getAttribute("uid") %>, name: "", courseDept: -1, courseMajor: 0, targetClass: "", courseBeginWeek: "", courseEndWeek: ""};
@@ -252,7 +269,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label col-sm-offset-1" for="labName">实验室名称</label>
 
-                        <div class="controls col-sm-6 col-sm-offset-1">
+                        <div class="controls col-sm-4 col-sm-offset-1">
                             <div class="btn-group open choice" id="labName">
                                 <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                     {{courseLabSelect}}<span class="caret"></span></button>
@@ -262,13 +279,14 @@
                                     </li>
                                 </ul>
                             </div>
+                            <div class="alert alert-danger" role="alert" ng-show="applyAlert.labId">未选择实验室</div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label col-sm-offset-1" for="weeks">星期</label>
 
-                        <div class="controls col-sm-6 col-sm-offset-1">
+                        <div class="controls col-sm-4 col-sm-offset-1">
                             <div class="btn-group open choice" id="weeks">
                                 <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                     {{courseWeekSelect}}<span class="caret"></span></button>
@@ -278,13 +296,14 @@
                                     </li>
                                 </ul>
                             </div>
+                            <div class="alert alert-danger" role="alert" ng-show="applyAlert.dayOfWeek">未选择星期</div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label col-sm-offset-1" for="orders">时间</label>
 
-                        <div class="controls col-sm-6 col-sm-offset-1">
+                        <div class="controls col-sm-4 col-sm-offset-1">
                             <div class="btn-group open choice" id="orders">
                                 <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                     {{courseOrderSelect}}<span class="caret"></span></button>
@@ -294,6 +313,7 @@
                                     </li>
                                 </ul>
                             </div>
+                            <div class="alert alert-danger" role="alert" ng-show="applyAlert.orders">未选择第几节上课</div>
                         </div>
                     </div>
 
@@ -362,7 +382,7 @@
                     <h5>上课班级：{{item.targetClass}}班</h5>
                     <h5>上课时间：第{{item.courseBeginWeek}}周 -- 第{{item.courseEndWeek}}周</h5>
                     <div class="callout callout-info" ng-show="item.apply.length > 0">
-                        <p class='text-info'>已排课记录：<span class="badge">{{item.apply.length}}</span></p>
+                        <p class='text-info'>已排课记录：<span class="badge">共{{item.apply.length}}条</span></p>
                         <div ng-repeat="apply in item.apply">
                             <p class='bg-info'>星期{{apply.dayOfWeek}}, 第{{apply.orders}}节课</p>
                         </div>
@@ -371,7 +391,7 @@
                     <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#ApplyModal" ng-click="clickAddApplyOrderBtn(item)">
                         添加实验室排课
                     </button>
-                    <button type='button' class='btn btn-danger pull-right'>删除</button>
+                    <button type='button' class='btn btn-danger pull-right'>删除课程</button>
                 </div>
             </div>
         </div>

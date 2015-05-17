@@ -35,12 +35,7 @@
                     .success(function (response) {
                         if(200 == response.status) {
                             $scope.notice = response.data;
-                            if($scope.notice.length > 0) {
-                                $scope.noticeIsEmpty = false;
-                            }
-                            else {
-                                $scope.noticeIsEmpty = true;
-                            }
+                            $scope.noticeIsEmpty = $scope.notice.length == 0;
                         }
                     })
 
@@ -63,11 +58,11 @@
             }
 
             $scope.logout = function () {
-            $http.get("/user/logout")
-                    .success(function () {
-                        location.href = "./login.jsp";
-                    })
-        }
+                $http.get("/user/logout")
+                        .success(function () {
+                            location.href = "./login.jsp";
+                        })
+            }
         });
     </script>
 </head>
