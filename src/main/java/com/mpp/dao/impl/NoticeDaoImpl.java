@@ -21,8 +21,13 @@ public class NoticeDaoImpl implements NoticeDao {
     private SqlSession sqlSession;
 
     @Override
-    public List<Notice> getNoticeByTargetUser(final Integer targetUser) {
-        return this.sqlSession.selectList("Notice.selectNoticeByTargetUser",targetUser);
+    public List<Notice> getNoticeByManager(final Integer targetUser) {
+        return this.sqlSession.selectList("Notice.selectNoticeByManager",targetUser);
+    }
+
+    @Override
+    public List<Notice> getNoticeByTeacher(final Integer targetUser) {
+        return this.sqlSession.selectList("Notice.selectNoticeByTeacher",targetUser);
     }
 
     @Override

@@ -73,7 +73,7 @@
                             }
                         })
             }
-
+            $scope.noticeState = ["", "", "同意", "拒绝"];
         });
     </script>
 </head>
@@ -184,7 +184,7 @@
             目前没有未处理消息！
         </div>
         <div class="panel-body">
-            {{item}}
+            实验室管理员{{item.userRealName}} {{noticeState[item.state]}} 了您的申请
         </div>
 </div>
 <div class="footer" style="margin-top: 10px;">

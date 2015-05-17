@@ -73,7 +73,7 @@ public class ApplyServiceImpl implements ApplyService{
             notice.setLabId(app.getLabId());
             notice.setUserId(app.getUserId());
             notice.setTargetUser(user.getUserId());
-            notice.setState(0);
+            notice.setState(1);
             noticeDao.addNotice(notice);
         }
 

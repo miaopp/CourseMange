@@ -99,15 +99,4 @@ public class NoticeBean {
                 ", noticeId=" + noticeId +
                 '}';
     }
-
-    public String toNoticeOfTeacherString() {
-        StringBuilder builder = new StringBuilder();
-        if(state == 2) {
-            builder.append("管理员").append(userRealName).append("同意您就课程").append(courseName).append("对实验室").append(labName).append("提出的申请。");
-        }
-        else if(state == 3) {
-            builder.append("很抱歉，当前您就课程").append(userRealName).append("对实验室").append(labName).append("提出的申请失败，请重新申请");
-        }
-        return builder.toString();
-    }
 }

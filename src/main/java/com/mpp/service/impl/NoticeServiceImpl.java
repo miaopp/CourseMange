@@ -37,7 +37,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public List<NoticeBean> getNoticeByTargetUser(final Integer targetUser) {
-        List<Notice> notice = noticeDao.getNoticeByTargetUser(targetUser);
+        List<Notice> notice = noticeDao.getNoticeByManager(targetUser);
         List<NoticeBean> noticeBean = new ArrayList<NoticeBean>();
         for (Notice no : notice) {
             NoticeBean n = new NoticeBean();
@@ -69,9 +69,9 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public List<String> getTeacherOfNotice(Integer targetUser) {
-        List<Notice> notices = noticeDao.getNoticeByTargetUser(targetUser);
-        List<String> list = new ArrayList<String>();
+    public List<NoticeBean> getTeacherOfNotice(Integer targetUser) {
+        List<Notice> notices = noticeDao.getNoticeByTeacher(targetUser);
+        List<NoticeBean> list = new ArrayList<NoticeBean>();
         for (Notice notice : notices) {
             NoticeBean n = new NoticeBean();
             User u = userDao.getUserByUserId(notice.getUserId());
@@ -86,8 +86,7 @@ public class NoticeServiceImpl implements NoticeService {
             n.setApplyId(notice.getApplyId());
             n.setNoticeId(notice.getNoticeId());
             n.setState(notice.getState());
-            String info = n.toNoticeOfTeacherString();
-            list.add(info);
+            list.add(n);
         }
         return list;
     }

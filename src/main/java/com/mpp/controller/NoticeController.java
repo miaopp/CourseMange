@@ -31,7 +31,7 @@ public class NoticeController {
     @RequestMapping(method = RequestMethod.POST, value = "/loadTeacherNotice", produces = "application/json; charset=utf-8")
     @ResponseBody
     public  CodeMessage loadTeacherNotice(@RequestBody Notice notice) {
-        List<String> list = noticeService.getTeacherOfNotice(notice.getTargetUser());
+        List<NoticeBean> list = noticeService.getTeacherOfNotice(notice.getTargetUser());
         return JsonReturn.getSuccess(list);
     }
 

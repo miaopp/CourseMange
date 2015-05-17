@@ -12,7 +12,14 @@
         <result property="targetUser" column="target_user"/>
         <result property="state" column="notice_state"/>
     </resultMap>
-    <select id="selectNoticeByTargetUser" parameterType="java.lang.Integer" resultMap="noticeResultMap">
+    <select id="selectNoticeByManager" parameterType="java.lang.Integer" resultMap="noticeResultMap">
+        <![CDATA[
+            select *
+            from notice
+            where target_user = #{targetUser} and notice_state = 1;
+        ]]>
+    </select>
+    <select id="selectNoticeByTeacher" parameterType="java.lang.Integer" resultMap="noticeResultMap">
         <![CDATA[
             select *
             from notice
