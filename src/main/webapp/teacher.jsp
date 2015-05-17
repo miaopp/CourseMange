@@ -42,12 +42,7 @@
                     .success(function (response) {
                         if(200 == response.status) {
                             $scope.notice = response.data;
-                            if ($scope.notice.length > 0) {
-                                $scope.noticeIsEmpty = false;
-                            }
-                            else {
-                                $scope.noticeIsEmpty = true;
-                            }
+                            $scope.noticeIsEmpty = $scope.notice.length == 0;
                         }
                     })
             $scope.noticeOfTeacherIsHandled = function (item, state) {
@@ -182,24 +177,26 @@
         <div class="panel-heading">
             <h3 class="panel-title" id="panel-title">实验室申请审核提醒<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
         </div>
-        <div class="panel-body" ng-show="noticeIsEmpty">
-            目前没有未处理消息！
-        </div>
         <div class="panel-body">
             实验室管理员{{item.userRealName}} {{noticeState[item.state]}} 了您的申请
         </div>
-</div>
-<div class="footer" style="margin-top: 10px;">
-    <div class="container">
-        <hr>
-        Powered by HTML 4.0
-        <br>
-        Copyright © 计算机应用112班 缪萍.
-        All rights reserved.
-        <br>
-        0.052352 sec - 0 queries - 0 sec @ portal
     </div>
-</div>
+    <div class="panel panel-danger" ng-show="noticeIsEmpty">
+        <div class="panel-heading">
+            <h3 class="panel-title">目前没有未处理消息！<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
+        </div>
+    </div>
+    <div class="footer" style="margin-top: 10px;">
+        <div class="container">
+            <hr>
+            Powered by HTML 4.0
+            <br>
+            Copyright © 计算机应用112班 缪萍.
+            All rights reserved.
+            <br>
+            0.052352 sec - 0 queries - 0 sec @ portal
+        </div>
+    </div>
 </div>
 </body>
 </html>
