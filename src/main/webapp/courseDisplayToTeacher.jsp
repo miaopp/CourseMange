@@ -124,7 +124,7 @@
     </div>
     <div class="panel panel-info" ng-show="Display">
         <!-- Default panel contents -->
-        <div class="panel-heading" ng-modal="LabName">{{LabName}}实验室课程安排</div>
+        <div class="panel-heading">{{LabName}}实验室课程安排</div>
         <!-- Table -->
         <table class="table">
             <thead>
@@ -142,7 +142,13 @@
             <tbody>
             <tr ng-repeat="order in Course">
                 <th scope="row">第{{$index+1}}节</th>
-                <td ng-repeat="item in order track by $index" ng-bind-html="item"></td>
+                <td ng-repeat="item in order track by $index">
+                    <div ng-bind-html="item"></div>
+                    {{$index}}, {{$parent.$index}}
+                    <a ng-show="item.length == 0" href="#" tooltip="添加课程安排" tooltip-placement="right">
+                        <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>
