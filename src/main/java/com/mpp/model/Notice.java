@@ -11,6 +11,11 @@ public class Notice {
     private int userId;
     private int targetUser;
     private int state;
+    private String message;
+
+    public Notice() {
+        this.message = "";
+    }
 
     public int getNoticeId() {
         return noticeId;
@@ -66,5 +71,13 @@ public class Notice {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(final String message) {
+        this.message = message;
     }
 }

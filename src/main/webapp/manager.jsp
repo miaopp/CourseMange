@@ -48,8 +48,13 @@
                             }
                         })
             }
-            $scope.applyChangeState = function (item, state) {
-                $http.post("/apply/applyChangeState?applyId=" + item.applyId + "&state=" + state)
+            $scope.applyBean = {applyId: -1, state: -1, msg: ""};
+            $scope.changeInfo = function (id, state) {
+                $scope.applyBean.applyId = id;
+                $scope.applyBean.state = state;
+            }
+            $scope.applyChangeState = function () {
+                $http.post("/apply/applyChangeState", $scope.applyBean)
                         .success(function (response) {
                             if(200 == response.status) {
                                 location.reload();
@@ -103,10 +108,38 @@
     </div>
 </nav>
 
+<!-- Modal -->
+<div id="rejectModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h3 id="addModalLabel">处理申请</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label col-sm-offset-4">拒绝理由：</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="col-sm-8 col-sm-offset-2" rows="5" cols="80" ng-model="applyBean.msg"tooltip="请简述拒绝理由" tooltip-trigger="focus" tooltip-placement="bottom"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="alert alert-info hide">
+                </div>
+                <button class="btn btn-success" ng-click="applyChangeState()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header" ng-model="LabName">
+            <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 <h4 class="modal-title" id="CourseModalLabel">{{LabName}}实验室排课情况<a class="anchorjs-link" href="#CourseModalLabel"><span class="anchorjs-icon"></span></a></h4>
             </div>
@@ -152,10 +185,10 @@
             <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="courseApplyDetail(item)">
                 查看详情
             </button>
-            <button type="button" class="btn btn-link" ng-click="applyChangeState(item, 2)">
+            <button type="button" class="btn btn-link" ng-click="changeInfo(item.applyId, 2);applyChangeState()">
                 同意申请
             </button>
-            <button type="button" class="btn btn-link" ng-click="applyChangeState(item, 3)">
+            <button type="button" class="btn btn-link" ng-click="changeInfo(item.applyId, 3)" data-toggle="modal" data-target="#rejectModal">
                 拒绝申请
             </button>
         </div>

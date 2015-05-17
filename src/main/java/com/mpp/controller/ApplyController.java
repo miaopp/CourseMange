@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import com.mpp.model.Lab;
 import com.mpp.model.User;
+import com.mpp.model.entity.ApplyChangeStateBean;
 import com.sun.org.apache.bcel.internal.classfile.Code;
 import jdk.nashorn.internal.ir.RuntimeNode;
 import org.springframework.stereotype.Controller;
@@ -71,8 +72,8 @@ public class ApplyController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/applyChangeState", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public CodeMessage applyChangeState(@RequestParam Integer applyId, @RequestParam Integer state) {
-        applyService.applyChangeState(applyId, state);
+    public CodeMessage applyChangeState(@RequestBody ApplyChangeStateBean bean) {
+        applyService.applyChangeState(bean);
         return JsonReturn.getSuccess("success");
     }
 }

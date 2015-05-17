@@ -175,7 +175,7 @@
 
     <div class="panel panel-danger" ng-repeat="item in notice">
         <div class="panel-heading">
-            <h3 class="panel-title" id="panel-title">实验室申请审核提醒<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
+            <h3 class="panel-title" id="panel-title">实验室 {{item.labName}} 审核提醒<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
         </div>
         <div class="panel-body">
             实验室管理员{{item.userRealName}} {{noticeState[item.state]}} 了您的申请

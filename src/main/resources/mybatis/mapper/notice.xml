@@ -29,8 +29,8 @@
     <insert id="insertNotice" parameterType="Notice">
         <![CDATA[
             insert into notice
-            (apply_id, course_id, lab_id, user_id, target_user, notice_state)
-            values (#{applyId}, #{courseId}, #{labId}, #{userId}, #{targetUser}, #{state});
+            (apply_id, course_id, lab_id, user_id, target_user, notice_state, message)
+            values (#{applyId}, #{courseId}, #{labId}, #{userId}, #{targetUser}, #{state}, #{message});
         ]]>
     </insert>
     <update id="noticeChecked" parameterType="java.util.Map">

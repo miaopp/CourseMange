@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import com.mpp.model.Apply;
+import com.mpp.model.entity.ApplyChangeStateBean;
 
 /**
  * Created by xiang.xu on 2015/4/20.
@@ -20,5 +21,5 @@ public interface ApplyService {
 
     public Map<String, Object> getCourseDisplayByLab(Integer labId);
 
-    public void applyChangeState(Integer applyId, final Integer state);
+    public void applyChangeState(final ApplyChangeStateBean bean);
 }
