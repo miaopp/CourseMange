@@ -80,8 +80,27 @@ public class ApplyServiceImpl implements ApplyService{
     }
 
     @Override
-    public List<Apply> getAllApply(final Integer uid) {
-        return applyDao.getAllApply(uid);
+    public List<CourseDisplayInfoBean> getAllApply(final Integer uid) {
+        List<Apply> applies = applyDao.getAllApply(uid);
+        List<CourseDisplayInfoBean> infoBeans = new ArrayList<CourseDisplayInfoBean>();
+        for (Apply apply : applies) {
+            CourseDisplayInfoBean info = new CourseDisplayInfoBean();
+            Course c = courseDao.getCourse(apply.getCourseId());
+            info.setCourseId(c.getId());
+            info.setCourseName(c.getName());
+            Lab l = labDao.getLabByLabId(apply.getLabId());
+            info.setLabName(l.getLabName());
+            info.setLabId(l.getId());
+            User u = userDao.getUserByUserId(uid);
+            info.setTeacherName(u.getRealName());
+            info.setUserId(u.getUserId());
+            info.setBeginWeek(c.getCourseBeginWeek());
+            info.setEndWeek(c.getCourseEndWeek());
+            info.setDayOfWeek(apply.getDayOfWeek());
+            info.setOrders(apply.getOrders());
+            infoBeans.add(info);
+        }
+        return infoBeans;
     }
 
     private final static int dayOfWeeks = 7;

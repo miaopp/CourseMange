@@ -29,6 +29,7 @@
         var app = angular.module('labManagerModule', ['ui.bootstrap']);
         app.controller("labManagerCtrl", function($scope , $http) {
             $scope.labIsEmpty = true;
+            $scope.labIsNotEmpty = false;
             $scope.LabLoad = {labDept: <%=session.getAttribute("userdept")%>};
             $http.post("/lab/loadLab", $scope.LabLoad)
                     .success(function (response) {
@@ -36,9 +37,11 @@
                             $scope.lab = response.data;
                             if($scope.lab.length > 0) {
                                 $scope.labIsEmpty = false;
+                                $scope.labIsNotEmpty = true;
                             }
                             else {
                                 $scope.labIsEmpty = true;
+                                $scope.labIsNotEmpty = false;
                             }
                         }
                     })
@@ -191,7 +194,7 @@
         </div>
     </div>
 
-    <div class='btn-group'>
+    <div class='btn-group' ng-show="labIsNotEmpty">
         <button type='button' class='btn btn-success' data-toggle="modal" data-target="#LabModal">添加实验室信息</button>
     </div>
 
