@@ -12,6 +12,17 @@
         <result property="targetUser" column="target_user"/>
         <result property="state" column="notice_state"/>
     </resultMap>
+    <resultMap id="noticeBeanResultMap" type="NoticeBean">
+        <result property="userRealName" column="user_realname"/>
+        <result property="courseName" column="course_name"/>
+        <result property="labName" column="lab_name"/>
+        <result property="userId" column="user_id"/>
+        <result property="labId" column="lab_id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="applyId" column="apply_id"/>
+        <result property="noticeId" column="notice_id"/>
+        <result property="state" column="notice_state"/>
+    </resultMap>
     <select id="selectNoticeByManager" parameterType="java.lang.Integer" resultMap="noticeResultMap">
         <![CDATA[
             select *
@@ -45,6 +56,13 @@
             select *
             from notice
             where apply_id = #{applyId}
+        ]]>
+    </select>
+    <select id="selectManagerAllNotices" parameterType="java.lang.Integer" resultMap="noticeBeanResultMap">
+        <![CDATA[
+            select u.user_id,u.user_realname,c.course_name,c.course_id,l.lab_id,l.lab_name,n.notice_id,n.apply_id,n.notice_state
+            from notice n,user u,course c,lab l
+            where n.user_id = u.user_id and n.course_id = c.course_id and n.lab_id = l.lab_id and n.target_user = #{targetUser}
         ]]>
     </select>
 </mapper>

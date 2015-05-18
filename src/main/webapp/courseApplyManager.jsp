@@ -35,12 +35,13 @@
                             location.href = "./login.jsp";
                         })
             }
-            var LabId = location.search.substring(1).split("=")[1];
-            $http.post("/apply/courseDisplay?LabId=" + LabId)
+
+            $http.post("/notice/loadAllNoticesOfManager")
                     .success(function (response) {
-                        $scope.Course = response.data.list;
-                        $scope.LabName = response.data.labName;
-                    });
+                        if(200 == response.status) {
+                            $scope.Notices = response.data;
+                        }
+                    })
         });
     </script>
 </head>
@@ -74,7 +75,6 @@
                         当前用户：<%=session.getAttribute("username")%> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">修改个人信息</a></li>
                         <li><a ng-click="logout()">退出</a></li>
                     </ul>
                 </li>
@@ -87,34 +87,13 @@
     <div class="page-header">
         <h1>实验室申请管理</h1>
     </div>
-    <div class="panel panel-info">
+    <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading" ng-modal="LabName">{{LabName}}实验室课程安排</div>
-        <!-- Table -->
-        <table class="table">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>星期一</th>
-                <th>星期二</th>
-                <th>星期三</th>
-                <th>星期四</th>
-                <th>星期五</th>
-                <th>星期六</th>
-                <th>星期日</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="order in Course">
-                <th scope="row">第{{$index+1}}节</th>
-                <td ng-repeat="item in order track by $index" ng-bind-html="item"></td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="panel-footer">
-            <a href="#" class="btn btn-link" role="button">同意申请</a>
-            <a href="#" class="btn btn-link pull-right" role="button">拒绝申请</a>
-        </div>
+        <div class="panel-heading">相关实验室所有的申请处理情况</div>
+        <!-- List group -->
+        <ul class="list-group" ng-repeat="item in Notices">
+            <li class="list-group-item">{{item.labName}}</li>
+        </ul>
     </div>
 </div>
 <div class="footer" style="margin-top: 10px;">

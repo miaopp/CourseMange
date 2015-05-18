@@ -90,4 +90,9 @@ public class NoticeServiceImpl implements NoticeService {
         }
         return list;
     }
+
+    @Override
+    public List<NoticeBean> getAllNoticeOfManager(final Integer targetUser) {
+        return noticeDao.getAllNoticeOfManager(targetUser);
+    }
 }

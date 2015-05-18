@@ -115,7 +115,6 @@
                         当前用户：<%=session.getAttribute("username")%> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">修改个人信息</a></li>
                         <li><a ng-click="logout()">退出</a></li>
                     </ul>
                 </li>
@@ -123,31 +122,64 @@
         </div>
     </div>
 </nav>
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+<%--<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">--%>
+    <%--<div class="modal-dialog modal-sm">--%>
+        <%--<div class="modal-content">--%>
+            <%--<div class="modal-header">--%>
+                <%--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>--%>
+                <%--申请课程安排--%>
+            <%--</div>--%>
+            <%--<div class="modal-body">--%>
+                <%--<div class="row">--%>
+                    <%--<div class="col-sm-5">--%>
+                        <%--<h5>请选择课程：</h5>--%>
+                    <%--</div>--%>
+                    <%--<div class="col-sm-7">--%>
+                        <%--<div class="btn-group">--%>
+                            <%--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{CourseSelect}} <span class="caret"></span></button>--%>
+                            <%--<ul class="dropdown-menu" role="menu">--%>
+                                <%--<li ng-repeat="item in coursesOfTeacher">--%>
+                                    <%--<a ng-click="CourseSelector(item)">{{item.name}}</a>--%>
+                                <%--</li>--%>
+                            <%--</ul>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="modal-footer">--%>
+                <%--<button type="button" class="btn btn-success" ng-click="submitApply()">提交</button>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+<div class="modal fade" id="LabApplyModal" tabindex="-1" role="dialog" aria-labelledby="LabApplyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                申请课程安排
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="LabApplyModalLabel">申请课程安排</h4>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-5">
-                        <h5>请选择课程：</h5>
-                    </div>
-                    <div class="col-sm-7">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{CourseSelect}} <span class="caret"></span></button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li ng-repeat="item in coursesOfTeacher">
-                                    <a ng-click="CourseSelector(item)">{{item.name}}</a>
-                                </li>
-                            </ul>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h5>请选择课程：</h5>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{CourseSelect}} <span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li ng-repeat="item in coursesOfTeacher">
+                                        <a ng-click="CourseSelector(item)">{{item.name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" class="btn btn-success" ng-click="submitApply()">提交</button>
             </div>
         </div>
@@ -159,22 +191,24 @@
     </div>
     <div class="panel panel-default">
         <div class="panel-body">
-            <div class="row">
-                <div class="col-sm-2">
-                    <h5>选择想要查看的实验室：</h5>
-                </div>
-                <div class="col-sm-1">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{LabSelect}} <span class="caret"></span></button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li ng-repeat="item in academyLabs">
-                                <a ng-click="LabSelector(item)">{{item.labName}}</a>
-                            </li>
-                        </ul>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h5>选择想要查看的实验室：</h5>
                     </div>
-                </div>
-                <div class="col-sm-9">
-                    <button type="button" class="btn btn-success" ng-click="LabCourseDisplay()">确认</button>
+                    <div class="col-sm-1">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{LabSelect}} <span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-repeat="item in academyLabs">
+                                    <a ng-click="LabSelector(item)">{{item.labName}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <button type="button" class="btn btn-success" ng-click="LabCourseDisplay()">确认</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -201,7 +235,7 @@
                 <th scope="row">第{{$index+1}}节</th>
                 <td ng-repeat="item in order track by $index">
                     <div ng-bind-html="item"></div>
-                    <a ng-show="item.length == 0" data-toggle="modal" data-target=".bs-example-modal-sm" tooltip="申请课程安排" tooltip-placement="right" ng-click="addApply($index+1, $parent.$index+1)">
+                    <a ng-show="item.length == 0" data-toggle="modal" data-target="#LabApplyModal" tooltip="申请课程安排" tooltip-placement="right" ng-click="addApply($index+1, $parent.$index+1)">
                         <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
                     </a>
                 </td>

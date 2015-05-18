@@ -1,6 +1,7 @@
 package com.mpp.dao;
 
 import com.mpp.model.Notice;
+import com.mpp.model.entity.NoticeBean;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface NoticeDao {
     public void addNotice(Notice notice);
     public void noticeStateChange(Integer applyId, Integer state);
     public Notice getNoticeByApply(Integer applyId);
+    public List<NoticeBean> getAllNoticeOfManager(Integer targetUser);
 }

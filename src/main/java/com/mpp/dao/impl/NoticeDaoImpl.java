@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.mpp.dao.NoticeDao;
 import com.mpp.model.Notice;
+import com.mpp.model.entity.NoticeBean;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -48,5 +49,11 @@ public class NoticeDaoImpl implements NoticeDao {
     public Notice getNoticeByApply(final Integer applyId) {
         Preconditions.checkNotNull(applyId);
         return this.sqlSession.selectOne("Notice.selectNoticeByApplyId", applyId);
+    }
+
+    @Override
+    public List<NoticeBean> getAllNoticeOfManager(final Integer targetUser) {
+        Preconditions.checkNotNull(targetUser);
+        return this.sqlSession.selectList("Notice.selectManagerAllNotices", targetUser);
     }
 }

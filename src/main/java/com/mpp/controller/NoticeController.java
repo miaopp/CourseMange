@@ -3,12 +3,14 @@ package com.mpp.controller;
 import com.mpp.constants.CodeMessage;
 import com.mpp.constants.JsonReturn;
 import com.mpp.model.Notice;
+import com.mpp.model.User;
 import com.mpp.model.entity.NoticeBean;
 import com.mpp.service.NoticeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -41,5 +43,13 @@ public class NoticeController {
     public CodeMessage noticeOfTeacherChange(@RequestParam Integer applyId, @RequestParam Integer state) {
         noticeService.noticeStateChange(applyId, state);
         return JsonReturn.getSuccess("success");
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/loadAllNoticesOfManager", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public CodeMessage loadAllNoticesOfManager(HttpSession httpSession) {
+        User user = (User) httpSession.getAttribute("user");
+        List<NoticeBean> list = noticeService.getAllNoticeOfManager(user.getUserId());
+        return JsonReturn.getSuccess(list);
     }
 }
