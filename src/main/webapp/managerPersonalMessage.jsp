@@ -1,15 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: pp
-  Date: 2015/4/25
-  Time: 15:21
+  Date: 2015/5/18
+  Time: 17:09
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html ng-app="courseApplyManagerModule" ng-controller="courseApplyManagerCtrl">
+<html ng-app="managerModule" ng-controller="managerCtrl">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- css-->
@@ -27,32 +27,14 @@
     <script type="text/javascript" src="./js/angular-sanitize.js"></script>
     <script type="text/javascript" src="./js/ui-bootstrap-0.12.1.js"></script>
     <script type="text/javascript">
-        var app = angular.module('courseApplyManagerModule', ['ui.bootstrap', 'ngSanitize']);
-        app.controller("courseApplyManagerCtrl", function ($scope, $http) {
-            $scope.logout = function () {
-                $http.get("/user/logout")
-                        .success(function () {
-                            location.href = "./login.jsp";
-                        })
-            }
-
-            $http.post("/notice/loadAllNoticesOfManager")
-                    .success(function (response) {
-                        if(200 == response.status) {
-                            $scope.Notices = response.data;
-                        }
-                    })
-        });
     </script>
 </head>
-
 <body>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -65,8 +47,8 @@
             <ul class="nav navbar-nav">
                 <li><a href="./manager.jsp">首页</a></li>
                 <li><a href="./labmanager.jsp">实验室管理</a></li>
-                <li class="active"><a href="./courseApplyManager.jsp">实验室课程申请管理</a></li>
                 <li><a href="./usermanager.jsp">用户信息管理</a></li>
+                <li class="active"><a href="./managerPersonalMessage.jsp">个人信息管理</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -82,19 +64,36 @@
         </div>
     </div>
 </nav>
-
 <div class="container">
     <div class="page-header">
-        <h1>实验室申请管理</h1>
+        <h1>个人信息管理</h1>
     </div>
-    <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading">相关实验室所有的申请处理情况</div>
-        <!-- List group -->
-        <ul class="list-group" ng-repeat="item in Notices">
-            <li class="list-group-item">教师{{item.userRealName}}就教授课程{{item.courseName}}对实验室{{item.labName}}作出的申请已被处理。</li>
-        </ul>
-    </div>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">姓名（必填）</label>
+            <div class="col-sm-2">
+                <input type="input" class="form-control" id="inputName" value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">学院（必选）</label>
+            <div class="col-sm-2">
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">专业（必选）</label>
+            <div class="col-sm-2">
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">班级（必填）</label>
+            <div class="col-sm-2">
+                <input type="input" class="form-control" id="inputName" value="">
+            </div>
+        </div>
+    </form>
 </div>
 <div class="footer" style="margin-top: 10px;">
     <div class="container">

@@ -97,8 +97,8 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="./manager.jsp">首页</a></li>
                 <li><a href="./labmanager.jsp">实验室管理</a></li>
-                <li><a href="./courseApplyManager.jsp">实验室课程申请管理</a></li>
                 <li><a href="./usermanager.jsp">用户信息管理</a></li>
+                <li><a href="./managerPersonalMessage.jsp">个人信息管理</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -107,7 +107,6 @@
                         当前用户：<%=session.getAttribute("username")%> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">修改个人信息</a></li>
                         <li><a ng-click="logout()">退出</a></li>
                     </ul>
                 </li>
