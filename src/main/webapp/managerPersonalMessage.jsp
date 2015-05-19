@@ -109,6 +109,14 @@
         <h1>个人信息管理</h1>
     </div>
     <div class="form-horizontal">
+        <fieldset disabled>
+            <div class="form-group">
+                <label for="disabledTextInput" class="col-sm-2 control-label col-sm-offset-1">用户名</label>
+                <div class="col-sm-6">
+                    <input type="text" id="disabledTextInput" class="form-control" value="<%=session.getAttribute("username")%>">
+                </div>
+            </div>
+        </fieldset>
         <div class="form-group">
             <label for="inputRealnameReg" class="col-sm-2 control-label col-sm-offset-1">姓名</label>
             <div class="col-sm-6">

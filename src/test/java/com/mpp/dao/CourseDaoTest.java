@@ -21,6 +21,6 @@ public class CourseDaoTest {
 
     @Test
     public void runGet() {
-        System.out.println(courseDao.getCourse());
+        System.out.println(courseDao.getCourse(1));
     }
 }

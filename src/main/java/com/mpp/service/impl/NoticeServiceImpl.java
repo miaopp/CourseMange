@@ -1,13 +1,7 @@
 package com.mpp.service.impl;
 
-import com.mpp.dao.CourseDao;
-import com.mpp.dao.LabDao;
-import com.mpp.dao.NoticeDao;
-import com.mpp.dao.UserDao;
-import com.mpp.model.Course;
-import com.mpp.model.Lab;
-import com.mpp.model.Notice;
-import com.mpp.model.User;
+import com.mpp.dao.*;
+import com.mpp.model.*;
 import com.mpp.model.entity.NoticeBean;
 import com.mpp.service.NoticeService;
 import org.springframework.stereotype.Service;
@@ -35,6 +29,9 @@ public class NoticeServiceImpl implements NoticeService {
     @Resource
     private LabDao labDao;
 
+    @Resource
+    private ApplyDao applyDao;
+
     @Override
     public List<NoticeBean> getNoticeByTargetUser(final Integer targetUser) {
         List<Notice> notice = noticeDao.getNoticeByManager(targetUser);
@@ -51,6 +48,8 @@ public class NoticeServiceImpl implements NoticeService {
             n.setLabId(no.getLabId());
             n.setCourseId(no.getCourseId());
             n.setApplyId(no.getApplyId());
+            Apply a = applyDao.getApplyByApplyId(no.getApplyId());
+            n.setApplyTime(a.getApplyTime());
             n.setNoticeId(no.getNoticeId());
             n.setState(no.getState());
             noticeBean.add(n);

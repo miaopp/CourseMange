@@ -21,5 +21,7 @@ public interface ApplyService {
 
     public Map<String, Object> getCourseDisplayByLab(Integer labId);
 
-    public void applyChangeState(final ApplyChangeStateBean bean);
+    public void applyChangeState(ApplyChangeStateBean bean);
+
+    public Apply getApplyByApplyId(Integer applyId);
 }

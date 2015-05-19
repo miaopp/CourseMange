@@ -28,4 +28,6 @@ public interface ApplyDao {
     public List<Apply> getApplyByCourseIdAndState(final Integer courseId, final Integer state);
 
     public void delApply(final int applyId);
+
+    public Apply getApplyByApplyId(Integer applyId);
 }

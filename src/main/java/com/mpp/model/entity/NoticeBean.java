@@ -1,5 +1,7 @@
 package com.mpp.model.entity;
 
+import java.util.Date;
+
 /**
  * Created by pp on 2015/4/21.
  */
@@ -13,6 +15,7 @@ public class NoticeBean {
     private int applyId;
     private int noticeId;
     private int state;
+    private Date applyTime;
 
     public String getUserRealName() {
         return userRealName;
@@ -86,6 +89,14 @@ public class NoticeBean {
         this.state = state;
     }
 
+    public Date getApplyTime() {
+        return applyTime;
+    }
+
+    public void setApplyTime(Date applyTime) {
+        this.applyTime = applyTime;
+    }
+
     @Override
     public String toString() {
         return "NoticeBean{" +
@@ -97,6 +108,8 @@ public class NoticeBean {
                 ", courseId=" + courseId +
                 ", applyId=" + applyId +
                 ", noticeId=" + noticeId +
+                ", state=" + state +
+                ", applyTime=" + applyTime +
                 '}';
     }
 }

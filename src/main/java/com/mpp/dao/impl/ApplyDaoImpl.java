@@ -76,4 +76,9 @@ public class ApplyDaoImpl implements ApplyDao {
         Preconditions.checkArgument(applyId > 0);
         this.sqlSession.delete("Apply.delApply", applyId);
     }
+    @Override
+    public Apply getApplyByApplyId(Integer applyId) {
+        Preconditions.checkNotNull(applyId);
+        return this.sqlSession.selectOne("Apply.selectApplyByApplyId", applyId);
+    }
 }

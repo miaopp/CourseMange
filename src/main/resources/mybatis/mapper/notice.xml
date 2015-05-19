@@ -22,6 +22,7 @@
         <result property="applyId" column="apply_id"/>
         <result property="noticeId" column="notice_id"/>
         <result property="state" column="notice_state"/>
+        <result property="applyTime" column="apply_time"/>
     </resultMap>
     <select id="selectNoticeByManager" parameterType="java.lang.Integer" resultMap="noticeResultMap">
         <![CDATA[

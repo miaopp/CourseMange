@@ -197,4 +197,9 @@ public class ApplyServiceImpl implements ApplyService{
         notice.setMessage(bean.getMsg());
         noticeDao.addNotice(notice);
     }
+
+    @Override
+    public Apply getApplyByApplyId(final Integer applyId) {
+        return applyDao.getApplyByApplyId(applyId);
+    }
 }

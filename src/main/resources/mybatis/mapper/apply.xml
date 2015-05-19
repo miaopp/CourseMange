@@ -73,6 +73,13 @@
             where a.lab_id = #{labId} and a.state = 2 and a.course_id = c.course_id and a.user_id = u.user_id
         ]]>
     </select>
+    <select id="selectApplyByApplyId" parameterType="java.lang.Integer" resultMap="applyResultMap">
+        <![CDATA[
+            select *
+            from apply
+            where apply_id = #{applyId}
+        ]]>
+    </select>
     <select id="selectOneApplyId" parameterType="Apply" resultMap="applyResultMap">
         <![CDATA[
             select *
