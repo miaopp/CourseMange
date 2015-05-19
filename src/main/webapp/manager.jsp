@@ -79,7 +79,7 @@
         });
     </script>
 </head>
-<body class="mybodystyle">
+<body class="mybodystyle" background="./img/bg.png">
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->

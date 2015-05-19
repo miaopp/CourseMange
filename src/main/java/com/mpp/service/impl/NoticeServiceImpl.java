@@ -83,6 +83,8 @@ public class NoticeServiceImpl implements NoticeService {
             n.setLabId(notice.getLabId());
             n.setCourseId(notice.getCourseId());
             n.setApplyId(notice.getApplyId());
+            Apply a = applyDao.getApplyByApplyId(notice.getApplyId());
+            n.setApplyTime(a.getApplyTime());
             n.setNoticeId(notice.getNoticeId());
             n.setState(notice.getState());
             list.add(n);
