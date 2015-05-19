@@ -7,6 +7,7 @@ import com.mpp.service.NoticeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public List<NoticeBean> getNoticeByTargetUser(final Integer targetUser) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         List<Notice> notice = noticeDao.getNoticeByManager(targetUser);
         List<NoticeBean> noticeBean = new ArrayList<NoticeBean>();
         for (Notice no : notice) {
@@ -49,7 +51,7 @@ public class NoticeServiceImpl implements NoticeService {
             n.setCourseId(no.getCourseId());
             n.setApplyId(no.getApplyId());
             Apply a = applyDao.getApplyByApplyId(no.getApplyId());
-            n.setApplyTime(a.getApplyTime());
+            n.setApplyTime(sdf.format(a.getApplyTime()));
             n.setNoticeId(no.getNoticeId());
             n.setState(no.getState());
             noticeBean.add(n);
@@ -69,6 +71,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public List<NoticeBean> getTeacherOfNotice(Integer targetUser) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         List<Notice> notices = noticeDao.getNoticeByTeacher(targetUser);
         List<NoticeBean> list = new ArrayList<NoticeBean>();
         for (Notice notice : notices) {
@@ -83,8 +86,8 @@ public class NoticeServiceImpl implements NoticeService {
             n.setLabId(notice.getLabId());
             n.setCourseId(notice.getCourseId());
             n.setApplyId(notice.getApplyId());
-            Apply a = applyDao.getApplyByApplyId(notice.getApplyId());
-            n.setApplyTime(a.getApplyTime());
+            Apply a = applyDao.getApplyByApplyId(n.getApplyId());
+            n.setApplyTime(sdf.format(a.getApplyTime()));
             n.setNoticeId(notice.getNoticeId());
             n.setState(notice.getState());
             list.add(n);

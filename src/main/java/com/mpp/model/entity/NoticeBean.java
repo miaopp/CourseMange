@@ -15,7 +15,7 @@ public class NoticeBean {
     private int applyId;
     private int noticeId;
     private int state;
-    private Date applyTime;
+    private String applyTime;
 
     public String getUserRealName() {
         return userRealName;
@@ -89,11 +89,11 @@ public class NoticeBean {
         this.state = state;
     }
 
-    public Date getApplyTime() {
+    public String getApplyTime() {
         return applyTime;
     }
 
-    public void setApplyTime(Date applyTime) {
+    public void setApplyTime(final String applyTime) {
         this.applyTime = applyTime;
     }
 
