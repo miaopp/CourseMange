@@ -159,6 +159,15 @@
                                 location.reload();
                             }
                         })
+            };
+
+            $scope.delCourse = function (item) {
+                $http.post("/course/delCourse?courseId="+item.id)
+                        .success(function (response) {
+                            if (200 == response.status) {
+                                location.reload();
+                            }
+                        })
             }
 
             $scope.logout = function () {
@@ -377,6 +386,7 @@
                      <%--data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">--%>
 
                 <div class="caption">
+                    <button type="button" class="close" tooltip="删除课程" tooltip-placement="top" ng-click="delCourse(item)"><span aria-hidden="true">&times;</span></button>
                     <h4>课程名称：{{item.name}}</h4>
                     <h5>授课老师：{{user.name}}</h5>
                     <h5>课程开设专业：{{item.courseMajor}}</h5>
@@ -392,7 +402,6 @@
                     <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#ApplyModal" ng-click="clickAddApplyOrderBtn(item)">
                         添加实验室排课
                     </button>
-                    <button type='button' class='btn btn-danger pull-right'>删除课程</button>
                 </div>
             </div>
         </div>

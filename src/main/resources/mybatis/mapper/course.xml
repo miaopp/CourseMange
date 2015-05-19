@@ -13,10 +13,11 @@
         <result property="courseBeginWeek" column="begin_week"/>
         <result property="courseEndWeek" column="end_week"/>
     </resultMap>
-    <select id="selectCourses" resultMap="courseResultMap">
+    <select id="selectCoursesByUserId" parameterType="java.lang.Integer" resultMap="courseResultMap">
         <![CDATA[
             select *
             from course
+            where user_id = #{userId}
         ]]>
     </select>
     <select id="selectCourse" parameterType="java.lang.Integer" resultMap="courseResultMap">

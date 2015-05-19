@@ -5,6 +5,10 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.google.common.collect.Lists;
+import com.mpp.dao.ApplyDao;
+import com.mpp.dao.ScheduleDao;
+import com.mpp.model.Apply;
+import com.mpp.model.entity.ScheduleStatus;
 import org.springframework.stereotype.Service;
 
 import com.mpp.dao.CourseDao;
@@ -21,9 +25,15 @@ public class CourseServiceImpl implements CourseService {
     @Resource
     private CourseDao courseDao;
 
+    @Resource
+    private ApplyDao applyDao;
+
+    @Resource
+    private ScheduleDao scheduleDao;
+
     @Override
-    public List<CourseBean> getCourse() {
-        List<Course>list = courseDao.getCourse();
+    public List<CourseBean> getCourse(final int userId) {
+        List<Course>list = courseDao.getCourseByUserId(userId);
 
         List<CourseBean> rtn = Lists.newArrayList();
         for (Course course : list) {
@@ -41,6 +51,21 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void deleteCourse(Integer id) {
+        List<Apply> applyList = applyDao.getApplyByCourseIdAndState(id, 0);
+        applyList.addAll(applyDao.getApplyByCourseIdAndState(id, 2));
+        Course course = courseDao.getCourse(id);
+        for (Apply apply : applyList) {
+            ScheduleStatus scheduleStatus = new ScheduleStatus();
+            scheduleStatus.setBeginWeek(course.getCourseBeginWeek());
+            scheduleStatus.setEndWeek(course.getCourseEndWeek());
+            scheduleStatus.setDayOfWeek(apply.getDayOfWeek());
+            scheduleStatus.setOrders(apply.getOrders());
+            scheduleStatus.setLabId(apply.getLabId());
+            scheduleStatus.setStatus(0);
+            scheduleStatus.setCourseId(0);
+            scheduleDao.setScheduleState(scheduleStatus);
+            applyDao.delApply(apply.getApplyId());
+        }
         courseDao.deleteCourse(id);
     }
 

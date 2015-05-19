@@ -19,8 +19,9 @@ public class CourseDaoImpl implements CourseDao {
     private SqlSession sqlSession;
 
     @Override
-    public List<Course> getCourse() {
-        return this.sqlSession.selectList("Course.selectCourses");
+    public List<Course> getCourseByUserId(final int userId) {
+        Preconditions.checkArgument(userId >= 0);
+        return this.sqlSession.selectList("Course.selectCoursesByUserId", userId);
     }
 
     @Override

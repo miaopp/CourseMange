@@ -9,7 +9,7 @@ import com.mpp.model.entity.CourseBean;
  * Created by pp on 2015/4/12.
  */
 public interface CourseService {
-    public List<CourseBean> getCourse();
+    public List<CourseBean> getCourse(final int userId);
     public void addCourse(Course course);
     public void deleteCourse(Integer id);
     public List<Course> getCourseByMajorAndClass(Course course);

@@ -24,4 +24,8 @@ public interface ApplyDao {
     public Apply getApplyIdByOtherAllMessage(Apply apply);
 
     public void applyChangeState(final Integer applyId, final Integer state);
+
+    public List<Apply> getApplyByCourseIdAndState(final Integer courseId, final Integer state);
+
+    public void delApply(final int applyId);
 }

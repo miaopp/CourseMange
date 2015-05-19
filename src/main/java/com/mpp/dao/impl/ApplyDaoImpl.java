@@ -63,4 +63,17 @@ public class ApplyDaoImpl implements ApplyDao {
         ImmutableMap param = ImmutableMap.of("applyId", applyId, "state", state);
         this.sqlSession.update("Apply.applyChangeState", param);
     }
+
+    @Override
+    public List<Apply> getApplyByCourseIdAndState(final Integer courseId, final Integer state) {
+        Preconditions.checkArgument(courseId > 0);
+        ImmutableMap param = ImmutableMap.of("courseId", courseId, "state", state);
+        return this.sqlSession.selectList("Apply.selectApplyByCourseIdAndState", param);
+    }
+
+    @Override
+    public void delApply(final int applyId) {
+        Preconditions.checkArgument(applyId > 0);
+        this.sqlSession.delete("Apply.delApply", applyId);
+    }
 }

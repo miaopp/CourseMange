@@ -87,4 +87,13 @@
             where apply_id = #{applyId}
         ]]>
     </update>
+    <select id="selectApplyByCourseIdAndState" parameterType="java.util.Map" resultMap="applyResultMap">
+        select *
+        from apply
+        where course_id = #{courseId} and state = #{state}
+    </select>
+    <delete id="delApply" parameterType="java.lang.Integer">
+        delete from apply
+        where apply_id = #{applyId}
+    </delete>
 </mapper>

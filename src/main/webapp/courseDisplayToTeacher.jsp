@@ -123,36 +123,6 @@
         </div>
     </div>
 </nav>
-<%--<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">--%>
-    <%--<div class="modal-dialog modal-sm">--%>
-        <%--<div class="modal-content">--%>
-            <%--<div class="modal-header">--%>
-                <%--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>--%>
-                <%--申请课程安排--%>
-            <%--</div>--%>
-            <%--<div class="modal-body">--%>
-                <%--<div class="row">--%>
-                    <%--<div class="col-sm-5">--%>
-                        <%--<h5>请选择课程：</h5>--%>
-                    <%--</div>--%>
-                    <%--<div class="col-sm-7">--%>
-                        <%--<div class="btn-group">--%>
-                            <%--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{CourseSelect}} <span class="caret"></span></button>--%>
-                            <%--<ul class="dropdown-menu" role="menu">--%>
-                                <%--<li ng-repeat="item in coursesOfTeacher">--%>
-                                    <%--<a ng-click="CourseSelector(item)">{{item.name}}</a>--%>
-                                <%--</li>--%>
-                            <%--</ul>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-            <%--<div class="modal-footer">--%>
-                <%--<button type="button" class="btn btn-success" ng-click="submitApply()">提交</button>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-<%--</div>--%>
 <div class="modal fade" id="LabApplyModal" tabindex="-1" role="dialog" aria-labelledby="LabApplyModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -161,14 +131,12 @@
                 <h4 class="modal-title" id="LabApplyModalLabel">申请课程安排</h4>
             </div>
             <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h5>请选择课程：</h5>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{CourseSelect}} <span class="caret"></span></button>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputCourse" class="col-sm-3 control-label col-sm-offset-2">请选择课程</label>
+                        <div class="controls col-sm-4 col-sm-offset-1">
+                            <div class="btn-group open choice" id="inputCourse">
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> {{CourseSelect}}<span class="caret"></span></button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li ng-repeat="item in coursesOfTeacher">
                                         <a ng-click="CourseSelector(item)">{{item.name}}</a>
