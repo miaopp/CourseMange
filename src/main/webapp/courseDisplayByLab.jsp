@@ -62,7 +62,7 @@
         });
     </script>
 </head>
-<body>
+<body background="./img/bg.png" class="mybodystyle">
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -102,22 +102,24 @@
     </div>
     <div class="panel panel-default">
         <div class="panel-body">
-            <div class="row">
-                <div class="col-sm-2">
-                    <h5>选择想要查看的实验室：</h5>
-                </div>
-                <div class="col-sm-1">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{LabSelect}} <span class="caret"></span></button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li ng-repeat="item in academyLabs">
-                                <a ng-click="LabSelector(item)">{{item.labName}}</a>
-                            </li>
-                        </ul>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h5>选择想要查看的实验室：</h5>
                     </div>
-                </div>
-                <div class="col-sm-9">
-                    <button type="button" class="btn btn-success" ng-click="LabCourseDisplay()">确认</button>
+                    <div class="col-sm-1">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{LabSelect}} <span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-repeat="item in academyLabs">
+                                    <a ng-click="LabSelector(item)">{{item.labName}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <button type="button" class="btn btn-success" ng-click="LabCourseDisplay()">确认</button>
+                    </div>
                 </div>
             </div>
         </div>
