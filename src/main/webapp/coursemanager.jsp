@@ -372,7 +372,7 @@
         </div>
     </div>
 </nav>
-<body>
+<body background="./img/bg.png" class="mybodystyle">
 <div class="container">
     <div class="page-header">
         <h1>课程信息管理</h1>

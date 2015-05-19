@@ -174,7 +174,7 @@
     </div>
 </nav>
 
-<body>
+<body background="./img/bg.png" class="mybodystyle">
 <div class="container">
     <div class="page-header">
         <h1>实验室管理</h1>
@@ -193,8 +193,10 @@
         </div>
     </div>
 
-    <div class='btn-group' ng-show="labIsNotEmpty">
-        <button type='button' class='btn btn-success' data-toggle="modal" data-target="#LabModal">添加实验室信息</button>
+    <div class="well" ng-show="labIsNotEmpty">
+        <div class='btn-group'>
+            <button type='button' class='btn btn-success' data-toggle="modal" data-target="#LabModal">添加实验室信息</button>
+        </div>
     </div>
 
     <div class="panel panel-danger" ng-show="labIsEmpty">

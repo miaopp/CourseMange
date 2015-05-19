@@ -97,7 +97,7 @@
         </div>
     </div>
 </nav>
-<body>
+<body background="./img/bg.png" class="mybodystyle">
 <div class="container">
     <div class="page-header">
         <h1>用户信息管理</h1>
