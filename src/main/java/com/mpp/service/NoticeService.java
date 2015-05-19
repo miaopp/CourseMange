@@ -14,4 +14,5 @@ public interface NoticeService {
     public void addNotice(Notice notice);
     public void noticeStateChange(Integer applyId, Integer state);
     public List<NoticeBean> getAllNoticeOfManager(Integer targetUser);
+    public void noticeIsReadByTeacher(Integer noticeId, Integer state);
 }

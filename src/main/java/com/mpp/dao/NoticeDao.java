@@ -15,4 +15,5 @@ public interface NoticeDao {
     public void noticeStateChange(Integer applyId, Integer state);
     public Notice getNoticeByApply(Integer applyId);
     public List<NoticeBean> getAllNoticeOfManager(Integer targetUser);
+    public void noticeIsReadByTeacher(Integer noticeId, Integer state);
 }

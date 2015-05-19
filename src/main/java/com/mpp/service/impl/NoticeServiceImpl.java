@@ -96,4 +96,9 @@ public class NoticeServiceImpl implements NoticeService {
     public List<NoticeBean> getAllNoticeOfManager(final Integer targetUser) {
         return noticeDao.getAllNoticeOfManager(targetUser);
     }
+
+    @Override
+    public void noticeIsReadByTeacher(final Integer noticeId, final Integer state) {
+        noticeDao.noticeIsReadByTeacher(noticeId, state);
+    }
 }

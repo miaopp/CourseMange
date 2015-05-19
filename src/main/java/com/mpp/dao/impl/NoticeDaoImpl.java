@@ -56,4 +56,12 @@ public class NoticeDaoImpl implements NoticeDao {
         Preconditions.checkNotNull(targetUser);
         return this.sqlSession.selectList("Notice.selectManagerAllNotices", targetUser);
     }
+
+    @Override
+    public void noticeIsReadByTeacher(final Integer noticeId, final Integer state) {
+        Preconditions.checkNotNull(noticeId);
+        Preconditions.checkNotNull(state);
+        ImmutableMap param = ImmutableMap.of("noticeId", noticeId, "state", state);
+        this.sqlSession.update("Notice.noticeOfTeacherIsRead", param);
+    }
 }

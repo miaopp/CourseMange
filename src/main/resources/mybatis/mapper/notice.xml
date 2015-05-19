@@ -66,4 +66,11 @@
             where n.user_id = u.user_id and n.course_id = c.course_id and n.lab_id = l.lab_id and n.target_user = #{targetUser}
         ]]>
     </select>
+    <update id="noticeOfTeacherIsRead" parameterType="java.util.Map">
+        <![CDATA[
+            update notice
+            set notice_state = #{state}
+            where notice_id = #{noticeId}
+        ]]>
+    </update>
 </mapper>

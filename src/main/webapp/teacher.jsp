@@ -57,6 +57,17 @@
                     return "timeline-inverted";
                 }
             };
+            $scope.changestate = {noticeId: -1, state: -1};
+            $scope.noticeHasBeenRead = function (NoticeId, State) {
+                $scope.changestate.noticeId = NoticeId;
+                $scope.changestate.state = State;
+                $http.post("/notice/noticeIsRead", $scope.changestate)
+                        .success(function (response) {
+                            if(200 == response.status) {
+                                location.reload();
+                            }
+                        })
+            }
         });
     </script>
 </head>
@@ -121,8 +132,8 @@
                         <div class="timeline-body">
                             <p>实验室管理员{{item.userRealName}} {{noticeState[item.state]}} 了您的申请</p>
                             <div>
-                                <button type="button" class="btn btn-link">标记为已读</button>
-                                <button type="button" class="btn btn-link" ng-show="item.state==3?true:false">重新申请实验室</button>
+                                <button type="button" class="btn btn-link" ng-click="noticeHasBeenRead(item.noticeId, 4)">标记为已读</button>
+                                <a href="./coursemanager.jsp" class="btn btn-link" ng-show="item.state==3?true:false">重新申请实验室</a>
                             </div>
                         </div>
                     </div>

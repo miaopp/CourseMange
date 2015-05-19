@@ -52,4 +52,11 @@ public class NoticeController {
         List<NoticeBean> list = noticeService.getAllNoticeOfManager(user.getUserId());
         return JsonReturn.getSuccess(list);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/noticeIsRead", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public CodeMessage noticeIsRead(@RequestBody Notice notice) {
+        noticeService.noticeIsReadByTeacher(notice.getNoticeId(), notice.getState());
+        return JsonReturn.getSuccess("success");
+    }
 }
