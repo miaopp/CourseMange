@@ -1,4 +1,4 @@
-.mycontianer{
+﻿.mycontianer{
 	margin-left: 15%;
 	margin-right: 15%;
 }
@@ -41,7 +41,7 @@ textarea.publish {
 }
 
 .login-dialog{
-    margin: 200px auto auto 50%;
+        margin: 200px auto 50% auto;
 	width: 470px;
 	height: auto;
 }
@@ -67,3 +67,8 @@ textarea.publish {
 .callout-info {
     border-left-color: #1b809e;
 }
+
+.mybodystyle {
+	font-family: "微软雅黑";
+}
+

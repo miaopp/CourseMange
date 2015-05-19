@@ -97,22 +97,26 @@
         <div class="panel-body">
             实验室管理员{{item.userRealName}} {{noticeState[item.state]}} 了您的申请
         </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-link">标记为已读</button>
+            <button type="button" class="btn btn-link" ng-show="item.state==3?true:false">重新申请实验室</button>
+        </div>
     </div>
     <div class="panel panel-danger" ng-show="noticeIsEmpty">
         <div class="panel-heading">
             <h3 class="panel-title">目前没有未处理消息！<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
         </div>
     </div>
-    <div class="footer" style="margin-top: 10px;">
-        <div class="container">
-            <hr>
-            Powered by HTML 4.0
-            <br>
-            Copyright © 计算机应用112班 缪萍.
-            All rights reserved.
-            <br>
-            0.052352 sec - 0 queries - 0 sec @ portal
-        </div>
+</div>
+<div class="footer" style="margin-top: 10px;">
+    <div class="container">
+        <hr>
+        Powered by HTML 4.0
+        <br>
+        Copyright © 计算机应用112班 缪萍.
+        All rights reserved.
+        <br>
+        0.052352 sec - 0 queries - 0 sec @ portal
     </div>
 </div>
 </body>
