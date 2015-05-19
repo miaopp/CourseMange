@@ -15,6 +15,10 @@
     <!-- css-->
     <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="./css/mystyle.css" rel="stylesheet" type="text/css"/>
+    <!-- Timeline CSS -->
+    <link href="./css/timeline.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <style type="text/css">
         .nav, .pagination, .carousel, .panel-title a {
             cursor: pointer;
@@ -46,6 +50,13 @@
                         }
                     })
             $scope.noticeState = ["", "", "同意", "拒绝"];
+            $scope.TimeLineWay = function (state) {
+                if (2 == state) {
+                    return "";
+                } else {
+                    return "timeline-inverted";
+                }
+            };
         });
     </script>
 </head>
@@ -90,19 +101,38 @@
         <h1>欢迎登录实验室排课系统</h1>
     </div>
 
-    <div class="panel panel-danger" ng-repeat="item in notice">
+    <!-- /.panel -->
+    <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title" id="panel-title">实验室 {{item.labName}} 审核提醒<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
+            <i class="fa fa-clock-o fa-fw"></i> 审核提醒
         </div>
-        <div class="panel-body">
-            实验室管理员{{item.userRealName}} {{noticeState[item.state]}} 了您的申请
+        <!-- /.panel-heading -->
+        <div class="panel-body" ng-if="!noticeIsEmpty">
+            <ul class="timeline">
+                <li ng-repeat="item in notice" ng-class="{'timeline-inverted':item.state==3}">
+                    <div class="timeline-badge warning" ng-if="item.state == 3"><i class="fa fa-times"></i></div>
+                    <div class="timeline-badge success" ng-if="item.state == 2"><i class="fa fa-check"></i></div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title">实验室 {{item.labName}} 审核提醒</h4>
+                            <p><small class="text-muted"><i class="fa fa-clock-o"></i> 11 hours ago via Twitter</small>
+                            </p>
+                        </div>
+                        <div class="timeline-body">
+                            <p>实验室管理员{{item.userRealName}} {{noticeState[item.state]}} 了您的申请</p>
+                            <div>
+                                <button type="button" class="btn btn-link">标记为已读</button>
+                                <button type="button" class="btn btn-link" ng-show="item.state==3?true:false">重新申请实验室</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <div class="panel-footer">
-            <button type="button" class="btn btn-link">标记为已读</button>
-            <button type="button" class="btn btn-link" ng-show="item.state==3?true:false">重新申请实验室</button>
-        </div>
+        <!-- /.panel-body -->
     </div>
-    <div class="panel panel-danger" ng-show="noticeIsEmpty">
+    <!-- /.panel -->
+    <div class="panel panel-danger" ng-if="noticeIsEmpty">
         <div class="panel-heading">
             <h3 class="panel-title">目前没有未处理消息！<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
         </div>
