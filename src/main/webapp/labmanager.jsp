@@ -15,6 +15,12 @@
     <!-- css-->
     <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="./css/mystyle.css" rel="stylesheet" type="text/css"/>
+    <!-- Timeline CSS -->
+    <link href="./css/timeline.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom CSS -->
+    <link href="./css/sb-admin-2.css" rel="stylesheet">
     <style type="text/css">
         .nav, .pagination, .carousel, .panel-title a {
             cursor: pointer;
@@ -78,13 +84,22 @@
                                 location.reload();
                             }
                         })
-            }
+            };
 
             $scope.logout = function () {
                 $http.get("/user/logout")
                         .success(function () {
                             location.href = "./login.jsp";
                         })
+            };
+
+            $scope.panelColor = function (idx) {
+                switch (idx % 4) {
+                    case 0: return "panel-primary";
+                    case 1: return "panel-green";
+                    case 2: return "panel-yellow";
+                    case 3: return "panel-red";
+                }
             }
         });
     </script>
@@ -181,17 +196,34 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-3" ng-repeat="item in lab">
-            <div class="thumbnail">
-                <div class="caption">
-                    <h4>实验室名称：{{item.labName}}</h4>
-                    <h5>所在学院：{{item.labDept}}</h5>
-                    <h5>实验室地址：{{item.labAddress}}</h5>
-                    <button type='button' class='btn btn-danger' ng-click="Deletor(item.id)">删除</button>
+        <div  ng-repeat="item in lab">
+
+            <div class="col-lg-3 col-md-6">
+                <div class="panel" ng-class="panelColor($index)">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-tasks fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <h2>{{item.labName}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <a>
+                        <div class="panel-footer">
+                            <span class="pull-left">
+                                <h5>所在学院：{{item.labDept}}</h5>
+                                <h5>实验室地址：{{item.labAddress}}</h5></span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+
 
     <div class="well" ng-show="labIsNotEmpty">
         <div class='btn-group'>

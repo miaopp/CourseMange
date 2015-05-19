@@ -7,6 +7,10 @@
     <!-- css-->
     <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="./css/mystyle.css" rel="stylesheet" type="text/css"/>
+    <!-- Timeline CSS -->
+    <link href="./css/timeline.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <style type="text/css">
         .nav, .pagination, .carousel, .panel-title a {
             cursor: pointer;
