@@ -91,8 +91,11 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/userChange", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public CodeMessage userChange(@RequestBody User user) {
+    public CodeMessage userChange(@RequestBody User user,HttpSession httpSession) {
         userService.changUser(user);
+        User u = userService.getUserByUserId(user.getUserId());
+        httpSession.removeAttribute("user");
+        httpSession.setAttribute("user",u);
         return JsonReturn.getSuccess("success");
     }
 }
