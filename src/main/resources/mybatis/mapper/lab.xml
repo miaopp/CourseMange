@@ -51,4 +51,9 @@
             where lab_dept = #{dept};
         ]]>
     </select>
+    <update id="modifyLabMessage" parameterType="Lab">
+        update lab
+        set lab_dept = #{labDept}, lab_address = #{labAddress}
+        where lab_id = #{id}
+    </update>
 </mapper>

@@ -48,4 +48,10 @@ public class LabDaoImpl implements LabDao {
         Preconditions.checkNotNull(id);
         return sqlSession.selectOne("Lab.selectLabByLabId", id);
     }
+
+    @Override
+    public void labMessageModify (final Lab lab) {
+        Preconditions.checkNotNull(lab);
+        this.sqlSession.update("Lab.modifyLabMessage", lab);
+    }
 }

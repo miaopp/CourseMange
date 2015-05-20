@@ -66,4 +66,11 @@ public class LabController {
         Lab l = labService.getLabByLabId(id);
         return JsonReturn.getSuccess(l);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/modifyLabMessage", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public CodeMessage modifyLabMessage (@RequestBody Lab lab) {
+        labService.labMessageModify(lab);
+        return JsonReturn.getSuccess("success");
+    }
 }

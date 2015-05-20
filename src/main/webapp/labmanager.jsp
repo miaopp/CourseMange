@@ -51,6 +51,8 @@
                             }
                         }
                     })
+            $scope.academy = [{code: -1, name: "未选择"}, {code: 1, name: "计算机学院"}, {code: 2, name: "软件学院"}];
+            $scope.modifyAcademySelect = "未选择";
             $scope.LabModify = {id:-1, labName: "", labDept: -1, labAddress: ""};
             $scope.modifyLab = function (id) {
                 $http.post("/lab/getModifyLab?id="+id)
@@ -61,11 +63,17 @@
                             }
                         })
             }
-            $scope.academy = [{code: -1, name: "未选择"}, {code: 1, name: "计算机学院"}, {code: 2, name: "软件学院"}];
-            $scope.modifyAcademySelect = "未选择";
             $scope.modifyAcademySelector = function (item) {
                 $scope.modifyAcademySelect = item.name;
                 $scope.LabModify.labDept = item.code;
+            }
+            $scope.modifyMessage = function () {
+                $http.post("/lab/modifyLabMessage", $scope.LabModify)
+                        .success(function (response) {
+                            if(200 == response.status) {
+                                location.reload();
+                            }
+                        })
             }
 
             $scope.LabAdd = {labName:"", labDept:-1, labAddress:""};
@@ -176,17 +184,19 @@
             </div>
             <div class="modal-body">
                 <div class="form-horizontal">
-                    <div class="form-group">
-                        <label for="labName" class="col-sm-3 control-label col-sm-offset-1">实验室名称</label>
-                        <div class="col-sm-5 col-sm-offset-1">
-                            <input type="text" class="form-control" id="labName" value="LabModify.labName" ng-model="LabModify.labName" tooltip="实验室的名称，如：6301" tooltip-trigger="focus" tooltip-placement="top">
+                    <fieldset disabled>
+                        <div class="form-group">
+                            <label for="disabledTextInput" class="col-sm-3 control-label col-sm-offset-1">实验室名称</label>
+                            <div class="col-sm-5 col-sm-offset-1">
+                                <input type="disabledTextInput" id="disabledTextInput" class="form-control" ng-model="LabModify.labName" value="LabModify.labName">
+                            </div>
                         </div>
-                    </div>
+                    </fieldset>
                     <div class="form-group">
                         <label for="modifyLabDept" class="col-sm-3 control-label col-sm-offset-1">实验室所属学院</label>
                         <div class="controls col-sm-5 col-sm-offset-1">
                             <div class="btn-group open choice" id="modifyLabDept">
-                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> {{modifyAcademySelected}}<span class="caret"></span></button>
+                                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> {{modifyAcademySelect}}<span class="caret"></span></button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li ng-repeat="item in academy">
                                         <a ng-click="modifyAcademySelector(item)">{{item.name}}</a>

@@ -15,4 +15,5 @@ public interface LabService {
     public List<LabInfoBean> getLabNameByDept(Integer labDept);
     public List<Lab> getLabNameByTeacherDept(Integer labDept);
     public Lab getLabByLabId (Integer id);
+    public void labMessageModify (Lab lab);
 }

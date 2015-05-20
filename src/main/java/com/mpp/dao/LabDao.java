@@ -18,4 +18,6 @@ public interface LabDao {
 
     public Lab getLabByLabId (Integer id);
 
+    public void labMessageModify(Lab lab);
+
 }
