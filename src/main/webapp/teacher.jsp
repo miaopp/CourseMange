@@ -38,17 +38,22 @@
                         .success(function () {
                             location.href = "./login.jsp";
                         })
-            }
+            };
+            $scope.pagination = {TotalItems: 0, CurrentPage: 1, maxSize: 5, itemsPerPage: 15, numPages: -1};
+            $scope.load = function () {
+                $http.post("/notice/loadTeacherNotice?start="+(($scope.pagination.CurrentPage-1)*$scope.pagination.itemsPerPage)+"&length="+$scope.pagination.itemsPerPage ,$scope.LoadNotice)
+                        .success(function (response) {
+                            if(200 == response.status) {
+                                $scope.notice = response.data.notice;
+                                $scope.pagination.TotalItems = response.data.count;
+                                $scope.noticeIsEmpty = $scope.notice.length == 0;
+                            }
+                        });
+            };
 
             $scope.LoadNotice = {targetUser: <%=session.getAttribute("uid")%>};
             $scope.noticeIsEmpty = true;
-            $http.post("/notice/loadTeacherNotice" ,$scope.LoadNotice)
-                    .success(function (response) {
-                        if(200 == response.status) {
-                            $scope.notice = response.data;
-                            $scope.noticeIsEmpty = $scope.notice.length == 0;
-                        }
-                    })
+            $scope.load();
             $scope.noticeState = ["", "", "同意", "拒绝"];
             $scope.TimeLineWay = function (state) {
                 if (2 == state) {
@@ -119,6 +124,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-clock-o fa-fw"></i> 审核提醒
+            <div class="pull-right">Page: {{pagination.CurrentPage}} / {{pagination.numPages}}</div>
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body" ng-if="!noticeIsEmpty">
@@ -154,6 +160,7 @@
             </ul>
         </div>
         <!-- /.panel-body -->
+        <pagination class="pull-right" ng-change="load()" total-items="pagination.TotalItems" items-per-page="pagination.itemsPerPage" ng-model="pagination.CurrentPage" max-size="pagination.maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="pagination.numPages"></pagination>
     </div>
     <!-- /.panel -->
 </div>

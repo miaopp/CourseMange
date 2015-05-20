@@ -1,5 +1,6 @@
 package com.mpp.controller;
 
+import com.google.common.collect.ImmutableList;
 import com.mpp.constants.CodeMessage;
 import com.mpp.constants.JsonReturn;
 import com.mpp.model.Notice;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by pp on 2015/4/19.
@@ -23,18 +25,21 @@ public class NoticeController {
     @Resource
     private NoticeService noticeService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/loadNotice", produces = "application/json; charset=utf-8")
+    private static final ImmutableList teacherStates = ImmutableList.of(2, 3);
+    private static final ImmutableList manageStates = ImmutableList.of(1);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/loadManagerNotice", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public CodeMessage loadNotice(@RequestBody Notice notice) {
-        List<NoticeBean> list = noticeService.getNoticeByTargetUser(notice.getTargetUser());
-        return JsonReturn.getSuccess(list);
+    public CodeMessage loadManagerNotice(@RequestBody Notice notice, @RequestParam Integer start, @RequestParam Integer length) {
+        Map<String, Object> rtn = noticeService.getNoticeByTargetUser(notice.getTargetUser(), start, length, manageStates);
+        return JsonReturn.getSuccess(rtn);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/loadTeacherNotice", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public  CodeMessage loadTeacherNotice(@RequestBody Notice notice) {
-        List<NoticeBean> list = noticeService.getTeacherOfNotice(notice.getTargetUser());
-        return JsonReturn.getSuccess(list);
+    public  CodeMessage loadTeacherNotice(@RequestBody Notice notice, @RequestParam Integer start, @RequestParam Integer length) {
+        Map<String, Object> rtn = noticeService.getNoticeByTargetUser(notice.getTargetUser(), start, length, teacherStates);
+        return JsonReturn.getSuccess(rtn);
     }
 
 

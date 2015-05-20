@@ -1,5 +1,6 @@
 package com.mpp.service.impl;
 
+import com.google.common.collect.Maps;
 import com.mpp.dao.*;
 import com.mpp.model.*;
 import com.mpp.model.entity.NoticeBean;
@@ -10,6 +11,7 @@ import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by pp on 2015/4/19.
@@ -34,9 +36,9 @@ public class NoticeServiceImpl implements NoticeService {
     private ApplyDao applyDao;
 
     @Override
-    public List<NoticeBean> getNoticeByTargetUser(final Integer targetUser) {
+    public Map<String, Object> getNoticeByTargetUser(final Integer targetUser, final Integer start, final Integer length, final List manageStates) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        List<Notice> notice = noticeDao.getNoticeByManager(targetUser);
+        List<Notice> notice = noticeDao.getNoticeByTargetUser(targetUser, start, length, manageStates);
         List<NoticeBean> noticeBean = new ArrayList<NoticeBean>();
         for (Notice no : notice) {
             NoticeBean n = new NoticeBean();
@@ -56,7 +58,11 @@ public class NoticeServiceImpl implements NoticeService {
             n.setState(no.getState());
             noticeBean.add(n);
         }
-        return noticeBean;
+        int count = noticeDao.getCountByTargetUser(targetUser, manageStates);
+        Map<String, Object> rtn = Maps.newHashMap();
+        rtn.put("notice", noticeBean);
+        rtn.put("count", count);
+        return rtn;
     }
 
     @Override
@@ -67,32 +73,6 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public void noticeStateChange(final Integer applyId,final Integer state) {
         noticeDao.noticeStateChange(applyId, state);
-    }
-
-    @Override
-    public List<NoticeBean> getTeacherOfNotice(Integer targetUser) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        List<Notice> notices = noticeDao.getNoticeByTeacher(targetUser);
-        List<NoticeBean> list = new ArrayList<NoticeBean>();
-        for (Notice notice : notices) {
-            NoticeBean n = new NoticeBean();
-            User u = userDao.getUserByUserId(notice.getUserId());
-            n.setUserRealName(u.getRealName());
-            Course c = courseDao.getCourse(notice.getCourseId());
-            n.setCourseName(c.getName());
-            Lab l = labDao.getLabByLabId(notice.getLabId());
-            n.setLabName(l.getLabName());
-            n.setUserId(notice.getUserId());
-            n.setLabId(notice.getLabId());
-            n.setCourseId(notice.getCourseId());
-            n.setApplyId(notice.getApplyId());
-            Apply a = applyDao.getApplyByApplyId(n.getApplyId());
-            n.setApplyTime(sdf.format(a.getApplyTime()));
-            n.setNoticeId(notice.getNoticeId());
-            n.setState(notice.getState());
-            list.add(n);
-        }
-        return list;
     }
 
     @Override

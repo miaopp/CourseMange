@@ -22,13 +22,15 @@ public class NoticeDaoImpl implements NoticeDao {
     private SqlSession sqlSession;
 
     @Override
-    public List<Notice> getNoticeByManager(final Integer targetUser) {
-        return this.sqlSession.selectList("Notice.selectNoticeByManager",targetUser);
+    public List<Notice> getNoticeByTargetUser(final Integer targetUser, final Integer start, final Integer length, final List states) {
+        ImmutableMap param = ImmutableMap.of("targetUser", targetUser, "start", start, "length", length, "states", states);
+        return this.sqlSession.selectList("Notice.selectNoticeByTargetUser",param);
     }
 
     @Override
-    public List<Notice> getNoticeByTeacher(final Integer targetUser) {
-        return this.sqlSession.selectList("Notice.selectNoticeByTeacher",targetUser);
+    public int getCountByTargetUser(final Integer targetUser, final List states) {
+        ImmutableMap param = ImmutableMap.of("targetUser", targetUser, "states", states);
+        return this.sqlSession.selectOne("Notice.selectCountByTargetUser",param);
     }
 
     @Override
