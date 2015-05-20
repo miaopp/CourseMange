@@ -15,6 +15,10 @@
     <!-- css-->
     <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="./css/mystyle.css" rel="stylesheet" type="text/css"/>
+    <!-- Timeline CSS -->
+    <link href="./css/timeline.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <style type="text/css">
         .nav, .pagination, .carousel, .panel-title a {
             cursor: pointer;
@@ -46,6 +50,7 @@
                             }
                         }
                     })
+            $scope.noticeLength = 0;
 
             $scope.courseApplyDetail = function (item) {
                 $http.post("/apply/courseDisplay?LabId=" + item.labId)
@@ -103,12 +108,15 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        当前用户：<%=session.getAttribute("username")%> <span class="caret"></span>
+                    <a class="dropdown-toggle active" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i>当前用户：<%=session.getAttribute("username")%><i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a ng-click="logout()">退出</a></li>
+                    <ul class="dropdown-menu dropdown-user in">
+                        <li class="divider"></li>
+                        <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
                     </ul>
+                    <!-- /.dropdown-user -->
                 </li>
             </ul>
         </div>
@@ -181,33 +189,54 @@
     <div class="page-header">
         <h1>欢迎登录实验室排课系统</h1>
     </div>
-    <div class="panel panel-info" ng-repeat="item in notice">
+    <!-- /.panel -->
+    <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title" id="panel-title">{{item.labName}}实验室申请<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
+            <i class="fa fa-comments fa-fw"></i>
+            实验室申请提醒
         </div>
-        <div class="panel-body">
-            教师{{item.userRealName}}就所教授课程{{item.courseName}}提出实验室申请
+        <!-- /.panel-heading -->
+        <div class="panel-body" ng-if="!noticeIsEmpty">
+            <ul class="timeline">
+                <li ng-repeat="item in notice" ng-class="{'timeline-inverted': $index%2 == 1}">
+                    <div class="timeline-badge success"><i class="fa fa-graduation-cap"></i></div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title">实验室 {{item.labName}} 申请提醒</h4>
+                            <p><small class="text-muted"><i class="fa fa-clock-o"></i>{{item.applyTime}}</small>
+                            </p>
+                        </div>
+                        <div class="timeline-body">
+                            <p>教师 {{item.userRealName}} 就所教授课程 {{item.courseName}} 提出实验室 {{item.labName}} 申请</p>
+                            <div>
+                                <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="courseApplyDetail(item)">
+                                    查看详情
+                                </button>
+                                <button type="button" class="btn btn-link" ng-click="changeInfo(item.applyId, 2);applyChangeState()">
+                                    同意申请
+                                </button>
+                                <button type="button" class="btn btn-link" ng-click="changeInfo(item.applyId, 3)" data-toggle="modal" data-target="#rejectModal">
+                                    拒绝申请
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <div class="panel-footer">
-            <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="courseApplyDetail(item)">
-                查看详情
-            </button>
-            <button type="button" class="btn btn-link" ng-click="changeInfo(item.applyId, 2);applyChangeState()">
-                同意申请
-            </button>
-            <button type="button" class="btn btn-link" ng-click="changeInfo(item.applyId, 3)" data-toggle="modal" data-target="#rejectModal">
-                拒绝申请
-            </button>
+        <div class="panel-body"  ng-if="noticeIsEmpty">
+            <ul class="timeline">
+                <li>
+                    <div class="timeline-badge danger"><i class="fa fa-save"></i></div>
+                    <div class="timeline-panel">
+                        <p>目前没有待处理的消息！</p>
+                    </div>
+                </li>
+            </ul>
         </div>
+        <!-- /.panel-body -->
     </div>
-    <div class="panel panel-danger" ng-show="noticeIsEmpty">
-        <div class="panel-heading">
-            提醒
-        </div>
-        <div class="panel-body">
-            目前没有待处理的消息！
-        </div>
-    </div>
+    <!-- /.panel -->
 </div>
 <div class="footer" style="margin-top: 10px;">
     <div class="container">

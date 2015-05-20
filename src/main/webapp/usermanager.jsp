@@ -15,6 +15,10 @@
     <!-- css-->
     <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="./css/mystyle.css" rel="stylesheet" type="text/css"/>
+    <!-- Timeline CSS -->
+    <link href="./css/timeline.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <style type="text/css">
         .nav, .pagination, .carousel, .panel-title a {
             cursor: pointer;
@@ -86,12 +90,15 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        当前用户：<%=session.getAttribute("username")%> <span class="caret"></span>
+                    <a class="dropdown-toggle active" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i>当前用户：<%=session.getAttribute("username")%><i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a ng-click="logout()">退出</a></li>
+                    <ul class="dropdown-menu dropdown-user in">
+                        <li class="divider"></li>
+                        <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
                     </ul>
+                    <!-- /.dropdown-user -->
                 </li>
             </ul>
         </div>
