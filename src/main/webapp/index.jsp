@@ -89,9 +89,9 @@
     <div class="page-header">
         <h1>欢迎登录实验室排课系统</h1>
     </div>
-    <div class="panel panel-info">
+    <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading" ng-modal="Displaytitle">{{Displaytitle}}</div>
+        <div class="panel-heading"><i class="fa fa-graduation-cap"></i>{{Displaytitle}}</div>
         <!-- Table -->
         <table class="table">
             <thead>

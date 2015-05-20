@@ -143,14 +143,19 @@
                 </li>
             </ul>
         </div>
+        <div class="panel-body" ng-if="noticeIsEmpty">
+            <ul class="timeline">
+                <li>
+                    <div class="timeline-badge danger"><i class="fa fa-save"></i></div>
+                    <div class="timeline-panel">
+                        <p>目前没有未处理消息！</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
         <!-- /.panel-body -->
     </div>
     <!-- /.panel -->
-    <div class="panel panel-danger" ng-if="noticeIsEmpty">
-        <div class="panel-heading">
-            <h3 class="panel-title">目前没有未处理消息！<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
-        </div>
-    </div>
 </div>
 <div class="footer" style="margin-top: 10px;">
     <div class="container">

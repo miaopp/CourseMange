@@ -156,7 +156,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="CourseModalLabel">{{LabName}}实验室排课情况<a class="anchorjs-link" href="#CourseModalLabel"><span class="anchorjs-icon"></span></a></h4>
+                <h4 class="modal-title" id="CourseModalLabel"><i class="fa fa-graduation-cap"></i>{{LabName}}实验室排课情况<a class="anchorjs-link" href="#CourseModalLabel"><span class="anchorjs-icon"></span></a></h4>
             </div>
             <div class="panel panel-info">
                 <!-- Table -->

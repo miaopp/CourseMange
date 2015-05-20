@@ -7,10 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import com.mpp.model.entity.LabInfoBean;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.mpp.constants.AcademyEnum;
 import com.mpp.constants.CodeMessage;
@@ -61,5 +58,12 @@ public class LabController {
         User user = (User) httpSession.getAttribute("user");
         List<Lab> list = labService.getLabNameByTeacherDept(user.getDept());
         return JsonReturn.getSuccess(list);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/getModifyLab", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public CodeMessage getModifyLab(@RequestBody Lab lab) {
+        Lab l = labService.getLabByLabId(lab.getId());
+        return JsonReturn.getSuccess(l);
     }
 }

@@ -196,6 +196,20 @@ public class ApplyServiceImpl implements ApplyService{
         notice.setLabId(no.getLabId());
         notice.setMessage(bean.getMsg());
         noticeDao.addNotice(notice);
+        if(bean.getState() == 3) {
+            ScheduleStatus scheduleStatus = new ScheduleStatus();
+            Apply apply = applyDao.getApplyByApplyId(bean.getApplyId());
+            Course course = courseDao.getCourse(apply.getCourseId());
+            scheduleStatus.setLabId(apply.getLabId());
+            scheduleStatus.setCourseId(course.getId());
+            scheduleStatus.setDayOfWeek(apply.getDayOfWeek());
+            scheduleStatus.setBeginWeek(course.getCourseBeginWeek());
+            scheduleStatus.setEndWeek(course.getCourseEndWeek());
+            scheduleStatus.setLength((course.getCourseEndWeek()-course.getCourseBeginWeek())+1);
+            scheduleStatus.setStatus(0);
+            scheduleStatus.setOrders(apply.getOrders());
+            scheduleDao.setScheduleStateOfNotAcceptedCourse(scheduleStatus);
+        }
     }
 
     @Override

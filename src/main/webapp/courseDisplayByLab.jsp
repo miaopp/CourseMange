@@ -108,6 +108,9 @@
         <h1>按实验室查看课表</h1>
     </div>
     <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-graduation-cap"></i>查看实验室课表
+        </div>
         <div class="panel-body">
             <div class="container-fluid">
                 <div class="row">
@@ -131,9 +134,9 @@
             </div>
         </div>
     </div>
-    <div class="panel panel-info" ng-show="Display">
+    <div class="panel panel-default" ng-if="Display">
         <!-- Default panel contents -->
-        <div class="panel-heading" ng-modal="LabName">{{LabName}}实验室课程安排</div>
+        <div class="panel-heading"><i class="fa fa-save"></i>{{LabName}}实验室课程安排</div>
         <!-- Table -->
         <table class="table">
             <thead>

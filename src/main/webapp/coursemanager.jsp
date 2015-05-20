@@ -384,7 +384,7 @@
         <h1>课程信息管理</h1>
     </div>
 
-    <div class="row">
+    <div class="row" ng-if="!courseIsEmpty">
         <div class="col-sm-3" ng-repeat="item in course">
             <div class="thumbnail">
                 <%--<img data-src="holder.js/100%x200" alt="100%x200"--%>
@@ -413,15 +413,20 @@
         </div>
     </div>
 
-    <div class="panel panel-danger">
-        <div class="panel-heading" ng-show="courseIsEmpty">
-            <h3 class="panel-title" id="panel-title">提醒<a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a></h3>
+    <div class="panel panel-default" ng-if="courseIsEmpty">
+        <div class="panel-heading">
+            <i class="fa fa-comments fa-fw"></i> 提醒
         </div>
         <div class="panel-body" ng-show="courseIsEmpty">
             目前还没有相关课程信息，请添加！
         </div>
         <div class="panel-footer">
             <a href="#" class="btn btn-link" role="button" data-toggle="modal" data-target="#CourseModal">添加课程信息</a>
+        </div>
+    </div>
+    <div class="well" ng-if="!courseIsEmpty">
+        <div class="btn-group">
+            <button type='button' class='btn btn-success' data-toggle="modal" data-target="#CourseModal">添加实验室信息</button>
         </div>
     </div>
     <%--<div class='well'>--%>

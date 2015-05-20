@@ -33,4 +33,9 @@ public class ScheduleDaoImpl implements ScheduleDao {
     public void setScheduleState(final ScheduleStatus scheduleStatus) {
         this.sqlSession.update("Schedule.updateScheduleState", scheduleStatus);
     }
+
+    @Override
+    public void setScheduleStateOfNotAcceptedCourse(final ScheduleStatus scheduleStatus) {
+        this.sqlSession.update("Schedule.courseApplyIsNotAccepted", scheduleStatus);
+    }
 }

@@ -44,4 +44,10 @@
             where lab_id = #{labId} and day_of_week = #{dayOfWeek} and week >= #{beginWeek} and week <= #{endWeek} and orders = #{orders}
         ]]>
     </update>
+    <update id="courseApplyIsNotAccepted" parameterType="ScheduleStatus">
+        <![CDATA[
+            update schedule set state = #{status}
+            where lab_id = #{labId} and course_id = #{courseId} and day_of_week = #{dayOfWeek} and week >= #{beginWeek} and week <= #{endWeek} and orders = #{orders}
+        ]]>
+    </update>
 </mapper>

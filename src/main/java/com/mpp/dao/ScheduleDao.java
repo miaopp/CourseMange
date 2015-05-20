@@ -15,4 +15,6 @@ public interface ScheduleDao {
     public List<Integer> getOrders(OrderFilter filter);
 
     public void setScheduleState(ScheduleStatus scheduleStatus);
+
+    public void setScheduleStateOfNotAcceptedCourse(ScheduleStatus scheduleStatus);
 }
