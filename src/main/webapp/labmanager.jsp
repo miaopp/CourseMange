@@ -53,15 +53,16 @@
                     })
             $scope.LabModify = {id:-1, labName: "", labDept: -1, labAddress: ""};
             $scope.modifyLab = function (id) {
-                $http.post("/lab/getModifyLab?id=" + id)
+                $http.post("/lab/getModifyLab?id="+id)
                         .success(function (response) {
                             if(200 == response.status) {
-                                $scope.LabModify.labName = response.data;
+                                $scope.LabModify = response.data;
+                                $scope.modifyAcademySelect = $scope.academy[$scope.LabModify.labDept].name;
                             }
                         })
             }
             $scope.academy = [{code: -1, name: "未选择"}, {code: 1, name: "计算机学院"}, {code: 2, name: "软件学院"}];
-            $scope.modifyAcademySelect = $scope.academy[$scope.LabModify.labDept].name;
+            $scope.modifyAcademySelect = "未选择";
             $scope.modifyAcademySelector = function (item) {
                 $scope.modifyAcademySelect = item.name;
                 $scope.LabModify.labDept = item.code;
@@ -73,7 +74,7 @@
             $scope.academySelector = function (item) {
                 $scope.academySelected = item.name;
                 $scope.LabAdd.labDept = item.code;
-            }
+            };
 
             $scope.labInsert = function () {
                 $scope.LabAddAlert.labName = $scope.LabAdd.labName.length < 3;
@@ -89,15 +90,13 @@
                 }
             };
 
-            $scope.LabDe = {id: -1};
             $scope.Deletor = function (id) {
-                $scope.LabDe.id = id;
-                $http.post("/lab/labDelete", $scope.LabDe)
+                $http.post("/lab/labDelete?id=" + id)
                         .success(function (response) {
-                            if(200 == response.status) {
+                            if (200 == response.status) {
                                 location.reload();
                             }
-                        })
+                        });
             };
 
             $scope.logout = function () {
@@ -184,9 +183,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputLabDept" class="col-sm-3 control-label col-sm-offset-1">实验室所属学院</label>
+                        <label for="modifyLabDept" class="col-sm-3 control-label col-sm-offset-1">实验室所属学院</label>
                         <div class="controls col-sm-5 col-sm-offset-1">
-                            <div class="btn-group open choice" id="inputLabDept">
+                            <div class="btn-group open choice" id="modifyLabDept">
                                 <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> {{modifyAcademySelected}}<span class="caret"></span></button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li ng-repeat="item in academy">
@@ -197,9 +196,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputLabAddress" class="col-sm-3 control-label col-sm-offset-1">实验室地点</label>
+                        <label for="modifyLabAddress" class="col-sm-3 control-label col-sm-offset-1">实验室地点</label>
                         <div class="col-sm-5 col-sm-offset-1">
-                            <input type="text" class="form-control" id="inputLabAddress" value="LabModify.labAddress" ng-model="LabModify.labAddress" tooltip="如：六教三楼最边边上，6301" tooltip-trigger="focus" tooltip-placement="bottom">
+                            <input type="text" class="form-control" id="modifyLabAddress" value="LabModify.labAddress" ng-model="LabModify.labAddress" tooltip="如：六教三楼最边边上，6301" tooltip-trigger="focus" tooltip-placement="bottom">
                         </div>
                     </div>
                 </div>
@@ -276,7 +275,7 @@
                             <span class="pull-left">
                                 <h5>所在学院：{{item.labDept}}</h5>
                                 <h5>实验室地址：{{item.labAddress}}</h5></span>
-                            <span class="pull-right"><button type="button" data-toggle="modal" data-target="#ModifyModal" ng-click="modifyLab(item.labId)"><i class="fa fa-arrow-circle-right"></i></button></span>
+                            <span class="pull-right"><button type="button" data-toggle="modal" data-target="#ModifyModal" ng-click="modifyLab(item.id)"><i class="fa fa-arrow-circle-right"></i></button></span>
                             <div class="clearfix"></div>
                         </div>
                     </a>
