@@ -47,8 +47,8 @@ public class LabController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/labDelete", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public CodeMessage labDelete(@RequestBody Lab lab) {
-        labService.deleteLab(lab.getId());
+    public CodeMessage labDelete(@RequestParam Integer id) {
+        labService.deleteLab(id);
         return JsonReturn.getSuccess("success");
     }
 
@@ -62,8 +62,8 @@ public class LabController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/getModifyLab", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public CodeMessage getModifyLab(@RequestBody Lab lab) {
-        Lab l = labService.getLabByLabId(lab.getId());
+    public CodeMessage getModifyLab(@RequestParam Integer id) {
+        Lab l = labService.getLabByLabId(id);
         return JsonReturn.getSuccess(l);
     }
 }
