@@ -77,4 +77,9 @@ public class LabServiceImpl implements LabService{
     public Lab getLabByLabId (final Integer id) {
         return labDao.getLabByLabId(id);
     }
+
+    @Override
+    public void labMessageModify (final Lab lab) {
+        labDao.labMessageModify(lab);
+    }
 }
