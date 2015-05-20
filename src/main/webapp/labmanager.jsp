@@ -51,11 +51,9 @@
                             }
                         }
                     })
-            $scope.Lab = {id: -1};
             $scope.LabModify = {id:-1, labName: "", labDept: -1, labAddress: ""};
             $scope.modifyLab = function (id) {
-                $scope.Lab.id = id;
-                $http.post("/lab/getModifyLab", $scope.Lab)
+                $http.post("/lab/getModifyLab?id=" + id)
                         .success(function (response) {
                             if(200 == response.status) {
                                 $scope.LabModify.labName = response.data;
